@@ -21,7 +21,6 @@ public class FreezeCommand extends BaseCommand {
         if(freeze.contains(player.getUniqueId())) {
 
 
-
         }
     }
 }
