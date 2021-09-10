@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class VanishCommand extends BaseCommand {
 
-    @Override @Command(name = "vanish", permission = "")
+    @Override @Command(name = "vanish", permission = "", inGameOnly = true, aliases = {"v", "invisible", "invisibilidad"})
     public void onCommand(CommandArgs command) {
 
         Player player = command.getPlayer();
