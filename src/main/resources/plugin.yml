@@ -1,0 +1,4 @@
+main: online.nasgar.survivalcore.Core
+name: SurvivalCore
+version: ${project.version}
+author: NasgarNetwork
