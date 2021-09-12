@@ -11,9 +11,9 @@ public class FlyCommand extends BaseCommand {
 
     @Override @Command(name = "fly", inGameOnly = true, aliases = {"volar"})
     public void onCommand(CommandArgs command) {
+
         Player player = command.getPlayer();
         String[] args = command.getArgs();
-
 
         if(!player.hasPermission("survivalcore.fly")) {
             player.sendMessage(CC.NO_PERMISSIONS);

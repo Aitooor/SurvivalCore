@@ -18,6 +18,7 @@ public class FeedCommand extends BaseCommand {
         if(args.length < 1) { // Solo pone /feed, por lo cual solo a ti se te llena la comida
             player.setFoodLevel(20);
             player.sendMessage(CC.translate("&aYour food has been restored"));
+            return;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
