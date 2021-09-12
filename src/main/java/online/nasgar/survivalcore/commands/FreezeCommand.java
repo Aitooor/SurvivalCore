@@ -15,12 +15,5 @@ public class FreezeCommand extends BaseCommand {
     public void onCommand(CommandArgs command) {
 
         Player player = command.getPlayer();
-
-        List<UUID> freeze = Core.getInstance().getManagers().getFreeze();
-
-        if(freeze.contains(player.getUniqueId())) {
-
-
-        }
     }
 }

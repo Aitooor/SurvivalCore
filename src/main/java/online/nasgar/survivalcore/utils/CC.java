@@ -4,6 +4,8 @@ import org.bukkit.ChatColor;
 
 public class CC {
 
+    public static String NO_PERMISSIONS = translate("&cYout don't have permissions");
+
     public static String translate(String string) {
         return ChatColor.translateAlternateColorCodes('&', "&bSURVIVAL&7: " + string);
     }

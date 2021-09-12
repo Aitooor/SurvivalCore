@@ -2,7 +2,6 @@ package online.nasgar.survivalcore;
 
 import lombok.Getter;
 import online.nasgar.survivalcore.listeners.GodModeListener;
-import online.nasgar.survivalcore.manager.Managers;
 import online.nasgar.survivalcore.utils.ClassRegistrationController;
 import online.nasgar.survivalcore.utils.command.CommandFramework;
 import org.bukkit.event.Listener;
@@ -17,7 +16,6 @@ public class Core extends JavaPlugin {
     @Getter private static Core instance;
     private final CommandFramework commandFramework = new CommandFramework(this);
     private final ClassRegistrationController crc = new ClassRegistrationController();
-    private Managers managers;
 
     @Override
     public void onEnable() {
@@ -31,7 +29,6 @@ public class Core extends JavaPlugin {
 
     private void registerListeners() {
         List<Listener> listeners = new ArrayList<>();
-        managers = new Managers();
 
         listeners.add(new GodModeListener());
 

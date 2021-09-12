@@ -64,7 +64,7 @@ public class CommandFramework implements CommandExecutor {
 				Object methodObject = commandMap.get(cmdLabel).getValue();
 				Command command = method.getAnnotation(Command.class);
 				if (!command.permission().equals("") && (!sender.hasPermission(command.permission()))) {
-					sender.sendMessage(CC.translate("&cYou don't have permissions to that."));
+					sender.sendMessage(CC.NO_PERMISSIONS);
 					return true;
 				}
 				if (command.inGameOnly() && !(sender instanceof Player)) {

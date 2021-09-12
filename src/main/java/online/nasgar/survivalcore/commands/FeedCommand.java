@@ -1,16 +1,11 @@
 package online.nasgar.survivalcore.commands;
 
-import lombok.Getter;
-import online.nasgar.survivalcore.Core;
 import online.nasgar.survivalcore.utils.CC;
 import online.nasgar.survivalcore.utils.command.BaseCommand;
 import online.nasgar.survivalcore.utils.command.Command;
 import online.nasgar.survivalcore.utils.command.CommandArgs;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.List;
-import java.util.UUID;
 
 public class FeedCommand extends BaseCommand {
 

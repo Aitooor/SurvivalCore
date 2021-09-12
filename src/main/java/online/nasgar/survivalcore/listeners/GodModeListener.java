@@ -17,9 +17,7 @@ public class GodModeListener implements Listener {
         if(event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
 
-            List<UUID> godMode = Core.getInstance().getManagers().getGodMode();
-
-            if(godMode.contains(player.getUniqueId())) {
+            if(player.hasMetadata("godmode")) {
                 event.setCancelled(true);
             }
         }
