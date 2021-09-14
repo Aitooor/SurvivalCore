@@ -1,7 +1,6 @@
 package online.nasgar.survivalcore;
 
 import lombok.Getter;
-import online.nasgar.survivalcore.database.MongoHandler;
 import online.nasgar.survivalcore.listeners.GodModeListener;
 import online.nasgar.survivalcore.utils.ClassRegistrationController;
 import online.nasgar.survivalcore.utils.command.CommandFramework;
@@ -24,7 +23,6 @@ public class Core extends JavaPlugin {
 
         saveDefaultConfig();
         registerListeners();
-        new MongoHandler(this);
         crc.loadCommands("online.nasgar.survivalcore.commands");
     }
 
