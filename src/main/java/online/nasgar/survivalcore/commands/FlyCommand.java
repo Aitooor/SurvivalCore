@@ -46,13 +46,13 @@ public class FlyCommand extends BaseCommand {
 
         if(!target.getAllowFlight()) {
             target.setAllowFlight(true);
-            player.sendMessage(CC.translate("&aYou can now fly"));
+            target.sendMessage(CC.translate("&aYou can now fly"));
+            player.sendMessage(CC.translate("&fThe player &b" + target.getName() + " &acan now fly"));
             return;
         }
 
         target.setAllowFlight(false);
-        player.sendMessage(CC.translate("&cCan no longer fly"));
-        return;
-
+        target.sendMessage(CC.translate("&cCan no longer fly"));
+        player.sendMessage(CC.translate("&fThe player &b" + target.getName() + " &ccan no longer fly"));
     }
 }
