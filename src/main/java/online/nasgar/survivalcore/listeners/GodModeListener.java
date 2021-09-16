@@ -9,18 +9,15 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import java.util.List;
 import java.util.UUID;
 
-public class GodModeListener implements Listener {
+public class GodModeListener {
 
-    @EventHandler
+
     public void onDamage(EntityDamageEvent event) {
-
         if(event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-
             if(player.hasMetadata("godmode")) {
                 event.setCancelled(true);
             }
         }
-
     }
 }

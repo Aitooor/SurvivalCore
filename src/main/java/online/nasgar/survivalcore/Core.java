@@ -2,6 +2,7 @@ package online.nasgar.survivalcore;
 
 import lombok.Getter;
 import online.nasgar.survivalcore.listeners.GodModeListener;
+import online.nasgar.survivalcore.listeners.HandlerListener;
 import online.nasgar.survivalcore.utils.ClassRegistrationController;
 import online.nasgar.survivalcore.utils.command.CommandFramework;
 import org.bukkit.event.Listener;
@@ -26,10 +27,6 @@ public class Core extends JavaPlugin {
     }
 
     private void registerListeners() {
-        List<Listener> listeners = new ArrayList<>();
-
-        listeners.add(new GodModeListener());
-
-        listeners.forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
+        getServer().getPluginManager().registerEvents(new HandlerListener(), this);
     }
 }
