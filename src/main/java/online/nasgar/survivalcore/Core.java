@@ -21,7 +21,6 @@ public class Core extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        saveDefaultConfig();
         registerListeners();
         crc.loadCommands("online.nasgar.survivalcore.commands");
     }
