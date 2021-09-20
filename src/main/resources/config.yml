@@ -1,0 +1,8 @@
+mongodb:
+  address: "localhost"
+  port: 27017
+  database: "survival"
+  authentication:
+    enabled: false
+    username: "root"
+    password: "******"
