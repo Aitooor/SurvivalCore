@@ -6,27 +6,23 @@ import online.nasgar.survival.tab.TabProvider;
 import online.nasgar.survival.utils.LuckPermsUtil;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TabAdapter implements TabProvider {
 
     @Override public Set<TabLayout> getProvider(Player player) {
         Set<TabLayout> layouts = new HashSet<>();
-        Set<String> strings = new HashSet<>();
+        Set<Player> players = new HashSet<>(Bukkit.getOnlinePlayers());
 
-        Bukkit.getOnlinePlayers().stream().filter(OfflinePlayer::isOnline)
-                .forEach(players -> strings.add(LuckPermsUtil.getPrefix(players) + players.getName()));
+        int i = 0;
+        Iterator<Player> iterator = players.iterator();
 
-        for (TabColumn column : TabColumn.values()) {
-            for (int i = 0; i < 80; i++) {
+        while (iterator.hasNext() && i++ < 80){
+            for (TabColumn column : TabColumn.values()) {
                 int row = i / 4;
-                layouts.add(new TabLayout(column, row, String.join("&f", strings)));
+                layouts.add(new TabLayout(column, row, String.join("&f", LuckPermsUtil.getPrefix(iterator.next()) + iterator.next().getName())));
             }
         }
 

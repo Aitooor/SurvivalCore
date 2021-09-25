@@ -2,6 +2,7 @@ package online.nasgar.survival.command.management;
 
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.*;
+import online.nasgar.survival.command.coins.CoinsCommand;
 import online.nasgar.survival.command.message.MessageCommand;
 import online.nasgar.survival.command.message.ReplyCommand;
 import online.nasgar.survival.command.rankup.SeeNextRankUpCommand;
@@ -28,7 +29,9 @@ public class CommandManager {
                 new ProfileCommand(),
                 new ShopItemCommand(),
                 new SeeNextRankUpCommand(plugin),
-                new SeeRankUpCommand(plugin)
+                new SeeRankUpCommand(plugin),
+                new FeedCommand(),
+                new CoinsCommand()
 
         );
     }

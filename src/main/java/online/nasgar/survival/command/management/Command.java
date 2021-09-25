@@ -57,11 +57,7 @@ public class Command extends BukkitCommand implements TabCompleter {
 
         if (this.argumentBase){
             if (array.length < 1){
-                if (this.argumentBaseUsageMessage == null) {
-                    return true;
-                }
-
-                ChatUtil.toSender(sender, this.argumentBaseUsageMessage);
+                this.onCommand(sender, array);
             } else {
 
                 Argument argument = this.getArgumentByName(array[0]);
@@ -139,8 +135,8 @@ public class Command extends BukkitCommand implements TabCompleter {
     }
 
     @Override public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String label, String[] array) {
-        if (array.length != 1) {
-            return super.tabComplete(sender, label, array);
+        if (array.length != 0) {
+            return null;
         }
 
         List<String> list = new ArrayList<>();

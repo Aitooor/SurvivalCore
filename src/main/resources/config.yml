@@ -13,6 +13,8 @@ redis:
   password: ""
 
 rank-ups:
+  default:
+    prefix: "&fNoob"
   diamond:
     time: 7 #In Days
     prefix: "&b&lDiamond"

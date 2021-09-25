@@ -10,10 +10,13 @@ import java.util.*;
 @Getter
 public class RankManager {
 
+    private final Survival plugin;
     private final List<Rank> ranks, ranksInverted;
     private final Map<String, Rank> ranksMap;
 
-    public RankManager() {
+    public RankManager(Survival plugin) {
+        this.plugin = plugin;
+
         this.ranks = new ArrayList<>();
         this.ranksInverted = new ArrayList<>();
         this.ranksMap = new HashMap<>();
@@ -22,7 +25,7 @@ public class RankManager {
     }
 
     private void setup(){
-        ConfigurationSection section = Survival.getInstance().getConfigFile().getConfigurationSection("rank-ups");
+        ConfigurationSection section = this.plugin.getConfigFile().getConfigurationSection("rank-ups");
 
         for (String key : section.getKeys(false)){
             Rank rank = new Rank(key,
@@ -38,8 +41,17 @@ public class RankManager {
 
     }
 
-    public Rank get(String name) {
+    public Rank getByName(String name) {
         return this.ranksMap.get(name);
+    }
+
+    public Rank getDefault(){
+        return new Rank(
+                "Default",
+                this.plugin.getConfigFile().getString("rank-ups.default.prefix"),
+                0,
+                new ArrayList<>()
+        );
     }
 
     public Rank getApplicable(PlayerData data) {

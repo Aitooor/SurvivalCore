@@ -2,9 +2,11 @@ package online.nasgar.survival.playerdata;
 
 import lombok.Getter;
 import lombok.Setter;
+import online.nasgar.survival.Survival;
 import online.nasgar.survival.rankup.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +20,14 @@ public class PlayerData {
     private String lastConverser;
     private List<String> ignoredPlayers;
 
+    private float xp;
     private int coins;
     private AtomicInteger time;
     private boolean tpm;
 
     private Rank rank;
+
+    private ItemStack[] items, armor;
 
     public PlayerData(UUID uuid){
         this.uuid = uuid;
@@ -31,9 +36,15 @@ public class PlayerData {
         this.ignoredPlayers = new ArrayList<>();
 
         this.coins = 0;
+        this.xp = 0.0f;
         this.time = new AtomicInteger(0);
 
         this.tpm = false;
+
+        this.rank = Survival.getInstance().getRankManager().getDefault();
+
+        this.items = null;
+        this.armor = null;
     }
 
     public void addCoins(int amount){

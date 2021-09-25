@@ -59,8 +59,8 @@ public class Survival extends JavaPlugin {
     private void setupManagers(){
         new CommandManager(this);
 
-        this.rankManager = new RankManager();
-        this.playerDataManager = new PlayerDataManager(this.mongoManager);
+        this.rankManager = new RankManager(this);
+        this.playerDataManager = new PlayerDataManager(this);
         this.shopItemManager = new ShopItemManager();
     }
 

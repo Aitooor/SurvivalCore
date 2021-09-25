@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,10 +32,13 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
 
-        if (this.playerDataManager.get(uuid) == null){
+        PlayerData data = this.playerDataManager.get(uuid);
+
+        if (data == null){
             this.playerDataManager.create(uuid);
         } else {
             this.playerDataManager.load(uuid);
+            player.setExp(data.getXp());
         }
 
         ChatUtil.toPlayer(player,
@@ -58,10 +62,18 @@ public class PlayerListener implements Listener {
         UUID uuid = event.getPlayer().getUniqueId();
 
         if (this.playerDataManager.get(uuid) != null){
-            this.playerDataManager.save(uuid);
+            this.playerDataManager.save(uuid, true);
         }
 
         event.setQuitMessage(null);
+    }
+
+    @EventHandler public void onPlayerKick(PlayerKickEvent event){
+        UUID uuid = event.getPlayer().getUniqueId();
+
+        if (this.playerDataManager.get(uuid) != null){
+            this.playerDataManager.save(uuid, true);
+        }
     }
 
     @EventHandler public void onMessage(MessageEvent event){

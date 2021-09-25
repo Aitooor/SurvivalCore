@@ -19,6 +19,7 @@ public class Argument  {
 
     private List<String> aliases;
 
+    private CommandSender sender;
     private Player player;
 
     private boolean onlyPlayers;
@@ -33,6 +34,8 @@ public class Argument  {
     }
 
     public boolean execute(CommandSender sender, String[] array){
+        this.sender = sender;
+
         if (sender instanceof ConsoleCommandSender){
             if (this.onlyPlayers){
                 ChatUtil.toSender(sender, "");
@@ -63,7 +66,7 @@ public class Argument  {
 
     public boolean isPlayerNull(Player target, String name){
         if (target == null){
-            ChatUtil.toPlayer(this.player, "&cPlayer " + name + " &cnot found");
+            ChatUtil.toSender(this.sender, "&cPlayer " + name + " &cnot found");
             return true;
         }
 
