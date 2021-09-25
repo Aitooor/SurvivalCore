@@ -3,11 +3,9 @@ package online.nasgar.survival.command.rankup;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.utils.TimeUtils;
+import online.nasgar.survival.utils.text.BuildText;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.entity.Player;
-
-import java.time.Duration;
 
 public class SeeRankUpCommand extends Command {
 
@@ -27,21 +25,13 @@ public class SeeRankUpCommand extends Command {
                 this.plugin.getRankManager().getRanksInverted().forEach(rank -> {
 
                     if (data.getTime().get() > rank.getTime()) {
-                        ChatUtil.toPlayer(player, (this.plugin.getConfigFile().getString("commands.listed.format", ""))
-                                .replace("<rankPrefix>", rank.getPrefix())
-                                .replace("<rankPendingTime>", "0s")
-                                .replace("<rankNeededTime>", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime())))
-                        );
+                        ChatUtil.toPlayer(player, BuildText.of(player, this.plugin.getConfigFile().getString("commands.listed.format", "")));
                     } else {
-                        ChatUtil.toPlayer(player, (s)
-                                .replace("<rankPrefix>", rank.getPrefix())
-                                .replace("<rankPendingTime>", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime() - data.getTime().get())))
-                                .replace("<rankNeededTime>", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime())))
-                        );
+                        ChatUtil.toPlayer(player, BuildText.of(player, s));
                     }
                 });
             } else {
-                ChatUtil.toPlayer(player, s);
+                ChatUtil.toPlayer(player, BuildText.of(player, s));
             }
 
         });

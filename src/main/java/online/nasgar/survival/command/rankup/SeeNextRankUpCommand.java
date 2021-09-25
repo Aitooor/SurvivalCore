@@ -4,11 +4,9 @@ import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.rankup.Rank;
-import online.nasgar.survival.utils.TimeUtils;
+import online.nasgar.survival.utils.text.BuildText;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.entity.Player;
-
-import java.time.Duration;
 
 public class SeeNextRankUpCommand extends Command {
 
@@ -26,13 +24,10 @@ public class SeeNextRankUpCommand extends Command {
 
         if (rank != null) {
             this.plugin.getConfigFile().getStringList("commands.see.next").forEach(message -> {
-                ChatUtil.toPlayer(player, (message)
-                        .replace("<newRankPrefix>", rank.getPrefix())
-                        .replace("<parsedTime>", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime() - data.getTime().get()))));
+                ChatUtil.toPlayer(player, BuildText.of(player, message));
             });
         } else {
-            this.plugin.getConfigFile().getStringList("commands.see.no-more").forEach(message -> ChatUtil.toPlayer(player, message));
-
+            this.plugin.getConfigFile().getStringList("commands.see.no-more").forEach(message -> ChatUtil.toPlayer(player, BuildText.of(player, message)));
         }
     }
 }

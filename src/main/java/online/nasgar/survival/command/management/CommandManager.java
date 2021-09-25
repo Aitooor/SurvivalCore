@@ -1,8 +1,11 @@
 package online.nasgar.survival.command.management;
 
+import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.message.MessageCommand;
 import online.nasgar.survival.command.message.ReplyCommand;
+import online.nasgar.survival.command.rankup.SeeNextRankUpCommand;
+import online.nasgar.survival.command.rankup.SeeRankUpCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.SimplePluginManager;
@@ -12,7 +15,7 @@ import java.util.Arrays;
 
 public class CommandManager {
 
-    public CommandManager(){
+    public CommandManager(Survival plugin){
         this.register(
 
                 new FlyCommand(),
@@ -21,7 +24,11 @@ public class CommandManager {
                 new MessageCommand(),
                 new HealCommand(),
                 new ReplyCommand(),
-                new MenuCommand()
+                new MenuCommand(),
+                new ProfileCommand(),
+                new ShopItemCommand(),
+                new SeeNextRankUpCommand(plugin),
+                new SeeRankUpCommand(plugin)
 
         );
     }

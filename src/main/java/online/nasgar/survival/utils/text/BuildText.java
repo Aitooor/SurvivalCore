@@ -3,9 +3,14 @@ package online.nasgar.survival.utils.text;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.UtilityClass;
+import online.nasgar.survival.Survival;
+import online.nasgar.survival.playerdata.PlayerData;
+import online.nasgar.survival.rankup.Rank;
 import online.nasgar.survival.utils.LuckPermsUtil;
+import online.nasgar.survival.utils.TimeUtils;
 import org.bukkit.entity.Player;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +20,8 @@ import java.util.stream.Collectors;
 
 @Getter @Setter @UtilityClass
 public class BuildText {
+
+    private Survival plugin = Survival.getInstance();
 
     private Map<String, String> map = new HashMap<>();
     private String staticText;
@@ -27,11 +34,31 @@ public class BuildText {
     public String of(Player player, String text){
         staticText = text;
 
+        PlayerData data = plugin.getPlayerDataManager().get(player.getUniqueId());
+
         put("player", player.getName());
 
         put("prefix", LuckPermsUtil.getPrefix(player));
         put("suffix", LuckPermsUtil.getSuffix(player));
         put("rank", LuckPermsUtil.getRankName(player));
+
+        Rank rank = plugin.getRankManager().getNextApplicable(data);
+
+        String finalText = text;
+        plugin.getRankManager().getRanksInverted().forEach(r -> {
+
+                put("rankPrefix", r.getPrefix());
+
+                if (finalText.equalsIgnoreCase("<ranks>")) {
+                    put("rankPendingTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime() - data.getTime().get())));
+                }
+
+                put("rankNeededTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime())));
+
+            });
+
+        put("newRankPrefix", rank.getPrefix());
+        put("parsedTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime() - data.getTime().get())));
 
         put("center:", null, TextUtil.centerText(matcher.group(2).trim()));
 
