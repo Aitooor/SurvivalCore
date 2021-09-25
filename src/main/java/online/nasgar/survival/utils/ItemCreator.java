@@ -121,8 +121,21 @@ public class ItemCreator {
         return this;
     }
 
+    public ItemCreator setSkullOwner(String skullOwner) {
+        if (itemStack.getType() == Material.SKULL_ITEM) {
+            SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
+            skullMeta.setOwner(skullOwner);
+            itemStack.setItemMeta(skullMeta);
+        }
+        return this;
+    }
+
     public ItemCreator setSkullTexture(String texture) {
         SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
+
+        if (texture == null){
+            texture = "ewogICJ0aW1lc3RhbXAiIDogMTYxODI4Nzc3MDYxNSwKICAicHJvZmlsZUlkIiA6ICI4NjY3YmE3MWI4NWE0MDA0YWY1NDQ1N2E5NzM0ZWVkNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJTdGV2ZSIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS82MGE1YmQwMTZiM2M5YTFiOTI3MmU0OTI5ZTMwODI3YTY3YmU0ZWJiMjE5MDE3YWRiYmM0YTRkMjJlYmQ1YjEiCiAgICB9LAogICAgIkNBUEUiIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzk1M2NhYzhiNzc5ZmU0MTM4M2U2NzVlZTJiODYwNzFhNzE2NThmMjE4MGY1NmZiY2U4YWEzMTVlYTcwZTJlZDYiCiAgICB9CiAgfQp9";
+        }
 
         if (!Reflection.VERSION.contains("v1_7")) {
             if (itemStack.getType().equals(Material.SKULL_ITEM)) {

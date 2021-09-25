@@ -3,12 +3,16 @@ package online.nasgar.survival;
 import lombok.Getter;
 import online.nasgar.survival.command.management.CommandManager;
 import online.nasgar.survival.config.ConfigFile;
+import online.nasgar.survival.database.Authentication;
 import online.nasgar.survival.listeners.PlayerListener;
-import online.nasgar.survival.mongodb.MongoAuth;
-import online.nasgar.survival.mongodb.MongoManager;
+import online.nasgar.survival.database.mongodb.MongoManager;
 import online.nasgar.survival.playerdata.PlayerDataManager;
+import online.nasgar.survival.rankup.RankManager;
 import online.nasgar.survival.scoreboard.NautilusManager;
 import online.nasgar.survival.scoreboard.NautilusScoreboardAdapter;
+import online.nasgar.survival.tab.Tab;
+import online.nasgar.survival.tab.adapter.TabAdapter;
+import online.nasgar.survival.shop.ShopItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,18 +22,42 @@ public class Survival extends JavaPlugin {
     @Getter private static Survival instance;
 
     private ConfigFile configFile;
+
     private MongoManager mongoManager;
+
     private PlayerDataManager playerDataManager;
+    private RankManager rankManager;
+    private ShopItemManager shopItemManager;
 
     @Override public void onEnable() {
         instance = this;
 
-        new CommandManager();
-        new NautilusManager(this, new NautilusScoreboardAdapter(), 20L);
-
         this.configFile = new ConfigFile(this, "config.yml");
 
-        this.mongoManager = new MongoManager(new MongoAuth(
+        this.setupDatabases();
+        this.setupProviders();
+        this.setupManagers();
+
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+    }
+
+    @Override public void onDisable() {
+        this.mongoManager.close();
+
+        instance = null;
+    }
+
+    private void setupManagers(){
+        new CommandManager();
+
+        this.rankManager = new RankManager();
+        this.playerDataManager = new PlayerDataManager(this.mongoManager);
+        this.shopItemManager = new ShopItemManager();
+    }
+
+    private void setupDatabases(){
+
+        this.mongoManager = new MongoManager(new Authentication(
 
                 this.configFile.getString("mongodb.address"),
                 this.configFile.getInt("mongodb.port"),
@@ -40,13 +68,11 @@ public class Survival extends JavaPlugin {
 
         );
 
-        this.playerDataManager = new PlayerDataManager(this.mongoManager);
-
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
     }
 
-    @Override public void onDisable() {
-        instance = null;
+    private void setupProviders(){
+        new NautilusManager(this, new NautilusScoreboardAdapter(), 20L);
+        new Tab(this, new TabAdapter());
     }
 
 }

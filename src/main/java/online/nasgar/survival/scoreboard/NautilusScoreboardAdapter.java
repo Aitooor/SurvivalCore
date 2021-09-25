@@ -2,7 +2,6 @@ package online.nasgar.survival.scoreboard;
 
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.scoreboard.adapter.NautilusAdapter;
-import online.nasgar.survival.utils.TaskUtil;
 import online.nasgar.survival.utils.text.BuildText;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
@@ -13,33 +12,8 @@ import java.util.List;
 
 public class NautilusScoreboardAdapter implements NautilusAdapter {
 
-    private String title;
-
     @Override public String getTitle(Player player) {
-        List<String> titleList = new ArrayList<>();
-
-        titleList.add("&b&lS");
-        titleList.add("&b&lSu");
-        titleList.add("&b&lSur");
-        titleList.add("&b&lSurv");
-        titleList.add("&b&lSurvi");
-        titleList.add("&b&lSurviv");
-        titleList.add("&b&lSurviva");
-        titleList.add("&b&lSurvival");
-
-        TaskUtil.runTaskTimer(() -> {
-
-            int i = 0;
-
-            if (++i >= titleList.size()){
-                i = -1;
-            }
-
-            this.title = titleList.get(i);
-
-        }, 0L, 5L);
-
-        return ChatUtil.translate(this.title);
+        return ChatUtil.translate("&b&lSURVIVAL");
     }
 
     @Override public List<String> getContent(Player player) {

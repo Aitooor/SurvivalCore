@@ -1,4 +1,4 @@
-package online.nasgar.survival.mongodb;
+package online.nasgar.survival.database.mongodb;
 
 import org.bson.Document;
 

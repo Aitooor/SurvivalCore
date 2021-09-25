@@ -1,7 +1,7 @@
-package online.nasgar.survival.transaction.event;
+package online.nasgar.survival.shop.event;
 
 import lombok.Getter;
-import online.nasgar.survival.transaction.TransactionPrice;
+import online.nasgar.survival.shop.ShopItem;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -12,11 +12,11 @@ public class TransactionEvent extends PlayerEvent {
 
     private final HandlerList handlerList = new HandlerList();
 
-    private final TransactionPrice price;
+    private final ShopItem shopItem;
 
-    public TransactionEvent(Player player, TransactionPrice price) {
+    public TransactionEvent(Player player, ShopItem shopItem) {
         super(player);
-        this.price = price;
+        this.shopItem = shopItem;
 
         Bukkit.getPluginManager().callEvent(this);
     }

@@ -5,8 +5,8 @@ import online.nasgar.survival.command.GodCommand;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.playerdata.PlayerDataManager;
-import online.nasgar.survival.transaction.TransactionPrice;
-import online.nasgar.survival.transaction.event.TransactionEvent;
+import online.nasgar.survival.shop.ShopItem;
+import online.nasgar.survival.shop.event.TransactionEvent;
 import online.nasgar.survival.utils.text.ChatUtil;
 import online.nasgar.survival.utils.text.BuildText;
 import org.bukkit.Bukkit;
@@ -15,9 +15,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.UUID;
 
@@ -73,11 +74,21 @@ public class PlayerListener implements Listener {
 
     @EventHandler public void onTransaction(TransactionEvent event){
         Player player = event.getPlayer();
-        TransactionPrice price = event.getPrice();
-
-        int priceCoins = price.getPrice();
+        ShopItem shopItem = event.getShopItem();
 
         PlayerData data = this.playerDataManager.get(player.getUniqueId());
+
+        ItemStack itemStack = shopItem.getItemStack();
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+        String displayName = null;
+
+        int priceCoins = shopItem.getPrice();
+
+
+        if (itemStack.hasItemMeta() && itemMeta.hasDisplayName()){
+            displayName = itemMeta.getDisplayName();
+        }
 
         if (data.getCoins() < priceCoins){
             ChatUtil.toPlayer(player, "&cYou do not have sufficient coins!");
@@ -85,8 +96,8 @@ public class PlayerListener implements Listener {
         }
 
         data.removeCoins(priceCoins);
-        price.getCommands().forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), (command).replace("<player>", player.getName())));
-        ChatUtil.toPlayer(player, "&aSuccessfully purchased " + price.getName() + " &afor &e" + priceCoins + "$");
+        shopItem.getCommands().forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), (command).replace("<player>", player.getName())));
+        ChatUtil.toPlayer(player, "&aSuccessfully purchased " + displayName + " &afor &e" + priceCoins + "$");
     }
 
     @EventHandler public void onEntityDamage(EntityDamageEvent event) {
@@ -99,10 +110,6 @@ public class PlayerListener implements Listener {
                 event.setCancelled(true);
             }
         }
-    }
-
-    @EventHandler public void onAsyncPlayerChat(AsyncPlayerChatEvent event){
-        event.setFormat(BuildText.of(event.getPlayer(), "&f<prefix><player>&f: %2$s"));
     }
 
 }

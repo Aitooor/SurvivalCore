@@ -218,12 +218,17 @@ public final class Reflection {
 					&& Arrays.equals(method.getParameterTypes(), params)) {
 				method.setAccessible(true);
 
-				return (target, arguments) -> {
-					try {
-						return method.invoke(target, arguments);
-					} catch (Exception e) {
-						throw new RuntimeException("Cannot invoke method " + method, e);
+				return new MethodInvoker() {
+
+					@Override
+					public Object invoke(Object target, Object... arguments) {
+						try {
+							return method.invoke(target, arguments);
+						} catch (Exception e) {
+							throw new RuntimeException("Cannot invoke method " + method, e);
+						}
 					}
+
 				};
 			}
 		}
@@ -289,7 +294,8 @@ public final class Reflection {
 	 * @return The class.
 	 */
 	public static Class<Object> getUntypedClass(String lookupName) {
-		return (Class<Object>) getClass(lookupName);
+		Class<Object> clazz = (Class<Object>) getClass(lookupName);
+		return clazz;
 	}
 	
 	/**

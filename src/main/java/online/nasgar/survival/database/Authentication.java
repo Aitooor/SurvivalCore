@@ -1,11 +1,10 @@
-package online.nasgar.survival.mongodb;
+package online.nasgar.survival.database;
 
-import com.mongodb.MongoCredential;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class MongoAuth {
+public class Authentication {
 
     private String
             address,
@@ -16,11 +15,11 @@ public class MongoAuth {
     private int port;
     private boolean authentication;
 
-    public MongoAuth(String address, int port, String database){
+    public Authentication(String address, int port, String database){
         this(address, port, database, false, null, null);
     }
 
-    public MongoAuth(String address, int port, String database, boolean authentication, String username, String password){
+    public Authentication(String address, int port, String database, boolean authentication, String username, String password){
         this.address = address;
         this.port = port;
         this.database = database;
@@ -29,8 +28,5 @@ public class MongoAuth {
         this.password = password;
     }
 
-    public MongoCredential getCredential(){
-        return MongoCredential.createCredential(this.username, this.database, this.password.toCharArray());
-    }
 
 }

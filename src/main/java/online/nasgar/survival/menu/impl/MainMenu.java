@@ -40,70 +40,135 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 18,
-                null,
+                player.getName(),
                 "profile",
                 new ItemCreator(Material.SKULL_ITEM)
+                        .setDisplayName("&8➢ &fMenu Perfil")
+                        .setLore(
+                                "&fAccede a esta opcion para ",
+                                "&fmirar tus estadisticas y ",
+                                "&Fconfiguraciones ",
+                                "",
+                                "&cClick para abrir")
         ));
 
         buttons.add(new ButtonItem(
                 9,
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzg3M2MxMmJmZmI1MjUxYTBiODhkNWFlNzVjNzI0N2NiMzlhNzVmZjFhODFjYmU0YzhhMzliMzExZGRlZGEifX19",
+                "",
                 "discord",
                 new ItemCreator(Material.SKULL_ITEM)
+                        .setDisplayName("&8➢ &3Discord")
+                        .setLore(
+                                "&fEntra a nuestro server ",
+                                "&fde Discord. ",
+                                "&fY conoce a toda nuesta comunidad. ",
+                                "",
+                                "&cClick para ver")
         ));
 
         buttons.add(new ButtonItem(
                 27,
-                "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDg5NTBiZjdkNWYwODc0OGY2NmI0MzAwNzMyNWM3MTUzNmU0MThkMzU2M2JkMDFhODNmZDhlYjUxNWQ4NjNiMCJ9fX0=",
+                "",
                 "store",
                 new ItemCreator(Material.SKULL_ITEM)
+                        .setDisplayName("&8➢ &aTienda")
+                        .setLore(
+                                "&fVisita nuestra tienda ",
+                                "&fy compra un monton ",
+                                "&fde cosas nuevas. ",
+                                "",
+                                "&aClick para ver")
         ));
 
         buttons.add(new ButtonItem(
                 19,
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjFjNjNkOWI5ZmQ4NzQyZWFlYjA0YzY5MjE3MmNiOWRhNDM3ODE2OThhNTc1Y2RhYmUxYzA0ZGYxMmMzZiJ9fX0=",
+                "",
                 "wiki",
                 new ItemCreator(Material.SKULL_ITEM)
+                        .setDisplayName("&8➢ &eAYUDA")
+                        .setLore(
+                                "&f¿Tienes preguntas sobre el server? "
+                                ,"&fentra a esta opcion e informate"
+                                ,"&Fde todo nuestros comandos y opciones"
+                                ,""
+                                ,"&aClick para abrir")
         ));
 
         buttons.add(new ButtonItem(
                 12,
-                "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDMwYzM4ZTVmNDYwNGNmYmZlOWEzNmExNWVhZDMyM2JmMGY1MzM5MWYzOTY0MGZhYjMwZWFiZDc4YjU4OTkzNyJ9fX0=",
+                "",
                 "lands",
                 new ItemCreator(Material.SKULL_ITEM)
         ));
 
         buttons.add(new ButtonItem(
                 14,
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzljODg4MWU0MjkxNWE5ZDI5YmI2MWExNmZiMjZkMDU5OTEzMjA0ZDI2NWRmNWI0MzliM2Q3OTJhY2Q1NiJ9fX0=",
-                "warp",
+                "",
+                "warps",
                 new ItemCreator(Material.SKULL_ITEM)
+                        .setDisplayName("&8➢ &dWarps de Jugadores")
+                        .setLore(
+                                "&c¿Que es esto?",
+                                "&fCualquier jugador puede",
+                                "&fcrear su propio warp.",
+                                "&fPara poder ser visitado por toda la comunidad",
+                                "",
+                                "&c¿Como puedo colocar uno?",
+                                "&fPuedes crear tu propio warp",
+                                "&fUsado el comando &b/pwarp set &7(nombre)",
+                                "",
+                                "&aClick para mas informacion")
         ));
 
         buttons.add(new ButtonItem(
                 16,
-                "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTIzYTI3NDJjMzVlYzI3MTU4MWZhOTYwMWQwODRlZmQwZmY0YzMzZDA2YTNjNzk1NzBkYjg3MzNmZmJjMzI2NiJ9fX0=",
+                "",
                 "jobs",
                 new ItemCreator(Material.SKULL_ITEM)
+                        .setDisplayName("&8➢ &dTrabajos")
+                        .setLore(
+                                "&fRecolecta dinero",
+                                "&fminando, talando, pescando, ...",
+                                "&fPor absolutamente todo",
+                                "",
+                                "&aSin necesidad de entrar a ningun trabajo",
+                                "",
+                                "&aClick para mas informacion")
         ));
 
         buttons.add(new ButtonItem(
                 22,
-                "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTQzYzc5Y2Q5YzJkMzE4N2VhMDMyNDVmZTIxMjhlMGQyYWJiZTc5NDUyMTRiYzU4MzRkZmE0MDNjMTM0ZTI3In19fQ==",
+                "",
                 "battlepass",
                 new ItemCreator(Material.SKULL_ITEM)
+                        .setDisplayName("&8➢ &dPase de Batalla")
+                        .setLore(
+                                "&fCompleta los desafios y retos",
+                                "&fy consigue las recompensas",
+                                "&fpuedes comprar el &epremium &fen la &atienda&f.",
+                                "&fO te puede tocar en las &ecajas&f.",
+                                "",
+                                "&aClick para abrir")
         ));
 
         buttons.add(new ButtonItem(
                 24,
-                "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWE0MGJjZjM2ZjFjNGU1YjE5OTc2NTIxZTg1NzZmMTVhNDgxMjJmNWUxOTdhMmRmNDQ0OGVmNDAyMjJiNDFkZCJ9fX0=",
+                "",
                 "ah",
                 new ItemCreator(Material.SKULL_ITEM)
+                        .setDisplayName("&8➢ &dCasa de Subastas")
+                        .setLore(
+                                "&c¿Quieres vender sin ser estafado?",
+                                "&fEsta es una opcion muy recomendable",
+                                "&fvende, compra y mucho mas de forma segura",
+                                "&fEsta es una tienda comunitaria para todos",
+                                "",
+                                "&aClick para mas informacion")
         ));
 
         buttons.add(new ButtonItem(
                 32,
-                "e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTk3ODdiNjVlZGNiODI4YTFiNTk3ZjQzNjQ5ZjJlNDE3OGVmMmFmMGIyMjBiNzRhZDFkZDZlYTBjNjRjOWU3MSJ9fX0=",
+                "",
                 "resources",
                 new ItemCreator(Material.SKULL_ITEM)
         ));
@@ -113,14 +178,14 @@ public class MainMenu extends Menu {
 
     private static class ButtonItem extends Button {
 
-        private final String command, skullTexture;
+        private final String command, skullOwner;
         private final ItemCreator itemCreator;
 
-        public ButtonItem(int slot, String skullTexture, String command, ItemCreator itemCreator) {
+        public ButtonItem(int slot, String skullOwner, String command, ItemCreator itemCreator) {
             super(slot);
 
             this.command = command;
-            this.skullTexture = skullTexture;
+            this.skullOwner = skullOwner;
             this.itemCreator = itemCreator;
         }
 
@@ -130,7 +195,7 @@ public class MainMenu extends Menu {
         }
 
         @Override public ItemStack getButtonItem() {
-            return this.itemCreator.setSkullTexture(this.skullTexture).toItemStack();
+            return this.itemCreator.setSkullOwner(this.skullOwner).toItemStack();
         }
     }
 
