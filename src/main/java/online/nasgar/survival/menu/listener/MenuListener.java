@@ -17,18 +17,19 @@ public class MenuListener implements Listener {
 
     private final MenuManager menuManager;
 
-    @EventHandler public void onInventoryClick(InventoryClickEvent event){
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Menu menu = this.menuManager.getMenuByUUID(player.getUniqueId());
         Consumer<Button> buttonConsumer = b -> b.onClick(event);
 
-        if (menu != null){
+        if (menu != null) {
 
             if (this.menuManager.contains(player)) {
                 event.setCancelled(true);
             }
 
-            for (Button button : menu.getButtons(player)){
+            for (Button button : menu.getButtons(player)) {
                 if (event.getSlot() == button.getSlot()) {
                     buttonConsumer.accept(button);
                 }
@@ -36,12 +37,13 @@ public class MenuListener implements Listener {
         }
     }
 
-    @EventHandler public void onInventoryClose(InventoryCloseEvent event){
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
         Player player = (Player) event.getPlayer();
 
         Menu menu = this.menuManager.getMenuByUUID(player.getUniqueId());
 
-        if (menu != null){
+        if (menu != null) {
             menu.onClose(player);
         }
     }

@@ -2,6 +2,7 @@ package online.nasgar.survival.playerdata;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.ReplaceOptions;
 import com.mongodb.client.model.UpdateOptions;
 import lombok.Getter;
 import online.nasgar.survival.Survival;
@@ -39,35 +40,48 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
     }
 
     @Override public Document toDocument(PlayerData data) {
-        Document document = new Document("_id", data.getUuid());
+        Document document = new Document();
 
+        document.put("uuid", data.getUuid().toString());
         document.put("lastConverser", data.getLastConverser());
         document.put("ignoredPlayers", data.getIgnoredPlayers());
         document.put("coins", data.getCoins());
         document.put("xp", data.getXp());
         document.put("time", data.getTime().get());
         document.put("tpm", data.isTpm());
-        document.put("rank", data.getRank().getName());
 
-        document.put("items", this.set(data.getItems(), BukkitUtil.serializeItemStackArray(data.getItems())));
-        document.put("armor", this.set(data.getArmor(), BukkitUtil.serializeItemStackArray(data.getArmor())));
+        if (data.getRank() != null) {
+            document.put("rank", data.getRank().getName());
+        }
+
+        document.put("backPackItems", data.getBackPackItems());
+
+        try {
+            document.put("items", BukkitUtil.itemStackArrayToBase64(data.getItems()));
+            document.put("armor", BukkitUtil.itemStackArrayToBase64(data.getArmor()));
+        } catch (Exception e) {}
 
         return document;
     }
 
     @Override public PlayerData fromDocument(Document document) {
-        PlayerData data = new PlayerData(UUID.fromString(document.getString("_id")));
+        PlayerData data = new PlayerData(UUID.fromString(document.getString("uuid")));
 
         data.setLastConverser(document.getString("lastConverser"));
-        data.setIgnoredPlayers(Collections.singletonList(document.getString("ignoredPlayers")));
+        data.setIgnoredPlayers(document.getList("ignoredPlayers", String.class));
         data.setCoins(document.getInteger("coins"));
-        data.setXp(document.getInteger("xp"));
+        data.setXp(document.getDouble("xp"));
         data.getTime().set(document.getInteger("time"));
         data.setTpm(document.getBoolean("tpm"));
-        data.setRank(Survival.getInstance().getRankManager().getByName(document.getString("rank")));
+        data.setBackPackItems((Map) document.get("backPackItems"));
+        if (document.containsKey("rank")) {
+            data.setRank(Survival.getInstance().getRankManager().getByName(document.getString("rank")));
+        }
 
-        data.setItems(this.getArrayOrNull(document.getString("items"), BukkitUtil.deserializeItemStackArray(document.getString("items"))));
-        data.setArmor(this.getArrayOrNull(document.getString("armor"), BukkitUtil.deserializeItemStackArray(document.getString("armor"))));
+        try {
+            data.setItems(BukkitUtil.itemStackArrayFromBase64(document.getString("items")));
+            data.setArmor(BukkitUtil.itemStackArrayFromBase64(document.getString("armor")));
+        } catch (Exception e) {}
 
         return data;
     }
@@ -78,7 +92,6 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
 
     public void create(UUID uuid){
         if (!this.contains(uuid)){
-            this.getDataCollection().insertOne(new Document("_id", uuid));
             this.dataMap.put(uuid, new PlayerData(uuid));
         }
     }
@@ -88,7 +101,7 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
             return;
         }
 
-        Document document = this.getDataCollection().find(Filters.eq("_id", uuid)).first();
+        Document document = this.getDataCollection().find(Filters.eq("uuid", uuid.toString())).first();
 
         if (document == null) {
             this.dataMap.put(uuid, new PlayerData(uuid));
@@ -117,7 +130,7 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         data.setArmor(data.getArmor());
         data.setItems(inventory.getContents());
 
-        this.getDataCollection().replaceOne(Filters.eq("_id", uuid), this.toDocument(data), new UpdateOptions().upsert(true));
+        this.getDataCollection().replaceOne(Filters.eq("uuid", uuid.toString()), this.toDocument(data), new ReplaceOptions().upsert(true));
 
         if (remove) {
             this.dataMap.remove(uuid);
@@ -129,7 +142,7 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
             return this.dataMap.get(uuid);
         }
 
-        Document document = this.getDataCollection().find(Filters.eq("_id", uuid)).first();
+        Document document = this.getDataCollection().find(Filters.eq("uuid", uuid.toString())).first();
 
         if (document == null) {
             return null;

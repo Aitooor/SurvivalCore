@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerEvent;
 @Getter
 public class MessageEvent extends PlayerEvent implements Cancellable {
 
-    private final HandlerList handlerList = new HandlerList();
+    private static HandlerList handlerList = new HandlerList();
 
     private final Player target;
 
@@ -35,7 +35,10 @@ public class MessageEvent extends PlayerEvent implements Cancellable {
     }
 
     @Override public HandlerList getHandlers() {
-        return this.handlerList;
+        return handlerList;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlerList;
+    }
 }

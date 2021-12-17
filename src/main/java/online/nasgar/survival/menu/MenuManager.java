@@ -14,11 +14,13 @@ import java.util.UUID;
 @Getter
 public class MenuManager {
 
-    @Getter private static MenuManager instance;
+    @Getter
+    private static MenuManager instance;
     private final Map<UUID, Menu> menuMap;
 
-    public MenuManager(JavaPlugin plugin){
+    public MenuManager(JavaPlugin plugin) {
         instance = this;
+
         this.menuMap = new HashMap<>();
 
         Bukkit.getPluginManager().registerEvents(new MenuListener(this), plugin);
@@ -28,10 +30,10 @@ public class MenuManager {
      * Add a player to the map menu
      *
      * @param player - Player | Key
-     * @param menu - Menu | Value
+     * @param menu   - Menu | Value
      */
 
-    public void addPlayerToMenu(Player player, Menu menu){
+    public void addPlayerToMenu(Player player, Menu menu) {
         this.menuMap.put(player.getUniqueId(), menu);
     }
 
@@ -41,7 +43,7 @@ public class MenuManager {
      * @param player - Player to remove
      */
 
-    public void removePlayerFromMenu(Player player){
+    public void removePlayerFromMenu(Player player) {
         this.menuMap.remove(player.getUniqueId());
     }
 
@@ -51,14 +53,14 @@ public class MenuManager {
      * @param uuid - UUID to get the menu
      */
 
-    public Menu getMenuByUUID(UUID uuid){
-        for (Map.Entry<UUID, Menu> entry : this.menuMap.entrySet()){
+    public Menu getMenuByUUID(UUID uuid) {
+        for (Map.Entry<UUID, Menu> entry : this.menuMap.entrySet()) {
             Optional<Menu> optionalMenu = Optional.ofNullable(entry.getValue());
 
             if (optionalMenu.isPresent()) {
                 Menu menu = optionalMenu.get();
 
-                if (Bukkit.getPlayer(uuid).getOpenInventory().getTopInventory().equals(menu.getInventory())){
+                if (Bukkit.getPlayer(uuid).getOpenInventory().getTopInventory().equals(menu.getInventory())) {
                     return menu;
                 }
             }
@@ -72,7 +74,7 @@ public class MenuManager {
      * @param player - Player to check
      */
 
-    public boolean contains(Player player){
+    public boolean contains(Player player) {
         return this.menuMap.containsKey(player.getUniqueId());
     }
 

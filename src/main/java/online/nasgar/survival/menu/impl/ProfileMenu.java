@@ -19,7 +19,8 @@ public class ProfileMenu extends Menu {
         super("&8➢ &ePERFIL", 3);
     }
 
-    @Override public Set<Button> getButtons(Player player) {
+    @Override
+    public Set<Button> getButtons(Player player) {
         Set<Button> buttons = new HashSet<>();
 
         PlayerData data = Survival.getInstance().getPlayerDataManager().get(player.getUniqueId());
@@ -71,10 +72,12 @@ public class ProfileMenu extends Menu {
             this.itemCreator = itemCreator;
         }
 
-        @Override public void onClick(InventoryClickEvent event) {
+        @Override
+        public void onClick(InventoryClickEvent event) {
         }
 
-        @Override public ItemStack getButtonItem() {
+        @Override
+        public ItemStack getButtonItem() {
             return this.itemCreator.toItemStack();
         }
     }

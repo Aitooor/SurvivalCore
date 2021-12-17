@@ -11,6 +11,8 @@ public class TimeFormatter {
 
     private final long MINUTE = TimeUnit.MINUTES.toMillis(1L);
     private final long HOUR = TimeUnit.HOURS.toMillis(1L);
+    public ThreadLocal<DecimalFormat> REMAINING_SECONDS = ThreadLocal.withInitial(() -> new DecimalFormat("0.#"));
+    public ThreadLocal<DecimalFormat> REMAINING_SECONDS_TRAILING = ThreadLocal.withInitial(() -> new DecimalFormat("0.0"));
 
     public String getRemaining(long millis, boolean milliseconds) {
         return getRemaining(millis, milliseconds, true);
@@ -23,9 +25,5 @@ public class TimeFormatter {
             return DurationFormatUtils.formatDuration(duration, (duration >= HOUR ? "HH:" : "") + "mm:ss");
         }
     }
-
-    public ThreadLocal<DecimalFormat> REMAINING_SECONDS = ThreadLocal.withInitial(() -> new DecimalFormat("0.#"));
-
-    public ThreadLocal<DecimalFormat> REMAINING_SECONDS_TRAILING = ThreadLocal.withInitial(() -> new DecimalFormat("0.0"));
 
 }

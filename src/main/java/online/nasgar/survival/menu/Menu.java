@@ -10,9 +10,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Set;
 
-@Getter @Setter
+@Getter
+@Setter
 public abstract class Menu {
 
     private MenuManager menuManager = MenuManager.getInstance();
@@ -31,18 +32,17 @@ public abstract class Menu {
     /**
      * Builder to make a menu
      *
-     * @param title - The title of the menu to be shown
-     * @param size - The number of slots to be added to the menu (if Default)
-     *               (Multiply by "9" as this is the minimum number of slots that
-     *               a normal inventory can have).
-     *
+     * @param title    - The title of the menu to be shown
+     * @param size     - The number of slots to be added to the menu (if Default)
+     *                 (Multiply by "9" as this is the minimum number of slots that
+     *                 a normal inventory can have).
      * @param menuType - The type of menu you want to open
      */
 
-    public Menu(String title, int size, MenuType menuType){
+    public Menu(String title, int size, MenuType menuType) {
         this.title = ChatColor.translateAlternateColorCodes('&', title);
 
-        if (this.title.length() > 32){
+        if (this.title.length() > 32) {
             this.title = title.substring(0, 32);
         }
 
@@ -64,7 +64,7 @@ public abstract class Menu {
      * Another constructor to make a menu, but without being able to set the type of menu you want (Default Menu).
      */
 
-    public Menu(String title, int size){
+    public Menu(String title, int size) {
         this(title, size, MenuType.DEFAULT);
     }
 
@@ -74,15 +74,15 @@ public abstract class Menu {
      * @param player - The player to whom the menu will be opened
      */
 
-    public void openMenu(Player player){
+    public void openMenu(Player player) {
         this.menuManager.addPlayerToMenu(player, this);
 
-        for (Button button : this.getButtons(player)){
+        for (Button button : this.getButtons(player)) {
             this.inventory.setItem(button.getSlot(), button.getButtonItem());
         }
 
-        if (this.isFillEnabled()){
-            if (this.fillType == null){
+        if (this.isFillEnabled()) {
+            if (this.fillType == null) {
                 return;
             }
 
@@ -99,7 +99,7 @@ public abstract class Menu {
      * @param player - The player to whom the contents of the method will be played back
      */
 
-    public void onOpen(Player player){
+    public void onOpen(Player player) {
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class Menu {
      * @param player - The player to whom the content of the method is to be played back
      */
 
-    public void onClose(Player player){
+    public void onClose(Player player) {
         this.menuManager.removePlayerFromMenu(player);
     }
 

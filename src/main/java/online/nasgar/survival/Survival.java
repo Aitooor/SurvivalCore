@@ -1,32 +1,34 @@
 package online.nasgar.survival;
 
 import lombok.Getter;
-import online.nasgar.survival.chat.ChatPacket;
-import online.nasgar.survival.chat.ChatPacketListener;
+import online.nasgar.survival.auctions.AuctionsManager;
+import online.nasgar.survival.backpack.BackPackMenu;
 import online.nasgar.survival.command.management.CommandManager;
 import online.nasgar.survival.config.ConfigFile;
 import online.nasgar.survival.database.Authentication;
-import online.nasgar.survival.listeners.PlayerListener;
 import online.nasgar.survival.database.mongodb.MongoManager;
+import online.nasgar.survival.graves.GravesManager;
+import online.nasgar.survival.listeners.PlayerListener;
+import online.nasgar.survival.listeners.SpawnersListener;
+import online.nasgar.survival.menu.MenuManager;
 import online.nasgar.survival.playerdata.PlayerDataManager;
+import online.nasgar.survival.providers.BoardListener;
+import online.nasgar.survival.providers.TablistListener;
+import online.nasgar.survival.randomtp.RandomTPManager;
 import online.nasgar.survival.rankup.RankManager;
-import online.nasgar.survival.scoreboard.NautilusManager;
-import online.nasgar.survival.scoreboard.NautilusScoreboardAdapter;
-import online.nasgar.survival.tab.Tab;
-import online.nasgar.survival.tab.adapter.TabAdapter;
+import online.nasgar.survival.redis.CoreRedisDatabase;
 import online.nasgar.survival.shop.ShopItemManager;
-import online.nasgar.survival.utils.pyrite.Pyrite;
-import online.nasgar.survival.utils.pyrite.PyriteCredentials;
+import online.nasgar.survival.warp.WarpManager;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @Getter
 public class Survival extends JavaPlugin {
 
-    @Getter private static Survival instance;
+    @Getter
+    private static Survival instance;
 
-    private ConfigFile configFile;
+    private ConfigFile configFile, warpsFile;
 
     private MongoManager mongoManager;
 
@@ -34,29 +36,41 @@ public class Survival extends JavaPlugin {
     private RankManager rankManager;
     private ShopItemManager shopItemManager;
 
-    private Pyrite pyrite;
-    private ChatPacketListener packetListener;
-
-    @Override public void onEnable() {
+    @Override
+    public void onEnable() {
         instance = this;
 
         this.configFile = new ConfigFile(this, "config.yml");
+        this.warpsFile = new ConfigFile(this, "warps.yml");
 
         this.setupDatabases();
-        this.setupProviders();
         this.setupManagers();
 
+        new CoreRedisDatabase();
+
+        new MenuManager(this);
+        new WarpManager();
+        new GravesManager();
+        new AuctionsManager();
+
+        new RandomTPManager();
+
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+        Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
+        Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
+        Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
+        Bukkit.getPluginManager().registerEvents(new BackPackMenu(), this);
     }
 
-    @Override public void onDisable() {
+    @Override
+    public void onDisable() {
+        WarpManager.getInstance().save();
+        AuctionsManager.getInstance().save();
         this.mongoManager.close();
-        this.pyrite.unregisterContainer(this.packetListener);
-
         instance = null;
     }
 
-    private void setupManagers(){
+    private void setupManagers() {
         new CommandManager(this);
 
         this.rankManager = new RankManager(this);
@@ -64,7 +78,7 @@ public class Survival extends JavaPlugin {
         this.shopItemManager = new ShopItemManager();
     }
 
-    private void setupDatabases(){
+    private void setupDatabases() {
 
         this.mongoManager = new MongoManager(new Authentication(
 
@@ -76,34 +90,5 @@ public class Survival extends JavaPlugin {
                 this.configFile.getString("mongodb.authentication.password"))
 
         );
-
-        this.pyrite = new Pyrite(new PyriteCredentials(
-                this.configFile.getString("redis.address"),
-                this.configFile.getString("redis.password"),
-                this.configFile.getInt("redis.port")));
-
-        this.packetListener = new ChatPacketListener();
-        this.pyrite.registerContainer(this.packetListener);
     }
-
-    private void setupProviders(){
-        new NautilusManager(this, new NautilusScoreboardAdapter(), 20L);
-        new Tab(this, new TabAdapter());
-    }
-
-    /*
-    Tengo que testear ésto
-     */
-
-    public void sendMessage(Player player, String message) {
-        this.pyrite.sendPacket(
-                new ChatPacket(
-                        player,
-                        message,
-                        this.getServer().getName()
-                ),
-                "chat"
-        );
-    }
-
 }

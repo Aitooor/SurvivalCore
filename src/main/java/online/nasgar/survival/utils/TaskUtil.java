@@ -24,11 +24,11 @@ public class TaskUtil {
         return new ThreadFactoryBuilder().setNameFormat(name).setUncaughtExceptionHandler(handler).build();
     }
 
-    public BukkitTask runTaskTimer(Callback callback, long delay, long tick){
+    public BukkitTask runTaskTimer(Callback callback, long delay, long tick) {
         return scheduler.runTaskTimer(plugin, callback::call, delay, tick);
     }
 
-    public BukkitTask runTaskLater(Callback callback, long tick){
+    public BukkitTask runTaskLater(Callback callback, long tick) {
         return scheduler.runTaskLater(plugin, callback::call, tick);
     }
 
@@ -36,19 +36,19 @@ public class TaskUtil {
         return scheduler.runTaskLaterAsynchronously(plugin, callback::call, delay);
     }
 
-    public BukkitTask runTaskTimerAsync(Callback callback, long delay, long tick){
+    public BukkitTask runTaskTimerAsync(Callback callback, long delay, long tick) {
         return scheduler.runTaskTimerAsynchronously(plugin, callback::call, delay, tick);
     }
 
-    public BukkitTask runTaskAsync(Callback callback){
+    public BukkitTask runTaskAsync(Callback callback) {
         return scheduler.runTaskAsynchronously(plugin, callback::call);
     }
 
-    public BukkitTask runTask(Callback callback){
+    public BukkitTask runTask(Callback callback) {
         return scheduler.runTask(plugin, callback::call);
     }
 
-    public void cancel(int id){
+    public void cancel(int id) {
         scheduler.cancelTask(id);
     }
 

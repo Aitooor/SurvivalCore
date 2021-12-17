@@ -18,7 +18,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@Getter @Setter @UtilityClass
+@Getter
+@Setter
+@UtilityClass
 public class BuildText {
 
     private Survival plugin = Survival.getInstance();
@@ -31,7 +33,7 @@ public class BuildText {
         return list.stream().map(string -> of(player, string)).collect(Collectors.toList());
     }
 
-    public String of(Player player, String text){
+    public String of(Player player, String text) {
         staticText = text;
 
         PlayerData data = plugin.getPlayerDataManager().get(player.getUniqueId());
@@ -47,23 +49,23 @@ public class BuildText {
         String finalText = text;
         plugin.getRankManager().getRanksInverted().forEach(r -> {
 
-                put("rankPrefix", r.getPrefix());
+            put("rankPrefix", r.getPrefix());
 
-                if (finalText.equalsIgnoreCase("<ranks>")) {
-                    put("rankPendingTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime() - data.getTime().get())));
-                }
+            if (finalText.equalsIgnoreCase("<ranks>")) {
+                put("rankPendingTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime() - data.getTime().get())));
+            }
 
-                put("rankNeededTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime())));
+            put("rankNeededTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime())));
 
-            });
+        });
 
         put("newRankPrefix", rank.getPrefix());
         put("parsedTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime() - data.getTime().get())));
 
-        put("center:", null, TextUtil.centerText(matcher.group(2).trim()));
+        put("center:", text, TextUtil.centerText(matcher.group(2).trim()));
 
-        for (Map.Entry<String, String> entry : map.entrySet()){
-            if (text.contains(entry.getKey())){
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (text.contains(entry.getKey())) {
                 text = text.replace(entry.getKey(), entry.getValue());
             }
         }
@@ -71,16 +73,16 @@ public class BuildText {
         return text;
     }
 
-    public void put(String key, String value){
+    public void put(String key, String value) {
         put(key, value, null);
     }
 
-    public void put(String key, String value, String trim){
-        if (key.contains(":")){
+    public void put(String key, String value, String trim) {
+        if (key.contains(":")) {
 
             matcher = Pattern.compile("(\\<" + Pattern.quote(key.split(":")[0]) + ":)(.+?)(\\>)").matcher(staticText);
 
-            if (matcher.find()){
+            if (matcher.find()) {
                 map.put("<" + key + matcher.group(2).trim() + ">", trim);
             }
 

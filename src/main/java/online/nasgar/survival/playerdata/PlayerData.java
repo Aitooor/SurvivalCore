@@ -1,5 +1,6 @@
 package online.nasgar.survival.playerdata;
 
+import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
 import online.nasgar.survival.Survival;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,7 +22,7 @@ public class PlayerData {
     private String lastConverser;
     private List<String> ignoredPlayers;
 
-    private float xp;
+    private double xp;
     private int coins;
     private AtomicInteger time;
     private boolean tpm;
@@ -28,6 +30,8 @@ public class PlayerData {
     private Rank rank;
 
     private ItemStack[] items, armor;
+
+    private Map<Integer, ItemStack> backPackItems = Maps.newConcurrentMap();
 
     public PlayerData(UUID uuid){
         this.uuid = uuid;

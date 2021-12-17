@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerEvent;
 @Getter
 public class TransactionEvent extends PlayerEvent {
 
-    private final HandlerList handlerList = new HandlerList();
+    private static HandlerList handlerList = new HandlerList();
 
     private final ShopItem shopItem;
 
@@ -21,7 +21,12 @@ public class TransactionEvent extends PlayerEvent {
         Bukkit.getPluginManager().callEvent(this);
     }
 
-    @Override public HandlerList getHandlers() {
+    @Override
+    public HandlerList getHandlers() {
         return this.handlerList;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlerList;
     }
 }

@@ -5,10 +5,12 @@ import online.nasgar.survival.command.GodCommand;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.playerdata.PlayerDataManager;
+import online.nasgar.survival.redis.CoreRedisDatabase;
+import online.nasgar.survival.redis.packets.ChatPacket;
 import online.nasgar.survival.shop.ShopItem;
 import online.nasgar.survival.shop.event.TransactionEvent;
-import online.nasgar.survival.utils.text.ChatUtil;
 import online.nasgar.survival.utils.text.BuildText;
+import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -28,17 +30,18 @@ public class PlayerListener implements Listener {
 
     private final PlayerDataManager playerDataManager = Survival.getInstance().getPlayerDataManager();
 
-    @EventHandler public void onPlayerJoin(PlayerJoinEvent event){
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
 
         PlayerData data = this.playerDataManager.get(uuid);
 
-        if (data == null){
+        if (data == null) {
             this.playerDataManager.create(uuid);
         } else {
             this.playerDataManager.load(uuid);
-            player.setExp(data.getXp());
+            player.setExp((float) data.getXp());
         }
 
         ChatUtil.toPlayer(player,
@@ -50,33 +53,33 @@ public class PlayerListener implements Listener {
                 "&b&lTwitter&7: &f@NasgarNetwork",
                 "&b&lDiscord&7: &fds.nasgar.online",
                 "",
-                BuildText.of(player, "<center:Welcome &b&l<player>&f!>"),
-                "&7&m-------------------------------------------------------"
-
-        );
-
+                "              Welcome &b&l<player>&f!>",
+                "&7&m-------------------------------------------------------");
         event.setJoinMessage(null);
     }
 
-    @EventHandler public void onPlayerQuit(PlayerQuitEvent event){
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
 
-        if (this.playerDataManager.get(uuid) != null){
+        if (this.playerDataManager.get(uuid) != null) {
             this.playerDataManager.save(uuid, true);
         }
 
         event.setQuitMessage(null);
     }
 
-    @EventHandler public void onPlayerKick(PlayerKickEvent event){
+    @EventHandler
+    public void onPlayerKick(PlayerKickEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
 
-        if (this.playerDataManager.get(uuid) != null){
+        if (this.playerDataManager.get(uuid) != null) {
             this.playerDataManager.save(uuid, true);
         }
     }
 
-    @EventHandler public void onMessage(MessageEvent event){
+    @EventHandler
+    public void onMessage(MessageEvent event) {
         Player player = event.getPlayer();
         Player target = event.getTarget();
         String message = event.getMessage();
@@ -85,7 +88,8 @@ public class PlayerListener implements Listener {
         ChatUtil.toPlayer(target, BuildText.of(player, "&7(From <prefix><player>) " + message));
     }
 
-    @EventHandler public void onTransaction(TransactionEvent event){
+    @EventHandler
+    public void onTransaction(TransactionEvent event) {
         Player player = event.getPlayer();
         ShopItem shopItem = event.getShopItem();
 
@@ -99,11 +103,11 @@ public class PlayerListener implements Listener {
         int priceCoins = shopItem.getPrice();
 
 
-        if (itemStack.hasItemMeta() && itemMeta.hasDisplayName()){
+        if (itemStack.hasItemMeta() && itemMeta.hasDisplayName()) {
             displayName = itemMeta.getDisplayName();
         }
 
-        if (data.getCoins() < priceCoins){
+        if (data.getCoins() < priceCoins) {
             ChatUtil.toPlayer(player, "&cYou do not have sufficient coins!");
             return;
         }
@@ -113,20 +117,23 @@ public class PlayerListener implements Listener {
         ChatUtil.toPlayer(player, "&aSuccessfully purchased " + displayName + " &afor &e" + priceCoins + "$");
     }
 
-    @EventHandler public void onEntityDamage(EntityDamageEvent event) {
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
         Entity entity = event.getEntity();
 
         if (entity instanceof Player) {
             Player player = (Player) entity;
 
-            if (GodCommand.contains(player.getUniqueId())){
+            if (GodCommand.contains(player.getUniqueId())) {
                 event.setCancelled(true);
             }
         }
     }
 
-    @EventHandler public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event){
-        Survival.getInstance().sendMessage(event.getPlayer(), "%2$s");
+    @EventHandler
+    public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
+        CoreRedisDatabase.getInstance().sendPacket(new ChatPacket(event.getPlayer().getName() + "&7: &f" + event.getMessage()));
+
         event.setCancelled(true);
     }
 

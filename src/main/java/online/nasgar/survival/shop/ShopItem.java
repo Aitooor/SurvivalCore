@@ -6,7 +6,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-@Getter @AllArgsConstructor
+@Getter
+@AllArgsConstructor
 public class ShopItem {
 
     private final ItemStack itemStack;

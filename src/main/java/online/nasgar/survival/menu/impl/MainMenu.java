@@ -20,29 +20,32 @@ public class MainMenu extends Menu {
 
         this.setFillEnabled(true);
 
-        this.setFillItemStack(new ItemCreator(Material.STAINED_GLASS_PANE, 1, (short) 4)
+        this.setFillItemStack(new ItemCreator(Material.BLACK_STAINED_GLASS, 1, (short) 4)
                 .setDisplayName(" ")
                 .toItemStack());
 
         this.setFillType(FillType.BORDERS);
     }
 
-    @Override public void onOpen(Player player) {
-        player.playSound(player.getLocation(), Sound.CHEST_OPEN, 1.0f, 1.0f);
+    @Override
+    public void onOpen(Player player) {
+        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1.0f, 1.0f);
     }
 
-    @Override public void onClose(Player player) {
-        player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 1.0f, 1.0f);
+    @Override
+    public void onClose(Player player) {
+        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1.0f, 1.0f);
     }
 
-    @Override public Set<Button> getButtons(Player player) {
+    @Override
+    public Set<Button> getButtons(Player player) {
         Set<Button> buttons = new HashSet<>();
 
         buttons.add(new ButtonItem(
                 18,
                 player.getName(),
                 "profile",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
                         .setDisplayName("&8➢ &fMenu Perfil")
                         .setLore(
                                 "&fAccede a esta opcion para ",
@@ -56,7 +59,7 @@ public class MainMenu extends Menu {
                 9,
                 "",
                 "discord",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.SKULL_BANNER_PATTERN)
                         .setDisplayName("&8➢ &3Discord")
                         .setLore(
                                 "&fEntra a nuestro server ",
@@ -70,7 +73,7 @@ public class MainMenu extends Menu {
                 27,
                 "",
                 "store",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.SKULL_BANNER_PATTERN)
                         .setDisplayName("&8➢ &aTienda")
                         .setLore(
                                 "&fVisita nuestra tienda ",
@@ -84,28 +87,28 @@ public class MainMenu extends Menu {
                 19,
                 "",
                 "wiki",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
                         .setDisplayName("&8➢ &eAYUDA")
                         .setLore(
                                 "&f¿Tienes preguntas sobre el server? "
-                                ,"&fentra a esta opcion e informate"
-                                ,"&Fde todo nuestros comandos y opciones"
-                                ,""
-                                ,"&aClick para abrir")
+                                , "&fentra a esta opcion e informate"
+                                , "&Fde todo nuestros comandos y opciones"
+                                , ""
+                                , "&aClick para abrir")
         ));
 
         buttons.add(new ButtonItem(
                 12,
                 "",
                 "lands",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
         ));
 
         buttons.add(new ButtonItem(
                 14,
                 "",
                 "warps",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
                         .setDisplayName("&8➢ &dWarps de Jugadores")
                         .setLore(
                                 "&c¿Que es esto?",
@@ -124,7 +127,7 @@ public class MainMenu extends Menu {
                 16,
                 "",
                 "jobs",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
                         .setDisplayName("&8➢ &dTrabajos")
                         .setLore(
                                 "&fRecolecta dinero",
@@ -140,7 +143,7 @@ public class MainMenu extends Menu {
                 22,
                 "",
                 "battlepass",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
                         .setDisplayName("&8➢ &dPase de Batalla")
                         .setLore(
                                 "&fCompleta los desafios y retos",
@@ -155,7 +158,7 @@ public class MainMenu extends Menu {
                 24,
                 "",
                 "ah",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
                         .setDisplayName("&8➢ &dCasa de Subastas")
                         .setLore(
                                 "&c¿Quieres vender sin ser estafado?",
@@ -170,7 +173,7 @@ public class MainMenu extends Menu {
                 32,
                 "",
                 "resources",
-                new ItemCreator(Material.SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
         ));
 
         return buttons;
@@ -189,12 +192,14 @@ public class MainMenu extends Menu {
             this.itemCreator = itemCreator;
         }
 
-        @Override public void onClick(InventoryClickEvent event) {
+        @Override
+        public void onClick(InventoryClickEvent event) {
             Player player = (Player) event.getWhoClicked();
             player.performCommand(this.command);
         }
 
-        @Override public ItemStack getButtonItem() {
+        @Override
+        public ItemStack getButtonItem() {
             return this.itemCreator.setSkullOwner(this.skullOwner).toItemStack();
         }
     }

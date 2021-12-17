@@ -6,8 +6,8 @@ import org.bukkit.inventory.Inventory;
 public enum FillType {
 
     BORDERS {
-
-        @Override public void applyFill(Menu menu) {
+        @Override
+        public void applyFill(Menu menu) {
             Inventory inventory = menu.getInventory();
             for (int i = 0; i < menu.getSize(); i++) {
                 if (i < 9 || i >= menu.getSize() - 9 || i % 9 == 0 || i % 9 == 8) {
@@ -21,10 +21,10 @@ public enum FillType {
     },
 
     ALL {
-
-        @Override public void applyFill(Menu menu) {
+        @Override
+        public void applyFill(Menu menu) {
             Inventory inventory = menu.getInventory();
-            for (int i = 0; i < menu.getSize(); i++){
+            for (int i = 0; i < menu.getSize(); i++) {
                 if (inventory.getItem(i) == null) {
                     inventory.setItem(i, menu.getFillItemStack());
                 }

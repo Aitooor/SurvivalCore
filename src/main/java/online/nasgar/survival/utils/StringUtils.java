@@ -7,7 +7,7 @@ public class StringUtils {
     public static StringBuilder buildString(String[] array, int start) {
         StringBuilder builder = new StringBuilder();
 
-        for(int i = start; i != array.length; ++i) {
+        for (int i = start; i != array.length; ++i) {
             builder.append(array[i]).append(" ");
         }
 
@@ -18,7 +18,7 @@ public class StringUtils {
         try {
             Integer.parseInt(value);
             return true;
-        } catch(NumberFormatException exception) {
+        } catch (NumberFormatException exception) {
             return false;
         }
     }

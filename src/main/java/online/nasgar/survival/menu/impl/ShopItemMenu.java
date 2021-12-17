@@ -20,7 +20,8 @@ public class ShopItemMenu extends Menu {
         super("&8➢ &eSHOP ITEM", 6);
     }
 
-    @Override public Set<Button> getButtons(Player player) {
+    @Override
+    public Set<Button> getButtons(Player player) {
         Set<Button> buttons = new HashSet<>();
 
         ShopItemManager shopItemManager = Survival.getInstance().getShopItemManager();
@@ -28,16 +29,18 @@ public class ShopItemMenu extends Menu {
         int i = 0;
         Iterator<ShopItem> iterator = shopItemManager.getItemMap().values().iterator();
 
-        while (iterator.hasNext() && i++ < shopItemManager.getItemMap().size()){
+        while (iterator.hasNext() && i++ < shopItemManager.getItemMap().size()) {
             buttons.add(new Button(i) {
 
                 private final ShopItem item = iterator.next();
 
-                @Override public void onClick(InventoryClickEvent event) {
+                @Override
+                public void onClick(InventoryClickEvent event) {
                     new TransactionEvent(player, this.item);
                 }
 
-                @Override public ItemStack getButtonItem() {
+                @Override
+                public ItemStack getButtonItem() {
                     return this.item.getItemStack();
                 }
 

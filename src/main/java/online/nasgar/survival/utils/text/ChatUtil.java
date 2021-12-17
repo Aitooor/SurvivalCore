@@ -13,50 +13,50 @@ import java.util.List;
 @UtilityClass
 public class ChatUtil {
 
-    public String translate(String message){
+    public String translate(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
-    public String translate(String... longMessage){
-        for (String message : longMessage){
+    public String translate(String... longMessage) {
+        for (String message : longMessage) {
             return message;
         }
         return null;
     }
 
-    public static List<String> translate(List<String> stringList){
+    public static List<String> translate(List<String> stringList) {
         List<String> arrayList = new ArrayList<>();
-        for (String list : stringList){
+        for (String list : stringList) {
             arrayList.add(translate(list));
         }
         return arrayList;
     }
 
-    public void print(String... message){
+    public void print(String... message) {
         Arrays.asList(message).forEach(log -> Bukkit.getConsoleSender().sendMessage(translate(log)));
     }
 
-    public void toPlayer(Player player, List<String> stringList){
+    public void toPlayer(Player player, List<String> stringList) {
         stringList.forEach(message -> toPlayer(player, message));
     }
 
-    public void toPlayer(Player player, String... longMessage){
+    public void toPlayer(Player player, String... longMessage) {
         Arrays.asList(longMessage).forEach(message -> toPlayer(player, message));
     }
 
-    public void toPlayer(Player player, String message){
+    public void toPlayer(Player player, String message) {
         player.sendMessage(translate(message));
     }
 
-    public void toSender(CommandSender sender, List<String> stringList){
+    public void toSender(CommandSender sender, List<String> stringList) {
         stringList.forEach(message -> toSender(sender, message));
     }
 
-    public void toSender(CommandSender sender, String... longMessage){
+    public void toSender(CommandSender sender, String... longMessage) {
         Arrays.asList(longMessage).forEach(message -> toSender(sender, message));
     }
 
-    public void toSender(CommandSender sender, String message){
+    public void toSender(CommandSender sender, String message) {
         sender.sendMessage(translate(message));
     }
 

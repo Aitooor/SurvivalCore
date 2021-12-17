@@ -16,10 +16,10 @@ public class ConfigFile extends YamlConfiguration {
         this.fileName = fileName;
         this.file = new File(plugin.getDataFolder(), fileName);
 
-        this.create();;
+        this.create();
     }
 
-    public void create(){
+    public void create() {
         try {
             if (!this.file.exists()) {
                 this.file.getParentFile().mkdirs();
@@ -36,7 +36,7 @@ public class ConfigFile extends YamlConfiguration {
         }
     }
 
-    public void save(){
+    public void save() {
         try {
             if (!this.file.exists()) {
                 this.file.createNewFile();

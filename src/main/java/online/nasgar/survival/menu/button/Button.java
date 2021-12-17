@@ -5,12 +5,13 @@ import lombok.Setter;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-@Getter @Setter
+@Getter
+@Setter
 public abstract class Button {
 
     private int slot;
 
-    public Button(int slot){
+    public Button(int slot) {
         this.slot = slot - 1;
     }
 

@@ -14,25 +14,24 @@ public class ShopItemManager {
 
     private final Map<String, ShopItem> itemMap;
 
-    public ShopItemManager(){
+    public ShopItemManager() {
         this.itemMap = new HashMap<>();
 
         this.setup();
     }
 
-    private void setup(){
+    private void setup() {
         this.itemMap.clear();
 
         ConfigurationSection section = Survival.getInstance().getConfigFile().getConfigurationSection("shop-items");
 
-        for (String key : section.getKeys(false)){
+        for (String key : section.getKeys(false)) {
             this.itemMap.put(key, new ShopItem(
                     new ItemCreator(Material.getMaterial(section.getString(key + ".item.material")),
                             section.getInt(key + ".item.amount"),
                             (short) section.getInt(key + "item.data"))
 
                             .setDisplayName(section.getString(key + ".item.display-name"))
-                            .setGlow(section.getBoolean(key + ".item.glow"))
                             .setLore(section.getStringList(key + ".item.description")).toItemStack(),
 
                     section.getInt(key + ".price"),
@@ -40,7 +39,7 @@ public class ShopItemManager {
         }
     }
 
-    public ShopItem getByName(String itemName){
+    public ShopItem getByName(String itemName) {
         return this.itemMap.get(itemName);
     }
 
