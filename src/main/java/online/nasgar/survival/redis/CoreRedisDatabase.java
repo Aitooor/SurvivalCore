@@ -12,6 +12,7 @@ import online.nasgar.survival.redis.packet.handler.PacketExceptionHandler;
 import online.nasgar.survival.redis.packet.listener.PacketListener;
 import online.nasgar.survival.redis.packet.listener.PacketListenerData;
 import online.nasgar.survival.redis.packets.ChatPacket;
+import online.nasgar.survival.redis.packets.RandomTPPacket;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -54,10 +55,11 @@ public class CoreRedisDatabase {
         config.setTimeBetweenEvictionRunsMillis(30000L);
 
         this.redisPool = new JedisPool(config, "127.0.0.1", 6379, 30000);
+        this.redisPool.getResource().auth("PASS");
 
         this.setupPubSub();
 
-        Arrays.asList(ChatPacket.class).forEach(this::registerPacket);
+        Arrays.asList(ChatPacket.class, RandomTPPacket.class).forEach(this::registerPacket);
 
         Arrays.asList(new SurvivalListener()).forEach(this::registerListener);
     }
@@ -147,6 +149,7 @@ public class CoreRedisDatabase {
             try {
                 Jedis jedis = this.redisPool.getResource();
 
+                jedis.auth("PASS");
                 jedis.subscribe(this.jedisPubSub, "Core");
             } catch (Exception e) {
                 e.printStackTrace();

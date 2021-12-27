@@ -31,6 +31,7 @@ public class AuctionsManager {
         for (Document document : Survival.getInstance().getMongoManager().getCollection("Auctions").find()) {
             AuctionData auctionData = new AuctionData();
 
+            auctionData.setId(UUID.fromString(document.getString("id")));
             auctionData.setOwner(UUID.fromString(document.getString("owner")));
             auctionData.setStack(ItemUtils.deSerialized(document.getString("itemStack")));
             auctionData.setPrice(document.getInteger("price"));
@@ -46,7 +47,7 @@ public class AuctionsManager {
         this.auctions.forEach(auctionData -> {
             Document document = new Document();
 
-            document.put("id", auctionData.getOwner().toString());
+            document.put("id", auctionData.getId().toString());
             document.put("owner", auctionData.getOwner().toString());
             document.put("itemStack", ItemUtils.serialize(auctionData.getStack()));
             document.put("price", auctionData.getPrice());

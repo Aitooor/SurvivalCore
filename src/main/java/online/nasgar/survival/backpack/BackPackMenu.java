@@ -19,9 +19,7 @@ public class BackPackMenu implements Listener {
         PlayerData playerData = Survival.getInstance().getPlayerDataManager().get(player.getUniqueId());
         Inventory inventory = Bukkit.createInventory(null, 27, "BackPack");
 
-        for (Map.Entry<Integer, ItemStack> stacks : playerData.getBackPackItems().entrySet()) {
-            inventory.setItem(stacks.getKey(), stacks.getValue());
-        }
+        if (playerData.getBackPackItems() != null) inventory.setContents(playerData.getBackPackItems());
 
         player.openInventory(inventory);
     }
@@ -32,13 +30,7 @@ public class BackPackMenu implements Listener {
 
         Player player = (Player) event.getPlayer();
         PlayerData playerData = Survival.getInstance().getPlayerDataManager().get(player.getUniqueId());
-        playerData.getBackPackItems().clear();
 
-        for (int i = 0; i < 27; i++) {
-            ItemStack stack = event.getInventory().getItem(i);
-            if (stack == null || stack.getType() == Material.AIR) continue;
-
-            playerData.getBackPackItems().put(i, stack);
-        }
+        playerData.setBackPackItems(event.getInventory().getContents());
     }
 }

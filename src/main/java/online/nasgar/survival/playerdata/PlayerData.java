@@ -8,6 +8,7 @@ import online.nasgar.survival.rankup.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,9 @@ public class PlayerData {
     private String lastConverser;
     private List<String> ignoredPlayers;
 
-    private double xp;
+    private double xp, foodLevel, health;
     private int coins;
+    private List<PotionEffect> effects;
     private AtomicInteger time;
     private boolean tpm;
 
@@ -31,7 +33,7 @@ public class PlayerData {
 
     private ItemStack[] items, armor;
 
-    private Map<Integer, ItemStack> backPackItems = Maps.newConcurrentMap();
+    private ItemStack[] backPackItems;
 
     public PlayerData(UUID uuid){
         this.uuid = uuid;

@@ -5,6 +5,7 @@ import lombok.Setter;
 import online.nasgar.survival.utils.reflect.BukkitReflection;
 import online.nasgar.survival.utils.reflect.Reflection;
 import online.nasgar.survival.utils.text.ChatUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -23,8 +24,8 @@ import java.util.*;
 @Setter
 public class ItemCreator {
 
-    private static ItemStack itemStack;
-    private static ItemMeta itemMeta;
+    private ItemStack itemStack;
+    private ItemMeta itemMeta;
 
     public ItemCreator(Material material) {
         this(material, 1, (short) 0);
@@ -35,8 +36,8 @@ public class ItemCreator {
     }
 
     public ItemCreator(ItemStack itemStack) {
-        ItemCreator.itemStack = itemStack;
-        itemMeta = itemStack.getItemMeta();
+        this.itemStack = itemStack;
+        this.itemMeta = itemStack.getItemMeta();
     }
 
     public static ItemStack makeItem(Material material) {
@@ -62,75 +63,52 @@ public class ItemCreator {
     }
 
     public static ItemStack makeItem(Material material, int amount, short data, String display, List<String> lore) {
-        itemStack = new ItemStack(material, amount, data);
+        ItemStack itemStack = new ItemStack(material, amount, data);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (display != null) {
-            itemMeta.setDisplayName(display);
+            itemMeta.setDisplayName(CC.translate(display));
         }
         if (lore != null) {
-            itemMeta.setLore(lore);
+            itemMeta.setLore(CC.translate(lore));
         }
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
 
-    public static void setDisplayName(ItemStack itemStack, String displayName) {
+    public void setDisplayName(ItemStack itemStack, String displayName) {
         itemMeta.setDisplayName(ChatUtil.translate(displayName));
         itemStack.setItemMeta(itemMeta);
     }
 
-    public static ItemStack setLore(ItemStack itemStack, String... lore) {
+    public ItemCreator setLore(String... lore) {
         List<String> list = new ArrayList<String>();
         Collections.addAll(list, lore);
-        return setLore(itemStack, list);
+
+        this.itemMeta.setLore(CC.translate(list));
+        return this;
     }
 
-    public static ItemStack setLore(ItemStack itemStack, List<String> lore) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
+    public ItemCreator setLore(List<String> lore) {
         itemMeta.setLore(ChatUtil.translate(lore));
         itemStack.setItemMeta(itemMeta);
-        return itemStack;
+        return this;
     }
 
-    public static void setUnbreakable(ItemStack itemStack, boolean unbreakable) {
+    public void setUnbreakable(ItemStack itemStack, boolean unbreakable) {
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         itemMeta.setUnbreakable(unbreakable);
         itemStack.setItemMeta(itemMeta);
     }
 
-    public static void setSkullOwner(ItemStack itemStack, String skullOwner) {
-        if (itemStack.getType() == Material.SKULL_BANNER_PATTERN) {
+    public ItemCreator setSkullOwner(ItemStack itemStack, String skullOwner) {
+        if (itemStack.getType() == Material.LEGACY_SKULL_ITEM) {
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
             skullMeta.setOwner(skullOwner);
             itemStack.setItemMeta(skullMeta);
         }
-    }
 
-    public static void addUnbreaking(Player player) {
-        for (ItemStack itemStack : player.getInventory().getContents()) {
-            if (itemStack != null) {
-                if (itemStack.getType() != Material.AIR) {
-                    Material type = itemStack.getType();
-                    if (type == Material.WOODEN_SWORD || type == Material.STONE_SWORD || type == Material.GOLDEN_SWORD || type == Material.IRON_SWORD || type == Material.DIAMOND_SWORD || type == Material.BOW || type == Material.DIAMOND_HELMET || type == Material.DIAMOND_CHESTPLATE || type == Material.DIAMOND_LEGGINGS || type == Material.DIAMOND_BOOTS) {
-                        setUnbreakable(itemStack, true);
-                    }
-                }
-            }
-        }
-    }
-
-    public static void removeUnbreaking(Player player) {
-        for (ItemStack itemStack : player.getInventory().getContents()) {
-            if (itemStack != null) {
-                if (itemStack.getType() != Material.AIR) {
-                    Material type = itemStack.getType();
-                    if (type == Material.WOODEN_SWORD || type == Material.STONE_SWORD || type == Material.GOLDEN_SWORD || type == Material.IRON_SWORD || type == Material.DIAMOND_SWORD || type == Material.BOW) {
-                        setUnbreakable(itemStack, false);
-                    }
-                }
-            }
-        }
+        return this;
     }
 
     public static void addEnchant(ItemStack itemStack, Enchantment enchantment, int level) {
@@ -178,32 +156,18 @@ public class ItemCreator {
     }
 
     public ItemCreator setMaterial(Material material) {
-        ItemCreator.itemStack = new ItemStack(material);
+        itemStack = new ItemStack(material);
         return this;
     }
 
     public ItemCreator setAmount(int amount) {
-        ItemCreator.itemStack.setAmount(amount);
+        itemStack.setAmount(amount);
         return this;
     }
 
     public ItemCreator setDisplayName(String displayName) {
         itemMeta.setDisplayName(ChatUtil.translate(displayName));
-        ItemCreator.itemStack.setItemMeta(itemMeta);
-        return this;
-    }
-
-    public ItemCreator setLore(List<String> lore) {
-        ItemMeta itemMeta = ItemCreator.itemStack.getItemMeta();
-        itemMeta.setLore(ChatUtil.translate(lore));
-        ItemCreator.itemStack.setItemMeta(itemMeta);
-        return this;
-    }
-
-    public ItemCreator setLore(String... lore) {
-        List<String> realLore = new ArrayList<>();
-        Collections.addAll(realLore, lore);
-        setLore(ItemCreator.itemStack, realLore);
+        itemStack.setItemMeta(itemMeta);
         return this;
     }
 
@@ -215,9 +179,9 @@ public class ItemCreator {
     }
 
     public ItemCreator setSkullOwner(String skullOwner) {
-        if (itemStack.getType() == Material.SKULL_BANNER_PATTERN) {
+        if (itemStack.getType() == Material.PLAYER_HEAD) {
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
-            skullMeta.setOwner(skullOwner);
+            skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(skullOwner));
             itemStack.setItemMeta(skullMeta);
         }
         return this;
@@ -250,12 +214,14 @@ public class ItemCreator {
         return this;
     }
 
-    public ItemCreator setDurability(ItemStack itemStack, short durability) {
+    public ItemCreator setDurability(short durability) {
         itemStack.setDurability(durability);
         return this;
     }
 
     public ItemStack toItemStack() {
+        itemStack.setItemMeta(itemMeta);
+
         return itemStack;
     }
 }

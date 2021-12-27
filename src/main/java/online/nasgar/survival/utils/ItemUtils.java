@@ -31,7 +31,7 @@ public class ItemUtils {
                 itemBuilder = new ItemCreator(Material.valueOf(material));
             } else if (str.contains("durability")) {
                 String durabity = str.replace("durability:", "");
-                itemBuilder.setDurability(itemBuilder.toItemStack(), Short.parseShort(durabity));
+                itemBuilder.setDurability(Short.parseShort(durabity));
             } else if (str.contains("name")) {
                 String name = str.replace("name:", "");
                 itemBuilder.setDisplayName(name);

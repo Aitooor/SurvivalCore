@@ -13,26 +13,30 @@ public class HealCommand extends Command {
         this.setOnlyPlayers(true);
     }
 
-    @Override public void onCommand(Player player, String[] array) {
-        if (player.getHealth() == 20){
+    @Override
+    public void onCommand(Player player, String[] array) {
+        if (player.getHealth() == 20) {
             ChatUtil.toPlayer(player, "&cYour health is at maximum!");
             return;
         }
 
-        player.setHealth(20);
-        ChatUtil.toPlayer(player, "&aYour health has been restored!");
+        if (array.length < 1) {
+            player.setHealth(20);
+            ChatUtil.toPlayer(player, "&aYour health has been restored!");
+            return;
+        }
 
-        if (!player.hasPermission("heal.others.command")){
+        if (!player.hasPermission("heal.others.command")) {
             return;
         }
 
         Player target = Bukkit.getPlayer(array[0]);
 
-        if (this.isPlayerNull(target, array[0])){
+        if (this.isPlayerNull(target, array[0])) {
             return;
         }
 
-        if (target.getHealth() == 20){
+        if (target.getHealth() == 20) {
             ChatUtil.toPlayer(player, "&e" + array[0] + " &chealth is at maximum!");
             return;
         }

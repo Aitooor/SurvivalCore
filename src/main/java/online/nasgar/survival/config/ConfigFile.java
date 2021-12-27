@@ -47,4 +47,11 @@ public class ConfigFile extends YamlConfiguration {
             throw new RuntimeException(exception);
         }
     }
+
+    public void reload() {
+        try {
+            super.load(file);
+            this.save();
+        } catch (Exception e) {}
+    }
 }

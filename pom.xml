@@ -9,7 +9,10 @@
     <version>0.0.1</version>
 
     <repositories>
-
+        <repository>
+            <id>papermc</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
+        </repository>
         <!-- ProtocolLib | Repository -->
         <repository>
             <id>dmulloy2-repo</id>
@@ -19,6 +22,13 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.18.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Lombok | Lib -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -28,13 +38,6 @@
         </dependency>
 
         <!-- Spigot 1.8 | API -->
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-1.8</artifactId>
-            <version>1.8.8-R0.1-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/Spigot.jar</systemPath>
-        </dependency>
 
         <!-- MongoDB | Lib -->
         <dependency>

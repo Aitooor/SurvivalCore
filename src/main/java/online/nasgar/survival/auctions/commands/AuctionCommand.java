@@ -27,7 +27,7 @@ public class AuctionCommand extends Command {
 
         if (args.length == 3) {
             if (args[0].equalsIgnoreCase("pull")) {
-                if (player.getItemInUse() == null) {
+                if (player.getItemInHand() == null) {
                     player.sendMessage(CC.translate("&cNo item in hand."));
                     return;
                 }

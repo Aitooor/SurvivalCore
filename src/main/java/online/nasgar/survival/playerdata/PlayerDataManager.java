@@ -1,5 +1,6 @@
 package online.nasgar.survival.playerdata;
 
+import com.google.gson.GsonBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ReplaceOptions;
@@ -12,16 +13,14 @@ import online.nasgar.survival.utils.BukkitUtil;
 import online.nasgar.survival.utils.TaskUtil;
 import org.bson.Document;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> {
@@ -49,16 +48,18 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         document.put("xp", data.getXp());
         document.put("time", data.getTime().get());
         document.put("tpm", data.isTpm());
+        document.put("food", data.getFoodLevel());
+        document.put("health", data.getHealth());
+        document.put("effects", new GsonBuilder().serializeNulls().create().toJson(data.getEffects()));
 
         if (data.getRank() != null) {
             document.put("rank", data.getRank().getName());
         }
 
-        document.put("backPackItems", data.getBackPackItems());
-
         try {
             document.put("items", BukkitUtil.itemStackArrayToBase64(data.getItems()));
             document.put("armor", BukkitUtil.itemStackArrayToBase64(data.getArmor()));
+            document.put("backPackItems", BukkitUtil.itemStackArrayToBase64(data.getBackPackItems()));
         } catch (Exception e) {}
 
         return document;
@@ -73,7 +74,11 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         data.setXp(document.getDouble("xp"));
         data.getTime().set(document.getInteger("time"));
         data.setTpm(document.getBoolean("tpm"));
-        data.setBackPackItems((Map) document.get("backPackItems"));
+
+        try {
+            data.setBackPackItems(BukkitUtil.itemStackArrayFromBase64(document.getString("backPackItems")));
+        } catch (Exception e) {}
+
         if (document.containsKey("rank")) {
             data.setRank(Survival.getInstance().getRankManager().getByName(document.getString("rank")));
         }
@@ -81,6 +86,9 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         try {
             data.setItems(BukkitUtil.itemStackArrayFromBase64(document.getString("items")));
             data.setArmor(BukkitUtil.itemStackArrayFromBase64(document.getString("armor")));
+            data.setFoodLevel(document.getInteger("food"));
+            data.setHealth(document.getDouble("health"));
+            data.setEffects(document.get("effects") == null ? new ArrayList<>() : new GsonBuilder().serializeNulls().create().fromJson(document.getString("effects"), List.class));
         } catch (Exception e) {}
 
         return data;
@@ -97,23 +105,28 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
     }
 
     public void load(UUID uuid){
-        if (this.contains(uuid)){
-            return;
+        PlayerData data = null;
+
+        if (!this.contains(uuid)){
+            Document document = this.getDataCollection().find(Filters.eq("uuid", uuid.toString())).first();
+
+            if (document == null) {
+                data = new PlayerData(uuid);
+            } else {
+                data = this.fromDocument(document);
+            }
         }
 
-        Document document = this.getDataCollection().find(Filters.eq("uuid", uuid.toString())).first();
-
-        if (document == null) {
-            this.dataMap.put(uuid, new PlayerData(uuid));
-            return;
-        }
-
-        PlayerData data = this.fromDocument(document);
-
-        PlayerInventory inventory = Bukkit.getPlayer(uuid).getInventory();
+        Player player = Bukkit.getPlayer(uuid);
+        PlayerInventory inventory = player.getInventory();
 
         inventory.setArmorContents(data.getArmor());
         inventory.setContents(data.getItems());
+
+        data.getEffects().forEach(player::addPotionEffect);
+
+        player.setHealth(data.getHealth());
+        player.setFoodLevel((int) data.getFoodLevel());
 
         this.dataMap.put(uuid, data);
     }
@@ -124,11 +137,6 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         if (data == null) {
             return;
         }
-
-        PlayerInventory inventory = Bukkit.getPlayer(uuid).getInventory();
-
-        data.setArmor(data.getArmor());
-        data.setItems(inventory.getContents());
 
         this.getDataCollection().replaceOne(Filters.eq("uuid", uuid.toString()), this.toDocument(data), new ReplaceOptions().upsert(true));
 

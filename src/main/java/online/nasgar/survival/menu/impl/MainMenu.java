@@ -45,7 +45,7 @@ public class MainMenu extends Menu {
                 18,
                 player.getName(),
                 "profile",
-                new ItemCreator(Material.PLAYER_HEAD)
+                new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &fMenu Perfil")
                         .setLore(
                                 "&fAccede a esta opcion para ",
@@ -87,7 +87,7 @@ public class MainMenu extends Menu {
                 19,
                 "",
                 "wiki",
-                new ItemCreator(Material.PLAYER_HEAD)
+                new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &eAYUDA")
                         .setLore(
                                 "&f¿Tienes preguntas sobre el server? "
@@ -101,14 +101,14 @@ public class MainMenu extends Menu {
                 12,
                 "",
                 "lands",
-                new ItemCreator(Material.PLAYER_HEAD)
+                new ItemCreator(Material.LEGACY_SKULL_ITEM)
         ));
 
         buttons.add(new ButtonItem(
                 14,
                 "",
                 "warps",
-                new ItemCreator(Material.PLAYER_HEAD)
+                new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &dWarps de Jugadores")
                         .setLore(
                                 "&c¿Que es esto?",
@@ -127,7 +127,7 @@ public class MainMenu extends Menu {
                 16,
                 "",
                 "jobs",
-                new ItemCreator(Material.PLAYER_HEAD)
+                new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &dTrabajos")
                         .setLore(
                                 "&fRecolecta dinero",
@@ -143,7 +143,7 @@ public class MainMenu extends Menu {
                 22,
                 "",
                 "battlepass",
-                new ItemCreator(Material.PLAYER_HEAD)
+                new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &dPase de Batalla")
                         .setLore(
                                 "&fCompleta los desafios y retos",
@@ -158,7 +158,7 @@ public class MainMenu extends Menu {
                 24,
                 "",
                 "ah",
-                new ItemCreator(Material.PLAYER_HEAD)
+                new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &dCasa de Subastas")
                         .setLore(
                                 "&c¿Quieres vender sin ser estafado?",
@@ -173,7 +173,7 @@ public class MainMenu extends Menu {
                 32,
                 "",
                 "resources",
-                new ItemCreator(Material.PLAYER_HEAD)
+                new ItemCreator(Material.LEGACY_SKULL_ITEM)
         ));
 
         return buttons;
@@ -200,6 +200,8 @@ public class MainMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem() {
+            if (this.skullOwner.isEmpty()) return this.itemCreator.toItemStack();
+
             return this.itemCreator.setSkullOwner(this.skullOwner).toItemStack();
         }
     }

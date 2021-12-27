@@ -8,6 +8,7 @@ import java.util.UUID;
 @Data
 public class AuctionData {
 
+    private UUID id;
     private UUID owner;
     private double price;
     private ItemStack stack;

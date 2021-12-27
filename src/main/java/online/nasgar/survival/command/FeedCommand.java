@@ -19,12 +19,16 @@ public class FeedCommand extends Command {
             return;
         }
 
-        player.setFoodLevel(20);
-        ChatUtil.toPlayer(player, "&aYour feed has been restored!");
+        if (array.length < 1) {
+            player.setFoodLevel(20);
+            ChatUtil.toPlayer(player, "&aYour feed has been restored!");
+            return;
+        }
 
         if (!player.hasPermission("feed.others.command")){
             return;
         }
+
 
         Player target = Bukkit.getPlayer(array[0]);
 

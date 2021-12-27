@@ -2,9 +2,11 @@ online\nasgar\survival\command\ShopItemCommand.class
 online\nasgar\survival\redis\CoreRedisDatabase.class
 online\nasgar\survival\command\GamemodeCommand.class
 online\nasgar\survival\menu\Menu.class
+online\nasgar\survival\auctions\menu\AuctionMenu$1.class
 online\nasgar\survival\Survival.class
 online\nasgar\survival\command\ProfileCommand.class
 online\nasgar\survival\redis\packet\json\JsonChain.class
+online\nasgar\survival\command\ReloadCommand.class
 online\nasgar\survival\utils\reflect\Reflection$2.class
 online\nasgar\survival\warp\commands\WarpsCommand.class
 online\nasgar\survival\utils\LuckPermsUtil.class
@@ -21,6 +23,7 @@ online\nasgar\survival\redis\packet\json\JsonSerializer.class
 online\nasgar\survival\utils\ItemCreator.class
 online\nasgar\survival\redis\CoreRedisDatabase$1.class
 online\nasgar\survival\database\Authentication.class
+online\nasgar\survival\auctions\AuctionData.class
 online\nasgar\survival\warp\menu\WarpsMenu.class
 online\nasgar\survival\utils\CC.class
 online\nasgar\survival\menu\MenuManager.class
@@ -44,8 +47,10 @@ online\nasgar\survival\graves\GraveData.class
 online\nasgar\survival\menu\impl\ProfileMenu$ButtonItem.class
 online\nasgar\survival\warp\commands\DeleteWarpCommand.class
 online\nasgar\survival\command\MenuCommand.class
+online\nasgar\survival\utils\ItemUtils.class
 online\nasgar\survival\randomtp\RandomTPManager.class
 online\nasgar\survival\database\mongodb\MongoManager.class
+online\nasgar\survival\redis\packets\RandomTPPacket.class
 online\nasgar\survival\providers\BoardListener.class
 online\nasgar\survival\command\FeedCommand.class
 online\nasgar\survival\listeners\PlayerListener.class
@@ -81,9 +86,11 @@ online\nasgar\survival\command\coins\arguments\RemoveArgument.class
 online\nasgar\survival\command\message\event\MessageEvent.class
 online\nasgar\survival\rankup\RankManager.class
 online\nasgar\survival\warp\commands\SetWarpItemCommand.class
+online\nasgar\survival\utils\BungeeUtil.class
 online\nasgar\survival\utils\TimeUtils.class
 online\nasgar\survival\command\management\Argument.class
 online\nasgar\survival\warp\commands\SetWarpSlotCommand.class
+online\nasgar\survival\auctions\AuctionsManager.class
 online\nasgar\survival\menu\type\MenuType.class
 online\nasgar\survival\shop\ShopItemManager.class
 online\nasgar\survival\command\coins\arguments\SetArgument.class
@@ -91,6 +98,8 @@ online\nasgar\survival\providers\TablistListener.class
 online\nasgar\survival\utils\reflect\BukkitReflection.class
 online\nasgar\survival\utils\reflect\Reflection$1.class
 online\nasgar\survival\rankup\RankCheckerTask.class
+online\nasgar\survival\auctions\commands\AuctionCommand.class
+online\nasgar\survival\auctions\menu\AuctionMenu.class
 online\nasgar\survival\command\management\Command.class
 online\nasgar\survival\menu\impl\ShopItemMenu$1.class
 online\nasgar\survival\playerdata\PlayerData.class

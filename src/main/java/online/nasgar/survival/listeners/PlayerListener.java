@@ -23,8 +23,11 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
 
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class PlayerListener implements Listener {
 
@@ -47,11 +50,11 @@ public class PlayerListener implements Listener {
         ChatUtil.toPlayer(player,
 
                 "&7&m-------------------------------------------------------",
-                "&b&lNasgar Online&8┃&fSurvival",
+                "              &b&lNasgar Online&8┃&fSurvival",
                 "",
-                "&b&lWebsite&7: &fwww.nasgar.online",
-                "&b&lTwitter&7: &f@NasgarNetwork",
-                "&b&lDiscord&7: &fds.nasgar.online",
+                "              &b&lWebsite&7: &fwww.nasgar.online",
+                "              &b&lTwitter&7: &f@NasgarNetwork",
+                "              &b&lDiscord&7: &fds.nasgar.online",
                 "",
                 "              Welcome &b&l<player>&f!>",
                 "&7&m-------------------------------------------------------");
@@ -60,11 +63,26 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
         UUID uuid = event.getPlayer().getUniqueId();
 
         if (this.playerDataManager.get(uuid) != null) {
+            PlayerData data = this.playerDataManager.get(uuid);
+
+            data.setItems(player.getInventory().getContents());
+            data.setArmor(player.getInventory().getArmorContents());
+            data.setHealth(player.getHealth());
+            data.setFoodLevel(player.getFoodLevel());
+            data.setEffects(new ArrayList<>(player.getActivePotionEffects()));
+
             this.playerDataManager.save(uuid, true);
         }
+
+        player.getInventory().clear();
+        player.getInventory().setHelmet(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setBoots(null);
 
         event.setQuitMessage(null);
     }

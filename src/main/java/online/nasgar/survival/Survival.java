@@ -28,6 +28,8 @@ public class Survival extends JavaPlugin {
     @Getter
     private static Survival instance;
 
+    private String serverId;
+
     private ConfigFile configFile, warpsFile;
 
     private MongoManager mongoManager;
@@ -42,6 +44,8 @@ public class Survival extends JavaPlugin {
 
         this.configFile = new ConfigFile(this, "config.yml");
         this.warpsFile = new ConfigFile(this, "warps.yml");
+
+        this.serverId = this.configFile.getString("id");
 
         this.setupDatabases();
         this.setupManagers();
@@ -60,12 +64,15 @@ public class Survival extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
         Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
         Bukkit.getPluginManager().registerEvents(new BackPackMenu(), this);
+
+        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     @Override
     public void onDisable() {
         WarpManager.getInstance().save();
         AuctionsManager.getInstance().save();
+
         this.mongoManager.close();
         instance = null;
     }

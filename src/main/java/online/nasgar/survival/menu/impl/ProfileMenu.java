@@ -49,7 +49,7 @@ public class ProfileMenu extends Menu {
                         .setDisplayName("&8➢ &bRankup")
                         .setLore(
                                 "&aRango Acual",
-                                data.getRank().getPrefix(),
+                                (data.getRank() != null ? data.getRank().getPrefix() : "Default"),
                                 "",
                                 "&cSiguiente Rango",
                                 Survival.getInstance().getRankManager().getNextApplicable(data).getPrefix(),
