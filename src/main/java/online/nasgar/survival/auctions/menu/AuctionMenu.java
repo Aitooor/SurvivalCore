@@ -22,7 +22,6 @@ import java.util.Set;
 public class AuctionMenu extends Menu {
 
     private List<AuctionData> notAddedAuctions;
-
     public AuctionMenu(List<AuctionData> auctionData) {
         super("Auction", 54, MenuType.CHEST);
 
@@ -33,10 +32,9 @@ public class AuctionMenu extends Menu {
     public Set<Button> getButtons(Player player) {
         Set<Button> buttons = new HashSet<>();
 
-        List<AuctionData> datas = new ArrayList<>(AuctionsManager.getInstance().getAuctions());
-        int id = 0;
+        int id = 1;
 
-        for (AuctionData data : datas) {
+        for (AuctionData data : notAddedAuctions) {
             if (id >= this.getInventory().getSize()) {
                 notAddedAuctions.add(data);
                 continue;
@@ -58,7 +56,7 @@ public class AuctionMenu extends Menu {
                     playerData.setCoins((int) (playerData.getCoins() - data.getPrice()));
                     Survival.getInstance().getPlayerDataManager().save(player.getUniqueId(), false);
 
-                    datas.removeIf(auctionData -> auctionData.getId().equals(data.getId()));
+                    AuctionsManager.getInstance().getAuctions().removeIf(auctionData -> auctionData.getId().equals(data.getId()));
 
                     if (player.getInventory().firstEmpty() == -1) {
                         player.getWorld().dropItem(player.getLocation(), data.getStack());

@@ -8,8 +8,10 @@ C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\utils\text\ChatUtil.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\menu\impl\ProfileMenu.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\utils\reflect\Reflection.java
+C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\command\ReloadCommand.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\redis\packet\json\JsonSerializer.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\menu\impl\ShopItemMenu.java
+C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\redis\packets\RandomTPPacket.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\command\management\CommandManager.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\utils\TimeFormatter.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\graves\GraveData.java
@@ -35,6 +37,7 @@ C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\utils\ItemUtils.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\utils\ItemCreator.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\command\ProfileCommand.java
+C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\utils\BungeeUtil.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\command\FlyCommand.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\utils\LuckPermsUtil.java
 C:\Users\mauri\Desktop\Projects\Nasgar\SurvivalCore\src\main\java\online\nasgar\survival\auctions\menu\AuctionMenu.java

@@ -1,8 +1,10 @@
 package online.nasgar.survival.redis.listeners;
 
+import online.nasgar.survival.randomtp.RandomTPManager;
 import online.nasgar.survival.redis.packet.handler.IncomingPacketHandler;
 import online.nasgar.survival.redis.packet.listener.PacketListener;
 import online.nasgar.survival.redis.packets.ChatPacket;
+import online.nasgar.survival.redis.packets.RandomTPPacket;
 import online.nasgar.survival.utils.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,5 +16,10 @@ public class SurvivalListener implements PacketListener {
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendMessage(CC.translate(packet.getMessage()));
         }
+    }
+
+    @IncomingPacketHandler
+    public void onRandomTP(RandomTPPacket packet) {
+        RandomTPManager.getInstance().getToTeleport().put(packet.getPlayer(), packet.getLocation());
     }
 }

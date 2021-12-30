@@ -7,8 +7,11 @@ import online.nasgar.survival.auctions.menu.AuctionMenu;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.utils.StringUtils;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.stream.Collectors;
 
 public class AuctionCommand extends Command {
 
@@ -21,13 +24,13 @@ public class AuctionCommand extends Command {
         Player player = (Player) sender;
 
         if (args.length == 1 && args[0].equalsIgnoreCase("menu")) {
-            new AuctionMenu(AuctionsManager.getInstance().getAuctions()).openMenu(player);
+            new AuctionMenu(AuctionsManager.getInstance().getAuctions().stream().filter(auctionData -> !auctionData.isRemoved()).collect(Collectors.toList())).openMenu(player);
             return;
         }
 
         if (args.length == 3) {
             if (args[0].equalsIgnoreCase("pull")) {
-                if (player.getItemInHand() == null) {
+                if (player.getItemInHand() == null || player.getItemInHand().getType() == Material.AIR) {
                     player.sendMessage(CC.translate("&cNo item in hand."));
                     return;
                 }
@@ -49,13 +52,14 @@ public class AuctionCommand extends Command {
                 AuctionData auctionData = new AuctionData();
 
                 auctionData.setOwner(player.getUniqueId());
-                auctionData.setStack(player.getItemInUse());
+                auctionData.setStack(player.getItemInHand());
                 auctionData.setAddedAt(System.currentTimeMillis());
                 auctionData.setDuration(System.currentTimeMillis() + time);
                 auctionData.setPrice(integer);
 
                 AuctionsManager.getInstance().getAuctions().add(auctionData);
 
+                player.setItemInHand(null);
                 player.sendMessage(CC.translate("&aYour item has been added successfully for sale. In case that you're offline the balance would be acredited, no matter what."));
                 return;
             }

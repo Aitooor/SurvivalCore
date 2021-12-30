@@ -34,4 +34,12 @@ public class RandomTPPacket implements Packet {
         this.player = player;
         this.location = location;
     }
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
 }

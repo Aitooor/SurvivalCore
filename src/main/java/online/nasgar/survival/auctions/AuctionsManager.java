@@ -37,13 +37,12 @@ public class AuctionsManager {
             auctionData.setPrice(document.getInteger("price"));
             auctionData.setDuration(document.getLong("duration"));
             auctionData.setAddedAt(document.getLong("added"));
+            auctionData.setRemoved(document.getBoolean("removed"));
 
             this.auctions.add(auctionData);
         }
     }
     public void save() {
-        Survival.getInstance().getMongoManager().getCollection("Auctions").drop();
-
         this.auctions.forEach(auctionData -> {
             Document document = new Document();
 
@@ -53,6 +52,7 @@ public class AuctionsManager {
             document.put("price", auctionData.getPrice());
             document.put("duration", auctionData.getDuration());
             document.put("added", auctionData.getAddedAt());
+            document.put("removed", auctionData.isRemoved());
 
             Survival.getInstance().getMongoManager().getCollection("Auctions").replaceOne(Filters.eq(UUID.randomUUID()), document, new ReplaceOptions().upsert(true));
         });

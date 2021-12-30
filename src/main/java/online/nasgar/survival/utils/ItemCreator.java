@@ -179,11 +179,10 @@ public class ItemCreator {
     }
 
     public ItemCreator setSkullOwner(String skullOwner) {
-        if (itemStack.getType() == Material.PLAYER_HEAD) {
             SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
             skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(skullOwner));
             itemStack.setItemMeta(skullMeta);
-        }
+
         return this;
     }
 

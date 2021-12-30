@@ -55,7 +55,7 @@ public class CoreRedisDatabase {
         config.setTimeBetweenEvictionRunsMillis(30000L);
 
         this.redisPool = new JedisPool(config, "127.0.0.1", 6379, 30000);
-        this.redisPool.getResource().auth("PASS");
+      //  this.redisPool.getResource().auth("PASS");
 
         this.setupPubSub();
 
@@ -149,7 +149,7 @@ public class CoreRedisDatabase {
             try {
                 Jedis jedis = this.redisPool.getResource();
 
-                jedis.auth("PASS");
+        //        jedis.auth("PASS");
                 jedis.subscribe(this.jedisPubSub, "Core");
             } catch (Exception e) {
                 e.printStackTrace();

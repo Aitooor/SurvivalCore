@@ -14,4 +14,5 @@ public class AuctionData {
     private ItemStack stack;
 
     private long addedAt, duration;
+    private boolean removed;
 }

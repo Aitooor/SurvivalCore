@@ -45,7 +45,7 @@ public class MainMenu extends Menu {
                 18,
                 player.getName(),
                 "profile",
-                new ItemCreator(Material.LEGACY_SKULL_ITEM)
+                new ItemCreator(Material.PLAYER_HEAD)
                         .setDisplayName("&8➢ &fMenu Perfil")
                         .setLore(
                                 "&fAccede a esta opcion para ",
@@ -202,7 +202,7 @@ public class MainMenu extends Menu {
         public ItemStack getButtonItem() {
             if (this.skullOwner.isEmpty()) return this.itemCreator.toItemStack();
 
-            return this.itemCreator.setSkullOwner(this.skullOwner).toItemStack();
+            return this.itemCreator.setDurability((short) 3).setSkullOwner(this.skullOwner).toItemStack();
         }
     }
 

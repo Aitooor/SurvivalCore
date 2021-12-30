@@ -45,7 +45,8 @@ public class CommandManager {
                 new SetWarpSlotCommand(),
                 new BackPackCommand(),
                 new RandomTPCommand(),
-                new AuctionCommand()
+                new AuctionCommand(),
+                new ReloadCommand()
         );
     }
 

@@ -59,9 +59,9 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         try {
             document.put("items", BukkitUtil.itemStackArrayToBase64(data.getItems()));
             document.put("armor", BukkitUtil.itemStackArrayToBase64(data.getArmor()));
-            document.put("backPackItems", BukkitUtil.itemStackArrayToBase64(data.getBackPackItems()));
-        } catch (Exception e) {}
+        } catch (Exception ignored) {}
 
+        document.put("backPackItems", BukkitUtil.itemStackArrayToBase64(data.getBackPackItems()));
         return document;
     }
 
@@ -74,6 +74,8 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         data.setXp(document.getDouble("xp"));
         data.getTime().set(document.getInteger("time"));
         data.setTpm(document.getBoolean("tpm"));
+        data.setFoodLevel(document.getDouble("food"));
+        data.setHealth(document.getDouble("health"));
 
         try {
             data.setBackPackItems(BukkitUtil.itemStackArrayFromBase64(document.getString("backPackItems")));
@@ -86,8 +88,6 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         try {
             data.setItems(BukkitUtil.itemStackArrayFromBase64(document.getString("items")));
             data.setArmor(BukkitUtil.itemStackArrayFromBase64(document.getString("armor")));
-            data.setFoodLevel(document.getInteger("food"));
-            data.setHealth(document.getDouble("health"));
             data.setEffects(document.get("effects") == null ? new ArrayList<>() : new GsonBuilder().serializeNulls().create().fromJson(document.getString("effects"), List.class));
         } catch (Exception e) {}
 
@@ -115,6 +115,8 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
             } else {
                 data = this.fromDocument(document);
             }
+        } else {
+            data = this.dataMap.get(uuid);
         }
 
         Player player = Bukkit.getPlayer(uuid);
@@ -123,7 +125,9 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         inventory.setArmorContents(data.getArmor());
         inventory.setContents(data.getItems());
 
-        data.getEffects().forEach(player::addPotionEffect);
+        if (data.getEffects() != null) {
+            data.getEffects().forEach(player::addPotionEffect);
+        }
 
         player.setHealth(data.getHealth());
         player.setFoodLevel((int) data.getFoodLevel());

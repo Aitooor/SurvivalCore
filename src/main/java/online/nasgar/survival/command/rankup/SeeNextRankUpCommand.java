@@ -15,6 +15,8 @@ public class SeeNextRankUpCommand extends Command {
     public SeeNextRankUpCommand(Survival plugin) {
         super("seenextrankup");
         this.plugin = plugin;
+
+        this.setOnlyPlayers(true);
     }
 
     @Override public void onCommand(Player player, String[] array) {
