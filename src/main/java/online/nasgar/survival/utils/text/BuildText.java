@@ -5,9 +5,10 @@ import lombok.Setter;
 import lombok.experimental.UtilityClass;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.rankup.Rank;
 import online.nasgar.survival.utils.LuckPermsUtil;
 import online.nasgar.survival.utils.TimeUtils;
+import online.nasgar.timedrankup.TimedRankup;
+import online.nasgar.timedrankup.rank.Rank;
 import org.bukkit.entity.Player;
 
 import java.time.Duration;
@@ -45,11 +46,11 @@ public class BuildText {
         put("rank", LuckPermsUtil.getRankName(player));
         put("coins", Integer.toString(data.getCoins()));
 
-        Rank rank = plugin.getRankManager().getNextApplicable(data);
+        Rank rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(data.getUuid()));
 
         String finalText = text;
-        plugin.getRankManager().getRanksInverted().forEach(r -> {
 
+        TimedRankup.getPlugin(TimedRankup.class).getRankManager().getRanksInverted().forEach(r -> {
             put("rankPrefix", r.getPrefix());
 
             if (finalText.equalsIgnoreCase("<ranks>")) {

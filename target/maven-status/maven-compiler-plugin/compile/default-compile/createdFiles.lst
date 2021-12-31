@@ -63,10 +63,8 @@ online\nasgar\survival\menu\type\MenuType$1.class
 online\nasgar\survival\utils\text\ChatUtil.class
 online\nasgar\survival\menu\type\FillType$1.class
 online\nasgar\survival\warp\commands\SetWarpCommand.class
-online\nasgar\survival\command\rankup\SeeNextRankUpCommand.class
 online\nasgar\survival\randomtp\commands\RandomTPCommand.class
 online\nasgar\survival\utils\TaskUtil.class
-online\nasgar\survival\command\rankup\SeeRankUpCommand.class
 online\nasgar\survival\listeners\SpawnersListener.class
 online\nasgar\survival\playerdata\PlayerDataManager.class
 online\nasgar\survival\utils\text\BuildText.class
@@ -84,7 +82,6 @@ online\nasgar\survival\redis\listeners\SurvivalListener.class
 online\nasgar\survival\utils\reflect\Reflection$3.class
 online\nasgar\survival\command\coins\arguments\RemoveArgument.class
 online\nasgar\survival\command\message\event\MessageEvent.class
-online\nasgar\survival\rankup\RankManager.class
 online\nasgar\survival\warp\commands\SetWarpItemCommand.class
 online\nasgar\survival\utils\BungeeUtil.class
 online\nasgar\survival\utils\TimeUtils.class
@@ -97,7 +94,6 @@ online\nasgar\survival\command\coins\arguments\SetArgument.class
 online\nasgar\survival\providers\TablistListener.class
 online\nasgar\survival\utils\reflect\BukkitReflection.class
 online\nasgar\survival\utils\reflect\Reflection$1.class
-online\nasgar\survival\rankup\RankCheckerTask.class
 online\nasgar\survival\auctions\commands\AuctionCommand.class
 online\nasgar\survival\auctions\menu\AuctionMenu.class
 online\nasgar\survival\command\management\Command.class
@@ -117,6 +113,5 @@ fr\mrmicky\fastboard\FastBoard$VersionType.class
 online\nasgar\survival\database\mongodb\MongoSerializer.class
 online\nasgar\survival\backpack\commands\BackPackCommand.class
 online\nasgar\survival\menu\impl\MainMenu.class
-online\nasgar\survival\rankup\Rank.class
 online\nasgar\survival\redis\packet\Packet.class
 online\nasgar\survival\utils\call\WebCallback.class

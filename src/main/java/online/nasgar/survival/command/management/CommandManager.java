@@ -7,8 +7,6 @@ import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.coins.CoinsCommand;
 import online.nasgar.survival.command.message.MessageCommand;
 import online.nasgar.survival.command.message.ReplyCommand;
-import online.nasgar.survival.command.rankup.SeeNextRankUpCommand;
-import online.nasgar.survival.command.rankup.SeeRankUpCommand;
 import online.nasgar.survival.randomtp.commands.RandomTPCommand;
 import online.nasgar.survival.warp.commands.*;
 import org.bukkit.Bukkit;
@@ -32,8 +30,6 @@ public class CommandManager {
                 new MenuCommand(),
                 new ProfileCommand(),
                 new ShopItemCommand(),
-                new SeeNextRankUpCommand(plugin),
-                new SeeRankUpCommand(plugin),
                 new FeedCommand(),
                 new CoinsCommand(),
                 new SetWarpCommand(),

@@ -11,6 +11,7 @@ import online.nasgar.survival.database.mongodb.MongoManager;
 import online.nasgar.survival.database.mongodb.MongoSerializer;
 import online.nasgar.survival.utils.BukkitUtil;
 import online.nasgar.survival.utils.TaskUtil;
+import online.nasgar.timedrankup.TimedRankup;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -86,7 +87,7 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         } catch (Exception e) {}
 
         if (document.containsKey("rank")) {
-            data.setRank(Survival.getInstance().getRankManager().getByName(document.getString("rank")));
+            data.setRank(TimedRankup.getPlugin(TimedRankup.class).getRankManager().get(document.getString("rank")));
         }
 
         try {

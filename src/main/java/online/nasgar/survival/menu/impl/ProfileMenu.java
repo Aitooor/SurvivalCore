@@ -5,6 +5,7 @@ import online.nasgar.survival.menu.Menu;
 import online.nasgar.survival.menu.button.Button;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.ItemCreator;
+import online.nasgar.timedrankup.TimedRankup;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -52,7 +53,7 @@ public class ProfileMenu extends Menu {
                                 (data.getRank() != null ? data.getRank().getPrefix() : "Default"),
                                 "",
                                 "&cSiguiente Rango",
-                                Survival.getInstance().getRankManager().getNextApplicable(data).getPrefix(),
+                                TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(player.getUniqueId())).getPrefix(),
                                 "",
                                 "&fTodos los Rangos",
                                 "&fClick para abrir",

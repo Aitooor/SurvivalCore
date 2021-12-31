@@ -29,6 +29,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>me.gatogamer</groupId>
+            <artifactId>rankup</artifactId>
+            <version>1.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/TimedRankup-1.2.jar</systemPath>
+        </dependency>
+
         <!-- Lombok | Lib -->
         <dependency>
             <groupId>org.projectlombok</groupId>

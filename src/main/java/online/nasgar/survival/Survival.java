@@ -15,7 +15,6 @@ import online.nasgar.survival.playerdata.PlayerDataManager;
 import online.nasgar.survival.providers.BoardListener;
 import online.nasgar.survival.providers.TablistListener;
 import online.nasgar.survival.randomtp.RandomTPManager;
-import online.nasgar.survival.rankup.RankManager;
 import online.nasgar.survival.redis.CoreRedisDatabase;
 import online.nasgar.survival.shop.ShopItemManager;
 import online.nasgar.survival.warp.WarpManager;
@@ -35,7 +34,6 @@ public class Survival extends JavaPlugin {
     private MongoManager mongoManager;
 
     private PlayerDataManager playerDataManager;
-    private RankManager rankManager;
     private ShopItemManager shopItemManager;
 
     @Override
@@ -80,7 +78,6 @@ public class Survival extends JavaPlugin {
     private void setupManagers() {
         new CommandManager(this);
 
-        this.rankManager = new RankManager(this);
         this.playerDataManager = new PlayerDataManager(this);
         this.shopItemManager = new ShopItemManager();
     }

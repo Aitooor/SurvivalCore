@@ -4,7 +4,8 @@ import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
 import online.nasgar.survival.Survival;
-import online.nasgar.survival.rankup.Rank;
+import online.nasgar.timedrankup.TimedRankup;
+import online.nasgar.timedrankup.rank.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -47,7 +48,7 @@ public class PlayerData {
 
         this.tpm = false;
 
-        this.rank = Survival.getInstance().getRankManager().getDefault();
+        this.rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager().get("Default");
 
         this.items = null;
         this.armor = null;
