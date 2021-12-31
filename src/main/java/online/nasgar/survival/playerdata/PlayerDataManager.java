@@ -19,8 +19,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> {
@@ -50,18 +53,15 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         document.put("tpm", data.isTpm());
         document.put("food", data.getFoodLevel());
         document.put("health", data.getHealth());
-        document.put("effects", new GsonBuilder().serializeNulls().create().toJson(data.getEffects()));
+        document.put("level", data.getLevel());
+        document.put("effects", data.getEffects() == null ? new ArrayList<>() : data.getEffects().stream().map(potionEffect -> potionEffect.getType().getName() + ";" + potionEffect.getAmplifier() + ";" + potionEffect.getDuration()).collect(Collectors.toList()));
+        document.put("rank", data.getRank().getName());
 
-        if (data.getRank() != null) {
-            document.put("rank", data.getRank().getName());
-        }
-
-        try {
-            document.put("items", BukkitUtil.itemStackArrayToBase64(data.getItems()));
-            document.put("armor", BukkitUtil.itemStackArrayToBase64(data.getArmor()));
-        } catch (Exception ignored) {}
-
+        document.put("items", BukkitUtil.itemStackArrayToBase64(data.getItems()));
+        document.put("armor", BukkitUtil.itemStackArrayToBase64(data.getArmor()));
+        document.put("enderChestItems", BukkitUtil.itemStackArrayToBase64(data.getEnderChestItems()));
         document.put("backPackItems", BukkitUtil.itemStackArrayToBase64(data.getBackPackItems()));
+
         return document;
     }
 
@@ -76,9 +76,13 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         data.setTpm(document.getBoolean("tpm"));
         data.setFoodLevel(document.getDouble("food"));
         data.setHealth(document.getDouble("health"));
+        data.setLevel(document.getDouble("level"));
 
         try {
             data.setBackPackItems(BukkitUtil.itemStackArrayFromBase64(document.getString("backPackItems")));
+        } catch (Exception e) {}
+        try {
+            data.setEnderChestItems(BukkitUtil.itemStackArrayFromBase64(document.getString("enderChestItems")));
         } catch (Exception e) {}
 
         if (document.containsKey("rank")) {
@@ -88,7 +92,10 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         try {
             data.setItems(BukkitUtil.itemStackArrayFromBase64(document.getString("items")));
             data.setArmor(BukkitUtil.itemStackArrayFromBase64(document.getString("armor")));
-            data.setEffects(document.get("effects") == null ? new ArrayList<>() : new GsonBuilder().serializeNulls().create().fromJson(document.getString("effects"), List.class));
+        } catch (Exception e) {}
+
+        try {
+            data.setEffects(document.getList("effects", String.class) == null ? new ArrayList<>() : document.getList("effects", String.class).stream().map(line -> new PotionEffect(PotionEffectType.getByName(line.split(";")[0]), Integer.parseInt(line.split(";")[2]), Integer.parseInt(line.split(";")[1]))).collect(Collectors.toList()));
         } catch (Exception e) {}
 
         return data;
@@ -131,6 +138,9 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
 
         player.setHealth(data.getHealth());
         player.setFoodLevel((int) data.getFoodLevel());
+        player.setLevel((int) data.getLevel());
+
+        player.getEnderChest().setContents(data.getEnderChestItems());
 
         this.dataMap.put(uuid, data);
     }

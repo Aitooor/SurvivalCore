@@ -73,6 +73,8 @@ public class PlayerListener implements Listener {
             data.setArmor(player.getInventory().getArmorContents());
             data.setHealth(player.getHealth());
             data.setFoodLevel(player.getFoodLevel());
+            data.setLevel(player.getLevel());
+            data.setEnderChestItems(player.getEnderChest().getContents());
             data.setEffects(new ArrayList<>(player.getActivePotionEffects()));
 
             this.playerDataManager.save(uuid, true);

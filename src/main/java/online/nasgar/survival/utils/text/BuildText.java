@@ -43,6 +43,7 @@ public class BuildText {
         put("prefix", LuckPermsUtil.getPrefix(player));
         put("suffix", LuckPermsUtil.getSuffix(player));
         put("rank", LuckPermsUtil.getRankName(player));
+        put("coins", Integer.toString(data.getCoins()));
 
         Rank rank = plugin.getRankManager().getNextApplicable(data);
 
@@ -61,8 +62,6 @@ public class BuildText {
 
         put("newRankPrefix", rank.getPrefix());
         put("parsedTime", TimeUtils.formatTime(Duration.ofSeconds(rank.getTime() - data.getTime().get())));
-
-        put("center:", text, TextUtil.centerText(matcher.group(2).trim()));
 
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (text.contains(entry.getKey())) {

@@ -23,7 +23,7 @@ public class PlayerData {
     private String lastConverser;
     private List<String> ignoredPlayers;
 
-    private double xp, foodLevel, health;
+    private double xp, foodLevel, health, level;
     private int coins;
     private List<PotionEffect> effects;
     private AtomicInteger time;
@@ -31,7 +31,7 @@ public class PlayerData {
 
     private Rank rank;
 
-    private ItemStack[] items, armor;
+    private ItemStack[] items, armor, enderChestItems;
 
     private ItemStack[] backPackItems;
 
