@@ -31,21 +31,18 @@ public class CoreRedisDatabase {
     private JedisPool redisPool;
     private JedisPubSub jedisPubSub;
 
-    private JsonParser parser;
-
     private List<PacketListenerData> packetListeners;
 
-    private Map<String, Class> idToType;
-    private Map<Class, String> typeToId;
+    private Map<String, Class<?>> idToType;
+    private Map<Class<?>, String> typeToId;
 
     public CoreRedisDatabase() {
         instance = this;
 
-        this.parser = new JsonParser();
-        this.packetListeners = new ArrayList<PacketListenerData>();
+        this.packetListeners = new ArrayList<>();
 
-        this.idToType = new HashMap<String, Class>();
-        this.typeToId = new HashMap<Class, String>();
+        this.idToType = new HashMap<>();
+        this.typeToId = new HashMap<>();
 
         JedisPoolConfig config = new JedisPoolConfig();
 
@@ -75,7 +72,7 @@ public class CoreRedisDatabase {
                 throw new IllegalStateException("Packet cannot generate null serialized data");
             }
             try (Jedis jedis = this.redisPool.getResource()) {
-                jedis.publish("Core", packet.id() + ";" + object.toString());
+                jedis.publish("Core", packet.id() + ";" + object);
             }
         } catch (Exception e) {
             if (exceptionHandler != null) {
@@ -97,9 +94,9 @@ public class CoreRedisDatabase {
         }
     }
 
-    public void registerPacket(Class clazz) {
+    public void registerPacket(Class<?> clazz) {
         try {
-            String id = (String) clazz.getDeclaredMethod("id", (Class<?>[]) new Class[0]).invoke(clazz.newInstance(), (Object[]) null);
+            String id = (String) clazz.getDeclaredMethod("id", new Class[0]).invoke(clazz.newInstance(), (Object[]) null);
             if (this.idToType.containsKey(id) || this.typeToId.containsKey(clazz)) {
                 throw new IllegalStateException("A packet with that ID has already been registered");
             }
@@ -112,7 +109,7 @@ public class CoreRedisDatabase {
 
     public void registerListener(PacketListener packetListener) {
         for (Method method : packetListener.getClass().getDeclaredMethods()) {
-            Class packetClass = null;
+            Class<?> packetClass = null;
             if (method.getParameters().length > 0 && Packet.class.isAssignableFrom(method.getParameters()[0].getType())) {
                 packetClass = method.getParameters()[0].getType();
             }
@@ -131,7 +128,7 @@ public class CoreRedisDatabase {
                         String[] args = message.split(";");
                         Packet packet = CoreRedisDatabase.this.buildPacket(args[0]);
                         if (packet != null) {
-                            packet.deserialize(CoreRedisDatabase.this.parser.parse(args[1]).getAsJsonObject());
+                            packet.deserialize(JsonParser.parseString(args[1]).getAsJsonObject());
                             for (PacketListenerData data : CoreRedisDatabase.this.packetListeners) {
                                 if (data.matches(packet)) {
                                     data.getMethod().invoke(data.getInstance(), packet);

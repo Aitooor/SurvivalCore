@@ -113,7 +113,7 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
     }
 
     public void load(UUID uuid){
-        PlayerData data = null;
+        PlayerData data;
 
         if (!this.contains(uuid)){
             Document document = this.getDataCollection().find(Filters.eq("uuid", uuid.toString())).first();
@@ -185,7 +185,7 @@ public class PlayerDataManager implements Listener, MongoSerializer<PlayerData> 
         return this.mongoManager.getCollection("playerData");
     }
 
-    @EventHandler public void onPluginDisable(PluginDisableEvent event){
+    @EventHandler public void onPluginDisable(PluginDisableEvent event) {
         TaskUtil.runTaskAsync(() -> Bukkit.getOnlinePlayers().forEach(player -> this.save(player.getUniqueId(), true)));
     }
 

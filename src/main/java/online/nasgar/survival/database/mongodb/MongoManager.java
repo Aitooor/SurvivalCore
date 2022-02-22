@@ -38,7 +38,8 @@ public class MongoManager implements Closeable {
         this.mongoDatabase = this.mongoClient.getDatabase(auth.getDatabase());
     }
 
-    @Override public void close(){
+    @Override
+    public void close(){
         if (this.mongoClient != null){
             this.mongoClient.close();
         }
