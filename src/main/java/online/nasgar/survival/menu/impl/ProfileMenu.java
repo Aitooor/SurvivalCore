@@ -19,8 +19,8 @@ public class ProfileMenu extends Menu {
 
     private final ModelService<PlayerData> playerCacheModelService;
 
-    public ProfileMenu(ModelService<PlayerData> playerCacheModelService) {
-        super("&8➢ &ePERFIL", 3);
+    public ProfileMenu(String title, ModelService<PlayerData> playerCacheModelService) {
+        super(title, 3);
         this.playerCacheModelService = playerCacheModelService;
     }
 

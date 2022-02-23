@@ -11,7 +11,7 @@ public class BackPackCommand extends Command {
     private final ModelService<PlayerData> playerModelCacheService;
 
     public BackPackCommand(ModelService<PlayerData> playerModelCacheService) {
-        super("backpack", messageHandler);
+        super("backpack", null);
         this.playerModelCacheService = playerModelCacheService;
 
         this.setOnlyPlayers(true);

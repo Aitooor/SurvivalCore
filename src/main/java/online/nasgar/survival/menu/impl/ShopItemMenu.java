@@ -16,8 +16,8 @@ import java.util.Set;
 
 public class ShopItemMenu extends Menu {
 
-    public ShopItemMenu() {
-        super("&8➢ &eSHOP ITEM", 6);
+    public ShopItemMenu(String title) {
+        super(title, 6);
     }
 
     @Override

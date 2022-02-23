@@ -15,8 +15,8 @@ import java.util.Set;
 
 public class MainMenu extends Menu {
 
-    public MainMenu() {
-        super("&b&lMain &7(Menu)", 5);
+    public MainMenu(String title) {
+        super(title, 5);
 
         this.setFillEnabled(true);
 

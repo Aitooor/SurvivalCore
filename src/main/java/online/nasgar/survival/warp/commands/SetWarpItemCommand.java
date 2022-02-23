@@ -1,5 +1,6 @@
 package online.nasgar.survival.warp.commands;
 
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.warp.WarpData;
@@ -8,8 +9,11 @@ import org.bukkit.entity.Player;
 
 public class SetWarpItemCommand extends Command {
 
-    public SetWarpItemCommand() {
+    private final MessageHandler messageHandler;
+
+    public SetWarpItemCommand(MessageHandler messageHandler) {
         super("setwarpitem", messageHandler);
+        this.messageHandler = messageHandler;
 
         this.setPermission("setwarpitem.command");
         this.setOnlyPlayers(true);
@@ -18,23 +22,23 @@ public class SetWarpItemCommand extends Command {
     @Override
     public void onCommand(Player player, String[] args) {
         if (args.length < 1) {
-            player.sendMessage(CC.translate("&cUsage: /setwarpitem <warpName>"));
+            messageHandler.send(player, "warp.set-warp.items.usage");
             return;
         }
 
         WarpData warpData = WarpManager.getInstance().getWarpDataByName(args[0]);
 
         if (warpData == null) {
-            player.sendMessage(CC.translate("&cA warp with that name doesn't exists."));
+            messageHandler.sendReplacing(player, "warp.not-exists", "%warp_name%", args[0]);
             return;
         }
 
         if (player.getItemInHand() == null){
-            player.sendMessage(CC.translate("&cNo item in hand."));
+            messageHandler.send(player, "warp.set-warp.items.error");
             return;
         }
 
         warpData.setStack(player.getItemInHand());
-        player.sendMessage(CC.translate("&aWarp item updated."));
+        messageHandler.send(player, "warp.set-warp.items.success");
     }
 }

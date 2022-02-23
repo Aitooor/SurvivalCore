@@ -1,6 +1,7 @@
 package online.nasgar.survival.auctions.commands;
 
 import com.google.common.primitives.Ints;
+import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.auctions.AuctionData;
 import online.nasgar.survival.auctions.AuctionsManager;
@@ -18,10 +19,12 @@ import java.util.stream.Collectors;
 public class AuctionCommand extends Command {
 
     private final ModelService<PlayerData> playerCacheModelService;
+    private final MessageHandler messageHandler;
 
-    public AuctionCommand(ModelService<PlayerData> playerCacheModelService) {
+    public AuctionCommand(ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler) {
         super("auction", messageHandler);
         this.playerCacheModelService = playerCacheModelService;
+        this.messageHandler = messageHandler;
     }
 
     @Override
@@ -36,21 +39,21 @@ public class AuctionCommand extends Command {
         if (args.length == 3) {
             if (args[0].equalsIgnoreCase("pull")) {
                 if (player.getItemInHand() == null || player.getItemInHand().getType() == Material.AIR) {
-                    player.sendMessage(CC.translate("&cNo item in hand."));
+                    messageHandler.send(player, "auction.pull.no-item");
                     return;
                 }
 
                 Integer integer = Ints.tryParse(args[1]);
 
                 if (integer == null) {
-                    player.sendMessage(CC.translate("&cInvalid price."));
+                    messageHandler.send(player, "auction.invalid.price");
                     return;
                 }
 
                 long time = StringUtils.parse(args[2]);
 
                 if (time <= 0L) {
-                    player.sendMessage(CC.translate("&cInvalid duration."));
+                    messageHandler.send(player, "auction.invalid.duration");
                     return;
                 }
 
@@ -65,13 +68,11 @@ public class AuctionCommand extends Command {
                 AuctionsManager.getInstance().getAuctions().add(auctionData);
 
                 player.setItemInHand(null);
-                player.sendMessage(CC.translate("&aYour item has been added successfully for sale. In case that you're offline the balance would be acredited, no matter what."));
+                messageHandler.send(player, "auction.success");
                 return;
             }
         }
 
-        player.sendMessage(CC.translate("&b&lAuction Commands"));
-        player.sendMessage(CC.translate("&7/auction menu"));
-        player.sendMessage(CC.translate("&7/auction pull <price> <time>"));
+        messageHandler.send(player, "auction.help");
     }
 }
