@@ -49,6 +49,9 @@ god:
 coins:
   limited-console: "&cYou do not have a limited money!"
   have: "&aYou have &e<coins>$"
+  error:
+    insufficient: "&cYou do not have sufficient coins!"
+  purchase: "&aSuccessfully purchased %display_name% &afor &e%price_coins%$"
   invalid:
     number: "&e%number% &cis a invalid number!"
   add:
@@ -68,6 +71,9 @@ coins:
       sender: "&aSuccessfully set to &e%target_name% &aa amount of &e%amount%$&a!"
       target: "&e%staff_name% &ahas set &e%amount%$ &afor you!"
 message:
+  prefix:
+    to: "&7(To <prefix><player>) "
+    from: "&7(From <prefix><player>) "
   usage: "&cUsage: /message <target> <message>"
   tpm:
     player: "&cYou have the private messages disabled!"

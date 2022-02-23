@@ -1,5 +1,6 @@
 package online.nasgar.survival.listeners;
 
+import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
 import net.cosmogrp.storage.redis.connection.Redis;
 import online.nasgar.survival.command.GodCommand;
@@ -35,11 +36,13 @@ public class PlayerListener implements Listener {
     private final PlayerService playerService;
     private final ModelService<PlayerData> playerCacheModelService;
     private final Redis redis;
+    private final MessageHandler messageHandler;
 
-    public PlayerListener(PlayerService playerService, ModelService<PlayerData> playerCacheModelService, Redis redis) {
+    public PlayerListener(PlayerService playerService, ModelService<PlayerData> playerCacheModelService, Redis redis, MessageHandler messageHandler) {
         this.playerService = playerService;
         this.playerCacheModelService = playerCacheModelService;
         this.redis = redis;
+        this.messageHandler = messageHandler;
     }
 
     @EventHandler
@@ -104,8 +107,8 @@ public class PlayerListener implements Listener {
         Player target = event.getTarget();
         String message = event.getMessage();
 
-        ChatUtil.toPlayer(player, new BuildText(playerCacheModelService).of(target, "&7(To <prefix><player>) " + message));
-        ChatUtil.toPlayer(target, new BuildText(playerCacheModelService).of(player, "&7(From <prefix><player>) " + message));
+        ChatUtil.toPlayer(player, new BuildText(playerCacheModelService).of(target, messageHandler.get(player, "message.prefix.to") + message));
+        ChatUtil.toPlayer(target, new BuildText(playerCacheModelService).of(player, messageHandler.get(player, "message.prefix.from") + message));
     }
 
     @EventHandler
@@ -128,13 +131,14 @@ public class PlayerListener implements Listener {
         }
 
         if (data.getCoins() < priceCoins) {
-            ChatUtil.toPlayer(player, "&cYou do not have sufficient coins!");
+            messageHandler.send(player, "coins.insufficient");
             return;
         }
 
         data.removeCoins(priceCoins);
         shopItem.getCommands().forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), (command).replace("<player>", player.getName())));
         ChatUtil.toPlayer(player, "&aSuccessfully purchased " + displayName + " &afor &e" + priceCoins + "$");
+        messageHandler.sendReplacing(player, "purchased", "%display_name%", displayName, "%price_coins%", priceCoins);
     }
 
     @EventHandler

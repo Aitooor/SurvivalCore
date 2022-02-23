@@ -5,7 +5,6 @@ import me.yushust.message.MessageHandler;
 import me.yushust.message.MessageProvider;
 import me.yushust.message.bukkit.BukkitMessageAdapt;
 import me.yushust.message.bukkit.SpigotLinguist;
-import me.yushust.message.language.Linguist;
 import me.yushust.message.source.MessageSourceDecorator;
 import net.cosmogrp.storage.ModelService;
 import net.cosmogrp.storage.mongo.MongoModelService;
@@ -39,7 +38,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -92,7 +90,7 @@ public class Survival extends JavaPlugin {
 
         new RandomTPManager();
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService, redis), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService, redis, messageHandler), this);
         Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
         Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
         Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
