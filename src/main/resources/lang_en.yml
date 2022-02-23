@@ -71,6 +71,6 @@ message:
   usage: "&cUsage: /message <target> <message>"
   tpm:
     player: "&cYou have the private messages disabled!"
-    target: "&e%target_name% &chave the private messages disabled!""
+    target: "&e%target_name% &chave the private messages disabled!"
 reply:
   usage: "&cUsage: /reply <message>"
