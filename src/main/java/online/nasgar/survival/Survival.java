@@ -1,6 +1,12 @@
 package online.nasgar.survival;
 
 import lombok.Getter;
+import me.yushust.message.MessageHandler;
+import me.yushust.message.MessageProvider;
+import me.yushust.message.bukkit.BukkitMessageAdapt;
+import me.yushust.message.bukkit.SpigotLinguist;
+import me.yushust.message.language.Linguist;
+import me.yushust.message.source.MessageSourceDecorator;
 import net.cosmogrp.storage.ModelService;
 import net.cosmogrp.storage.mongo.MongoModelService;
 import net.cosmogrp.storage.redis.connection.GsonRedis;
@@ -29,7 +35,11 @@ import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.shop.ShopItemManager;
 import online.nasgar.survival.warp.WarpManager;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -47,6 +57,8 @@ public class Survival extends JavaPlugin {
     private MongoManager mongoManager;
 
     private Executor executor;
+
+    private MessageHandler messageHandler;
 
     private Redis redis;
 
@@ -70,6 +82,8 @@ public class Survival extends JavaPlugin {
         this.setupDatabases();
         this.setupServices();
         this.setupManagers();
+
+        this.setupNMessage();
 
         new MenuManager(this);
         new WarpManager();
@@ -96,6 +110,28 @@ public class Survival extends JavaPlugin {
         instance = null;
     }
 
+
+    private void setupNMessage() {
+        MessageProvider messageProvider = MessageProvider
+                .create(
+                        MessageSourceDecorator
+                                .decorate(BukkitMessageAdapt.newYamlSource(this, "lang_%lang%.yml"))
+                                .addFallbackLanguage("en")
+                                .get(),
+                        config -> {
+                            config.specify(Player.class)
+                                    .setLinguist(new SpigotLinguist())
+                                    .setMessageSender((sender, mode, message) -> sender.sendMessage(message));
+                            config.specify(CommandSender.class)
+                                            .setLinguist(commandSender -> "en")
+                                    .setMessageSender((sender, mode, message) -> sender.sendMessage(message));
+                            config.addInterceptor(s -> ChatColor.translateAlternateColorCodes('&', s));
+                        }
+                );
+
+        messageHandler = MessageHandler.of(messageProvider);
+    }
+
     private void setupRedis() {
         JedisInstance jedisInstance = JedisBuilder.builder()
                 .setHost(configFile.getString("address"))
@@ -120,7 +156,7 @@ public class Survival extends JavaPlugin {
     }
 
     private void setupManagers() {
-        new CommandManager(playerCacheModelService);
+        new CommandManager(playerCacheModelService, messageHandler);
 
         this.shopItemManager = new ShopItemManager();
     }

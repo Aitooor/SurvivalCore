@@ -1,7 +1,7 @@
 package online.nasgar.survival.command.message;
 
+import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
-import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
@@ -13,10 +13,12 @@ import org.bukkit.entity.Player;
 public class ReplyCommand extends Command {
 
     private final ModelService<PlayerData> playerCacheModelService;
+    private final MessageHandler messageHandler;
 
-    public ReplyCommand(ModelService<PlayerData> playerCacheModelService) {
-        super("reply");
+    public ReplyCommand(ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler) {
+        super("reply", messageHandler);
         this.playerCacheModelService = playerCacheModelService;
+        this.messageHandler = messageHandler;
 
         this.setPermission("reply.command");
         this.setOnlyPlayers(true);
@@ -24,7 +26,7 @@ public class ReplyCommand extends Command {
 
     @Override public void onCommand(Player player, String[] array) {
         if (array.length == 0){
-            ChatUtil.toPlayer(player, "&cUsage: /reply <message>");
+            messageHandler.send(player, "reply.usage");
             return;
         }
 
@@ -39,12 +41,12 @@ public class ReplyCommand extends Command {
         PlayerData targetData = playerCacheModelService.findSync(target.getUniqueId().toString());
 
         if (playerData.isTpm()){
-            ChatUtil.toPlayer(player, "&cYou have the private messages disabled!");
+            messageHandler.send(player, "message.tpm.player");
             return;
         }
 
         if (targetData.isTpm()){
-            ChatUtil.toPlayer(player, "&e" + array[0] + " &chave the private messages disabled!");
+            messageHandler.sendReplacing(player, "message.tpm.target", "%target_name%", target.getName());
             return;
         }
 

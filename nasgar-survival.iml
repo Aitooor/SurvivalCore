@@ -36,7 +36,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.30" level="project" />
     <orderEntry type="library" name="Maven: net.cosmogrp:storage-mongo-legacy-dist:0.6.3" level="project" />
     <orderEntry type="library" name="Maven: net.cosmogrp:storage-api:0.6.3" level="project" />
-    <orderEntry type="library" name="Maven: org.jetbrains:annotations:22.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-sync:4.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:bson:4.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:4.4.1" level="project" />
@@ -58,5 +57,8 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.luckperms:api:5.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.protocol:ProtocolLib:4.6.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.bytebuddy:byte-buddy:1.10.16" level="project" />
+    <orderEntry type="library" name="Maven: me.yushust.message:core:6.0.17" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:20.1.0" level="project" />
+    <orderEntry type="library" name="Maven: me.yushust.message:sourcetype-bukkit-yml:6.0.17" level="project" />
   </component>
 </module>

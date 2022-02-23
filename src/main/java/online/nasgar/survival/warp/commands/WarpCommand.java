@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class WarpCommand extends Command {
 
     public WarpCommand() {
-        super("warp");
+        super("warp", messageHandler);
 
         this.setOnlyPlayers(true);
     }

@@ -20,7 +20,7 @@ public class AuctionCommand extends Command {
     private final ModelService<PlayerData> playerCacheModelService;
 
     public AuctionCommand(ModelService<PlayerData> playerCacheModelService) {
-        super("auction");
+        super("auction", messageHandler);
         this.playerCacheModelService = playerCacheModelService;
     }
 

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class SetWarpSlotCommand extends Command {
 
     public SetWarpSlotCommand() {
-        super("setwarpslot");
+        super("setwarpslot", messageHandler);
 
         this.setPermission("setwarpslot.command");
         this.setOnlyPlayers(true);

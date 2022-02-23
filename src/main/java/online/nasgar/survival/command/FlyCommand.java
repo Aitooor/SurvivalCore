@@ -1,14 +1,17 @@
 package online.nasgar.survival.command;
 
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
-import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class FlyCommand extends Command {
 
-    public FlyCommand() {
-        super("fly");
+    private final MessageHandler messageHandler;
+
+    public FlyCommand(MessageHandler messageHandler) {
+        super("fly", messageHandler);
+        this.messageHandler = messageHandler;
 
         this.setPermission("fly.command");
         this.setOnlyPlayers(true);
@@ -19,11 +22,11 @@ public class FlyCommand extends Command {
             if (!player.getAllowFlight()){
                 player.setAllowFlight(true);
 
-                ChatUtil.toPlayer(player, "&aFly enabled");
+                messageHandler.send(player, "fly.enabled.player");
             } else {
                 player.setAllowFlight(false);
 
-                ChatUtil.toPlayer(player, "&cFly disabled");
+                messageHandler.send(player, "fly.disabled.player");
             }
             return;
         }
@@ -41,13 +44,15 @@ public class FlyCommand extends Command {
         if (!target.getAllowFlight()) {
             target.setAllowFlight(true);
 
-            ChatUtil.toPlayer(player, "&aFly for &e" + array[0] + " &aenabled!");
-            ChatUtil.toPlayer(target, "&aFly enabled by &e"+ player.getName());
+            messageHandler.sendReplacing(player, "fly.enabled.target.you", "%target_name%", array[0]);
+
+            messageHandler.sendReplacing(target, "fly.enable.target.other", "%staff_name%", player.getName());
         } else {
             target.setAllowFlight(false);
 
-            ChatUtil.toPlayer(player, "&cFly for &e" + array[0] + " &cdisabled!");
-            ChatUtil.toPlayer(target, "&cFly disabled by &e"+ player.getName());
+            messageHandler.sendReplacing(player, "fly.disabled.target.you", "%target_name%", array[0]);
+
+            messageHandler.sendReplacing(target, "fly.disabled.target.other", "%staff_name%", player.getName());
         }
     }
 

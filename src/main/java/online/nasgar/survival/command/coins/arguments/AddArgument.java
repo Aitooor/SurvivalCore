@@ -1,11 +1,10 @@
 package online.nasgar.survival.command.coins.arguments;
 
+import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
-import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Argument;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.StringUtils;
-import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,17 +12,19 @@ import org.bukkit.entity.Player;
 public class AddArgument extends Argument {
 
     private final ModelService<PlayerData> playerCacheModelService;
+    private final MessageHandler messageHandler;
 
-    public AddArgument(ModelService<PlayerData> playerCacheModelService) {
-        super("add");
+    public AddArgument(ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler) {
+        super(messageHandler, "add");
         this.playerCacheModelService = playerCacheModelService;
+        this.messageHandler = messageHandler;
 
         this.setPermission("coins.add.command");
     }
 
     @Override public void onArgument(CommandSender sender, String[] array) {
         if (array.length < 1){
-            ChatUtil.toSender(sender, "&cUsage: /coins add <player> <amount>");
+            messageHandler.send(sender, "coins.add.usage");
             return;
         }
 
@@ -34,14 +35,14 @@ public class AddArgument extends Argument {
         }
 
         if (!StringUtils.isInteger(array[1])){
-            ChatUtil.toSender(sender, "&e" + array[1] + " &cis a invalid number!");
+            messageHandler.sendReplacing(sender, "coins.invalid.number", "%number%", array[1]);
             return;
         }
 
         int amount = Integer.parseInt(array[1]);
 
         playerCacheModelService.findSync(target.getUniqueId().toString()).addCoins(amount);
-        ChatUtil.toSender(sender, "&aSuccessfully added to &e" + array[0] + " &aa amount of &e" + amount + "$&a!");
-        ChatUtil.toPlayer(target, "&e" + sender.getName() + " &ahas added &e" + amount + "$ &afor you!");
+        messageHandler.sendReplacing(sender, "coins.add.success.sender", "%target_name%", target.getName(), "%amount%", amount);
+        messageHandler.sendReplacing(sender, "coins.add.success.target", "%amount%", amount , "%staff_name%", sender.getName());
     }
 }

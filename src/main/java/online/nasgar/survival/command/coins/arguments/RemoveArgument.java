@@ -1,11 +1,10 @@
 package online.nasgar.survival.command.coins.arguments;
 
+import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
-import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Argument;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.StringUtils;
-import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,17 +12,19 @@ import org.bukkit.entity.Player;
 public class RemoveArgument extends Argument {
 
     private final ModelService<PlayerData> playerCacheModelService;
+    private final MessageHandler messageHandler;
 
-    public RemoveArgument(ModelService<PlayerData> playerCacheModelService) {
-        super("remove");
+    public RemoveArgument(ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler) {
+        super(messageHandler, "remove");
         this.playerCacheModelService = playerCacheModelService;
+        this.messageHandler = messageHandler;
 
         this.setPermission("coins.remove.command");
     }
 
     @Override public void onArgument(CommandSender sender, String[] array) {
         if (array.length < 1){
-            ChatUtil.toSender(sender, "&cUsage: /coins remove <player> <amount>");
+            messageHandler.send(sender, "coins.remove.usage");
             return;
         }
 
@@ -34,7 +35,7 @@ public class RemoveArgument extends Argument {
         }
 
         if (!StringUtils.isInteger(array[1])){
-            ChatUtil.toSender(sender, "&e" + array[1] + " &cis a invalid number!");
+            messageHandler.sendReplacing(sender, "coins.invalid.number", "%number%", array[1]);
             return;
         }
 
@@ -42,12 +43,12 @@ public class RemoveArgument extends Argument {
         int amount = Integer.parseInt(array[1]);
 
         if (amount > data.getCoins()){
-            ChatUtil.toSender(sender, "&cThe player &e" + array[0] + " &cno have that quantity!");
+            messageHandler.sendReplacing(sender, "coins.invalid-amount", "%target_name%", target.getName());
             return;
         }
 
         data.removeCoins(amount);
-        ChatUtil.toSender(sender, "&aSuccessfully removed to &e" + array[0] + " &aa amount of &e" + amount + "$&a!");
-        ChatUtil.toPlayer(target, "&e" + sender.getName() + " &ahas removed &e" + amount + "$ &afor you!");
+        messageHandler.sendReplacing(sender, "coins.remove.success.sender", "%target_name%", target.getName(), "%amount%", amount);
+        messageHandler.sendReplacing(sender, "coins.remove.success.target", "%amount%", amount , "%staff_name%", sender.getName());
     }
 }

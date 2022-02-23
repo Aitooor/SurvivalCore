@@ -13,7 +13,7 @@ public class ProfileCommand extends Command {
     private final ModelService<PlayerData> playerCacheModelService;
 
     public ProfileCommand(ModelService<PlayerData> playerCacheModelService) {
-        super("profile");
+        super("profile", messageHandler);
         this.playerCacheModelService = playerCacheModelService;
 
         this.setPermission("profile.command");

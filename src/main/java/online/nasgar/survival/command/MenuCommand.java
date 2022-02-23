@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class MenuCommand extends Command {
 
     public MenuCommand() {
-        super("menu");
+        super("menu", messageHandler);
 
         this.setPermission("menu.command");
         this.setOnlyPlayers(true);

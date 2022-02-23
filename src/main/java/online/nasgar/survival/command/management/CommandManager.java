@@ -1,5 +1,6 @@
 package online.nasgar.survival.command.management;
 
+import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.auctions.commands.AuctionCommand;
 import online.nasgar.survival.backpack.commands.BackPackCommand;
@@ -20,20 +21,20 @@ import java.util.Arrays;
 public class CommandManager {
 
 
-    public CommandManager(ModelService<PlayerData> playerCacheModelService){
+    public CommandManager(ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler){
         this.register(
 
-                new FlyCommand(),
-                new GodCommand(),
-                new GamemodeCommand(),
-                new MessageCommand(playerCacheModelService),
-                new HealCommand(),
-                new ReplyCommand(playerCacheModelService),
+                new FlyCommand(messageHandler),
+                new GodCommand(messageHandler),
+                new GamemodeCommand(messageHandler),
+                new MessageCommand(playerCacheModelService, messageHandler),
+                new HealCommand(messageHandler),
+                new ReplyCommand(playerCacheModelService, messageHandler),
                 new MenuCommand(),
                 new ProfileCommand(playerCacheModelService),
                 new ShopItemCommand(),
-                new FeedCommand(),
-                new CoinsCommand(playerCacheModelService),
+                new FeedCommand(messageHandler),
+                new CoinsCommand(playerCacheModelService, messageHandler),
                 new SetWarpCommand(),
                 new DeleteWarpCommand(),
                 new WarpCommand(),
@@ -44,7 +45,7 @@ public class CommandManager {
                 new BackPackCommand(playerCacheModelService),
                 new RandomTPCommand(),
                 new AuctionCommand(playerCacheModelService),
-                new ReloadCommand()
+                new ReloadCommand(messageHandler)
         );
     }
 

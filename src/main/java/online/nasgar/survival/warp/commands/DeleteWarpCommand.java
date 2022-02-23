@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class DeleteWarpCommand extends Command {
 
     public DeleteWarpCommand() {
-        super("deletewarp");
+        super("deletewarp", messageHandler);
 
         this.setPermission("deletewarp.command");
         this.setOnlyPlayers(true);

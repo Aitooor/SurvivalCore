@@ -2,6 +2,7 @@ package online.nasgar.survival.command.management;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -12,6 +13,8 @@ import java.util.List;
 
 @Getter @Setter
 public class Argument  {
+
+    private final MessageHandler messageHandler;
 
     private Command command;
 
@@ -24,7 +27,8 @@ public class Argument  {
 
     private boolean onlyPlayers;
 
-    public Argument(String name) {
+    public Argument(MessageHandler messageHandler, String name) {
+        this.messageHandler = messageHandler;
         this.name = name;
         this.permission = null;
 
@@ -66,7 +70,7 @@ public class Argument  {
 
     public boolean isPlayerNull(Player target, String name){
         if (target == null){
-            ChatUtil.toSender(this.sender, "&cPlayer " + name + " &cnot found");
+            messageHandler.send(player, "player-not-found", "%target_name%", name);
             return true;
         }
 

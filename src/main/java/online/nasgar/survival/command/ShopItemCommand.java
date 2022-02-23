@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class ShopItemCommand extends Command {
 
     public ShopItemCommand() {
-        super("shopitem");
+        super("shopitem", messageHandler);
 
         this.setPermission("shopitem.command");
         this.setOnlyPlayers(true);
