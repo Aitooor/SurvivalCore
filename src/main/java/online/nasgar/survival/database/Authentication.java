@@ -6,11 +6,10 @@ import lombok.Setter;
 @Getter @Setter
 public class Authentication {
 
-    private String
-            address,
-            database,
-            username,
-            password;
+    private String address;
+    private String database;
+    private String username;
+    private String password;
 
     private int port;
     private boolean authentication;

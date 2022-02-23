@@ -2,7 +2,7 @@ package online.nasgar.survival.utils.text;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.UtilityClass;
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.LuckPermsUtil;
@@ -21,14 +21,19 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@UtilityClass
 public class BuildText {
 
     private Survival plugin = Survival.getInstance();
 
+    private final ModelService<PlayerData> playerCacheModelService;
+
     private Map<String, String> map = new HashMap<>();
     private String staticText;
     private Matcher matcher;
+
+    public BuildText(ModelService<PlayerData> playerCacheModelService) {
+        this.playerCacheModelService = playerCacheModelService;
+    }
 
     public List<String> of(Player player, List<String> list) {
         return list.stream().map(string -> of(player, string)).collect(Collectors.toList());
@@ -37,7 +42,7 @@ public class BuildText {
     public String of(Player player, String text) {
         staticText = text;
 
-        PlayerData data = plugin.getPlayerDataManager().get(player.getUniqueId());
+        PlayerData data = playerCacheModelService.findSync(player.getUniqueId().toString());
 
         put("player", player.getName());
 

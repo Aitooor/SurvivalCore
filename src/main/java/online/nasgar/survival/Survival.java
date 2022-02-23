@@ -1,6 +1,8 @@
 package online.nasgar.survival;
 
 import lombok.Getter;
+import net.cosmogrp.storage.ModelService;
+import net.cosmogrp.storage.mongo.MongoModelService;
 import online.nasgar.survival.auctions.AuctionsManager;
 import online.nasgar.survival.backpack.BackPackMenu;
 import online.nasgar.survival.command.management.CommandManager;
@@ -11,7 +13,10 @@ import online.nasgar.survival.graves.GravesManager;
 import online.nasgar.survival.listeners.PlayerListener;
 import online.nasgar.survival.listeners.SpawnersListener;
 import online.nasgar.survival.menu.MenuManager;
-import online.nasgar.survival.playerdata.PlayerDataManager;
+import online.nasgar.survival.playerdata.PlayerData;
+import online.nasgar.survival.playerdata.service.PlayerCacheModelService;
+import online.nasgar.survival.playerdata.service.PlayerMongoModelService;
+import online.nasgar.survival.playerdata.service.PlayerService;
 import online.nasgar.survival.providers.BoardListener;
 import online.nasgar.survival.providers.TablistListener;
 import online.nasgar.survival.randomtp.RandomTPManager;
@@ -20,6 +25,9 @@ import online.nasgar.survival.shop.ShopItemManager;
 import online.nasgar.survival.warp.WarpManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 @Getter
 public class Survival extends JavaPlugin {
@@ -33,12 +41,18 @@ public class Survival extends JavaPlugin {
 
     private MongoManager mongoManager;
 
-    private PlayerDataManager playerDataManager;
+    private Executor executor;
+
+    private PlayerService playerService;
+    private ModelService<PlayerData> playerCacheModelService;
+    private MongoModelService<PlayerData> playerDataMongoModelService;
     private ShopItemManager shopItemManager;
 
     @Override
     public void onEnable() {
         instance = this;
+
+        executor = Executors.newCachedThreadPool();
 
         this.configFile = new ConfigFile(this, "config.yml");
         this.warpsFile = new ConfigFile(this, "warps.yml");
@@ -46,6 +60,7 @@ public class Survival extends JavaPlugin {
         this.serverId = this.configFile.getString("id");
 
         this.setupDatabases();
+        this.setupServices();
         this.setupManagers();
 
         new CoreRedisDatabase();
@@ -57,11 +72,11 @@ public class Survival extends JavaPlugin {
 
         new RandomTPManager();
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService), this);
         Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
         Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
         Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
-        Bukkit.getPluginManager().registerEvents(new BackPackMenu(), this);
+        Bukkit.getPluginManager().registerEvents(new BackPackMenu(playerCacheModelService), this);
 
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
@@ -75,10 +90,16 @@ public class Survival extends JavaPlugin {
         instance = null;
     }
 
-    private void setupManagers() {
-        new CommandManager(this);
+    private void setupServices() {
+        this.playerCacheModelService = new PlayerCacheModelService();
+        this.playerDataMongoModelService = new PlayerMongoModelService(null, mongoManager.getMongoDatabase(), playerCacheModelService);
 
-        this.playerDataManager = new PlayerDataManager(this);
+        this.playerService = new PlayerService(playerCacheModelService, playerDataMongoModelService);
+    }
+
+    private void setupManagers() {
+        new CommandManager(playerCacheModelService);
+
         this.shopItemManager = new ShopItemManager();
     }
 

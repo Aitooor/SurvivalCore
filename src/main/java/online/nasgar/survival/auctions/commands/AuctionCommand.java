@@ -1,10 +1,12 @@
 package online.nasgar.survival.auctions.commands;
 
 import com.google.common.primitives.Ints;
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.auctions.AuctionData;
 import online.nasgar.survival.auctions.AuctionsManager;
 import online.nasgar.survival.auctions.menu.AuctionMenu;
 import online.nasgar.survival.command.management.Command;
+import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.utils.StringUtils;
 import org.bukkit.Material;
@@ -15,8 +17,11 @@ import java.util.stream.Collectors;
 
 public class AuctionCommand extends Command {
 
-    public AuctionCommand() {
+    private final ModelService<PlayerData> playerCacheModelService;
+
+    public AuctionCommand(ModelService<PlayerData> playerCacheModelService) {
         super("auction");
+        this.playerCacheModelService = playerCacheModelService;
     }
 
     @Override
@@ -24,7 +29,7 @@ public class AuctionCommand extends Command {
         Player player = (Player) sender;
 
         if (args.length == 1 && args[0].equalsIgnoreCase("menu")) {
-            new AuctionMenu(AuctionsManager.getInstance().getAuctions().stream().filter(auctionData -> !auctionData.isRemoved()).collect(Collectors.toList())).openMenu(player);
+            new AuctionMenu(AuctionsManager.getInstance().getAuctions().stream().filter(auctionData -> !auctionData.isRemoved()).collect(Collectors.toList()), playerCacheModelService).openMenu(player);
             return;
         }
 

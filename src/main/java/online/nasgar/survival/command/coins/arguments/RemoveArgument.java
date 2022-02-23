@@ -1,5 +1,6 @@
 package online.nasgar.survival.command.coins.arguments;
 
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Argument;
 import online.nasgar.survival.playerdata.PlayerData;
@@ -11,8 +12,11 @@ import org.bukkit.entity.Player;
 
 public class RemoveArgument extends Argument {
 
-    public RemoveArgument() {
+    private final ModelService<PlayerData> playerCacheModelService;
+
+    public RemoveArgument(ModelService<PlayerData> playerCacheModelService) {
         super("remove");
+        this.playerCacheModelService = playerCacheModelService;
 
         this.setPermission("coins.remove.command");
     }
@@ -34,7 +38,7 @@ public class RemoveArgument extends Argument {
             return;
         }
 
-        PlayerData data = Survival.getInstance().getPlayerDataManager().get(target.getUniqueId());
+        PlayerData data = playerCacheModelService.findSync(target.getUniqueId().toString());
         int amount = Integer.parseInt(array[1]);
 
         if (amount > data.getCoins()){

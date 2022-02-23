@@ -1,5 +1,6 @@
 package online.nasgar.survival.menu.impl;
 
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.menu.Menu;
 import online.nasgar.survival.menu.button.Button;
@@ -16,15 +17,18 @@ import java.util.Set;
 
 public class ProfileMenu extends Menu {
 
-    public ProfileMenu() {
+    private final ModelService<PlayerData> playerCacheModelService;
+
+    public ProfileMenu(ModelService<PlayerData> playerCacheModelService) {
         super("&8➢ &ePERFIL", 3);
+        this.playerCacheModelService = playerCacheModelService;
     }
 
     @Override
     public Set<Button> getButtons(Player player) {
         Set<Button> buttons = new HashSet<>();
 
-        PlayerData data = Survival.getInstance().getPlayerDataManager().get(player.getUniqueId());
+        PlayerData data = playerCacheModelService.findSync(player.getUniqueId().toString());
 
         buttons.add(new ButtonItem(12,
                 new ItemCreator(Material.BOOKSHELF)

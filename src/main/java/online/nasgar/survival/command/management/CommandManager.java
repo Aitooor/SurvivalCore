@@ -1,12 +1,13 @@
 package online.nasgar.survival.command.management;
 
-import online.nasgar.survival.Survival;
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.auctions.commands.AuctionCommand;
 import online.nasgar.survival.backpack.commands.BackPackCommand;
 import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.coins.CoinsCommand;
 import online.nasgar.survival.command.message.MessageCommand;
 import online.nasgar.survival.command.message.ReplyCommand;
+import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.randomtp.commands.RandomTPCommand;
 import online.nasgar.survival.warp.commands.*;
 import org.bukkit.Bukkit;
@@ -18,20 +19,21 @@ import java.util.Arrays;
 
 public class CommandManager {
 
-    public CommandManager(Survival plugin){
+
+    public CommandManager(ModelService<PlayerData> playerCacheModelService){
         this.register(
 
                 new FlyCommand(),
                 new GodCommand(),
                 new GamemodeCommand(),
-                new MessageCommand(),
+                new MessageCommand(playerCacheModelService),
                 new HealCommand(),
-                new ReplyCommand(),
+                new ReplyCommand(playerCacheModelService),
                 new MenuCommand(),
-                new ProfileCommand(),
+                new ProfileCommand(playerCacheModelService),
                 new ShopItemCommand(),
                 new FeedCommand(),
-                new CoinsCommand(),
+                new CoinsCommand(playerCacheModelService),
                 new SetWarpCommand(),
                 new DeleteWarpCommand(),
                 new WarpCommand(),
@@ -39,9 +41,9 @@ public class CommandManager {
                 new WarpsCommand(),
                 new SetWarpItemCommand(),
                 new SetWarpSlotCommand(),
-                new BackPackCommand(),
+                new BackPackCommand(playerCacheModelService),
                 new RandomTPCommand(),
-                new AuctionCommand(),
+                new AuctionCommand(playerCacheModelService),
                 new ReloadCommand()
         );
     }

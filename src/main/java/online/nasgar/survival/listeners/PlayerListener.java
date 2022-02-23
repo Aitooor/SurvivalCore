@@ -1,14 +1,15 @@
 package online.nasgar.survival.listeners;
 
-import online.nasgar.survival.Survival;
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.command.GodCommand;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.playerdata.PlayerDataManager;
+import online.nasgar.survival.playerdata.service.PlayerService;
 import online.nasgar.survival.redis.CoreRedisDatabase;
 import online.nasgar.survival.redis.packets.ChatPacket;
 import online.nasgar.survival.shop.ShopItem;
 import online.nasgar.survival.shop.event.TransactionEvent;
+import online.nasgar.survival.utils.TaskUtil;
 import online.nasgar.survival.utils.text.BuildText;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
@@ -21,31 +22,33 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class PlayerListener implements Listener {
 
-    private final PlayerDataManager playerDataManager = Survival.getInstance().getPlayerDataManager();
+    private final PlayerService playerService;
+    private final ModelService<PlayerData> playerCacheModelService;
+
+    public PlayerListener(PlayerService playerService, ModelService<PlayerData> playerCacheModelService) {
+        this.playerService = playerService;
+        this.playerCacheModelService = playerCacheModelService;
+    }
+
+    @EventHandler
+    public void onPluginDisable(PluginDisableEvent event) {
+        TaskUtil.runTaskAsync(() -> Bukkit.getOnlinePlayers().forEach(player -> playerService.saveAndRemove(player.getUniqueId().toString())));
+    }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
 
-        PlayerData data = this.playerDataManager.get(uuid);
-
-        if (data == null) {
-            this.playerDataManager.create(uuid);
-        } else {
-            this.playerDataManager.load(uuid);
-            player.setExp((float) data.getXp());
-        }
+        playerService.load(player);
 
         ChatUtil.toPlayer(player,
 
@@ -66,9 +69,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         UUID uuid = event.getPlayer().getUniqueId();
 
-        if (this.playerDataManager.get(uuid) != null) {
-            PlayerData data = this.playerDataManager.get(uuid);
-
+        playerService.saveAndRemove(uuid.toString(), data -> {
             data.setItems(player.getInventory().getContents());
             data.setArmor(player.getInventory().getArmorContents());
             data.setHealth(player.getHealth());
@@ -76,9 +77,7 @@ public class PlayerListener implements Listener {
             data.setLevel(player.getLevel());
             data.setEnderChestItems(player.getEnderChest().getContents());
             data.setEffects(new ArrayList<>(player.getActivePotionEffects()));
-
-            this.playerDataManager.save(uuid, true);
-        }
+        });
 
         player.getInventory().clear();
         player.getInventory().setHelmet(null);
@@ -93,9 +92,7 @@ public class PlayerListener implements Listener {
     public void onPlayerKick(PlayerKickEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
 
-        if (this.playerDataManager.get(uuid) != null) {
-            this.playerDataManager.save(uuid, true);
-        }
+        playerService.saveAndRemove(uuid.toString());
     }
 
     @EventHandler
@@ -104,8 +101,8 @@ public class PlayerListener implements Listener {
         Player target = event.getTarget();
         String message = event.getMessage();
 
-        ChatUtil.toPlayer(player, BuildText.of(target, "&7(To <prefix><player>) " + message));
-        ChatUtil.toPlayer(target, BuildText.of(player, "&7(From <prefix><player>) " + message));
+        ChatUtil.toPlayer(player, new BuildText(playerCacheModelService).of(target, "&7(To <prefix><player>) " + message));
+        ChatUtil.toPlayer(target, new BuildText(playerCacheModelService).of(player, "&7(From <prefix><player>) " + message));
     }
 
     @EventHandler
@@ -113,7 +110,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         ShopItem shopItem = event.getShopItem();
 
-        PlayerData data = this.playerDataManager.get(player.getUniqueId());
+        PlayerData data = this.playerCacheModelService.findSync(player.getUniqueId().toString());
 
         ItemStack itemStack = shopItem.getItemStack();
         ItemMeta itemMeta = itemStack.getItemMeta();

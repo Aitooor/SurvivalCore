@@ -1,15 +1,20 @@
 package online.nasgar.survival.command;
 
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.menu.impl.ProfileMenu;
+import online.nasgar.survival.playerdata.PlayerData;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 
 public class ProfileCommand extends Command {
 
-    public ProfileCommand() {
+    private final ModelService<PlayerData> playerCacheModelService;
+
+    public ProfileCommand(ModelService<PlayerData> playerCacheModelService) {
         super("profile");
+        this.playerCacheModelService = playerCacheModelService;
 
         this.setPermission("profile.command");
         this.setOnlyPlayers(true);
@@ -17,6 +22,6 @@ public class ProfileCommand extends Command {
     }
 
     @Override public void onCommand(Player player, String[] array) {
-        new ProfileMenu().openMenu(player);
+        new ProfileMenu(playerCacheModelService).openMenu(player);
     }
 }

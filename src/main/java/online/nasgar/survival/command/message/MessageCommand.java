@@ -1,10 +1,10 @@
 package online.nasgar.survival.command.message;
 
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.playerdata.PlayerDataManager;
 import online.nasgar.survival.utils.text.ChatUtil;
 import online.nasgar.survival.utils.StringUtils;
 import org.bukkit.Bukkit;
@@ -14,8 +14,11 @@ import java.util.Arrays;
 
 public class MessageCommand extends Command {
 
-    public MessageCommand() {
+    private final ModelService<PlayerData> playerModelCacheService;
+
+    public MessageCommand(ModelService<PlayerData> playerModelCacheService) {
         super("message");
+        this.playerModelCacheService = playerModelCacheService;
 
         this.setAliases(Arrays.asList("msg", "m", "tell", "whisper"));
 
@@ -28,16 +31,14 @@ public class MessageCommand extends Command {
             return;
         }
 
-        PlayerDataManager dataManager = Survival.getInstance().getPlayerDataManager();
-
         Player target = Bukkit.getPlayer(array[0]);
 
         if (this.isPlayerNull(target, array[0])){
             return;
         }
 
-        PlayerData playerData = dataManager.get(player.getUniqueId());
-        PlayerData targetData = dataManager.get(target.getUniqueId());
+        PlayerData playerData = playerModelCacheService.findSync(player.getUniqueId().toString());
+        PlayerData targetData = playerModelCacheService.findSync(target.getUniqueId().toString());
 
         if (playerData.isTpm()){
             ChatUtil.toPlayer(player, "&cYou have the private messages disabled!");

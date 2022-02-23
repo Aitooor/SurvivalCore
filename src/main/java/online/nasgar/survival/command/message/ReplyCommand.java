@@ -1,10 +1,10 @@
 package online.nasgar.survival.command.message;
 
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.playerdata.PlayerDataManager;
 import online.nasgar.survival.utils.StringUtils;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
@@ -12,8 +12,11 @@ import org.bukkit.entity.Player;
 
 public class ReplyCommand extends Command {
 
-    public ReplyCommand() {
+    private final ModelService<PlayerData> playerCacheModelService;
+
+    public ReplyCommand(ModelService<PlayerData> playerCacheModelService) {
         super("reply");
+        this.playerCacheModelService = playerCacheModelService;
 
         this.setPermission("reply.command");
         this.setOnlyPlayers(true);
@@ -25,9 +28,7 @@ public class ReplyCommand extends Command {
             return;
         }
 
-        PlayerDataManager dataManager = Survival.getInstance().getPlayerDataManager();
-
-        PlayerData playerData = dataManager.get(player.getUniqueId());
+        PlayerData playerData = playerCacheModelService.findSync(player.getUniqueId().toString());
 
         Player target = Bukkit.getPlayer(playerData.getLastConverser());
 
@@ -35,7 +36,7 @@ public class ReplyCommand extends Command {
             return;
         }
 
-        PlayerData targetData = dataManager.get(target.getUniqueId());
+        PlayerData targetData = playerCacheModelService.findSync(target.getUniqueId().toString());
 
         if (playerData.isTpm()){
             ChatUtil.toPlayer(player, "&cYou have the private messages disabled!");

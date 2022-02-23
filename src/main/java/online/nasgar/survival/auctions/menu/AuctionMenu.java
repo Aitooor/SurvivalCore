@@ -1,6 +1,6 @@
 package online.nasgar.survival.auctions.menu;
 
-import com.google.common.collect.Lists;
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.auctions.AuctionData;
 import online.nasgar.survival.auctions.AuctionsManager;
@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,10 +21,14 @@ import java.util.Set;
 public class AuctionMenu extends Menu {
 
     private List<AuctionData> notAddedAuctions;
-    public AuctionMenu(List<AuctionData> auctionData) {
+
+    private final ModelService<PlayerData> playerCacheModelService;
+
+    public AuctionMenu(List<AuctionData> auctionData, ModelService<PlayerData> playerCacheModelService) {
         super("Auction", 54, MenuType.CHEST);
 
         this.notAddedAuctions = auctionData;
+        this.playerCacheModelService = playerCacheModelService;
     }
 
     @Override
@@ -46,7 +49,7 @@ public class AuctionMenu extends Menu {
                 public void onClick(InventoryClickEvent event) {
                     player.closeInventory();
 
-                    PlayerData playerData = Survival.getInstance().getPlayerDataManager().get(player.getUniqueId());
+                    PlayerData playerData = playerCacheModelService.findSync(player.getUniqueId().toString());
 
                     if (playerData.getCoins() < data.getPrice()) {
                         player.sendMessage(CC.translate("&cNot enough money."));
@@ -54,7 +57,7 @@ public class AuctionMenu extends Menu {
                     }
 
                     playerData.setCoins((int) (playerData.getCoins() - data.getPrice()));
-                    Survival.getInstance().getPlayerDataManager().save(player.getUniqueId(), false);
+                    playerCacheModelService.saveSync(playerData);
 
                     AuctionsManager.getInstance().getAuctions().removeIf(auctionData -> auctionData.getId().equals(data.getId()));
 
