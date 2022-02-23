@@ -3,6 +3,10 @@ package online.nasgar.survival;
 import lombok.Getter;
 import net.cosmogrp.storage.ModelService;
 import net.cosmogrp.storage.mongo.MongoModelService;
+import net.cosmogrp.storage.redis.connection.GsonRedis;
+import net.cosmogrp.storage.redis.connection.JedisBuilder;
+import net.cosmogrp.storage.redis.connection.JedisInstance;
+import net.cosmogrp.storage.redis.connection.Redis;
 import online.nasgar.survival.auctions.AuctionsManager;
 import online.nasgar.survival.backpack.BackPackMenu;
 import online.nasgar.survival.command.management.CommandManager;
@@ -20,7 +24,8 @@ import online.nasgar.survival.playerdata.service.PlayerService;
 import online.nasgar.survival.providers.BoardListener;
 import online.nasgar.survival.providers.TablistListener;
 import online.nasgar.survival.randomtp.RandomTPManager;
-import online.nasgar.survival.redis.CoreRedisDatabase;
+import online.nasgar.survival.redis.ChatChannelListener;
+import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.shop.ShopItemManager;
 import online.nasgar.survival.warp.WarpManager;
 import org.bukkit.Bukkit;
@@ -43,6 +48,8 @@ public class Survival extends JavaPlugin {
 
     private Executor executor;
 
+    private Redis redis;
+
     private PlayerService playerService;
     private ModelService<PlayerData> playerCacheModelService;
     private MongoModelService<PlayerData> playerDataMongoModelService;
@@ -59,11 +66,10 @@ public class Survival extends JavaPlugin {
 
         this.serverId = this.configFile.getString("id");
 
+        this.setupRedis();
         this.setupDatabases();
         this.setupServices();
         this.setupManagers();
-
-        new CoreRedisDatabase();
 
         new MenuManager(this);
         new WarpManager();
@@ -72,7 +78,7 @@ public class Survival extends JavaPlugin {
 
         new RandomTPManager();
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService, redis), this);
         Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
         Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
         Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
@@ -88,6 +94,22 @@ public class Survival extends JavaPlugin {
 
         this.mongoManager.close();
         instance = null;
+    }
+
+    private void setupRedis() {
+        JedisInstance jedisInstance = JedisBuilder.builder()
+                .setHost(configFile.getString("address"))
+                .setPassword(configFile.getString("password"))
+                .setPort(configFile.getInt("port"))
+                .build();
+
+        redis = GsonRedis.builder(executor)
+                .setJedis(jedisInstance)
+                .setServerId(getServerId())
+                .setParentChannel("survival-core")
+                .build();
+
+        redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class).addListener(new ChatChannelListener());
     }
 
     private void setupServices() {

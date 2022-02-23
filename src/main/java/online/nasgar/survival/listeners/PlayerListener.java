@@ -1,12 +1,13 @@
 package online.nasgar.survival.listeners;
 
 import net.cosmogrp.storage.ModelService;
+import net.cosmogrp.storage.redis.connection.Redis;
 import online.nasgar.survival.command.GodCommand;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.playerdata.service.PlayerService;
-import online.nasgar.survival.redis.CoreRedisDatabase;
-import online.nasgar.survival.redis.packets.ChatPacket;
+import online.nasgar.survival.redis.ChatChannelListener;
+import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.shop.ShopItem;
 import online.nasgar.survival.shop.event.TransactionEvent;
 import online.nasgar.survival.utils.TaskUtil;
@@ -33,10 +34,12 @@ public class PlayerListener implements Listener {
 
     private final PlayerService playerService;
     private final ModelService<PlayerData> playerCacheModelService;
+    private final Redis redis;
 
-    public PlayerListener(PlayerService playerService, ModelService<PlayerData> playerCacheModelService) {
+    public PlayerListener(PlayerService playerService, ModelService<PlayerData> playerCacheModelService, Redis redis) {
         this.playerService = playerService;
         this.playerCacheModelService = playerCacheModelService;
+        this.redis = redis;
     }
 
     @EventHandler
@@ -149,7 +152,15 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-        CoreRedisDatabase.getInstance().sendPacket(new ChatPacket(event.getPlayer().getName() + "&7: &f" + event.getMessage()));
+        Player player = event.getPlayer();
+
+        redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class)
+                .sendMessage(
+                        new MessageData(
+                                player.getUniqueId().toString(),
+                                player.getName() + "&7: &f" + event.getMessage()
+                        )
+                );
 
         event.setCancelled(true);
     }
