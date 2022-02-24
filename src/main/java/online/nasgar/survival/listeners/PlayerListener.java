@@ -2,13 +2,10 @@ package online.nasgar.survival.listeners;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
-import net.cosmogrp.storage.redis.connection.Redis;
 import online.nasgar.survival.command.GodCommand;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.playerdata.service.PlayerService;
-import online.nasgar.survival.redis.ChatChannelListener;
-import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.shop.ShopItem;
 import online.nasgar.survival.shop.event.TransactionEvent;
 import online.nasgar.survival.utils.TaskUtil;
@@ -20,7 +17,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -35,13 +31,11 @@ public class PlayerListener implements Listener {
 
     private final PlayerService playerService;
     private final ModelService<PlayerData> playerCacheModelService;
-    private final Redis redis;
     private final MessageHandler messageHandler;
 
-    public PlayerListener(PlayerService playerService, ModelService<PlayerData> playerCacheModelService, Redis redis, MessageHandler messageHandler) {
+    public PlayerListener(PlayerService playerService, ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler) {
         this.playerService = playerService;
         this.playerCacheModelService = playerCacheModelService;
-        this.redis = redis;
         this.messageHandler = messageHandler;
     }
 
@@ -152,21 +146,6 @@ public class PlayerListener implements Listener {
                 event.setCancelled(true);
             }
         }
-    }
-
-    @EventHandler
-    public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
-        Player player = event.getPlayer();
-
-        redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class)
-                .sendMessage(
-                        new MessageData(
-                                player.getUniqueId().toString(),
-                                player.getName() + "&7: &f" + event.getMessage()
-                        )
-                );
-
-        event.setCancelled(true);
     }
 
 }

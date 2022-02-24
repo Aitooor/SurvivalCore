@@ -19,6 +19,7 @@ import online.nasgar.survival.config.ConfigFile;
 import online.nasgar.survival.database.Authentication;
 import online.nasgar.survival.database.mongodb.MongoManager;
 import online.nasgar.survival.graves.GravesManager;
+import online.nasgar.survival.listeners.ChatListener;
 import online.nasgar.survival.listeners.PlayerListener;
 import online.nasgar.survival.listeners.SpawnersListener;
 import online.nasgar.survival.menu.MenuManager;
@@ -90,7 +91,8 @@ public class Survival extends JavaPlugin {
 
         new RandomTPManager();
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService, redis, messageHandler), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService, messageHandler), this);
+        Bukkit.getPluginManager().registerEvents(new ChatListener(redis), this);
         Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
         Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
         Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
@@ -143,7 +145,7 @@ public class Survival extends JavaPlugin {
                 .setParentChannel("survival-core")
                 .build();
 
-        redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class).addListener(new ChatChannelListener());
+        redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class).addListener(new ChatChannelListener(messageHandler));
     }
 
     private void setupServices() {
