@@ -19,6 +19,11 @@
             <url>https://repo.dmulloy2.net/repository/public/</url>
         </repository>
 
+        <repository>
+            <id>unnamed-public</id>
+            <url>https://repo.unnamed.team/repository/unnamed-public/</url>
+        </repository>
+
     </repositories>
 
     <dependencies>
