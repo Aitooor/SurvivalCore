@@ -22,7 +22,7 @@ public class ChatChannelListener implements ChannelListener<MessageData> {
 
     @Override
     public void listen(Channel<MessageData> channel, String server, MessageData messageData) {
-        Player player = Bukkit.getPlayer((UUID) messageData.getValue("_id"));
+        Player player = Bukkit.getPlayer(UUID.fromString((String) messageData.getValue("_id")));
 
         if (player == null) {
             throw new IllegalArgumentException("Not found player id in message data");
