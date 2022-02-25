@@ -21,10 +21,6 @@ public class RandomTPChannelListener implements ChannelListener<MessageData> {
 
         Player player = Bukkit.getPlayer(UUID.fromString(messagePart[0]));
 
-        if (player == null) {
-            throw new IllegalArgumentException("Not found player id in message data");
-        }
-
         Location location = LocationUtil.convertLocation(messagePart[1]);
 
         RandomTPManager.getInstance().getToTeleport().put(player.getName(), location);

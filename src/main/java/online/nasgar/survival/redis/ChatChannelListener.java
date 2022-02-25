@@ -25,11 +25,6 @@ public class ChatChannelListener implements ChannelListener<MessageData> {
         String[] messagePart = messageData.getContent().split(";");
 
         Player player = Bukkit.getPlayer(UUID.fromString(messagePart[0]));
-
-        if (player == null) {
-            throw new IllegalArgumentException("Not found player id in message data");
-        }
-
         chatService.sendMessage(player, messagePart[1]);
     }
 }
