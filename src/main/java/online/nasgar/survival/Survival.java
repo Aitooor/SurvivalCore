@@ -14,6 +14,7 @@ import net.cosmogrp.storage.redis.connection.JedisInstance;
 import net.cosmogrp.storage.redis.connection.Redis;
 import online.nasgar.survival.auctions.AuctionsManager;
 import online.nasgar.survival.backpack.BackPackMenu;
+import online.nasgar.survival.chat.ChatService;
 import online.nasgar.survival.command.management.CommandManager;
 import online.nasgar.survival.config.ConfigFile;
 import online.nasgar.survival.database.Authentication;
@@ -58,6 +59,8 @@ public class Survival extends JavaPlugin {
 
     private Executor executor;
 
+    private ChatService chatService;
+
     private MessageHandler messageHandler;
 
     private Redis redis;
@@ -79,6 +82,7 @@ public class Survival extends JavaPlugin {
         this.serverId = this.configFile.getString("id");
 
         this.setupNMessage();
+        chatService = new ChatService(messageHandler);
 
         this.setupRedis();
         this.setupDatabases();
@@ -93,7 +97,7 @@ public class Survival extends JavaPlugin {
         new RandomTPManager(redis);
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService, messageHandler), this);
-        Bukkit.getPluginManager().registerEvents(new ChatListener(redis), this);
+        Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
         Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
         Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
         Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
@@ -147,7 +151,7 @@ public class Survival extends JavaPlugin {
                 .build();
 
         redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class)
-                .addListener(new ChatChannelListener(messageHandler));
+                .addListener(new ChatChannelListener(chatService));
 
         redis.getMessenger().getChannel(RandomTPChannelListener.CHANNEL_NAME, MessageData.class)
                 .addListener(new RandomTPChannelListener());
