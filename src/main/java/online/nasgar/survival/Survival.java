@@ -78,12 +78,12 @@ public class Survival extends JavaPlugin {
 
         this.serverId = this.configFile.getString("id");
 
+        this.setupNMessage();
+
         this.setupRedis();
         this.setupDatabases();
         this.setupServices();
         this.setupManagers();
-
-        this.setupNMessage();
 
         new MenuManager(this);
         new WarpManager();
