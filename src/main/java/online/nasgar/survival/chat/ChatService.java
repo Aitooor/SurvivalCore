@@ -15,7 +15,7 @@ public class ChatService {
     public void sendMessage(String playerName, String message) {
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
             messageHandler.sendReplacing(onlinePlayer, "chat.format",
-                    "%player_name%", playerName(),
+                    "%player_name%", playerName,
                     "%message%", message
             );
         });
