@@ -141,6 +141,7 @@ public class Survival extends JavaPlugin {
                 .setHost(configFile.getString("redis.address"))
                 .setPassword(configFile.getString("redis.password"))
                 .setPort(configFile.getInt("redis.port"))
+                .setTimeout(2000)
                 .build();
 
         redis = GsonRedis.builder(executor)
