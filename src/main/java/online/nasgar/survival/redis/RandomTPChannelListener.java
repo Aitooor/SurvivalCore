@@ -2,6 +2,7 @@ package online.nasgar.survival.redis;
 
 import net.cosmogrp.storage.redis.channel.Channel;
 import net.cosmogrp.storage.redis.channel.ChannelListener;
+import online.nasgar.survival.randomtp.RandomTPManager;
 import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.utils.LocationUtil;
 import org.bukkit.Bukkit;
@@ -27,5 +28,7 @@ public class RandomTPChannelListener implements ChannelListener<MessageData> {
         }
 
         Location location = LocationUtil.convertLocation((String) messageData.getValue("location"));
+
+        RandomTPManager.getInstance().getToTeleport().put(player.getName(), location);
     }
 }

@@ -31,6 +31,7 @@ import online.nasgar.survival.providers.BoardListener;
 import online.nasgar.survival.providers.TablistListener;
 import online.nasgar.survival.randomtp.RandomTPManager;
 import online.nasgar.survival.redis.ChatChannelListener;
+import online.nasgar.survival.redis.RandomTPChannelListener;
 import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.shop.ShopItemManager;
 import online.nasgar.survival.warp.WarpManager;
@@ -145,7 +146,11 @@ public class Survival extends JavaPlugin {
                 .setParentChannel("survival-core")
                 .build();
 
-        redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class).addListener(new ChatChannelListener(messageHandler));
+        redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class)
+                .addListener(new ChatChannelListener(messageHandler));
+
+        redis.getMessenger().getChannel(RandomTPChannelListener.CHANNEL_NAME, MessageData.class)
+                .addListener(new RandomTPChannelListener());
     }
 
     private void setupServices() {

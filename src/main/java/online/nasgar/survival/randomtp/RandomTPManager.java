@@ -5,8 +5,10 @@ import lombok.Data;
 import lombok.Getter;
 import net.cosmogrp.storage.redis.connection.Redis;
 import online.nasgar.survival.Survival;
+import online.nasgar.survival.redis.RandomTPChannelListener;
 import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.utils.BungeeUtil;
+import online.nasgar.survival.utils.LocationUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -59,9 +61,12 @@ public class RandomTPManager implements Listener {
             List<String> servers = Survival.getInstance().getConfigFile().getStringList("random_tp_server");
 
             BungeeUtil.sendToServer(player, servers.get(ThreadLocalRandom.current().nextInt(servers.size())));
-            //CoreRedisDatabase.getInstance().sendPacket(new RandomTPPacket(player.getName(), location));
 
-            redis.getMessenger().getChannel("", MessageData.class);
+            redis.getMessenger().getChannel(RandomTPChannelListener.CHANNEL_NAME, MessageData.class).sendMessage(
+                    new MessageData()
+                            .addValue("_id", player.getUniqueId())
+                            .addValue("location", LocationUtil.parseLocation(location))
+            );
             return;
         }
 
