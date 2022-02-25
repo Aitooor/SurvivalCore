@@ -89,7 +89,7 @@ public class Survival extends JavaPlugin {
         new GravesManager();
         new AuctionsManager();
 
-        new RandomTPManager();
+        new RandomTPManager(redis);
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService, messageHandler), this);
         Bukkit.getPluginManager().registerEvents(new ChatListener(redis), this);
