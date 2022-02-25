@@ -22,10 +22,6 @@ public class ChatChannelListener implements ChannelListener<MessageData> {
 
     @Override
     public void listen(Channel<MessageData> channel, String server, MessageData messageData) {
-        if (!channel.getName().equals(CHANNEL_NAME)) {
-            return;
-        }
-
         Player player = Bukkit.getPlayer((UUID) messageData.getValue("_id"));
 
         if (player == null) {

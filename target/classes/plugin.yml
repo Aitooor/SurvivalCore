@@ -1,7 +1,0 @@
-author: Nasgar Development Team
-name: Nasgar-Survival
-main: online.nasgar.survival.Survival
-version: 1.0
-api-version: 1.13
-softdepend:
-  - TimedRankup
