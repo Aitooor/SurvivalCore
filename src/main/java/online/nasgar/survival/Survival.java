@@ -4,7 +4,6 @@ import lombok.Getter;
 import me.yushust.message.MessageHandler;
 import me.yushust.message.MessageProvider;
 import me.yushust.message.bukkit.BukkitMessageAdapt;
-import me.yushust.message.bukkit.SpigotLinguist;
 import me.yushust.message.source.MessageSourceDecorator;
 import net.cosmogrp.storage.ModelService;
 import net.cosmogrp.storage.mongo.MongoModelService;
@@ -96,7 +95,7 @@ public class Survival extends JavaPlugin {
 
         new RandomTPManager(redis);
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, playerCacheModelService, messageHandler), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerDataMongoModelService), this);
         Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
         Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
         Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
