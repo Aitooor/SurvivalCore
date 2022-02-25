@@ -63,9 +63,7 @@ public class RandomTPManager implements Listener {
             BungeeUtil.sendToServer(player, servers.get(ThreadLocalRandom.current().nextInt(servers.size())));
 
             redis.getMessenger().getChannel(RandomTPChannelListener.CHANNEL_NAME, MessageData.class).sendMessage(
-                    new MessageData()
-                            .addValue("_id", player.getUniqueId().toString())
-                            .addValue("location", LocationUtil.parseLocation(location))
+                    new MessageData(player.getUniqueId() + ";" + LocationUtil.parseLocation(location))
             );
             return;
         }
