@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Authentication {
 
+    private String uri;
     private String address;
     private String database;
     private String username;
@@ -15,16 +16,17 @@ public class Authentication {
     private boolean authentication;
 
     public Authentication(String address, int port, String database){
-        this(address, port, database, false, null, null);
+        this(address, port, database, false, null, null, null);
     }
 
-    public Authentication(String address, int port, String database, boolean authentication, String username, String password){
+    public Authentication(String address, int port, String database, boolean authentication, String username, String password, String uri){
         this.address = address;
         this.port = port;
         this.database = database;
         this.authentication = authentication;
         this.username = username;
         this.password = password;
+        this.uri = uri;
     }
 
 

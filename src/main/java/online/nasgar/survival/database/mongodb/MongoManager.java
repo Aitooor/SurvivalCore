@@ -23,7 +23,9 @@ public class MongoManager implements Closeable {
     public MongoManager(Authentication auth){
         MongoClientSettings.Builder builder = MongoClientSettings.builder();
 
-        builder.applyConnectionString(new ConnectionString("mongodb://" + auth.getAddress() + ":" + auth.getPort()));
+        String uri = (auth.getUri() != null) ? auth.getUri() :  "mongodb://" + auth.getAddress() + ":" + auth.getPort();
+
+        builder.applyConnectionString(new ConnectionString(uri));
         builder.applyToConnectionPoolSettings(block -> block.maxConnectionIdleTime(15, TimeUnit.SECONDS));
         builder.retryWrites(true);
 

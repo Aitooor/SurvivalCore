@@ -179,7 +179,9 @@ public class Survival extends JavaPlugin {
                 this.configFile.getString("mongodb.database"),
                 this.configFile.getBoolean("mongodb.authentication.enabled"),
                 this.configFile.getString("mongodb.authentication.username"),
-                this.configFile.getString("mongodb.authentication.password"))
+                this.configFile.getString("mongodb.authentication.password"),
+                this.configFile.getString("mongodb.authentication.uri")
+        )
 
         );
     }
