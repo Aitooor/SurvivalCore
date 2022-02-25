@@ -125,7 +125,7 @@ public class Survival extends JavaPlugin {
                                 .get(),
                         config -> {
                             config.specify(Player.class)
-                                    .setLinguist(new SpigotLinguist())
+                                    .setLinguist(player -> player.getLocale().split("_")[0])
                                     .setMessageSender((sender, mode, message) -> sender.sendMessage(message));
                             config.specify(CommandSender.class)
                                             .setLinguist(commandSender -> "en")
