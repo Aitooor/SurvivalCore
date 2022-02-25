@@ -135,9 +135,9 @@ public class Survival extends JavaPlugin {
 
     private void setupRedis() {
         JedisInstance jedisInstance = JedisBuilder.builder()
-                .setHost(configFile.getString("address"))
-                .setPassword(configFile.getString("password"))
-                .setPort(configFile.getInt("port"))
+                .setHost(configFile.getString("redis.address"))
+                .setPassword(configFile.getString("redis.password"))
+                .setPort(configFile.getInt("redis.port"))
                 .build();
 
         redis = GsonRedis.builder(executor)
