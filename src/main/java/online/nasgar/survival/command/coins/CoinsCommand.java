@@ -1,7 +1,7 @@
 package online.nasgar.survival.command.coins;
 
 import me.yushust.message.MessageHandler;
-import net.cosmogrp.storage.ModelService;
+import net.cosmogrp.storage.mongo.MongoModelService;
 import online.nasgar.survival.command.coins.arguments.AddArgument;
 import online.nasgar.survival.command.coins.arguments.RemoveArgument;
 import online.nasgar.survival.command.coins.arguments.SetArgument;
@@ -17,18 +17,18 @@ import java.util.Arrays;
 
 public class CoinsCommand extends Command {
 
-    private final ModelService<PlayerData> playerCacheModelService;
+    private final MongoModelService<PlayerData> playerDataMongoModelService;
     private final MessageHandler messageHandler;
 
-    public CoinsCommand(ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler) {
+    public CoinsCommand(MongoModelService<PlayerData> playerDataMongoModelService, MessageHandler messageHandler) {
         super("coins", messageHandler);
-        this.playerCacheModelService = playerCacheModelService;
+        this.playerDataMongoModelService = playerDataMongoModelService;
         this.messageHandler = messageHandler;
 
         this.setAliases(Arrays.asList("economy", "balance"));
         this.setArgumentBase(true);
 
-        this.addArguments(new AddArgument(this.playerCacheModelService, messageHandler), new RemoveArgument(playerCacheModelService, messageHandler), new SetArgument(playerCacheModelService, messageHandler));
+        this.addArguments(new AddArgument(this.playerDataMongoModelService, messageHandler), new RemoveArgument(playerDataMongoModelService, messageHandler), new SetArgument(playerDataMongoModelService, messageHandler));
     }
 
     @Override public void onCommand(CommandSender sender, String[] array) {
@@ -39,6 +39,6 @@ public class CoinsCommand extends Command {
 
         Player player = (Player) sender;
 
-        ChatUtil.toPlayer(player, new BuildText(playerCacheModelService).of(player, messageHandler.get(player, "coins.have")));
+        ChatUtil.toPlayer(player, new BuildText(playerDataMongoModelService).of(player, messageHandler.get(player, "coins.have")));
     }
 }

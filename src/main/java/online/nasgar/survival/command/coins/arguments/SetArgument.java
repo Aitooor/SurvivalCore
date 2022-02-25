@@ -1,7 +1,7 @@
 package online.nasgar.survival.command.coins.arguments;
 
 import me.yushust.message.MessageHandler;
-import net.cosmogrp.storage.ModelService;
+import net.cosmogrp.storage.mongo.MongoModelService;
 import online.nasgar.survival.command.management.Argument;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.StringUtils;
@@ -11,12 +11,12 @@ import org.bukkit.entity.Player;
 
 public class SetArgument extends Argument {
 
-    private final ModelService<PlayerData> playerCacheModelService;
+    private final MongoModelService<PlayerData> playerDataMongoModelService;
     private final MessageHandler messageHandler;
 
-    public SetArgument(ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler) {
+    public SetArgument(MongoModelService<PlayerData> playerDataMongoModelService, MessageHandler messageHandler) {
         super(messageHandler, "set");
-        this.playerCacheModelService = playerCacheModelService;
+        this.playerDataMongoModelService = playerDataMongoModelService;
         this.messageHandler = messageHandler;
 
         this.setPermission("coins.set.command");
@@ -41,7 +41,7 @@ public class SetArgument extends Argument {
 
         int amount = Integer.parseInt(array[1]);
 
-        playerCacheModelService.findSync(target.getUniqueId().toString()).setCoins(amount);
+        playerDataMongoModelService.findSync(target.getUniqueId().toString()).setCoins(amount);
         messageHandler.sendReplacing(sender, "coins.set.success.sender", "%target_name%", target.getName(), "%amount%", amount);
         messageHandler.sendReplacing(sender, "coins.set.success.target", "%amount%", amount , "%staff_name%", sender.getName());
     }
