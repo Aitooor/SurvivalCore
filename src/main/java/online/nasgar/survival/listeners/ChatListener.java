@@ -30,7 +30,7 @@ public class ChatListener implements Listener {
                 );
 
 
-        chatService.sendMessage(player, message);
+        chatService.sendMessage(player.getName(), message);
 
         event.setCancelled(true);
     }

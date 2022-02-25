@@ -24,7 +24,6 @@ public class ChatChannelListener implements ChannelListener<MessageData> {
     public void listen(Channel<MessageData> channel, String server, MessageData messageData) {
         String[] messagePart = messageData.getContent().split(";");
 
-        Player player = Bukkit.getPlayer(UUID.fromString(messagePart[0]));
-        chatService.sendMessage(player, messagePart[1]);
+        chatService.sendMessage(messagePart[0], messagePart[1]);
     }
 }

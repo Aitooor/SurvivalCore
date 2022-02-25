@@ -12,10 +12,10 @@ public class ChatService {
         this.messageHandler = messageHandler;
     }
 
-    public void sendMessage(Player author, String message) {
+    public void sendMessage(String playerName, String message) {
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
             messageHandler.sendReplacing(onlinePlayer, "chat.format",
-                    "%player_name%", author.getName(),
+                    "%player_name%", playerName(),
                     "%message%", message
             );
         });
