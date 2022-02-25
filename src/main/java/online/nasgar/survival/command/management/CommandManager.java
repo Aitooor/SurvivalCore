@@ -2,6 +2,7 @@ package online.nasgar.survival.command.management;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
+import net.cosmogrp.storage.mongo.MongoModelService;
 import online.nasgar.survival.auctions.commands.AuctionCommand;
 import online.nasgar.survival.backpack.commands.BackPackCommand;
 import online.nasgar.survival.command.*;
@@ -21,7 +22,8 @@ import java.util.Arrays;
 public class CommandManager {
 
 
-    public CommandManager(ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler){
+    public CommandManager(MongoModelService<PlayerData> playerDataMongoModelService,
+                          ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler){
         this.register(
 
                 new FlyCommand(messageHandler),
@@ -34,7 +36,7 @@ public class CommandManager {
                 new ProfileCommand(playerCacheModelService, messageHandler),
                 new ShopItemCommand(messageHandler),
                 new FeedCommand(messageHandler),
-                new CoinsCommand(playerCacheModelService, messageHandler),
+                new CoinsCommand(playerDataMongoModelService, messageHandler),
                 new SetWarpCommand(messageHandler),
                 new DeleteWarpCommand(messageHandler),
                 new WarpCommand(messageHandler),

@@ -165,7 +165,7 @@ public class Survival extends JavaPlugin {
     }
 
     private void setupManagers() {
-        new CommandManager(playerCacheModelService, messageHandler);
+        new CommandManager(playerDataMongoModelService, playerCacheModelService, messageHandler);
 
         this.shopItemManager = new ShopItemManager();
     }
