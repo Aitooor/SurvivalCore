@@ -155,9 +155,9 @@ public class Survival extends JavaPlugin {
 
     private void setupServices() {
         this.playerCacheModelService = new PlayerCacheModelService();
-        this.playerDataMongoModelService = new PlayerMongoModelService(null, mongoManager.getMongoDatabase(), playerCacheModelService);
+        this.playerDataMongoModelService = new PlayerMongoModelService(executor, mongoManager.getMongoDatabase(), playerCacheModelService);
 
-        this.playerService = new PlayerService(playerCacheModelService, playerDataMongoModelService);
+        this.playerService = new PlayerService(playerDataMongoModelService);
     }
 
     private void setupManagers() {
