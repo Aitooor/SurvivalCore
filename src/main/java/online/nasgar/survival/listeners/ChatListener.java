@@ -26,7 +26,7 @@ public class ChatListener implements Listener {
 
         redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class)
                 .sendMessage(
-                        new MessageData(player.getUniqueId() + ";" + message)
+                        new MessageData(player.getName() + ";" + message)
                 );
 
 
