@@ -33,6 +33,8 @@ public class PlayerService {
             player.setLevel(data.getLevel());
 
             player.getEnderChest().setContents(data.getEnderChestItems());
+
+            System.out.println("ola si pase por el find");
         });
 
     }
@@ -42,16 +44,18 @@ public class PlayerService {
     }
 
     public void saveAndRemove(String id, Consumer<PlayerData> beforeSave) {
-        playerDataMongoModelService.get(id).thenAccept(playerData -> {
-            if (playerData == null) {
-                throw new NullPointerException("Error from find data of player id=" + id);
-            }
+        PlayerData playerData = playerDataMongoModelService.getSync("id");
 
-            beforeSave.accept(playerData);
+        if (playerData == null) {
+            throw new NullPointerException("Error from find data of player id=" + id);
+        }
 
-            playerDataMongoModelService.save(playerData);
-            playerDataMongoModelService.deleteInCache(playerData);
+        beforeSave.accept(playerData);
 
-        });
+        playerDataMongoModelService.save(playerData);
+        playerDataMongoModelService.deleteInCache(playerData);
+
+        System.out.println("si pase por el get");
+
     }
 }

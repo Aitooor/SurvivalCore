@@ -2,7 +2,6 @@ package online.nasgar.survival.chat;
 
 import me.yushust.message.MessageHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class ChatService {
 

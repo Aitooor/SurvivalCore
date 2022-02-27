@@ -1,7 +1,6 @@
 package online.nasgar.survival.menu.impl;
 
 import net.cosmogrp.storage.ModelService;
-import online.nasgar.survival.Survival;
 import online.nasgar.survival.menu.Menu;
 import online.nasgar.survival.menu.button.Button;
 import online.nasgar.survival.playerdata.PlayerData;

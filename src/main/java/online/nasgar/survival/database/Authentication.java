@@ -1,10 +1,13 @@
 package online.nasgar.survival.database;
 
+import com.mongodb.ConnectionString;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
 public class Authentication {
+
+    private final String STRING_CONNECTION = "mongodb://%s:%s@%s:%s/?authSource=%s";
 
     private String uri;
     private String address;
@@ -13,21 +16,33 @@ public class Authentication {
     private String password;
 
     private int port;
-    private boolean authentication;
 
     public Authentication(String address, int port, String database){
-        this(address, port, database, false, null, null, null);
+        this(address, port, database,  null, null, null);
     }
 
-    public Authentication(String address, int port, String database, boolean authentication, String username, String password, String uri){
+    public Authentication(String address, int port, String database, String username, String password, String uri){
         this.address = address;
         this.port = port;
         this.database = database;
-        this.authentication = authentication;
         this.username = username;
         this.password = password;
         this.uri = uri;
     }
 
+    public ConnectionString toConnectionString() {
+        return new ConnectionString(
+                (getUri() != null) ? getUri() :
+                        String.format(
+                                STRING_CONNECTION,
+                                getUsername(),
+                                getPassword(),
+                                getAddress(),
+                                getPort(),
+                                getDatabase()
+                        )
+        );
+
+    }
 
 }

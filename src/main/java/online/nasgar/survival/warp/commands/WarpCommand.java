@@ -2,7 +2,6 @@ package online.nasgar.survival.warp.commands;
 
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
-import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.warp.WarpData;
 import online.nasgar.survival.warp.WarpManager;
 import org.bukkit.entity.Player;

@@ -83,6 +83,8 @@ public class Survival extends JavaPlugin {
         this.setupNMessage();
         chatService = new ChatService(messageHandler);
 
+        this.setupCache();
+
         this.setupRedis();
         this.setupDatabases();
         this.setupServices();
@@ -157,8 +159,11 @@ public class Survival extends JavaPlugin {
                 .addListener(new RandomTPChannelListener());
     }
 
-    private void setupServices() {
+    private void setupCache() {
         this.playerCacheModelService = new PlayerCacheModelService();
+    }
+
+    private void setupServices() {
         this.playerDataMongoModelService = new PlayerMongoModelService(executor, mongoManager.getMongoDatabase(), playerCacheModelService);
 
         this.playerService = new PlayerService(playerDataMongoModelService);
@@ -177,7 +182,6 @@ public class Survival extends JavaPlugin {
                 this.configFile.getString("mongodb.address"),
                 this.configFile.getInt("mongodb.port"),
                 this.configFile.getString("mongodb.database"),
-                this.configFile.getBoolean("mongodb.authentication.enabled"),
                 this.configFile.getString("mongodb.authentication.username"),
                 this.configFile.getString("mongodb.authentication.password"),
                 this.configFile.getString("mongodb.authentication.uri")

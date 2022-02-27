@@ -5,7 +5,6 @@ mongodb:
   port: 27017
   database: "survival"
   authentication:
-    enabled: false
     username: "root"
     password: "******"
 

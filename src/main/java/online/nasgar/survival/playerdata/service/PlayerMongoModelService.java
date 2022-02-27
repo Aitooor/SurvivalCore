@@ -13,6 +13,7 @@ import java.util.concurrent.Executor;
 
 public class PlayerMongoModelService extends MongoModelService<PlayerData> {
 
+
     public PlayerMongoModelService(Executor executor, MongoDatabase database, ModelService<PlayerData> cacheModelService) {
         super(executor, new ModelMeta<>(PlayerData.class).addProperty("collection", "users"), cacheModelService, database, new PlayerMongoModelParser());
     }
