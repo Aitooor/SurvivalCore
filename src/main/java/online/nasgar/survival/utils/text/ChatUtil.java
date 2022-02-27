@@ -45,7 +45,7 @@ public class ChatUtil {
     }
 
     public void toPlayer(Player player, String message) {
-        player.sendMessage(translate(message));
+        player.sendMessage(translate(message).replace("<player>", player.getName()));
     }
 
     public void toSender(CommandSender sender, List<String> stringList) {
