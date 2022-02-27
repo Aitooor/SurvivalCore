@@ -25,6 +25,8 @@ public class PlayerMongoModelService extends MongoModelService<PlayerData> {
             playerData = new PlayerData(
                     UUID.fromString(id)
             );
+
+            cacheModelService.saveSync(playerData);
         }
 
         return playerData;
