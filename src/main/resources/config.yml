@@ -1,57 +1,18 @@
-id: survival-1
+id: Survival-1
 
 mongodb:
   address: "localhost"
   port: 27017
-  database: "survival"
+  database: "Survival"
   authentication:
-    enabled: false
-    username: "root"
-    password: "******"
+    enabled: true
+    username: "usrcx_local54"
+    password: "ZR9xye5J5R5J9BdLcykq9fGfLkS9dvFVptzmBZRMm2hzb6erTARH9RysXkCpVmvSZtEGh3rf3V3"
 
 redis:
   address: "localhost"
   port: 6379
-  password: ""
-
-rank-ups:
-  default:
-    prefix: "&fNoob"
-  diamond:
-    time: 7 #In Days
-    prefix: "&b&lDiamond"
-    commands:
-      - "lp user <player> parent set diamond"
-
-commands:
-  see:
-    next:
-      - "&7&m&l----------------------------"
-      - "&7Te falta &b<parsedTime> &7para"
-      - "&7obtener el rango <newRankPrefix>"
-      - "&7&m&l----------------------------"
-    no-more:
-      - "&7&m&l----------------------------"
-      - "&7You're in the last rankup."
-      - "&7&m&l----------------------------"
-  listed:
-    format: "&7<rankPrefix> &8- &b<rankPendingTime>&7/&b<rankNeededTime>"
-    format-already: "&7<rankPrefix> &8- &b&b<rankNeededTime> &7(obtenido)"
-    send:
-      - "&7&m&l----------------------------"
-      - "&7Rank list:"
-      - "<ranks>"
-      - "&7&m&l----------------------------"
-
-ranked:
-  all:
-    - "&7&m&l----------------------------"
-    - "&b<player> &7rankup to &b<rankPrefix>&7!"
-    - "&7&m&l----------------------------"
-  own:
-    - "&7&m&l----------------------------"
-    - "&7You rankup to &b<rankPrefix>&7!"
-    - "&7&m&l----------------------------"
+  password: "e44fuT2mQM2hr437N5DTA99rK8xW8RhRAMmSm9LQ4FcnXx7bf5e8VpwXKquYzBvTpnKjUTthqq3"
 
 shop-items:
   golden-apple:
