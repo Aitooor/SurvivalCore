@@ -1,0 +1,123 @@
+reload: "&aConfiguracion del Survival recargada."
+
+player-not-found: "&cJugador %target_name% no encontrado."
+
+chat:
+  format: "%player_name%&7: &f%message%"
+
+feed:
+  max:
+    player: "&cTu comida esta al maximo!"
+    target: "&cLa comida de &e%target_name% &cesta al maximo!"
+  restored:
+    player: "&a¡Tu comida ha sido restablecida!"
+    target:
+      you: "&a¡La comida de &e%target_name% &aha sido restablecida!"
+      other: "&aTu comida ha sido restablecida por &e%staff_name%"
+heal:
+  max:
+    player: "&c¡Tu salud esta al maximo!"
+    target: "&c¡La salud de &e%target_name% &cesta al maximo!"
+  restored:
+    player: "&a¡Tu salud ha sido restablecida!"
+    target:
+      you: "&aLa vida de &e%target_name% &aha sido restablecida!"
+      other: "&aTu vida ha sido restablecida por &e%staff_name%"
+fly:
+  enabled:
+    player: "&aVuelo activado"
+    target:
+      you: "&cVuelo de &e%target_name% &eactivado!"
+      other: "&cVuelo activado por &e%staff_name%"
+  disabled:
+    player: "&cVuelo desactivado"
+    target:
+      you: "&cVuelo de &e%target_name% &cdesactivado!"
+      other: "&cVuelo desactivado por &e%staff_name%"
+gamemode:
+  usage: "&cUso: /gamemode <mode>"
+  not-found: "&c¡Gamemode &e%gamemode% &cno encontrado!"
+  update: "&a¡Tu modo de juego ha sido cambiado!"
+god:
+  enabled:
+    player: "&aModo dios activado"
+    target:
+      you: "&cModo dios de &e%target_name% &eenabled!"
+      other: "&cModo dios activado por &e%staff_name%"
+  disabled:
+    player: "&cModo dios desactivado"
+    target:
+      you: "&cModo dios de &e%target_name% &cdesactivado!"
+      other: "&cModo dios desactivado por &e%staff_name%"
+coins:
+  limited-console: "&c¡No tienes un dinero limitado!"
+  have: "&aTienes &e<coins>$"
+  error:
+    insufficient: "&c¡No tienes suficientes monedas!"
+  purchase: "&aCompró con éxito %display_name% &afor &e%price_coins%$"
+  invalid:
+    number: "&c¡&e%number% &ces un número inválido!"
+  add:
+    usage: "&cUso: /coins add <jugador> <cantidad>"
+    success:
+      sender: "&aAgregado con éxito a &e%target_name% &aa cantidad de &e%amount%$&a!"
+      target: "&e%staff_name% &a ha agregado &e%amount%$ &apara ti!"
+  remove:
+    usage: "&cUso: /coins remove <jugador> <cantidad>"
+    invalid-amount: "&cEl jugador &e%target_name% &cno tiene esa cantidad!"
+    success:
+      sender: "&aEliminado con éxito a &e%target_name% &aa cantidad de &e%amount%$&a!"
+      target: "&e%staff_name% &a ha eliminado &e%amount%$ &apara ti!"
+  set:
+    usage: "&cUso: /coins set <jugador> <cantidad>"
+    success:
+      remitente: "&aConfigurado con éxito en &e%target_name% &aa cantidad de &e%cantidad%$&a!"
+      target: "&e%staff_name% &aha establecido &e%cantidad%$ &apara ti!"
+message:
+  prefix:
+    to: "&7(To <prefix><player>) "
+    from: "&7(From <prefix><player>) "
+  usage: "&cUsage: /message <receptor> <mensaje>"
+  tpm:
+    player: "&cYou have the private messages disabled!"
+    target: "&e%target_name% &chave the private messages disabled!"
+reply:
+  usage: "&cUsage: /reply <mensaje>"
+guis:
+  main: "&b&lMain &7(Menu)"
+  profile: "&8➢ &ePERFIL"
+  shop: "&8➢ &eSHOP ITEM"
+auction:
+  help:
+    - "&b&lComandos de subasta"
+    - "&7/auction menu"
+    - "&7/auction pull <precio> <tiempo>"
+  invalid:
+    price: "&cPrecio invalido."
+    duration: "&cDuracion invalida."
+  pull:
+    no-item: "&cNo tienes items en la mano."
+  success: "&aSu artículo se ha agregado con éxito a la venta. En caso de que esté desconectado, el saldo se acreditará, pase lo que pase."
+warp:
+  usage: "/warp <warp>"
+  teleport: "&aSuccessfully teleported to warp."
+  no-permisison: "&cYou can't use this warp."
+  not-exists: "&cA warp with that name doesn't exists."
+  exists: "&cA warp with that name already exists."
+  delete:
+    usage: "&cUsage: /deletewarp <warpName>"
+    success: "&cWarp delete."
+  create:
+    usage: "&cUsage: /setwarp <warpName>"
+    success: "&aWarp create."
+  set-warp:
+    item:
+      usage: "&cUsage: /setwarpitem <warpName>"
+      error: "&cNo Item in hand."
+      success: "&aItem updated."
+    permission:
+      usage: "&cUsage: /setwarppermission <warpName> <permission>"
+      success: "&aWarp permission update."
+    slot:
+      usage: "&cUsage: /setwarpslot <warpName> <slot>"
+      success: "&aWarp slot update."
