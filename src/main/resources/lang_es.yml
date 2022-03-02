@@ -5,6 +5,30 @@ player-not-found: "&cJugador %target_name% no encontrado."
 chat:
   format: "%prefix%%player_name%&7: &f%message%"
 
+tab:
+  header:
+    - "&b&lNASGAR &8| &fSurvival &71.18"
+    - "&7Jugando en Survival &e%online%"
+  footer:
+    - "&7&oJugando en Nasgar &e%online%"
+    - "&b&onasgar.online"
+
+scoreboard:
+  lines:
+    - ""
+    - "&fNombre"
+    - "&a%player%"
+    - ""
+    - "&fRango"
+    - "&a%rank%"
+    - ""
+    - "&fDinero"
+    - "&a%money%"
+    - ""
+    - "&fJugando &a%survival_online%"
+    - ""
+    - "&bnasgar.online"
+
 feed:
   max:
     player: "&cTu comida esta al maximo!"
