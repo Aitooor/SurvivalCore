@@ -3,7 +3,7 @@ reload: "&aSurvival Configuration reloaded."
 player-not-found: "&cPlayer %target_name% not found."
 
 chat:
-  format: "%player_name%&7: &f%message%"
+  format: "%prefix%%player_name%&7: &f%message%"
 
 feed:
   max:

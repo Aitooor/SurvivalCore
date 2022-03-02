@@ -1,8 +1,8 @@
 package online.nasgar.survival.chat;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.yushust.message.MessageHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class ChatService {
 
@@ -14,9 +14,13 @@ public class ChatService {
 
     public void sendMessage(String playerName, String message) {
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
+
+            String rank = "%vault_prefix% ";
+            rank = PlaceholderAPI.setPlaceholders(onlinePlayer.getPlayer(), rank);
+
             messageHandler.sendReplacing(onlinePlayer, "chat.format",
                     "%player_name%", playerName,
-                    "%message%", message
+                    "%message%", message, "%prefix%", rank
             );
         });
     }
