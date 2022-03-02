@@ -23,7 +23,7 @@ scoreboard:
     - "&a%rank%"
     - ""
     - "&fDinero"
-    - "&a%money%"
+    - "&e%money%"
     - ""
     - "&fJugando &a%survival_online%"
     - ""
