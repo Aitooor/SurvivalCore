@@ -15,6 +15,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -52,7 +53,7 @@ public class BuildText {
         put("rank", LuckPermsUtil.getRankName(player));
         put("coins", Integer.toString(data.getCoins()));
 
-        Rank rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(data.getUuid()));
+        Rank rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(UUID.fromString(data.getId())));
 
         String finalText = text;
 

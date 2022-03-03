@@ -83,8 +83,6 @@ public class Survival extends JavaPlugin {
         this.setupNMessage();
         chatService = new ChatService(messageHandler);
 
-        this.setupCache();
-
         this.setupRedis();
         this.setupDatabases();
         this.setupServices();
@@ -159,11 +157,8 @@ public class Survival extends JavaPlugin {
                 .addListener(new RandomTPChannelListener());
     }
 
-    private void setupCache() {
-        this.playerCacheModelService = new PlayerCacheModelService();
-    }
-
     private void setupServices() {
+        this.playerCacheModelService = new PlayerCacheModelService();
         this.playerDataMongoModelService = new PlayerMongoModelService(executor, mongoManager.getMongoDatabase(), playerCacheModelService);
 
         this.playerService = new PlayerService(playerDataMongoModelService);

@@ -16,7 +16,7 @@ public class PlayerMongoModelParser implements MongoModelParser<PlayerData> {
 
     @Override
     public PlayerData parse(DocumentReader reader) {
-        PlayerData data = new PlayerData(UUID.fromString(reader.readString("_id")));
+        PlayerData data = new PlayerData(reader.readString("_id"));
 
         data.setLastConverser(reader.readString("lastConverser"));
         data.setIgnoredPlayers(reader.readList("ignoredPlayers", String.class));

@@ -59,7 +59,7 @@ public class PlayerListener implements Listener {
                 "              &b&lTwitter&7: &f@NasgarNetwork",
                 "              &b&lDiscord&7: &fds.nasgar.online",
                 "",
-                "              Welcome &b&l<player>&f!>",
+                "              Welcome &b&l<player>&f",
                 "&7&m-------------------------------------------------------");
         event.setJoinMessage(null);
     }

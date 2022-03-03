@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Getter @Setter
 public class PlayerData implements DocumentCodec, Model {
 
-    private UUID uuid;
+    private String id;
     private String lastConverser;
     private List<String> ignoredPlayers;
 
@@ -44,8 +44,8 @@ public class PlayerData implements DocumentCodec, Model {
 
     private ItemStack[] backPackItems;
 
-    public PlayerData(UUID uuid){
-        this.uuid = uuid;
+    public PlayerData(String id){
+        this.id = id;
 
         this.lastConverser = null;
         this.ignoredPlayers = new ArrayList<>();
@@ -75,7 +75,7 @@ public class PlayerData implements DocumentCodec, Model {
     }
 
     public Player getAsPlayer(){
-        Player player = Bukkit.getPlayer(this.uuid);
+        Player player = Bukkit.getPlayer(UUID.fromString(id));
 
         if (player == null || !player.hasPlayedBefore()){
             return null;
@@ -110,6 +110,6 @@ public class PlayerData implements DocumentCodec, Model {
 
     @Override
     public String getId() {
-        return uuid.toString();
+        return id;
     }
 }

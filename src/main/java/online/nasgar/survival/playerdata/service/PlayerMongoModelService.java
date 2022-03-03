@@ -8,11 +8,9 @@ import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.playerdata.parser.PlayerMongoModelParser;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
 import java.util.concurrent.Executor;
 
 public class PlayerMongoModelService extends MongoModelService<PlayerData> {
-
 
     public PlayerMongoModelService(Executor executor, MongoDatabase database, ModelService<PlayerData> cacheModelService) {
         super(executor, new ModelMeta<>(PlayerData.class).addProperty("collection", "users"), cacheModelService, database, new PlayerMongoModelParser());
@@ -23,11 +21,12 @@ public class PlayerMongoModelService extends MongoModelService<PlayerData> {
         PlayerData playerData = super.getOrFindSync(id);
 
         if (playerData == null) {
+
             playerData = new PlayerData(
-                    UUID.fromString(id)
+                    id
             );
 
-            cacheModelService.saveSync(playerData);
+            saveInCache(playerData);
         }
 
         return playerData;

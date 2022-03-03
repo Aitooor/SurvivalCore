@@ -5,8 +5,7 @@ import online.nasgar.survival.playerdata.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
+
 import java.util.function.Consumer;
 
 public class PlayerService {
@@ -34,7 +33,6 @@ public class PlayerService {
 
             player.getEnderChest().setContents(data.getEnderChestItems());
 
-            System.out.println("ola si pase por el find");
         });
 
     }
@@ -44,7 +42,7 @@ public class PlayerService {
     }
 
     public void saveAndRemove(String id, Consumer<PlayerData> beforeSave) {
-        PlayerData playerData = playerDataMongoModelService.getSync("id");
+        PlayerData playerData = playerDataMongoModelService.getSync(id);
 
         if (playerData == null) {
             throw new NullPointerException("Error from find data of player id=" + id);
@@ -54,8 +52,6 @@ public class PlayerService {
 
         playerDataMongoModelService.save(playerData);
         playerDataMongoModelService.deleteInCache(playerData);
-
-        System.out.println("si pase por el get");
 
     }
 }
