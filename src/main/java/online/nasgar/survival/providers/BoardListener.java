@@ -25,8 +25,7 @@ public class BoardListener implements Listener {
 
     MessageHandler messageHandler = Survival.getInstance().getMessageHandler();
 
-    public BoardListener(MongoModelService<PlayerData> playerDataMongoModelService) {
-        this.playerDataMongoModelService = playerDataMongoModelService;
+    public BoardListener() {
         Bukkit.getScheduler().runTaskTimerAsynchronously(Survival.getInstance(), () -> this.boards.values().forEach(this::updateBoard), 20L, 20L);
     }
 
@@ -50,8 +49,6 @@ public class BoardListener implements Listener {
             board.delete();
         }
     }
-
-    private final MongoModelService<PlayerData> playerDataMongoModelService;
 
     private void updateBoard(FastBoard board) {
 
