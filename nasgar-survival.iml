@@ -45,9 +45,9 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.11.1" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20211205" level="project" />
     <orderEntry type="module-library">
-      <library name="Maven: me.gatogamer:rankup:1.1-SNAPSHOT">
+      <library name="Maven: online.nasgar:timedRankup:1.0">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/TimedRankup-1.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/TimedRankup-1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -55,10 +55,11 @@
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.20" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.luckperms:api:5.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.clip:placeholderapi:2.10.9" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:19.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.comphenix.protocol:ProtocolLib:4.6.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.bytebuddy:byte-buddy:1.10.16" level="project" />
     <orderEntry type="library" name="Maven: me.yushust.message:core:6.0.17" level="project" />
-    <orderEntry type="library" name="Maven: org.jetbrains:annotations:20.1.0" level="project" />
     <orderEntry type="library" name="Maven: me.yushust.message:sourcetype-bukkit-yml:6.0.17" level="project" />
   </component>
 </module>

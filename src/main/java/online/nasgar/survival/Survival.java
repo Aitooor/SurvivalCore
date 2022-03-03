@@ -95,14 +95,18 @@ public class Survival extends JavaPlugin {
 
         new RandomTPManager(redis);
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerDataMongoModelService), this);
-        Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
-        Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
-        Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
-        Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
-        Bukkit.getPluginManager().registerEvents(new BackPackMenu(playerCacheModelService), this);
-
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerDataMongoModelService), this);
+            Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
+            Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
+            Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
+            Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
+            Bukkit.getPluginManager().registerEvents(new BackPackMenu(playerCacheModelService), this);
+        } else {
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
     }
 
     @Override
