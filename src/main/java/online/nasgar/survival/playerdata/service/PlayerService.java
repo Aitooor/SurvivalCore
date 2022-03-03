@@ -50,8 +50,7 @@ public class PlayerService {
 
         beforeSave.accept(playerData);
 
-        playerDataMongoModelService.save(playerData);
-        playerDataMongoModelService.deleteInCache(playerData);
+        playerDataMongoModelService.upload(playerData);
 
     }
 }
