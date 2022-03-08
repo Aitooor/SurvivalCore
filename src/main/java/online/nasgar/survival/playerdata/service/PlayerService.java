@@ -50,7 +50,11 @@ public class PlayerService {
 
         beforeSave.accept(playerData);
 
-        playerDataMongoModelService.upload(playerData);
+        playerDataMongoModelService.upload(playerData).whenComplete((ignored, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+            }
+        });
 
     }
 }
