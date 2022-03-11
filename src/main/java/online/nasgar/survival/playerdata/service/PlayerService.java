@@ -52,7 +52,7 @@ public class PlayerService {
 
         playerDataMongoModelService.upload(playerData).whenComplete((ignored, error) -> {
             if (error != null) {
-                error.printStackTrace();
+                error.printStackTrace(System.err);
             }
         });
 
