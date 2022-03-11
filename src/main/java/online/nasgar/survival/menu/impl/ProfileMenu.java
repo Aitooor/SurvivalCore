@@ -27,7 +27,7 @@ public class ProfileMenu extends Menu {
     public Set<Button> getButtons(Player player) {
         Set<Button> buttons = new HashSet<>();
 
-        PlayerData data = playerCacheModelService.findSync(player.getUniqueId().toString());
+        PlayerData data = playerCacheModelService.getOrFindSync(player.getUniqueId().toString());
 
         buttons.add(new ButtonItem(12,
                 new ItemCreator(Material.BOOKSHELF)
