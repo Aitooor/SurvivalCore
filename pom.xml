@@ -54,10 +54,9 @@
 
         <dependency>
             <groupId>online.nasgar</groupId>
-            <artifactId>timedRankup</artifactId>
+            <artifactId>TimedRankup</artifactId>
             <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/TimedRankup-1.0.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Lombok | Lib -->
