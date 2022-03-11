@@ -57,10 +57,7 @@ public class PlayerData implements DocumentCodec, Model {
 
         this.tpm = false;
 
-        this.rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager().get("Default");
-        if (rank == null) {
-            throw new IllegalArgumentException("The rank is not find in timed rankup.");
-        }
+        this.rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager().get("default");
 
         this.items = null;
         this.armor = null;
