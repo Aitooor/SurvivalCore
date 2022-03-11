@@ -53,7 +53,8 @@ public class BuildText {
         put("rank", LuckPermsUtil.getRankName(player));
         put("coins", Integer.toString(data.getCoins()));
 
-        Rank rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(UUID.fromString(data.getId())));
+        Rank rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager()
+                .getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(UUID.fromString(data.getId())));
 
         String finalText = text;
 

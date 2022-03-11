@@ -39,6 +39,10 @@ public class CoinsCommand extends Command {
 
         Player player = (Player) sender;
 
-        ChatUtil.toPlayer(player, new BuildText(playerDataMongoModelService).of(player, messageHandler.get(player, "coins.have")));
+        String text = new BuildText(playerDataMongoModelService).of(player, messageHandler.get(player, "coins.have"));
+
+
+        ChatUtil.toPlayer(player, text);
+        return;
     }
 }
