@@ -1,7 +1,7 @@
 package online.nasgar.survival.command;
 
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
-import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -13,8 +13,11 @@ public class GodCommand extends Command {
 
     private static Set<UUID> uuids;
 
-    public GodCommand() {
-        super("god");
+    private final MessageHandler messageHandler;
+
+    public GodCommand(MessageHandler messageHandler) {
+        super("god", messageHandler);
+        this.messageHandler = messageHandler;
 
         this.setPermission("god.command");
         this.setOnlyPlayers(true);
@@ -29,11 +32,11 @@ public class GodCommand extends Command {
             if (!contains(uuid)){
                 this.add(uuid);
 
-                ChatUtil.toPlayer(player, "&aGod enabled");
+                messageHandler.send(player, "god.enabled.player");
             } else {
                 this.remove(uuid);
 
-                ChatUtil.toPlayer(player, "&cGod disabled");
+                messageHandler.send(player, "god.disabled.player");
             }
             return;
         }
@@ -53,13 +56,17 @@ public class GodCommand extends Command {
         if (!contains(uuid)) {
             this.add(uuid);
 
-            ChatUtil.toPlayer(player, "&aGod for &e" + array[0] + " &aenabled!");
-            ChatUtil.toPlayer(target, "&aGod enabled by &e"+ player.getName());
+            messageHandler.sendReplacing(player, "god.enabled.target.you", "%target_name%", array[0]);
+
+            messageHandler.sendReplacing(target, "god.enabled.target.other", "%staff_name%", player.getName());
+
         } else {
             this.remove(uuid);
 
-            ChatUtil.toPlayer(player, "&cGod for &e" + array[0] + " &cdisabled!");
-            ChatUtil.toPlayer(target, "&cGod disabled by &e"+ player.getName());
+            messageHandler.sendReplacing(player, "god.disabled.target.you", "%target_name%", array[0]);
+
+            messageHandler.sendReplacing(target, "god.disabled.target.other", "%staff_name%", player.getName());
+
         }
     }
 

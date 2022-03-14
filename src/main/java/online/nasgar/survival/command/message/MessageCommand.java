@@ -1,10 +1,10 @@
 package online.nasgar.survival.command.message;
 
-import online.nasgar.survival.Survival;
+import me.yushust.message.MessageHandler;
+import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.playerdata.PlayerDataManager;
 import online.nasgar.survival.utils.text.ChatUtil;
 import online.nasgar.survival.utils.StringUtils;
 import org.bukkit.Bukkit;
@@ -14,8 +14,13 @@ import java.util.Arrays;
 
 public class MessageCommand extends Command {
 
-    public MessageCommand() {
-        super("message");
+    private final ModelService<PlayerData> playerModelCacheService;
+    private final MessageHandler messageHandler;
+
+    public MessageCommand(ModelService<PlayerData> playerModelCacheService, MessageHandler messageHandler) {
+        super("message", messageHandler);
+        this.playerModelCacheService = playerModelCacheService;
+        this.messageHandler = messageHandler;
 
         this.setAliases(Arrays.asList("msg", "m", "tell", "whisper"));
 
@@ -24,11 +29,9 @@ public class MessageCommand extends Command {
 
     @Override public void onCommand(Player player, String[] array) {
         if (array.length < 1){
-            ChatUtil.toPlayer(player, "&cUsage: /message <target> <message>");
+            messageHandler.send(player, "message.usage");
             return;
         }
-
-        PlayerDataManager dataManager = Survival.getInstance().getPlayerDataManager();
 
         Player target = Bukkit.getPlayer(array[0]);
 
@@ -36,16 +39,16 @@ public class MessageCommand extends Command {
             return;
         }
 
-        PlayerData playerData = dataManager.get(player.getUniqueId());
-        PlayerData targetData = dataManager.get(target.getUniqueId());
+        PlayerData playerData = playerModelCacheService.findSync(player.getUniqueId().toString());
+        PlayerData targetData = playerModelCacheService.findSync(target.getUniqueId().toString());
 
         if (playerData.isTpm()){
-            ChatUtil.toPlayer(player, "&cYou have the private messages disabled!");
+            messageHandler.send(player, "message.tpm.player");
             return;
         }
 
         if (targetData.isTpm()){
-            ChatUtil.toPlayer(player, "&e" + array[0] + " &chave the private messages disabled!");
+            messageHandler.sendReplacing(player, "message.tpm.target", "%target_name%", target.getName());
             return;
         }
 

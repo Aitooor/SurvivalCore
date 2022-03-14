@@ -1,27 +1,30 @@
 package online.nasgar.survival.command;
 
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
-import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class FeedCommand extends Command {
 
-    public FeedCommand() {
-        super("feed");
+    private final MessageHandler messageHandler;
+
+    public FeedCommand(MessageHandler messageHandler) {
+        super("feed", messageHandler);
+        this.messageHandler = messageHandler;
 
         this.setOnlyPlayers(true);
     }
 
     @Override public void onCommand(Player player, String[] array) {
         if (player.getFoodLevel() == 20){
-            ChatUtil.toPlayer(player, "&cYour feed is at maximum!");
+            messageHandler.send(player, "feed.max.player");
             return;
         }
 
         if (array.length < 1) {
             player.setFoodLevel(20);
-            ChatUtil.toPlayer(player, "&aYour feed has been restored!");
+            messageHandler.send(player, "feed.restored.player");
             return;
         }
 
@@ -37,12 +40,13 @@ public class FeedCommand extends Command {
         }
 
         if (target.getFoodLevel() == 20){
-            ChatUtil.toPlayer(player, "&e" + array[0] + " &cfeed is at maximum!");
+            messageHandler.sendReplacing(player, "feed.max.target", "%target_name%", array[0]);
             return;
         }
 
         target.setFoodLevel(20);
-        ChatUtil.toPlayer(player, "&e" + array[0] + " &afeed has been restored!");
-        ChatUtil.toPlayer(target, "&aYour feed has been restored by &e" + array[0]);
+
+        messageHandler.sendReplacing(player, "feed.restored.target.you", "%target_name%", array[0]);
+        messageHandler.sendReplacing(target, "feed.restored.target.other", "%staff_name%", player.getName());
     }
 }

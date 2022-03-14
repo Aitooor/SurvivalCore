@@ -1,24 +1,30 @@
 package online.nasgar.survival.command.coins.arguments;
 
-import online.nasgar.survival.Survival;
+import me.yushust.message.MessageHandler;
+import net.cosmogrp.storage.mongo.MongoModelService;
 import online.nasgar.survival.command.management.Argument;
+import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.StringUtils;
-import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SetArgument extends Argument {
 
-    public SetArgument() {
-        super("set");
+    private final MongoModelService<PlayerData> playerDataMongoModelService;
+    private final MessageHandler messageHandler;
+
+    public SetArgument(MongoModelService<PlayerData> playerDataMongoModelService, MessageHandler messageHandler) {
+        super(messageHandler, "set");
+        this.playerDataMongoModelService = playerDataMongoModelService;
+        this.messageHandler = messageHandler;
 
         this.setPermission("coins.set.command");
     }
 
     @Override public void onArgument(CommandSender sender, String[] array) {
         if (array.length < 1){
-            ChatUtil.toSender(sender, "&cUsage: /coins set <player> <amount>");
+            messageHandler.send(sender, "coins.set.usage");
             return;
         }
 
@@ -29,14 +35,14 @@ public class SetArgument extends Argument {
         }
 
         if (!StringUtils.isInteger(array[1])){
-            ChatUtil.toSender(sender, "&e" + array[1] + " &cis a invalid number!");
+            messageHandler.sendReplacing(sender, "coins.invalid.number", "%number%", array[1]);
             return;
         }
 
         int amount = Integer.parseInt(array[1]);
 
-        Survival.getInstance().getPlayerDataManager().get(target.getUniqueId()).setCoins(amount);
-        ChatUtil.toSender(sender, "&aSuccessfully set to &e" + array[0] + " &aa amount of &e" + amount + "$&a!");
-        ChatUtil.toPlayer(target, "&e" + sender.getName() + " &ahas set &e" + amount + "$ &afor you!");
+        playerDataMongoModelService.findSync(target.getUniqueId().toString()).setCoins(amount);
+        messageHandler.sendReplacing(sender, "coins.set.success.sender", "%target_name%", target.getName(), "%amount%", amount);
+        messageHandler.sendReplacing(sender, "coins.set.success.target", "%amount%", amount , "%staff_name%", sender.getName());
     }
 }

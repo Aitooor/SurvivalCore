@@ -1,7 +1,7 @@
 package online.nasgar.survival.command;
 
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
-import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,8 +12,11 @@ import java.util.List;
 
 public class GamemodeCommand extends Command {
 
-    public GamemodeCommand() {
-        super("gamemode");
+    private final MessageHandler messageHandler;
+
+    public GamemodeCommand(MessageHandler messageHandler) {
+        super("gamemode", messageHandler);
+        this.messageHandler = messageHandler;
 
         this.setPermission("gamemode.command");
         this.setAliases(Arrays.asList("gm", "gmode"));
@@ -22,19 +25,19 @@ public class GamemodeCommand extends Command {
 
     @Override public void onCommand(Player player, String[] array) {
         if (array.length == 0){
-            ChatUtil.toPlayer(player, "&cUsage: /gamemode <mode>");
+            messageHandler.send(player, "gamemode.usage");
             return;
         }
 
         String gameMode = this.getGamemodeName(array[0]);
 
         if (gameMode == null){
-            ChatUtil.toPlayer(player, "&cGamemode &e" + array[0] + " &cnot found!");
+            messageHandler.sendReplacing(player, "gamemode.not-found", "%gamemode%", array[0]);
             return;
         }
 
         player.setGameMode(GameMode.valueOf(gameMode));
-        ChatUtil.toPlayer(player, "&aYour gamemode have been updated!");
+        messageHandler.sendReplacing(player, "gamemode.update", "%gamemode%", gameMode);
     }
 
     private String getGamemodeName(String name){
@@ -64,7 +67,8 @@ public class GamemodeCommand extends Command {
         }
     }
 
-    @Override public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String label, String[] array) {
+    @Override
+    public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String label, String[] array) {
         List<String> list = new ArrayList<>();
 
         if (sender.hasPermission("gamemode.command")){

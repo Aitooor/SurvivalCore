@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class RandomTPCommand extends Command {
 
     public RandomTPCommand() {
-        super("randomtp");
+        super("randomtp", null);
 
         this.setOnlyPlayers(true);
         this.setAliases(Arrays.asList("rtp"));

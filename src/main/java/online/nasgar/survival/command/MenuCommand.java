@@ -1,5 +1,6 @@
 package online.nasgar.survival.command;
 
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.menu.impl.MainMenu;
 import org.bukkit.entity.Player;
@@ -8,8 +9,11 @@ import java.util.Arrays;
 
 public class MenuCommand extends Command {
 
-    public MenuCommand() {
-        super("menu");
+    private final MessageHandler messageHandler;
+
+    public MenuCommand(MessageHandler messageHandler) {
+        super("menu", messageHandler);
+        this.messageHandler = messageHandler;
 
         this.setPermission("menu.command");
         this.setOnlyPlayers(true);
@@ -17,6 +21,6 @@ public class MenuCommand extends Command {
     }
 
     @Override public void onCommand(Player player, String[] array) {
-        new MainMenu().openMenu(player);
+        new MainMenu(messageHandler.get(player, "guis.main")).openMenu(player);
     }
 }

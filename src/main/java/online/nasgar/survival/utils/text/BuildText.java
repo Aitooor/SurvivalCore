@@ -2,7 +2,7 @@ package online.nasgar.survival.utils.text;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.UtilityClass;
+import net.cosmogrp.storage.mongo.MongoModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.LuckPermsUtil;
@@ -15,20 +15,27 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@UtilityClass
 public class BuildText {
 
     private Survival plugin = Survival.getInstance();
 
+    private final MongoModelService<PlayerData> playerDataMongoModelService;
+
     private Map<String, String> map = new HashMap<>();
     private String staticText;
     private Matcher matcher;
+
+    public BuildText(MongoModelService<PlayerData> playerDataMongoModelService) {
+        this.playerDataMongoModelService = playerDataMongoModelService;
+    }
+
 
     public List<String> of(Player player, List<String> list) {
         return list.stream().map(string -> of(player, string)).collect(Collectors.toList());
@@ -37,7 +44,7 @@ public class BuildText {
     public String of(Player player, String text) {
         staticText = text;
 
-        PlayerData data = plugin.getPlayerDataManager().get(player.getUniqueId());
+        PlayerData data = playerDataMongoModelService.getOrFindSync(player.getUniqueId().toString());
 
         put("player", player.getName());
 
@@ -46,7 +53,8 @@ public class BuildText {
         put("rank", LuckPermsUtil.getRankName(player));
         put("coins", Integer.toString(data.getCoins()));
 
-        Rank rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(data.getUuid()));
+        Rank rank = TimedRankup.getPlugin(TimedRankup.class).getRankManager()
+                .getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(UUID.fromString(data.getId())));
 
         String finalText = text;
 

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class WarpsCommand extends Command {
 
     public WarpsCommand() {
-        super("warps");
+        super("warps", null);
 
         this.setOnlyPlayers(true);
     }

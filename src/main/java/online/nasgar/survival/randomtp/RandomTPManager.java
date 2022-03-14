@@ -3,10 +3,12 @@ package online.nasgar.survival.randomtp;
 import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.Getter;
+import net.cosmogrp.storage.redis.connection.Redis;
 import online.nasgar.survival.Survival;
-import online.nasgar.survival.redis.CoreRedisDatabase;
-import online.nasgar.survival.redis.packets.RandomTPPacket;
+import online.nasgar.survival.redis.RandomTPChannelListener;
+import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.utils.BungeeUtil;
+import online.nasgar.survival.utils.LocationUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -24,9 +26,12 @@ public class RandomTPManager implements Listener {
 
     @Getter private static RandomTPManager instance;
 
+    private final Redis redis;
+
     private Map<String, Location> toTeleport;
 
-    public RandomTPManager() {
+    public RandomTPManager(Redis redis) {
+        this.redis = redis;
         instance = this;
 
         this.toTeleport = Maps.newConcurrentMap();
@@ -56,7 +61,10 @@ public class RandomTPManager implements Listener {
             List<String> servers = Survival.getInstance().getConfigFile().getStringList("random_tp_server");
 
             BungeeUtil.sendToServer(player, servers.get(ThreadLocalRandom.current().nextInt(servers.size())));
-            CoreRedisDatabase.getInstance().sendPacket(new RandomTPPacket(player.getName(), location));
+
+            redis.getMessenger().getChannel(RandomTPChannelListener.CHANNEL_NAME, MessageData.class).sendMessage(
+                    new MessageData(player.getUniqueId() + ";" + LocationUtil.parseLocation(location))
+            );
             return;
         }
 

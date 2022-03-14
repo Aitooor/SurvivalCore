@@ -1,12 +1,15 @@
 package online.nasgar.survival.command.management;
 
-import online.nasgar.survival.Survival;
+import me.yushust.message.MessageHandler;
+import net.cosmogrp.storage.ModelService;
+import net.cosmogrp.storage.mongo.MongoModelService;
 import online.nasgar.survival.auctions.commands.AuctionCommand;
 import online.nasgar.survival.backpack.commands.BackPackCommand;
 import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.coins.CoinsCommand;
 import online.nasgar.survival.command.message.MessageCommand;
 import online.nasgar.survival.command.message.ReplyCommand;
+import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.randomtp.commands.RandomTPCommand;
 import online.nasgar.survival.warp.commands.*;
 import org.bukkit.Bukkit;
@@ -18,31 +21,33 @@ import java.util.Arrays;
 
 public class CommandManager {
 
-    public CommandManager(Survival plugin){
+
+    public CommandManager(MongoModelService<PlayerData> playerDataMongoModelService,
+                          ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler){
         this.register(
 
-                new FlyCommand(),
-                new GodCommand(),
-                new GamemodeCommand(),
-                new MessageCommand(),
-                new HealCommand(),
-                new ReplyCommand(),
-                new MenuCommand(),
-                new ProfileCommand(),
-                new ShopItemCommand(),
-                new FeedCommand(),
-                new CoinsCommand(),
-                new SetWarpCommand(),
-                new DeleteWarpCommand(),
-                new WarpCommand(),
-                new SetWarpPermissionCommand(),
+                new FlyCommand(messageHandler),
+                new GodCommand(messageHandler),
+                new GamemodeCommand(messageHandler),
+                new MessageCommand(playerCacheModelService, messageHandler),
+                new HealCommand(messageHandler),
+                new ReplyCommand(playerCacheModelService, messageHandler),
+                new MenuCommand(messageHandler),
+                new ProfileCommand(playerCacheModelService, messageHandler),
+                new ShopItemCommand(messageHandler),
+                new FeedCommand(messageHandler),
+                new CoinsCommand(playerDataMongoModelService, messageHandler),
+                new SetWarpCommand(messageHandler),
+                new DeleteWarpCommand(messageHandler),
+                new WarpCommand(messageHandler),
+                new SetWarpPermissionCommand(messageHandler),
                 new WarpsCommand(),
-                new SetWarpItemCommand(),
-                new SetWarpSlotCommand(),
-                new BackPackCommand(),
+                new SetWarpItemCommand(messageHandler),
+                new SetWarpSlotCommand(messageHandler),
+                new BackPackCommand(playerCacheModelService),
                 new RandomTPCommand(),
-                new AuctionCommand(),
-                new ReloadCommand()
+                new AuctionCommand(playerCacheModelService, messageHandler),
+                new ReloadCommand(messageHandler)
         );
     }
 

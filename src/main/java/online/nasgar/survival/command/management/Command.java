@@ -2,6 +2,7 @@ package online.nasgar.survival.command.management;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.utils.text.ChatUtil;
 import online.nasgar.survival.utils.CooldownUtil;
 import online.nasgar.survival.utils.TimeFormatter;
@@ -16,6 +17,8 @@ import java.util.*;
 @Getter @Setter
 public class Command extends BukkitCommand implements TabCompleter {
 
+    private final MessageHandler messageHandler;
+
     private String permission;
 
     private long cooldown;
@@ -26,8 +29,9 @@ public class Command extends BukkitCommand implements TabCompleter {
     private Set<Argument> arguments;
     private List<String> argumentBaseUsageMessage;
 
-    public Command(String name) {
+    public Command(String name, MessageHandler messageHandler) {
         super(name);
+        this.messageHandler = messageHandler;
 
         this.permission = null;
         this.argumentBaseUsageMessage = new ArrayList<>();
@@ -90,7 +94,7 @@ public class Command extends BukkitCommand implements TabCompleter {
 
     public boolean isPlayerNull(Player target, String name){
         if (target == null){
-            ChatUtil.toPlayer(this.player, "&cPlayer " + name + " &cnot found");
+            messageHandler.send(player, "player-not-found", "%target_name%", name);
             return true;
         }
 

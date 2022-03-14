@@ -1,5 +1,6 @@
 package online.nasgar.survival.warp.commands;
 
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.warp.WarpData;
@@ -8,8 +9,11 @@ import org.bukkit.entity.Player;
 
 public class SetWarpSlotCommand extends Command {
 
-    public SetWarpSlotCommand() {
-        super("setwarpslot");
+    private final MessageHandler messageHandler;
+
+    public SetWarpSlotCommand(MessageHandler messageHandler) {
+        super("setwarpslot", messageHandler);
+        this.messageHandler = messageHandler;
 
         this.setPermission("setwarpslot.command");
         this.setOnlyPlayers(true);
@@ -18,14 +22,14 @@ public class SetWarpSlotCommand extends Command {
     @Override
     public void onCommand(Player player, String[] args) {
         if (args.length < 2) {
-            player.sendMessage(CC.translate("&cUsage: /setwarpslot <warpName> <slot>"));
+            messageHandler.send(player, "warp.set-warp.slot.usage");
             return;
         }
 
         WarpData warpData = WarpManager.getInstance().getWarpDataByName(args[0]);
 
         if (warpData == null) {
-            player.sendMessage(CC.translate("&cA warp with that name doesn't exists."));
+            messageHandler.sendReplacing(player, "warp.not-exists", "%warp_name%", args[0]);
             return;
         }
 

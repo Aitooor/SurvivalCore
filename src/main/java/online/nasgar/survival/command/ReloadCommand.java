@@ -1,14 +1,17 @@
 package online.nasgar.survival.command;
 
+import me.yushust.message.MessageHandler;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.command.management.Command;
-import online.nasgar.survival.utils.CC;
 import org.bukkit.command.CommandSender;
 
 public class ReloadCommand extends Command {
 
-    public ReloadCommand() {
-        super("survivalreload");
+    private final MessageHandler messageHandler;
+
+    public ReloadCommand(MessageHandler messageHandler) {
+        super("survivalreload", messageHandler);
+        this.messageHandler = messageHandler;
 
         this.setPermission("survivalreload.command");
     }
@@ -18,6 +21,6 @@ public class ReloadCommand extends Command {
         Survival.getInstance().getConfigFile().reload();
         Survival.getInstance().getWarpsFile().reload();
 
-        sender.sendMessage(CC.translate("&aSurvival Configuration reloaded."));
+        messageHandler.send(sender, "reload");
     }
 }
