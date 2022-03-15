@@ -10,8 +10,6 @@ import online.nasgar.survival.command.coins.CoinsCommand;
 import online.nasgar.survival.command.message.MessageCommand;
 import online.nasgar.survival.command.message.ReplyCommand;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.randomtp.commands.RandomTPCommand;
-import online.nasgar.survival.warp.commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.SimplePluginManager;
@@ -37,15 +35,7 @@ public class CommandManager {
                 new ShopItemCommand(messageHandler),
                 new FeedCommand(messageHandler),
                 new CoinsCommand(playerDataMongoModelService, messageHandler),
-                new SetWarpCommand(messageHandler),
-                new DeleteWarpCommand(messageHandler),
-                new WarpCommand(messageHandler),
-                new SetWarpPermissionCommand(messageHandler),
-                new WarpsCommand(),
-                new SetWarpItemCommand(messageHandler),
-                new SetWarpSlotCommand(messageHandler),
                 new BackPackCommand(playerCacheModelService),
-                new RandomTPCommand(),
                 new AuctionCommand(playerCacheModelService, messageHandler),
                 new ReloadCommand(messageHandler)
         );

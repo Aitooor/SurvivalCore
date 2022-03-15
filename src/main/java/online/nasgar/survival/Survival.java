@@ -18,7 +18,6 @@ import online.nasgar.survival.command.management.CommandManager;
 import online.nasgar.survival.config.ConfigFile;
 import online.nasgar.survival.database.Authentication;
 import online.nasgar.survival.database.mongodb.MongoManager;
-import online.nasgar.survival.graves.GravesManager;
 import online.nasgar.survival.listeners.ChatListener;
 import online.nasgar.survival.listeners.PlayerListener;
 import online.nasgar.survival.listeners.SpawnersListener;
@@ -29,12 +28,9 @@ import online.nasgar.survival.playerdata.service.PlayerMongoModelService;
 import online.nasgar.survival.playerdata.service.PlayerService;
 import online.nasgar.survival.providers.BoardListener;
 import online.nasgar.survival.providers.TablistListener;
-import online.nasgar.survival.randomtp.RandomTPManager;
 import online.nasgar.survival.redis.ChatChannelListener;
-import online.nasgar.survival.redis.RandomTPChannelListener;
 import online.nasgar.survival.redis.data.MessageData;
 import online.nasgar.survival.shop.ShopItemManager;
-import online.nasgar.survival.warp.WarpManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -89,11 +85,7 @@ public class Survival extends JavaPlugin {
         this.setupManagers();
 
         new MenuManager(this);
-        new WarpManager();
-        new GravesManager();
         new AuctionsManager();
-
-        new RandomTPManager(redis);
 
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
@@ -111,7 +103,6 @@ public class Survival extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        WarpManager.getInstance().save();
         AuctionsManager.getInstance().save();
 
         this.mongoManager.close();
@@ -157,8 +148,6 @@ public class Survival extends JavaPlugin {
         redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class)
                 .addListener(new ChatChannelListener(chatService));
 
-        redis.getMessenger().getChannel(RandomTPChannelListener.CHANNEL_NAME, MessageData.class)
-                .addListener(new RandomTPChannelListener());
     }
 
     private void setupServices() {

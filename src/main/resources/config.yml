@@ -26,6 +26,3 @@ shop-items:
     price: 500
     commands:
       - "give <player> GOLDEN_APPLE 1"
-
-random_tp_server:
-  - "Survival-3"

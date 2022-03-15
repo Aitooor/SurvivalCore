@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>online.nasgar.survival</groupId>
-    <artifactId>nasgar-survival</artifactId>
+    <artifactId>SurvivalCore</artifactId>
     <version>0.0.1</version>
 
     <repositories>
