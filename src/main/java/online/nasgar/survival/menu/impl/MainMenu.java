@@ -42,7 +42,7 @@ public class MainMenu extends Menu {
         Set<Button> buttons = new HashSet<>();
 
         buttons.add(new ButtonItem(
-                18,
+                19,
                 player.getName(),
                 "profile",
                 new ItemCreator(Material.PLAYER_HEAD)
@@ -56,7 +56,7 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                9,
+                10,
                 "",
                 "discord",
                 new ItemCreator(Material.SKULL_BANNER_PATTERN)
@@ -70,7 +70,7 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                27,
+                28,
                 "",
                 "store",
                 new ItemCreator(Material.SKULL_BANNER_PATTERN)
@@ -84,7 +84,7 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                19,
+                20,
                 "",
                 "wiki",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
@@ -98,14 +98,14 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                12,
+                13,
                 "",
                 "lands",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
         ));
 
         buttons.add(new ButtonItem(
-                14,
+                15,
                 "",
                 "warps",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
@@ -124,7 +124,7 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                16,
+                17,
                 "",
                 "jobs",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
@@ -140,7 +140,7 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                22,
+                23,
                 "",
                 "battlepass",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
@@ -155,7 +155,7 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                24,
+                25,
                 "",
                 "ah",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
@@ -170,7 +170,7 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                32,
+                33,
                 "",
                 "resources",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
