@@ -20,7 +20,8 @@ public class ChatService {
 
             messageHandler.sendReplacing(onlinePlayer, "chat.format",
                     "%player_name%", playerName,
-                    "%message%", message, "%prefix%", rank
+                    "%message%", message,
+                    "%rank%", rank
             );
         });
     }
