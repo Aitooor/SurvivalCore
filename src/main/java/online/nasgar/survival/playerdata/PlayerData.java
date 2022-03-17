@@ -3,8 +3,8 @@ package online.nasgar.survival.playerdata;
 import lombok.Getter;
 import lombok.Setter;
 import net.cosmogrp.storage.model.Model;
-import net.cosmogrp.storage.mongo.DocumentBuilder;
-import net.cosmogrp.storage.mongo.DocumentCodec;
+import net.cosmogrp.storage.mongo.codec.DocumentCodec;
+import net.cosmogrp.storage.mongo.codec.DocumentWriter;
 import online.nasgar.survival.utils.BukkitUtil;
 import online.nasgar.timedrankup.TimedRankup;
 import online.nasgar.timedrankup.rank.Rank;
@@ -20,7 +20,8 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-@Getter @Setter
+@Getter
+@Setter
 public class PlayerData implements DocumentCodec, Model {
 
     private String id;
@@ -44,7 +45,7 @@ public class PlayerData implements DocumentCodec, Model {
 
     private ItemStack[] backPackItems;
 
-    public PlayerData(String id){
+    public PlayerData(String id) {
         this.id = id;
 
         this.lastConverser = null;
@@ -62,22 +63,22 @@ public class PlayerData implements DocumentCodec, Model {
         this.armor = null;
     }
 
-    public void addCoins(int amount){
+    public void addCoins(int amount) {
         this.setCoins(this.coins + amount);
     }
 
-    public void removeCoins(int amount){
+    public void removeCoins(int amount) {
         this.setCoins(this.coins - amount);
     }
 
-    public void setCoins(int amount){
+    public void setCoins(int amount) {
         this.coins = amount;
     }
 
-    public Player getAsPlayer(){
+    public Player getAsPlayer() {
         Player player = Bukkit.getPlayer(UUID.fromString(id));
 
-        if (player == null || !player.hasPlayedBefore()){
+        if (player == null || !player.hasPlayedBefore()) {
             return null;
         }
 
@@ -85,27 +86,31 @@ public class PlayerData implements DocumentCodec, Model {
     }
 
     @Override
-    public Document toDocument() {
-        DocumentBuilder documentBuilder = DocumentBuilder.create(this);
-
-        documentBuilder.write("lastConverser", getLastConverser());
-        documentBuilder.write("ignoredPlayers", getIgnoredPlayers());
-        documentBuilder.write("coins", getCoins());
-        documentBuilder.write("xp", getXp());
-        documentBuilder.write("time", getTime().get());
-        documentBuilder.write("tpm", isTpm());
-        documentBuilder.write("food", getFoodLevel());
-        documentBuilder.write("health", getHealth());
-        documentBuilder.write("level", getLevel());
-        documentBuilder.write("effects", getEffects() == null ? new ArrayList<>() : getEffects().stream().map(potionEffect -> potionEffect.getType().getName() + ";" + potionEffect.getAmplifier() + ";" + potionEffect.getDuration()).collect(Collectors.toList()));
-        documentBuilder.write("rank", getRank().getName());
-
-        documentBuilder.write("items", BukkitUtil.itemStackArrayToBase64(getItems()));
-        documentBuilder.write("armor", BukkitUtil.itemStackArrayToBase64(getArmor()));
-        documentBuilder.write("enderChestItems", BukkitUtil.itemStackArrayToBase64(getEnderChestItems()));
-        documentBuilder.write("backPackItems", BukkitUtil.itemStackArrayToBase64(getBackPackItems()));
-
-        return documentBuilder.build();
+    public Document serialize() {
+        return DocumentWriter.create(this)
+                .writeObject("ignoredPlayers", getIgnoredPlayers())
+                .write("lastConverser", getLastConverser())
+                .write("coins", getCoins())
+                .write("xp", getXp())
+                .write("time", getTime().get())
+                .write("tpm", isTpm())
+                .write("food", getFoodLevel())
+                .write("health", getHealth())
+                .write("level", getLevel())
+                .writeObject("effects", getEffects() == null ?
+                        new ArrayList<>() :
+                        getEffects().stream()
+                                .map(potionEffect -> potionEffect
+                                        .getType().getName() + ";" +
+                                        potionEffect.getAmplifier() + ";" +
+                                        potionEffect.getDuration())
+                                .collect(Collectors.toList()))
+                .write("rank", getRank().getName())
+                .write("items", BukkitUtil.itemStackArrayToBase64(getItems()))
+                .write("armor", BukkitUtil.itemStackArrayToBase64(getArmor()))
+                .write("enderChestItems", BukkitUtil.itemStackArrayToBase64(getEnderChestItems()))
+                .write("backPackItems", BukkitUtil.itemStackArrayToBase64(getBackPackItems()))
+                .end();
     }
 
     @Override

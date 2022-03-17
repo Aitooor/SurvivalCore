@@ -1,21 +1,21 @@
 package online.nasgar.survival.playerdata.parser;
 
-import net.cosmogrp.storage.mongo.DocumentReader;
-import net.cosmogrp.storage.mongo.MongoModelParser;
+import net.cosmogrp.storage.codec.ModelReader;
+import net.cosmogrp.storage.mongo.codec.MongoModelParser;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.BukkitUtil;
 import online.nasgar.timedrankup.TimedRankup;
+import org.bson.Document;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class PlayerMongoModelParser implements MongoModelParser<PlayerData> {
 
     @Override
-    public PlayerData parse(DocumentReader reader) {
+    public PlayerData parse(ModelReader<Document> reader) {
         PlayerData data = new PlayerData(reader.readString("_id"));
 
         data.setLastConverser(reader.readString("lastConverser"));
@@ -30,10 +30,12 @@ public class PlayerMongoModelParser implements MongoModelParser<PlayerData> {
 
         try {
             data.setBackPackItems(BukkitUtil.itemStackArrayFromBase64(reader.readString("backPackItems")));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         try {
             data.setEnderChestItems(BukkitUtil.itemStackArrayFromBase64(reader.readString("enderChestItems")));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         String rank = reader.readString("rank");
 
@@ -44,11 +46,13 @@ public class PlayerMongoModelParser implements MongoModelParser<PlayerData> {
         try {
             data.setItems(BukkitUtil.itemStackArrayFromBase64(reader.readString("items")));
             data.setArmor(BukkitUtil.itemStackArrayFromBase64(reader.readString("armor")));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         try {
             data.setEffects(reader.readList("effects", String.class) == null ? new ArrayList<>() : reader.readList("effects", String.class).stream().map(line -> new PotionEffect(PotionEffectType.getByName(line.split(";")[0]), Integer.parseInt(line.split(";")[2]), Integer.parseInt(line.split(";")[1]))).collect(Collectors.toList()));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         return data;
     }

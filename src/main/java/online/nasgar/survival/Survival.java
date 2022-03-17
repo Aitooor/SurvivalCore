@@ -5,7 +5,8 @@ import me.yushust.message.MessageHandler;
 import me.yushust.message.MessageProvider;
 import me.yushust.message.bukkit.BukkitMessageAdapt;
 import me.yushust.message.source.MessageSourceDecorator;
-import net.cosmogrp.storage.ModelService;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
+import net.cosmogrp.storage.dist.LocalModelService;
 import net.cosmogrp.storage.mongo.MongoModelService;
 import net.cosmogrp.storage.redis.connection.GsonRedis;
 import net.cosmogrp.storage.redis.connection.JedisBuilder;
@@ -23,8 +24,7 @@ import online.nasgar.survival.listeners.PlayerListener;
 import online.nasgar.survival.listeners.SpawnersListener;
 import online.nasgar.survival.menu.MenuManager;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.playerdata.service.PlayerCacheModelService;
-import online.nasgar.survival.playerdata.service.PlayerMongoModelService;
+import online.nasgar.survival.playerdata.parser.PlayerMongoModelParser;
 import online.nasgar.survival.playerdata.service.PlayerService;
 import online.nasgar.survival.providers.BoardListener;
 import online.nasgar.survival.providers.TablistListener;
@@ -61,8 +61,7 @@ public class Survival extends JavaPlugin {
     private Redis redis;
 
     private PlayerService playerService;
-    private ModelService<PlayerData> playerCacheModelService;
-    private MongoModelService<PlayerData> playerDataMongoModelService;
+    private CachedRemoteModelService<PlayerData> playerModelService;
     private ShopItemManager shopItemManager;
 
     @Override
@@ -90,12 +89,12 @@ public class Survival extends JavaPlugin {
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerDataMongoModelService), this);
+            Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerModelService), this);
             Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
             Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
             Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
-            Bukkit.getPluginManager().registerEvents(new BoardListener(playerDataMongoModelService, playerCacheModelService), this);
-            Bukkit.getPluginManager().registerEvents(new BackPackMenu(playerCacheModelService), this);
+            Bukkit.getPluginManager().registerEvents(new BoardListener(playerModelService), this);
+            Bukkit.getPluginManager().registerEvents(new BackPackMenu(playerModelService), this);
         } else {
             Bukkit.getPluginManager().disablePlugin(this);
         }
@@ -122,7 +121,7 @@ public class Survival extends JavaPlugin {
                                     .setLinguist(player -> player.getLocale().split("_")[0])
                                     .setMessageSender((sender, mode, message) -> sender.sendMessage(message));
                             config.specify(CommandSender.class)
-                                            .setLinguist(commandSender -> "en")
+                                    .setLinguist(commandSender -> "en")
                                     .setMessageSender((sender, mode, message) -> sender.sendMessage(message));
                             config.addInterceptor(s -> ChatColor.translateAlternateColorCodes('&', s));
                         }
@@ -151,14 +150,20 @@ public class Survival extends JavaPlugin {
     }
 
     private void setupServices() {
-        this.playerCacheModelService = new PlayerCacheModelService();
-        this.playerDataMongoModelService = new PlayerMongoModelService(executor, mongoManager.getMongoDatabase(), playerCacheModelService);
+        this.playerModelService = (CachedRemoteModelService<PlayerData>)
+                MongoModelService.builder(PlayerData.class)
+                        .modelParser(new PlayerMongoModelParser())
+                        .cachedService(LocalModelService.create())
+                        .database(mongoManager.getMongoDatabase())
+                        .collection("users")
+                        .executor(executor)
+                        .build();
 
-        this.playerService = new PlayerService(playerDataMongoModelService);
+        this.playerService = new PlayerService(playerModelService);
     }
 
     private void setupManagers() {
-        new CommandManager(playerDataMongoModelService, playerCacheModelService, messageHandler);
+        new CommandManager(playerModelService, messageHandler);
 
         this.shopItemManager = new ShopItemManager();
     }

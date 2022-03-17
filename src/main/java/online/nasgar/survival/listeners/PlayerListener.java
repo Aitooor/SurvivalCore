@@ -1,7 +1,7 @@
 package online.nasgar.survival.listeners;
 
 import me.yushust.message.MessageHandler;
-import net.cosmogrp.storage.mongo.MongoModelService;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.command.GodCommand;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.playerdata.PlayerData;
@@ -30,12 +30,16 @@ import java.util.UUID;
 public class PlayerListener implements Listener {
 
     private final PlayerService playerService;
-    private final MongoModelService<PlayerData> playerDataMongoModelService;
+    private final CachedRemoteModelService<PlayerData> modelService;
     private final MessageHandler messageHandler;
 
-    public PlayerListener(PlayerService playerService, MessageHandler messageHandler, MongoModelService<PlayerData> playerDataMongoModelService) {
+    public PlayerListener(
+            PlayerService playerService,
+            MessageHandler messageHandler,
+            CachedRemoteModelService<PlayerData> modelService
+    ) {
         this.playerService = playerService;
-        this.playerDataMongoModelService = playerDataMongoModelService;
+        this.modelService = modelService;
         this.messageHandler = messageHandler;
     }
 
@@ -101,8 +105,8 @@ public class PlayerListener implements Listener {
         Player target = event.getTarget();
         String message = event.getMessage();
 
-        ChatUtil.toPlayer(player, new BuildText(playerDataMongoModelService).of(target, messageHandler.get(player, "message.prefix.to") + message));
-        ChatUtil.toPlayer(target, new BuildText(playerDataMongoModelService).of(player, messageHandler.get(player, "message.prefix.from") + message));
+        ChatUtil.toPlayer(player, new BuildText(modelService).of(target, messageHandler.get(player, "message.prefix.to") + message));
+        ChatUtil.toPlayer(target, new BuildText(modelService).of(player, messageHandler.get(player, "message.prefix.from") + message));
     }
 
     @EventHandler
@@ -110,7 +114,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         ShopItem shopItem = event.getShopItem();
 
-        PlayerData data = this.playerDataMongoModelService.getOrFindSync(player.getUniqueId().toString());
+        PlayerData data = this.modelService.getOrFindSync(player.getUniqueId().toString());
 
         ItemStack itemStack = shopItem.getItemStack();
         ItemMeta itemMeta = itemStack.getItemMeta();

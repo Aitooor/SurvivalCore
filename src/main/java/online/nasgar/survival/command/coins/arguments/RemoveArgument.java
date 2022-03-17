@@ -1,7 +1,7 @@
 package online.nasgar.survival.command.coins.arguments;
 
 import me.yushust.message.MessageHandler;
-import net.cosmogrp.storage.mongo.MongoModelService;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.command.management.Argument;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.StringUtils;
@@ -11,44 +11,45 @@ import org.bukkit.entity.Player;
 
 public class RemoveArgument extends Argument {
 
-    private final MongoModelService<PlayerData> playerDataMongoModelService;
+    private final CachedRemoteModelService<PlayerData> modelService;
     private final MessageHandler messageHandler;
 
-    public RemoveArgument(MongoModelService<PlayerData> playerDataMongoModelService, MessageHandler messageHandler) {
+    public RemoveArgument(CachedRemoteModelService<PlayerData> modelService, MessageHandler messageHandler) {
         super(messageHandler, "remove");
-        this.playerDataMongoModelService = playerDataMongoModelService;
+        this.modelService = modelService;
         this.messageHandler = messageHandler;
 
         this.setPermission("coins.remove.command");
     }
 
-    @Override public void onArgument(CommandSender sender, String[] array) {
-        if (array.length < 1){
+    @Override
+    public void onArgument(CommandSender sender, String[] array) {
+        if (array.length < 1) {
             messageHandler.send(sender, "coins.remove.usage");
             return;
         }
 
         Player target = Bukkit.getPlayer(array[0]);
 
-        if (this.isPlayerNull(target, array[0])){
+        if (this.isPlayerNull(target, array[0])) {
             return;
         }
 
-        if (!StringUtils.isInteger(array[1])){
+        if (!StringUtils.isInteger(array[1])) {
             messageHandler.sendReplacing(sender, "coins.invalid.number", "%number%", array[1]);
             return;
         }
 
-        PlayerData data = playerDataMongoModelService.getOrFindSync(target.getUniqueId().toString());
+        PlayerData data = modelService.getOrFindSync(target.getUniqueId().toString());
         int amount = Integer.parseInt(array[1]);
 
-        if (amount > data.getCoins()){
+        if (amount > data.getCoins()) {
             messageHandler.sendReplacing(sender, "coins.invalid-amount", "%target_name%", target.getName());
             return;
         }
 
         data.removeCoins(amount);
         messageHandler.sendReplacing(sender, "coins.remove.success.sender", "%target_name%", target.getName(), "%amount%", amount);
-        messageHandler.sendReplacing(sender, "coins.remove.success.target", "%amount%", amount , "%staff_name%", sender.getName());
+        messageHandler.sendReplacing(sender, "coins.remove.success.target", "%amount%", amount, "%staff_name%", sender.getName());
     }
 }

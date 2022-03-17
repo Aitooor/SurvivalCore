@@ -2,7 +2,7 @@ package online.nasgar.survival.utils.text;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.cosmogrp.storage.mongo.MongoModelService;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.playerdata.PlayerData;
 import online.nasgar.survival.utils.LuckPermsUtil;
@@ -26,14 +26,14 @@ public class BuildText {
 
     private Survival plugin = Survival.getInstance();
 
-    private final MongoModelService<PlayerData> playerDataMongoModelService;
+    private final CachedRemoteModelService<PlayerData> modelService;
 
     private Map<String, String> map = new HashMap<>();
     private String staticText;
     private Matcher matcher;
 
-    public BuildText(MongoModelService<PlayerData> playerDataMongoModelService) {
-        this.playerDataMongoModelService = playerDataMongoModelService;
+    public BuildText(CachedRemoteModelService<PlayerData> modelService) {
+        this.modelService = modelService;
     }
 
 
@@ -44,7 +44,7 @@ public class BuildText {
     public String of(Player player, String text) {
         staticText = text;
 
-        PlayerData data = playerDataMongoModelService.getOrFindSync(player.getUniqueId().toString());
+        PlayerData data = modelService.getOrFindSync(player.getUniqueId().toString());
 
         put("player", player.getName());
 

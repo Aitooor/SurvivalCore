@@ -1,48 +1,56 @@
 package online.nasgar.survival.playerdata.service;
 
-import net.cosmogrp.storage.mongo.MongoModelService;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.playerdata.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
-
 
 import java.util.function.Consumer;
 
 public class PlayerService {
 
-    private final MongoModelService<PlayerData> playerDataMongoModelService;
+    private final CachedRemoteModelService<PlayerData> modelService;
 
-    public PlayerService(MongoModelService<PlayerData> playerDataMongoModelService) {
-        this.playerDataMongoModelService = playerDataMongoModelService;
+    public PlayerService(CachedRemoteModelService<PlayerData> modelService) {
+        this.modelService = modelService;
     }
 
     public void load(Player player) {
-        playerDataMongoModelService.getOrFind(player.getUniqueId().toString()).thenAccept(data -> {
-            PlayerInventory inventory = player.getInventory();
+        String playerId = player.getUniqueId().toString();
+        modelService.getOrFind(playerId)
+                .thenApply(data -> {
+                    if (data == null) {
+                        data = new PlayerData(playerId);
+                        modelService.saveSync(data);
+                    }
 
-            inventory.setArmorContents(data.getArmor());
-            inventory.setContents(data.getItems());
+                    return data;
+                })
+                .thenAccept(data -> {
+                    PlayerInventory inventory = player.getInventory();
 
-            if (data.getEffects() != null) {
-                data.getEffects().forEach(player::addPotionEffect);
-            }
+                    inventory.setArmorContents(data.getArmor());
+                    inventory.setContents(data.getItems());
 
-            player.setHealth(data.getHealth());
-            player.setFoodLevel(data.getFoodLevel());
-            player.setLevel(data.getLevel());
+                    if (data.getEffects() != null) {
+                        data.getEffects().forEach(player::addPotionEffect);
+                    }
 
-            player.getEnderChest().setContents(data.getEnderChestItems());
+                    player.setHealth(data.getHealth());
+                    player.setFoodLevel(data.getFoodLevel());
+                    player.setLevel(data.getLevel());
 
-        });
-
+                    player.getEnderChest().setContents(data.getEnderChestItems());
+                });
     }
 
     public void saveAndRemove(String id) {
-       saveAndRemove(id, data -> {});
+        saveAndRemove(id, data -> {
+        });
     }
 
     public void saveAndRemove(String id, Consumer<PlayerData> beforeSave) {
-        PlayerData playerData = playerDataMongoModelService.getSync(id);
+        PlayerData playerData = modelService.getSync(id);
 
         if (playerData == null) {
             throw new NullPointerException("Error from find data of player id=" + id);
@@ -50,11 +58,10 @@ public class PlayerService {
 
         beforeSave.accept(playerData);
 
-        playerDataMongoModelService.upload(playerData).whenComplete((ignored, error) -> {
+        modelService.upload(playerData).whenComplete((ignored, error) -> {
             if (error != null) {
                 error.printStackTrace(System.err);
             }
         });
-
     }
 }

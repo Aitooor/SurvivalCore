@@ -1,7 +1,7 @@
 package online.nasgar.survival.command.coins;
 
 import me.yushust.message.MessageHandler;
-import net.cosmogrp.storage.mongo.MongoModelService;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.command.coins.arguments.AddArgument;
 import online.nasgar.survival.command.coins.arguments.RemoveArgument;
 import online.nasgar.survival.command.coins.arguments.SetArgument;
@@ -17,29 +17,33 @@ import java.util.Arrays;
 
 public class CoinsCommand extends Command {
 
-    private final MongoModelService<PlayerData> playerDataMongoModelService;
+    private final CachedRemoteModelService<PlayerData> modelService;
     private final MessageHandler messageHandler;
 
-    public CoinsCommand(MongoModelService<PlayerData> playerDataMongoModelService, MessageHandler messageHandler) {
+    public CoinsCommand(
+            CachedRemoteModelService<PlayerData> modelService,
+            MessageHandler messageHandler
+    ) {
         super("coins", messageHandler);
-        this.playerDataMongoModelService = playerDataMongoModelService;
+        this.modelService = modelService;
         this.messageHandler = messageHandler;
 
         this.setAliases(Arrays.asList("economy", "balance"));
         this.setArgumentBase(true);
 
-        this.addArguments(new AddArgument(this.playerDataMongoModelService, messageHandler), new RemoveArgument(playerDataMongoModelService, messageHandler), new SetArgument(playerDataMongoModelService, messageHandler));
+        this.addArguments(new AddArgument(modelService, messageHandler), new RemoveArgument(modelService, messageHandler), new SetArgument(modelService, messageHandler));
     }
 
-    @Override public void onCommand(CommandSender sender, String[] array) {
-        if (sender instanceof ConsoleCommandSender){
+    @Override
+    public void onCommand(CommandSender sender, String[] array) {
+        if (sender instanceof ConsoleCommandSender) {
             messageHandler.send(sender, "coins.limited-console");
             return;
         }
 
         Player player = (Player) sender;
 
-        String text = new BuildText(playerDataMongoModelService).of(player, messageHandler.get(player, "coins.have.formated"));
+        String text = new BuildText(modelService).of(player, messageHandler.get(player, "coins.have.formated"));
 
 
         ChatUtil.toPlayer(player, text);
