@@ -3,7 +3,7 @@ reload: "&aSurvival Configuration reloaded."
 player-not-found: "&cPlayer %target_name% not found."
 
 chat:
-  format: "%prefix%%player_name%&7: &f%message%"
+  format: "%rank%%player_name%&7: &f%message%"
 
 tab:
   header:
@@ -19,8 +19,8 @@ scoreboard:
     - "&fName"
     - "&a%player%"
     - ""
-    - "&fRank"
-    - "&a%rank%"
+    - "&fRank &7| &fRankup"
+    - "&a%rank% &7| &a%rankup%"
     - ""
     - "&fMoney"
     - "&e%money%"
@@ -75,7 +75,9 @@ god:
       other: "&cGod disabled by &e%staff_name%"
 coins:
   limited-console: "&cYou do not have a limited money!"
-  have: "&aYou have &e<coins>$"
+  have:
+    formated: "&aYou have &e<coins>$"
+    numbered: "&e<coins>$"
   error:
     insufficient: "&cYou do not have sufficient coins!"
   purchase: "&aSuccessfully purchased %display_name% &afor &e%price_coins%$"

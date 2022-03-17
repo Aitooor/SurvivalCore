@@ -94,7 +94,7 @@ public class Survival extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
             Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
             Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
-            Bukkit.getPluginManager().registerEvents(new BoardListener(), this);
+            Bukkit.getPluginManager().registerEvents(new BoardListener(playerDataMongoModelService, playerCacheModelService), this);
             Bukkit.getPluginManager().registerEvents(new BackPackMenu(playerCacheModelService), this);
         } else {
             Bukkit.getPluginManager().disablePlugin(this);
