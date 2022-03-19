@@ -101,16 +101,6 @@ public class ItemCreator {
         itemStack.setItemMeta(itemMeta);
     }
 
-    public ItemCreator setSkullOwner(ItemStack itemStack, String skullOwner) {
-        if (itemStack.getType() == Material.LEGACY_SKULL_ITEM) {
-            SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
-            skullMeta.setOwner(skullOwner);
-            itemStack.setItemMeta(skullMeta);
-        }
-
-        return this;
-    }
-
     public static void addEnchant(ItemStack itemStack, Enchantment enchantment, int level) {
         if (itemStack != null) {
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -175,41 +165,6 @@ public class ItemCreator {
         LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemMeta;
         leatherArmorMeta.setColor(color);
         itemStack.setItemMeta(leatherArmorMeta);
-        return this;
-    }
-
-    public ItemCreator setSkullOwner(String skullOwner) {
-            SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
-            skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(skullOwner));
-            itemStack.setItemMeta(skullMeta);
-
-        return this;
-    }
-
-    public ItemCreator setSkullTexture(String texture) {
-        SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
-
-        if (texture == null) {
-            texture = "ewogICJ0aW1lc3RhbXAiIDogMTYxODI4Nzc3MDYxNSwKICAicHJvZmlsZUlkIiA6ICI4NjY3YmE3MWI4NWE0MDA0YWY1NDQ1N2E5NzM0ZWVkNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJTdGV2ZSIsCiAgInNpZ25hdHVyZVJlcXVpcmVkIiA6IHRydWUsCiAgInRleHR1cmVzIiA6IHsKICAgICJTS0lOIiA6IHsKICAgICAgInVybCIgOiAiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS82MGE1YmQwMTZiM2M5YTFiOTI3MmU0OTI5ZTMwODI3YTY3YmU0ZWJiMjE5MDE3YWRiYmM0YTRkMjJlYmQ1YjEiCiAgICB9LAogICAgIkNBUEUiIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzk1M2NhYzhiNzc5ZmU0MTM4M2U2NzVlZTJiODYwNzFhNzE2NThmMjE4MGY1NmZiY2U4YWEzMTVlYTcwZTJlZDYiCiAgICB9CiAgfQp9";
-        }
-
-        if (!Reflection.VERSION.contains("v1_7")) {
-            if (itemStack.getType().equals(Material.SKULL_BANNER_PATTERN)) {
-                texture = "http://textures.minecraft.net/texture/" + texture;
-                byte[] encodedData = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", texture).getBytes());
-
-                Object profile = BukkitReflection.GAME_PROFILE_CONSTRUCTOR.invoke(UUID.randomUUID(), "MHF_HEAD");
-                BukkitReflection.PROPERTY_MAP_PUT_METHOD.invoke(BukkitReflection.GAME_PROFILE_PROPERTIES_FIELD.get(profile),
-                        "textures", BukkitReflection.PROPERTY_CONSTRUCTOR.invoke("textures", new String(encodedData)));
-
-                Reflection.FieldAccessor<?> profileField = Reflection.getField(skullMeta.getClass(), "profile",
-                        BukkitReflection.GAME_PROFILE_CLASS);
-
-                profileField.set(skullMeta, profile);
-            }
-        }
-
-        itemStack.setItemMeta(skullMeta);
         return this;
     }
 
