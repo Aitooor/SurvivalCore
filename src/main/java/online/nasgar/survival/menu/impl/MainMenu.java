@@ -44,7 +44,6 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 19,
-                player.getName(),
                 "profile",
                 new ItemCreator(Material.PLAYER_HEAD)
                         .setDisplayName("&8➢ &fMenu Perfil")
@@ -58,7 +57,6 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 10,
-                "",
                 "discord",
                 new ItemCreator(Material.SKULL_BANNER_PATTERN)
                         .setDisplayName("&8➢ &3Discord")
@@ -72,7 +70,6 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 28,
-                "",
                 "store",
                 new ItemCreator(Material.SKULL_BANNER_PATTERN)
                         .setDisplayName("&8➢ &aTienda")
@@ -86,7 +83,6 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 20,
-                "",
                 "wiki",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &eAYUDA")
@@ -100,14 +96,12 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 13,
-                "",
                 "lands",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
         ));
 
         buttons.add(new ButtonItem(
                 15,
-                "",
                 "warps",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &dWarps de Jugadores")
@@ -126,7 +120,6 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 17,
-                "",
                 "jobs",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &dTrabajos")
@@ -142,7 +135,6 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 23,
-                "",
                 "battlepass",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &dPase de Batalla")
@@ -157,7 +149,6 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 25,
-                "",
                 "ah",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
                         .setDisplayName("&8➢ &dCasa de Subastas")
@@ -172,7 +163,6 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 33,
-                "",
                 "resources",
                 new ItemCreator(Material.LEGACY_SKULL_ITEM)
         ));
@@ -182,14 +172,13 @@ public class MainMenu extends Menu {
 
     private static class ButtonItem extends Button {
 
-        private final String command, skullOwner;
+        private final String command;
         private final ItemCreator itemCreator;
 
-        public ButtonItem(int slot, String skullOwner, String command, ItemCreator itemCreator) {
+        public ButtonItem(int slot, String command, ItemCreator itemCreator) {
             super(slot);
 
             this.command = command;
-            this.skullOwner = skullOwner;
             this.itemCreator = itemCreator;
         }
 
@@ -201,9 +190,7 @@ public class MainMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem() {
-            if (this.skullOwner.isEmpty()) return this.itemCreator.toItemStack();
-
-            return SkullBuilder.ofItemCreator(this.itemCreator).setOwner(this.skullOwner).setDurability((short) 3).toItemStack();
+            return this.itemCreator.toItemStack();
         }
     }
 
