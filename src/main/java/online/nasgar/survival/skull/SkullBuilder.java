@@ -40,6 +40,10 @@ public class SkullBuilder extends ItemCreator {
         super(Material.PLAYER_HEAD, 0, (short) 0);
     }
 
+    private SkullBuilder(ItemCreator itemCreator) {
+        super(itemCreator.toItemStack());
+    }
+
     public SkullBuilder setOwner(String owner) {
         this.owner = owner;
         return this;
@@ -87,5 +91,9 @@ public class SkullBuilder extends ItemCreator {
 
     public static SkullBuilder newBuilder() {
         return new SkullBuilder();
+    }
+
+    public static SkullBuilder ofItemCreator(ItemCreator itemCreator) {
+        return new SkullBuilder(itemCreator);
     }
 }
