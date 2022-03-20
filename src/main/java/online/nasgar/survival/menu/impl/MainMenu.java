@@ -3,6 +3,7 @@ package online.nasgar.survival.menu.impl;
 import online.nasgar.survival.menu.Menu;
 import online.nasgar.survival.menu.button.Button;
 import online.nasgar.survival.menu.type.FillType;
+import online.nasgar.survival.skull.SkullBuilder;
 import online.nasgar.survival.utils.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -202,7 +203,7 @@ public class MainMenu extends Menu {
         public ItemStack getButtonItem() {
             if (this.skullOwner.isEmpty()) return this.itemCreator.toItemStack();
 
-            return this.itemCreator.setDurability((short) 3).setSkullOwner(this.skullOwner).toItemStack();
+            return SkullBuilder.ofItemCreator(this.itemCreator).setOwner(this.skullOwner).setDurability((short) 3).toItemStack();
         }
     }
 
