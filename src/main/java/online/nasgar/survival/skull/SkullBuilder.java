@@ -23,7 +23,7 @@ public class SkullBuilder extends ItemCreator {
             Class<?> metaClass = Class.forName(
                     "org.bukkit.craftbukkit."
                             + ServerVersion.CURRENT +
-                            ".block.CraftSkull"
+                            ".invenrory.CraftMetaSkull"
             );
 
             PROFILE_FIELD = metaClass.getDeclaredField("profile");
