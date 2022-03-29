@@ -16,23 +16,6 @@ public class SkullBuilder extends ItemCreator {
 
     private final static String MINECRAFT_TEXTURE_URL = "http://textures.minecraft.net/texture/%s";
 
-    private static final Field PROFILE_FIELD;
-
-    static {
-        try {
-            Class<?> metaClass = Class.forName(
-                    "org.bukkit.craftbukkit."
-                            + ServerVersion.CURRENT +
-                            ".block.CraftSkull"
-            );
-
-            PROFILE_FIELD = metaClass.getDeclaredField("profile");
-
-        } catch (ClassNotFoundException | NoSuchFieldException e) {
-            throw new IllegalStateException("Cannot get the SkullMeta profile field!", e);
-        }
-    }
-
     private String owner;
     private String url;
 
@@ -59,27 +42,34 @@ public class SkullBuilder extends ItemCreator {
         return setUrl(String.format(MINECRAFT_TEXTURE_URL, texture));
     }
 
-    @Override
     public ItemStack toItemStack() {
-        ItemStack itemStack =  super.toItemStack();
+        ItemStack itemStack =  new ItemStack(Material.PLAYER_HEAD, 1);
         SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
 
         if (owner != null) {
             skullMeta.setOwner(owner);
         } else if (url != null) {
+            Field profileField;
+
+            try {
+                profileField = skullMeta.getClass().getDeclaredField("profile");
+            } catch (NoSuchFieldException e) {
+                throw new IllegalArgumentException("SkullMeta.profile field not found", e);
+            }
+
             GameProfile gameProfile = new GameProfile(UUID.randomUUID(), null);
             byte[] encodedData = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
 
             gameProfile.getProperties().put("textures", new Property("textures", new String(encodedData)));
-            boolean accessible = PROFILE_FIELD.isAccessible();
-            PROFILE_FIELD.setAccessible(true);
+            boolean accessible = profileField.isAccessible();
+            profileField.setAccessible(true);
 
             try {
-                PROFILE_FIELD.set(skullMeta, gameProfile);
+                profileField.set(skullMeta, gameProfile);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } finally {
-                PROFILE_FIELD.setAccessible(accessible);
+                profileField.setAccessible(accessible);
             }
 
         }

@@ -2,6 +2,7 @@ package online.nasgar.survival.utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import online.nasgar.survival.skull.SkullBuilder;
 import online.nasgar.survival.utils.reflect.BukkitReflection;
 import online.nasgar.survival.utils.reflect.Reflection;
 import online.nasgar.survival.utils.text.ChatUtil;
@@ -171,6 +172,10 @@ public class ItemCreator {
     public ItemCreator setDurability(short durability) {
         itemStack.setDurability(durability);
         return this;
+    }
+
+    public SkullBuilder skull() {
+        return SkullBuilder.ofItemCreator(this);
     }
 
     public ItemStack toItemStack() {
