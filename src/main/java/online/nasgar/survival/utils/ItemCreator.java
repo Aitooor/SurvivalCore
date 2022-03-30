@@ -28,6 +28,9 @@ public class ItemCreator {
     private ItemStack itemStack;
     private ItemMeta itemMeta;
 
+    protected String displayName;
+    protected List<String> lore;
+
     public ItemCreator(Material material) {
         this(material, 1, (short) 0);
     }
@@ -77,19 +80,21 @@ public class ItemCreator {
     }
 
     public void setDisplayName(ItemStack itemStack, String displayName) {
+        this.displayName = displayName;
+
         itemMeta.setDisplayName(ChatUtil.translate(displayName));
         itemStack.setItemMeta(itemMeta);
     }
 
     public ItemCreator setLore(String... lore) {
-        List<String> list = new ArrayList<String>();
-        Collections.addAll(list, lore);
+        List<String> list = Arrays.asList(lore);
 
-        this.itemMeta.setLore(CC.translate(list));
-        return this;
+        return setLore(list);
     }
 
     public ItemCreator setLore(List<String> lore) {
+        this.lore = lore;
+
         itemMeta.setLore(ChatUtil.translate(lore));
         itemStack.setItemMeta(itemMeta);
         return this;

@@ -3,6 +3,7 @@ package online.nasgar.survival.skull;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.cosmogrp.commons.bukkit.server.ServerVersion;
+import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.utils.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -45,6 +46,15 @@ public class SkullBuilder extends ItemCreator {
     public ItemStack toItemStack() {
         ItemStack itemStack =  new ItemStack(Material.PLAYER_HEAD, 1);
         SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
+
+
+        if (displayName != null) {
+            skullMeta.setDisplayName(CC.translate(displayName));
+        }
+
+        if (lore != null) {
+            skullMeta.setLore(CC.translate(lore));
+        }
 
         if (owner != null) {
             skullMeta.setOwner(owner);
