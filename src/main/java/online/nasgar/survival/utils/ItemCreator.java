@@ -179,10 +179,6 @@ public class ItemCreator {
         return this;
     }
 
-    public SkullBuilder skull() {
-        return SkullBuilder.ofItemCreator(this);
-    }
-
     public ItemStack toItemStack() {
         itemStack.setItemMeta(itemMeta);
 
