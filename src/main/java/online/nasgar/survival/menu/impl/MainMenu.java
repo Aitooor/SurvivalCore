@@ -173,13 +173,13 @@ public class MainMenu extends Menu {
     private static class ButtonItem extends Button {
 
         private final String command;
-        private final ItemCreator itemCreator;
+        private final ItemStack item;
 
-        public ButtonItem(int slot, String command, ItemCreator itemCreator) {
+        public ButtonItem(int slot, String command, ItemStack item) {
             super(slot);
 
             this.command = command;
-            this.itemCreator = itemCreator;
+            this.item = item;
         }
 
         @Override
@@ -190,7 +190,7 @@ public class MainMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem() {
-            return this.itemCreator.toItemStack();
+            return this.item;
         }
     }
 

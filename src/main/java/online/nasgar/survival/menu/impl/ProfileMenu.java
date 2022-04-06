@@ -69,11 +69,11 @@ public class ProfileMenu extends Menu {
 
     private static class ButtonItem extends Button {
 
-        private final ItemCreator itemCreator;
+        private final ItemStack item;
 
-        public ButtonItem(int slot, ItemCreator itemCreator) {
+        public ButtonItem(int slot, ItemStack item) {
             super(slot);
-            this.itemCreator = itemCreator;
+            this.item = item;
         }
 
         @Override
@@ -82,7 +82,7 @@ public class ProfileMenu extends Menu {
 
         @Override
         public ItemStack getButtonItem() {
-            return this.itemCreator.toItemStack();
+            return this.item;
         }
     }
 }
