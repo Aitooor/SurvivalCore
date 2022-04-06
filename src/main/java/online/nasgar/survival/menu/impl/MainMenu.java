@@ -53,7 +53,7 @@ public class MainMenu extends Menu {
                                 "&Fconfiguraciones ",
                                 "",
                                 "&cClick para abrir")
-                        .setTexture("")
+                        .setOwner(player.getName())
                         .toItemStack()
         ));
 
