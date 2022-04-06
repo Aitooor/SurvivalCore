@@ -22,7 +22,7 @@ public class MainMenu extends Menu {
         this.setFillEnabled(true);
 
         this.setFillItemStack(new ItemCreator(Material.BLACK_STAINED_GLASS, 1, (short) 4)
-                .setDisplayName(" ")
+                .setDisplayName("&8&oNasgar")
                 .toItemStack());
 
         this.setFillType(FillType.BORDERS);
