@@ -4,29 +4,44 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.cosmogrp.commons.bukkit.server.ServerVersion;
 import online.nasgar.survival.utils.CC;
-import online.nasgar.survival.utils.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 import java.util.UUID;
 
-public class SkullBuilder extends ItemCreator {
+public class SkullBuilder {
 
     private final static String MINECRAFT_TEXTURE_URL = "http://textures.minecraft.net/texture/%s";
 
     private String owner;
     private String url;
+    private String displayName;
+    private List<String> lore;
 
-    private SkullBuilder() {
-        super(Material.PLAYER_HEAD, 0, (short) 0);
+    public SkullBuilder setDisplayName(String displayName) {
+        this.displayName = displayName;
+
+        return this;
     }
 
-    private SkullBuilder(ItemCreator itemCreator) {
-        super(itemCreator.toItemStack());
+    public SkullBuilder setLore(List<String> lore) {
+        this.lore = lore;
+
+        return this;
     }
+
+    public SkullBuilder setLore(String... lore) {
+        this.lore = CC.translate(Arrays.asList(lore));
+
+        return this;
+    }
+
+
 
     public SkullBuilder setOwner(String owner) {
         this.owner = owner;
@@ -91,9 +106,5 @@ public class SkullBuilder extends ItemCreator {
 
     public static SkullBuilder newBuilder() {
         return new SkullBuilder();
-    }
-
-    public static SkullBuilder ofItemCreator(ItemCreator itemCreator) {
-        return new SkullBuilder(itemCreator);
     }
 }
