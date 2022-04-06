@@ -45,7 +45,7 @@ public class MainMenu extends Menu {
         buttons.add(new ButtonItem(
                 19,
                 "profile",
-                new ItemCreator(Material.PLAYER_HEAD)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &fMenu Perfil")
                         .setLore(
                                 "&fAccede a esta opcion para ",
@@ -53,12 +53,14 @@ public class MainMenu extends Menu {
                                 "&Fconfiguraciones ",
                                 "",
                                 "&cClick para abrir")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 10,
                 "discord",
-                new ItemCreator(Material.SKULL_BANNER_PATTERN)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &3Discord")
                         .setLore(
                                 "&fEntra a nuestro server ",
@@ -66,12 +68,14 @@ public class MainMenu extends Menu {
                                 "&fY conoce a toda nuesta comunidad. ",
                                 "",
                                 "&cClick para ver")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 28,
                 "store",
-                new ItemCreator(Material.SKULL_BANNER_PATTERN)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &aTienda")
                         .setLore(
                                 "&fVisita nuestra tienda ",
@@ -79,12 +83,14 @@ public class MainMenu extends Menu {
                                 "&fde cosas nuevas. ",
                                 "",
                                 "&aClick para ver")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 20,
                 "wiki",
-                new ItemCreator(Material.LEGACY_SKULL_ITEM)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &eAYUDA")
                         .setLore(
                                 "&f¿Tienes preguntas sobre el server? "
@@ -92,18 +98,22 @@ public class MainMenu extends Menu {
                                 , "&Fde todo nuestros comandos y opciones"
                                 , ""
                                 , "&aClick para abrir")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 13,
                 "lands",
-                new ItemCreator(Material.LEGACY_SKULL_ITEM)
+                SkullBuilder.newBuilder()
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 15,
                 "warps",
-                new ItemCreator(Material.LEGACY_SKULL_ITEM)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &dWarps de Jugadores")
                         .setLore(
                                 "&c¿Que es esto?",
@@ -116,12 +126,14 @@ public class MainMenu extends Menu {
                                 "&fUsado el comando &b/pwarp set &7(nombre)",
                                 "",
                                 "&aClick para mas informacion")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 17,
                 "jobs",
-                new ItemCreator(Material.LEGACY_SKULL_ITEM)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &dTrabajos")
                         .setLore(
                                 "&fRecolecta dinero",
@@ -131,12 +143,14 @@ public class MainMenu extends Menu {
                                 "&aSin necesidad de entrar a ningun trabajo",
                                 "",
                                 "&aClick para mas informacion")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 23,
                 "battlepass",
-                new ItemCreator(Material.LEGACY_SKULL_ITEM)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &dPase de Batalla")
                         .setLore(
                                 "&fCompleta los desafios y retos",
@@ -145,12 +159,14 @@ public class MainMenu extends Menu {
                                 "&fO te puede tocar en las &ecajas&f.",
                                 "",
                                 "&aClick para abrir")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 25,
                 "ah",
-                new ItemCreator(Material.LEGACY_SKULL_ITEM)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &dCasa de Subastas")
                         .setLore(
                                 "&c¿Quieres vender sin ser estafado?",
@@ -159,12 +175,16 @@ public class MainMenu extends Menu {
                                 "&fEsta es una tienda comunitaria para todos",
                                 "",
                                 "&aClick para mas informacion")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 33,
                 "resources",
-                new ItemCreator(Material.LEGACY_SKULL_ITEM)
+                SkullBuilder.newBuilder()
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         return buttons;

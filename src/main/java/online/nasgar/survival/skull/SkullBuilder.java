@@ -2,7 +2,6 @@ package online.nasgar.survival.skull;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import net.cosmogrp.commons.bukkit.server.ServerVersion;
 import online.nasgar.survival.utils.CC;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

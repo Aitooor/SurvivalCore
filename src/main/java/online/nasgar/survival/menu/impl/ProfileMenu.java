@@ -4,9 +4,8 @@ import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.menu.Menu;
 import online.nasgar.survival.menu.button.Button;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.utils.ItemCreator;
+import online.nasgar.survival.skull.SkullBuilder;
 import online.nasgar.timedrankup.TimedRankup;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -30,26 +29,32 @@ public class ProfileMenu extends Menu {
         PlayerData data = modelService.getOrFindSync(player.getUniqueId().toString());
 
         buttons.add(new ButtonItem(12,
-                new ItemCreator(Material.BOOKSHELF)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &eAjustes")
                         .setLore("",
                                 "&fMira los ajustes generales",
                                 "&fAjustalos&f, &eInfo &fy &aRankUP",
                                 "",
                                 "&fClick para abrir",
-                                "")));
+                                "")
+                        .setTexture("")
+                        .toItemStack()
+        ));
 
         buttons.add(new ButtonItem(14,
-                new ItemCreator(Material.BOOKSHELF)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &aInfo")
                         .setLore(
                                 "",
                                 "&eMonedas",
                                 "&fTienes " + data.getCoins() + " &fmonedas",
-                                "")));
+                                "")
+                        .setTexture("")
+                        .toItemStack()
+        ));
 
         buttons.add(new ButtonItem(16,
-                new ItemCreator(Material.BOOKSHELF)
+                SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &bRankup")
                         .setLore(
                                 "&aRango Acual",
@@ -61,6 +66,8 @@ public class ProfileMenu extends Menu {
                                 "&fTodos los Rangos",
                                 "&fClick para abrir",
                                 "")
+                        .setTexture("")
+                        .toItemStack()
         ));
 
         return buttons;
