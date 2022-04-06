@@ -22,6 +22,11 @@
       <option name="url" value="https://repo.dmulloy2.net/repository/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="minecraft-libraries" />
+      <option name="name" value="minecraft-libraries" />
+      <option name="url" value="https://libraries.minecraft.net" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="cosmo-libs" />
       <option name="name" value="cosmo-libs" />
       <option name="url" value="https://repo.cosmogrp.net/repository/libs-public/" />

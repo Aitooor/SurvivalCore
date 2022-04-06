@@ -24,21 +24,21 @@ public class SkullBuilder {
     private List<String> lore;
 
     public SkullBuilder setDisplayName(String displayName) {
-        this.displayName = displayName;
+        this.displayName = CC.translate(displayName);
 
         return this;
     }
 
     public SkullBuilder setLore(List<String> lore) {
-        this.lore = lore;
+        this.lore = CC.translate(lore);
 
         return this;
     }
 
     public SkullBuilder setLore(String... lore) {
-        this.lore = CC.translate(Arrays.asList(lore));
-
-        return this;
+        return setLore(
+                Arrays.asList(lore)
+        );
     }
 
 
