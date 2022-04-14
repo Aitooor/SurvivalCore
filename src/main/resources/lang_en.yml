@@ -99,16 +99,6 @@ coins:
     success:
       sender: "&aSuccessfully set to &e%target_name% &aa amount of &e%amount%$&a!"
       target: "&e%staff_name% &ahas set &e%amount%$ &afor you!"
-message:
-  prefix:
-    to: "&7(To <prefix><player>) "
-    from: "&7(From <prefix><player>) "
-  usage: "&cUsage: /message <target> <message>"
-  tpm:
-    player: "&cYou have the private messages disabled!"
-    target: "&e%target_name% &chave the private messages disabled!"
-reply:
-  usage: "&cUsage: /reply <message>"
 guis:
   main: "&b&lMain &7(Menu)"
   profile: "&8➢ &ePERFIL"
@@ -124,26 +114,3 @@ auction:
   pull:
     no-item: "&cNo Item in hand."
   success: "&aYour item has been added successfully for sale. In case that you're offline the balance would be acredited, no matter what."
-warp:
-  usage: "/warp <warp>"
-  teleport: "&aSuccessfully teleported to warp."
-  no-permisison: "&cYou can't use this warp."
-  not-exists: "&cA warp with that name doesn't exists."
-  exists: "&cA warp with that name already exists."
-  delete:
-    usage: "&cUsage: /deletewarp <warpName>"
-    success: "&cWarp delete."
-  create:
-    usage: "&cUsage: /setwarp <warpName>"
-    success: "&aWarp create."
-  set-warp:
-    item:
-      usage: "&cUsage: /setwarpitem <warpName>"
-      error: "&cNo Item in hand."
-      success: "&aItem updated."
-    permission:
-      usage: "&cUsage: /setwarppermission <warpName> <permission>"
-      success: "&aWarp permission update."
-    slot:
-      usage: "&cUsage: /setwarpslot <warpName> <slot>"
-      success: "&aWarp slot update."
