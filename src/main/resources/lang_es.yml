@@ -100,9 +100,56 @@ coins:
       remitente: "&aConfigurado con éxito en &e%target_name% &aa cantidad de &e%cantidad%$&a!"
       target: "&e%staff_name% &aha establecido &e%cantidad%$ &apara ti!"
 guis:
-  main: "&b&lMain &7(Menu)"
-  profile: "&8➢ &ePERFIL"
-  shop: "&8➢ &eSHOP ITEM"
+  main:
+    title: "&0&oMenu Principal"
+    profile:
+      title: "&8➢ &bPerfil"
+      lore:
+        - "&r"
+        - "&fAccede a esta opcion para"
+        - "&fmirar tus estadisticas y"
+        - "&fconfiguraciones"
+        - "&r"
+        - "&7Click para abrir"
+    discord:
+      title: "&8➢ &bDiscord"
+      lore:
+        - "&r"
+        - "&fEntra a nuestro server"
+        - "&fde Discord."
+        - "&fY conoce a toda nuesta comunidad."
+        - ""
+        - "&7Click para ver"
+    shop:
+      title: "&8➢ &bShop"
+      lore:
+        - "&r"
+        - "&fVisita nuestra tienda"
+        - "&fy compra un monton"
+        - "&fde cosas nuevas."
+        - ""
+        - "&7Click para ver"
+    wiki:
+      title: "&8➢ &bWiki"
+      lore:
+        - "&r"
+        - "&a¿Tienes preguntas sobre el server?"
+        - "&r"
+        - "&fEntra a esta opcion e informate"
+        - "&fde todo nuestros comandos y opciones"
+        - ""
+        - "&7Click para abrir"
+    protections:
+      title: "&8➢ &bProtecciones"
+      lore:
+        - "&r"
+        - "&a¿Quieres saber como proteger?"
+        - "&r"
+        - "&fNosotros te lo explicamos"
+        - ""
+        - "&7Click para abrir"
+  profile: "&0&oPerfil"
+  shop: "&0&oTienda de Items"
 auction:
   help:
     - "&b&lComandos de subasta"

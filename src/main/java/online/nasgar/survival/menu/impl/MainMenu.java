@@ -1,5 +1,7 @@
 package online.nasgar.survival.menu.impl;
 
+import me.yushust.message.MessageHandler;
+import online.nasgar.survival.Survival;
 import online.nasgar.survival.menu.Menu;
 import online.nasgar.survival.menu.button.Button;
 import online.nasgar.survival.menu.type.FillType;
@@ -16,16 +18,18 @@ import java.util.Set;
 
 public class MainMenu extends Menu {
 
+    MessageHandler messageHandler = Survival.getInstance().getMessageHandler();
+
     public MainMenu(String title) {
         super(title, 5);
 
         this.setFillEnabled(true);
 
         this.setFillItemStack(new ItemCreator(Material.BLACK_STAINED_GLASS, 1, (short) 4)
-                .setDisplayName("&8&oNasgar")
+                        .setDisplayName("&8Nasgar")
                 .toItemStack());
 
-        this.setFillType(FillType.BORDERS);
+        this.setFillType(FillType.ALL);
     }
 
     @Override
@@ -46,13 +50,8 @@ public class MainMenu extends Menu {
                 19,
                 "profile",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &fMenu Perfil")
-                        .setLore(
-                                "&fAccede a esta opcion para ",
-                                "&fmirar tus estadisticas y ",
-                                "&Fconfiguraciones ",
-                                "",
-                                "&cClick para abrir")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.profile.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.profile.lore"))
                         .setOwner(player.getName())
                         .toItemStack()
         ));
@@ -61,14 +60,9 @@ public class MainMenu extends Menu {
                 10,
                 "discord",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &3Discord")
-                        .setLore(
-                                "&fEntra a nuestro server ",
-                                "&fde Discord. ",
-                                "&fY conoce a toda nuesta comunidad. ",
-                                "",
-                                "&cClick para ver")
-                        .setTexture("")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.discord.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.discord.lore"))
+                        .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
         ));
 
@@ -76,14 +70,9 @@ public class MainMenu extends Menu {
                 28,
                 "store",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &aTienda")
-                        .setLore(
-                                "&fVisita nuestra tienda ",
-                                "&fy compra un monton ",
-                                "&fde cosas nuevas. ",
-                                "",
-                                "&aClick para ver")
-                        .setTexture("")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.shop.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.shop.lore"))
+                        .setTexture("7406e45318e9a4a6bfe132f202fe3ceac15d11eaedbef1eb06a376db433090a8")
                         .toItemStack()
         ));
 
@@ -91,14 +80,9 @@ public class MainMenu extends Menu {
                 20,
                 "wiki",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &eAYUDA")
-                        .setLore(
-                                "&f¿Tienes preguntas sobre el server? "
-                                , "&fentra a esta opcion e informate"
-                                , "&Fde todo nuestros comandos y opciones"
-                                , ""
-                                , "&aClick para abrir")
-                        .setTexture("")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.wiki.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.wiki.lore"))
+                        .setTexture("7dc985a7a68c574f683c0b859521feb3fc3d2ffa05fa09db0bae44b8ac29b385")
                         .toItemStack()
         ));
 
@@ -106,7 +90,9 @@ public class MainMenu extends Menu {
                 13,
                 "lands",
                 SkullBuilder.newBuilder()
-                        .setTexture("")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.protections.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.protections.lore"))
+                        .setTexture("63d02cdc075bb1cc5f6fe3c7711ae4977e38b910d50ed6023df73913e5e7fcff")
                         .toItemStack()
         ));
 
@@ -114,7 +100,7 @@ public class MainMenu extends Menu {
                 15,
                 "warps",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &dWarps de Jugadores")
+                        .setDisplayName("&8➢ &bWarps")
                         .setLore(
                                 "&c¿Que es esto?",
                                 "&fCualquier jugador puede",
@@ -126,7 +112,7 @@ public class MainMenu extends Menu {
                                 "&fUsado el comando &b/pwarp set &7(nombre)",
                                 "",
                                 "&aClick para mas informacion")
-                        .setTexture("")
+                        .setTexture("77400ea19dbd84f75c39ad6823ac4ef786f39f48fc6f84602366ac29b837422")
                         .toItemStack()
         ));
 
@@ -134,7 +120,7 @@ public class MainMenu extends Menu {
                 17,
                 "jobs",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &dTrabajos")
+                        .setDisplayName("&8➢ &bTrabajos")
                         .setLore(
                                 "&fRecolecta dinero",
                                 "&fminando, talando, pescando, ...",
@@ -143,7 +129,7 @@ public class MainMenu extends Menu {
                                 "&aSin necesidad de entrar a ningun trabajo",
                                 "",
                                 "&aClick para mas informacion")
-                        .setTexture("")
+                        .setTexture("69a600ab0a83097065b95ae284f8059961774609adb3dbd3a4ca269d44409551")
                         .toItemStack()
         ));
 
@@ -151,7 +137,7 @@ public class MainMenu extends Menu {
                 23,
                 "battlepass",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &dPase de Batalla")
+                        .setDisplayName("&8➢ &bPase de Batalla")
                         .setLore(
                                 "&fCompleta los desafios y retos",
                                 "&fy consigue las recompensas",
@@ -159,23 +145,23 @@ public class MainMenu extends Menu {
                                 "&fO te puede tocar en las &ecajas&f.",
                                 "",
                                 "&aClick para abrir")
-                        .setTexture("")
+                        .setTexture("ea62b9de6a26b86869ca22ea40f1bde80a0430a54547becce8fda8707777258f")
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 25,
-                "ah",
+                "auction menu",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &dCasa de Subastas")
+                        .setDisplayName("&8➢ &bCasa de Subastas")
                         .setLore(
-                                "&c¿Quieres vender sin ser estafado?",
+                                "&c¿Quieres comprar algo?",
                                 "&fEsta es una opcion muy recomendable",
                                 "&fvende, compra y mucho mas de forma segura",
                                 "&fEsta es una tienda comunitaria para todos",
                                 "",
                                 "&aClick para mas informacion")
-                        .setTexture("")
+                        .setTexture("ef835b8941fe319931749b87fe8e84c5d1f4a271b5fbce5e700a60004d881f79")
                         .toItemStack()
         ));
 
@@ -183,7 +169,8 @@ public class MainMenu extends Menu {
                 33,
                 "resources",
                 SkullBuilder.newBuilder()
-                        .setTexture("")
+                        .setDisplayName("&8➢ &bRecursos")
+                        .setTexture("27957f895d7bc53423a35aac59d584b41cc30e040269c955e451fe680a1cc049")
                         .toItemStack()
         ));
 

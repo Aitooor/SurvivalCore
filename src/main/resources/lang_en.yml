@@ -100,9 +100,56 @@ coins:
       sender: "&aSuccessfully set to &e%target_name% &aa amount of &e%amount%$&a!"
       target: "&e%staff_name% &ahas set &e%amount%$ &afor you!"
 guis:
-  main: "&b&lMain &7(Menu)"
-  profile: "&8➢ &ePERFIL"
-  shop: "&8➢ &eSHOP ITEM"
+  main:
+    title: "&0&oMain Menu"
+    profile:
+      title: "&8➢ &bProfile"
+      lore:
+        - "&r"
+        - "&fAccess this option to"
+        - "&flook at your stats and"
+        - "&fsettings"
+        - "&r"
+        - "&7Click to open"
+    discord:
+      title: "&8➢ &bDiscord"
+      lore:
+        - "&r"
+        - "&fEnter our server"
+        - "&f from Discord."
+        - "&fY knows our entire community."
+        - ""
+        - "&7Click to view"
+    shop:
+      title: "&8➢ &bShop"
+      lore:
+        - "&r"
+        - "&fVisit our store"
+        - "&fy buy a lot"
+        - "& fde new things."
+        - ""
+        - "&7Click to view"
+    wiki:
+      title: "&8➢ &bWiki"
+      lore:
+        - "&r"
+        - "&aDo you have questions about the server?"
+        - "&r"
+        - "&fGo to this option and inform yourself"
+        - "&fde all our commands and options"
+        - ""
+        - "&7Click to open"
+    protections:
+      title: "&8➢ &bProtections"
+      lore:
+        - "&r"
+        - "&aDo you want to know how to protect?"
+        - "&r"
+        - "&fWe'll explain it to you"
+        - ""
+        - "&7Click to open"
+  profile: "&0&oProfile"
+  shop: "&0&oShop Items"
 auction:
   help:
     - "&b&lAuction Commands"

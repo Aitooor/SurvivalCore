@@ -21,6 +21,6 @@ public class MenuCommand extends Command {
     }
 
     @Override public void onCommand(Player player, String[] array) {
-        new MainMenu(messageHandler.get(player, "guis.main")).openMenu(player);
+        new MainMenu(messageHandler.get(player, "guis.main.title")).openMenu(player);
     }
 }
