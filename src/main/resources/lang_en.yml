@@ -147,7 +147,7 @@ guis:
         - "&r"
         - "&fWe'll explain it to you"
         - ""
-        - "&7Click to open"
+        - "&7Click to view"
   profile: "&0&oProfile"
   shop: "&0&oShop Items"
 auction:
