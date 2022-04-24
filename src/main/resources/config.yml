@@ -12,7 +12,8 @@ redis:
   address: "localhost"
   port: 6379
   password: "e44fuT2mQM2hr437N5DTA99rK8xW8RhRAMmSm9LQ4FcnXx7bf5e8VpwXKquYzBvTpnKjUTthqq3"
-  chat_channel: "survivalcore_chat"
+  channel:
+    chat: "SurvivalCoreChat"
 
 shop-items:
   golden-apple:

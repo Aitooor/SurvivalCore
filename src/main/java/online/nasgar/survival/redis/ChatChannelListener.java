@@ -11,7 +11,7 @@ public class ChatChannelListener implements ChannelListener<MessageData> {
 
     static ConfigFile configFile = Survival.getInstance().getConfigFile();
 
-    public static final String CHANNEL_NAME = configFile.getString("chat_channel");
+    public static final String CHANNEL_NAME = configFile.getString("redis.channel.chat");
 
     private final ChatService chatService;
 
