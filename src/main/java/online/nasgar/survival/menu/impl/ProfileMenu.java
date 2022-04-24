@@ -59,7 +59,7 @@ public class ProfileMenu extends Menu {
                         .setDisplayName("&8➢ &bRankup")
                         .setLore(
                                 "&aRango Acual",
-                                (data.getRank() != null ? data.getRank().getPrefix() : "Default"),
+                                (data.getRank() != null ? data.getRank().getPrefix() : "default"),
                                 "",
                                 "&cSiguiente Rango",
                                 TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(player.getUniqueId())).getPrefix(),

@@ -74,7 +74,7 @@ public class BoardListener implements Listener {
 
         PlayerData data = modelService.getOrFindSync(player.getUniqueId().toString());
 
-        String rankup = (data.getRank() != null ? data.getRank().getPrefix() : "Default");
+        String rankup = (data.getRank() != null ? data.getRank().getPrefix() : "default");
 
         board.updateLines(messageHandler.replacingMany(player, "scoreboard.lines",
                 "%player%", player.getName(),

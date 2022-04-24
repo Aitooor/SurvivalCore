@@ -14,8 +14,8 @@
             <url>https://repo.nasgar.online/repository/nasgar-public/</url>
         </repository>
         <repository>
-            <id>papermc</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
+            <id>codemc</id>
+            <url>https://repo.codemc.io/repository/nms/</url>
         </repository>
         <!-- ProtocolLib | Repository -->
         <repository>
