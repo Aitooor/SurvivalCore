@@ -19,7 +19,6 @@ public class ReloadCommand extends Command {
     @Override
     public void onCommand(CommandSender sender, String[] array) {
         Survival.getInstance().getConfigFile().reload();
-        Survival.getInstance().getWarpsFile().reload();
 
         messageHandler.send(sender, "reload");
     }

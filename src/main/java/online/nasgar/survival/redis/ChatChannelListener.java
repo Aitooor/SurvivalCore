@@ -1,18 +1,17 @@
 package online.nasgar.survival.redis;
 
-
 import net.cosmogrp.storage.redis.channel.Channel;
 import net.cosmogrp.storage.redis.channel.ChannelListener;
+import online.nasgar.survival.Survival;
 import online.nasgar.survival.chat.ChatService;
+import online.nasgar.survival.config.ConfigFile;
 import online.nasgar.survival.redis.data.MessageData;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class ChatChannelListener implements ChannelListener<MessageData> {
 
-    public static final String CHANNEL_NAME = "survival_core_chat";
+    static ConfigFile configFile = Survival.getInstance().getConfigFile();
+
+    public static final String CHANNEL_NAME = configFile.getString("chat_channel");
 
     private final ChatService chatService;
 

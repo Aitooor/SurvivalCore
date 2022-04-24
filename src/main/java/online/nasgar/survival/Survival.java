@@ -48,7 +48,7 @@ public class Survival extends JavaPlugin {
 
     private String serverId;
 
-    private ConfigFile configFile, warpsFile;
+    private ConfigFile configFile;
 
     private MongoManager mongoManager;
 
@@ -71,7 +71,6 @@ public class Survival extends JavaPlugin {
         executor = Executors.newCachedThreadPool();
 
         this.configFile = new ConfigFile(this, "config.yml");
-        this.warpsFile = new ConfigFile(this, "warps.yml");
 
         this.serverId = this.configFile.getString("id");
 
