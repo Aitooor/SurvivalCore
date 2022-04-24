@@ -37,7 +37,7 @@ public class ProfileMenu extends Menu {
                                 "",
                                 "&fClick para abrir",
                                 "")
-                        .setTexture("")
+                        .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
         ));
 
@@ -49,11 +49,12 @@ public class ProfileMenu extends Menu {
                                 "&eMonedas",
                                 "&fTienes " + data.getCoins() + " &fmonedas",
                                 "")
-                        .setTexture("")
+                        .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
         ));
 
-        buttons.add(new ButtonItem(16,
+        buttons.add(new ButtonItem(
+                16,
                 SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &bRankup")
                         .setLore(
@@ -66,7 +67,7 @@ public class ProfileMenu extends Menu {
                                 "&fTodos los Rangos",
                                 "&fClick para abrir",
                                 "")
-                        .setTexture("")
+                        .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
         ));
 

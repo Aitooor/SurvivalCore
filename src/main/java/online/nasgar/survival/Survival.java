@@ -140,7 +140,7 @@ public class Survival extends JavaPlugin {
         redis = GsonRedis.builder(executor)
                 .setJedis(jedisInstance)
                 .setServerId(getServerId())
-                .setParentChannel("survival-core")
+                .setParentChannel(configFile.getString("redis.chat_channel"))
                 .build();
 
         redis.getMessenger().getChannel(ChatChannelListener.CHANNEL_NAME, MessageData.class)
