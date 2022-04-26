@@ -37,6 +37,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -109,6 +110,14 @@ public class Survival extends JavaPlugin {
 
 
     private void setupNMessage() {
+        File langFolder = new File(this.getDataFolder(), "lang");
+
+        try {
+            langFolder.mkdir();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         MessageProvider messageProvider = MessageProvider
                 .create(
                         MessageSourceDecorator
