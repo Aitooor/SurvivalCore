@@ -55,13 +55,18 @@ fly:
   enabled:
     player: "&aVuelo activado"
     target:
-      you: "&cVuelo de &e%target_name% &eactivado!"
-      other: "&cVuelo activado por &e%staff_name%"
+      you: "&fVuelo de &e%target_name% &aactivado!"
+      other: "&fVuelo activado por &e%staff_name%"
   disabled:
-    player: "&cVuelo desactivado"
+    player: "&fVuelo desactivado"
     target:
-      you: "&cVuelo de &e%target_name% &cdesactivado!"
-      other: "&cVuelo desactivado por &e%staff_name%"
+      you: "&fVuelo de &e%target_name% &cdesactivado!"
+      other: "&fVuelo desactivado por &e%staff_name%"
+top:
+  player: "&aTeletransportado al top"
+  target:
+    you: "&fTeletransportado a &e%target_name% &aal top"
+    other: "&fTeletransportado al top por &e%staff_name%"
 shop:
   usage: "&cUso: /shop <jugador>"
   player: "&b&lNASGAR &fhttps://nasgar.online/shop"

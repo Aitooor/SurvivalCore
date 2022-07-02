@@ -5,6 +5,8 @@ import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.auctions.commands.AuctionCommand;
 import online.nasgar.survival.backpack.commands.BackPackCommand;
 import online.nasgar.survival.command.*;
+import online.nasgar.survival.command.admin.ReloadCommand;
+import online.nasgar.survival.command.admin.TopCommand;
 import online.nasgar.survival.command.coins.CoinsCommand;
 import online.nasgar.survival.command.message.MessageCommand;
 import online.nasgar.survival.command.message.ReplyCommand;
@@ -55,7 +57,8 @@ public class CommandManager {
                 new CoinsCommand(modelService, messageHandler),
 
                 // ADMIN
-                new ReloadCommand(messageHandler)
+                new ReloadCommand(messageHandler),
+                new TopCommand(messageHandler)
         );
     }
 

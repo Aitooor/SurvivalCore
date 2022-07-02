@@ -55,13 +55,18 @@ fly:
   enabled:
     player: "&aFly enabled"
     target:
-      you: "&cFly for &e%target_name% &eenabled!"
-      other: "&cFly enabled by &e%staff_name%"
+      you: "&fFly for &e%target_name% &aenabled!"
+      other: "&aFly enabled by &e%staff_name%"
   disabled:
     player: "&cFly disabled"
     target:
-      you: "&cFly for &e%target_name% &cdisabled!"
+      you: "&fFly for &e%target_name% &cdisabled!"
       other: "&cFly disabled by &e%staff_name%"
+top:
+  player: "&aTeletransporting to the top"
+  target:
+    you: "&fTeletransporting &e%target_name% &fto the top"
+    other: "&ffTeletransported by &e%staff_name% &fto the top"
 shop:
   usage: "&cUsage: /shop <player>"
   player: "&b&lNASGAR &fhttps://nasgar.online/shop"
