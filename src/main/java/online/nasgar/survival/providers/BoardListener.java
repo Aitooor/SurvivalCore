@@ -6,7 +6,6 @@ import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.utils.text.BuildText;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
