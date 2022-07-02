@@ -138,7 +138,7 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 50,
-                "",
+                null,
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.exit"))
                         .setTexture("86e145e71295bcc0488e9bb7e6d6895b7f969a3b5bb7eb34a52e932bc84df5b")
@@ -164,6 +164,9 @@ public class MainMenu extends Menu {
         public void onClick(InventoryClickEvent event) {
             Player player = (Player) event.getWhoClicked();
             player.closeInventory();
+            if(this.command == null) {
+                return;
+            }
             player.performCommand(this.command);
         }
 
