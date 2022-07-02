@@ -1,8 +1,7 @@
 package online.nasgar.survival.backpack;
 
 import net.cosmogrp.storage.ModelService;
-import online.nasgar.survival.Survival;
-import online.nasgar.survival.playerdata.PlayerData;
+import online.nasgar.survival.managers.playerdata.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

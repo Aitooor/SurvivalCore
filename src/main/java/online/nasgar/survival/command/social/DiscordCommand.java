@@ -1,11 +1,9 @@
 package online.nasgar.survival.command.social;
 
 import me.yushust.message.MessageHandler;
-import online.nasgar.survival.command.management.Command;
+import online.nasgar.survival.managers.command.Command;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.Arrays;
 
 public class DiscordCommand extends Command {
 

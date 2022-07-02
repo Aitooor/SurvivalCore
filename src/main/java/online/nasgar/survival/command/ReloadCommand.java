@@ -2,7 +2,7 @@ package online.nasgar.survival.command;
 
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.Survival;
-import online.nasgar.survival.command.management.Command;
+import online.nasgar.survival.managers.command.Command;
 import org.bukkit.command.CommandSender;
 
 public class ReloadCommand extends Command {

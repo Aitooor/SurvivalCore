@@ -1,9 +1,9 @@
 package online.nasgar.survival.listeners;
 
 import net.cosmogrp.storage.redis.connection.Redis;
-import online.nasgar.survival.chat.ChatService;
-import online.nasgar.survival.redis.ChatChannelListener;
-import online.nasgar.survival.redis.data.MessageData;
+import online.nasgar.survival.services.chat.ChatService;
+import online.nasgar.survival.services.redis.ChatChannelListener;
+import online.nasgar.survival.services.redis.data.MessageData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

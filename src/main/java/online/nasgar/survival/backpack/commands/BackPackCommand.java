@@ -2,8 +2,8 @@ package online.nasgar.survival.backpack.commands;
 
 import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.backpack.BackPackMenu;
-import online.nasgar.survival.command.management.Command;
-import online.nasgar.survival.playerdata.PlayerData;
+import online.nasgar.survival.managers.command.Command;
+import online.nasgar.survival.managers.playerdata.PlayerData;
 import org.bukkit.entity.Player;
 
 public class BackPackCommand extends Command {

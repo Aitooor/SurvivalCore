@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.Survival;
-import online.nasgar.survival.playerdata.PlayerData;
+import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.utils.LuckPermsUtil;
 import online.nasgar.survival.utils.TimeUtils;
 import online.nasgar.timedrankup.TimedRankup;

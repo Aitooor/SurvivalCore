@@ -1,11 +1,11 @@
 package online.nasgar.survival.providers;
 
-import fr.mrmicky.fastboard.FastBoard;
+import online.nasgar.survival.managers.scoreboard.FastBoard;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.Survival;
-import online.nasgar.survival.playerdata.PlayerData;
+import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.utils.text.BuildText;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -59,15 +59,9 @@ public class BoardListener implements Listener {
         String rank = "%vault_prefix%";
         rank = PlaceholderAPI.setPlaceholders(player, rank);
 
-        //TODO Change this method to another one using bungeecord messagechannel
-        String survival1 = "%bungee_Survival-1%";
-        survival1 = PlaceholderAPI.setPlaceholders(player, survival1);
-        int survival1Int = Integer.parseInt(survival1);
-        String survival2 = "%bungee_Survival-2%";
-        survival2 = PlaceholderAPI.setPlaceholders(player, survival2);
-        int survival2Int = Integer.parseInt(survival2);
-
-        int survivalCountInt = survival1Int + survival2Int;
+        String survival = "%pb_pc_Survivals%";
+        survival = PlaceholderAPI.setPlaceholders(player, survival);
+        int survivalInt = Integer.parseInt(survival);
 
         String money = new BuildText(modelService).of(player, messageHandler.get(player, "coins.have.numbered"));
 
@@ -79,7 +73,7 @@ public class BoardListener implements Listener {
                 "%player%", player.getName(),
                 "%rank%", rank,
                 "%rankup%", rankup,
-                "%survival_online%", survivalCountInt,
+                "%survival_online%", survivalInt,
                 "%money%", money));
     }
 }
