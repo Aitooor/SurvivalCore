@@ -37,7 +37,7 @@ public class BoardListener implements Listener {
         Player player = event.getPlayer();
         FastBoard board = new FastBoard(player);
 
-        board.updateTitle(CC.translate("&b&lSURVIVAL &8| &7&o1.18"));
+        board.updateTitle(messageHandler.replacing(player, "scoreboard.title"));
 
         this.boards.put(player.getUniqueId(), board);
     }
