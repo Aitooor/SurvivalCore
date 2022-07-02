@@ -6,6 +6,7 @@ import online.nasgar.survival.auctions.commands.AuctionCommand;
 import online.nasgar.survival.backpack.commands.BackPackCommand;
 import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.admin.GamemodeCommand;
+import online.nasgar.survival.command.admin.GodCommand;
 import online.nasgar.survival.command.admin.ReloadCommand;
 import online.nasgar.survival.command.admin.TopCommand;
 import online.nasgar.survival.command.coins.CoinsCommand;
@@ -48,6 +49,8 @@ public class CommandManager {
                 // PREMIUM
                 new FlyCommand(messageHandler),
                 new HatCommand(messageHandler),
+                new EnderchestCommand(messageHandler),
+                new SkullCommand(messageHandler),
 
                 // MESSAGE
                 new MessageCommand(modelService, messageHandler),

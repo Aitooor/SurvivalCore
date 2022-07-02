@@ -60,12 +60,9 @@ public class BoardListener implements Listener {
         String rank = "%vault_prefix%";
         rank = PlaceholderAPI.setPlaceholders(player, rank);
 
-        String survival1 = BungeeUtil.getPlayerCount(player,"Survival-1");
-        int survival1Int = Integer.parseInt(survival1);
-        String survival2 = BungeeUtil.getPlayerCount(player,"Survival-2");
-        int survival2Int = Integer.parseInt(survival2);
-
-        int survivalCount =  survival1Int + survival2Int;
+        String survival = "%pb_pc_Survivals%";
+        survival = PlaceholderAPI.setPlaceholders(player, survival);
+        int survivalInt = Integer.parseInt(survival);
 
         String money = new BuildText(modelService).of(player, messageHandler.get(player, "coins.have.numbered"));
 
@@ -77,7 +74,7 @@ public class BoardListener implements Listener {
                 "%player%", player.getName(),
                 "%rank%", rank,
                 "%rankup%", rankup,
-                "%survival_online%", survivalCount,
+                "%survival_online%", survivalInt,
                 "%money%", money));
     }
 }

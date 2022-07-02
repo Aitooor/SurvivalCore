@@ -58,6 +58,14 @@ hat:
   target:
     you: "&fEl casco de &e%target_name% &fha sido actualizado"
     other: "&fTu casco ha sido actualizado por &e%staff_name%"
+enderchest:
+  you: "&a¡Has abierto el enderchest!"
+  target:
+    you: "&e%target_name% &fenderchest ha sido abierto!"
+    other: "&fTu enderchest ha sido abierto por &e%staff_name%"
+skull:
+  you: "&aRecibido una copia de tu cabeza"
+  target: "&fHas recibido una copia de la cabeza de &e%target_name%"
 fly:
   enabled:
     player: "&aVuelo activado"

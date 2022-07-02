@@ -2,7 +2,7 @@ package online.nasgar.survival.listeners;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
-import online.nasgar.survival.command.GodCommand;
+import online.nasgar.survival.command.admin.GodCommand;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.services.playerdata.PlayerService;

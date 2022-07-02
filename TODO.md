@@ -1,5 +1,5 @@
 #TODO
 
-- Change tab lib
 - Add to lang /msg
+- Speed command /speed
 - Test all the rest commands

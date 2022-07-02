@@ -58,6 +58,14 @@ hat:
   target:
     you: "&f&e%target_name%&f's helmet has been updated"
     other: "&fYour helmet has been updated by &e%staff_name%"
+enderchest:
+  you: "&aYour enderchest has been opened!"
+  target:
+    you: "&e%target_name% &fenderchest has been opened!"
+    other: "&fYour enderchest has been opened by &e%staff_name%"
+skull:
+  you: "&aGived your skull to you"
+  target: "&fGived &e%target_name% &fskull to you"
 fly:
   enabled:
     player: "&aFly enabled"
