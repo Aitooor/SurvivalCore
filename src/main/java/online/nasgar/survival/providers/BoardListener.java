@@ -6,6 +6,7 @@ import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.managers.playerdata.PlayerData;
+import online.nasgar.survival.utils.BungeeUtil;
 import online.nasgar.survival.utils.text.BuildText;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -59,9 +60,12 @@ public class BoardListener implements Listener {
         String rank = "%vault_prefix%";
         rank = PlaceholderAPI.setPlaceholders(player, rank);
 
-        String survival = "%pb_pc_Survivals%";
-        survival = PlaceholderAPI.setPlaceholders(player, survival);
-        int survivalInt = Integer.parseInt(survival);
+        String survival1 = BungeeUtil.getPlayerCount(player,"Survival-1");
+        int survival1Int = Integer.parseInt(survival1);
+        String survival2 = BungeeUtil.getPlayerCount(player,"Survival-2");
+        int survival2Int = Integer.parseInt(survival2);
+
+        int survivalCount =  survival1Int + survival2Int;
 
         String money = new BuildText(modelService).of(player, messageHandler.get(player, "coins.have.numbered"));
 
@@ -73,7 +77,7 @@ public class BoardListener implements Listener {
                 "%player%", player.getName(),
                 "%rank%", rank,
                 "%rankup%", rankup,
-                "%survival_online%", survivalInt,
+                "%survival_online%", survivalCount,
                 "%money%", money));
     }
 }

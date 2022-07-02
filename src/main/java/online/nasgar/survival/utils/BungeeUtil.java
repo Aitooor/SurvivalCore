@@ -46,4 +46,17 @@ public final class BungeeUtil {
 		}
 	}
 
+	public static String getPlayerCount(Player player, String server) {
+		try {
+			ByteArrayDataOutput out = ByteStreams.newDataOutput();
+			out.writeUTF("PlayerCount");
+			out.writeUTF(server);
+
+			player.sendPluginMessage(Survival.getInstance(), "BungeeCord", out.toByteArray());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return server;
+	}
+
 }
