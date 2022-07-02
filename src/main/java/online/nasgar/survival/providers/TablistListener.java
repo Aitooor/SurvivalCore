@@ -18,18 +18,12 @@ public class TablistListener implements Listener {
         String bungeeTotal = "%bungee_total%";
         bungeeTotal = PlaceholderAPI.setPlaceholders(player, bungeeTotal);
 
-        //TODO Change this method to another one using bungeecord messagechannel
-        String survival1 = "%bungee_Survival-1%";
-        survival1 = PlaceholderAPI.setPlaceholders(player, survival1);
-        int survival1Int = Integer.parseInt(survival1);
-        String survival2 = "%bungee_Survival-2%";
-        survival2 = PlaceholderAPI.setPlaceholders(player, survival2);
-        int survival2Int = Integer.parseInt(survival2);
-
-        int survivalCountInt = survival1Int + survival2Int;
+        String survival = "%pb_pc_Survivals%";
+        survival = PlaceholderAPI.setPlaceholders(player, survival);
+        int survivalInt = Integer.parseInt(survival);
 
         player.setPlayerListHeaderFooter(
-                messageHandler.replacing(player, "tab.header","%online%", survivalCountInt),
+                messageHandler.replacing(player, "tab.header","%online%", survivalInt),
                 messageHandler.replacing(player, "tab.footer", "%online%", bungeeTotal));
 
         String playerListNames = "%vault_prefix% %player_name%";
