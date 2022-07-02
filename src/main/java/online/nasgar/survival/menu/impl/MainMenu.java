@@ -58,7 +58,7 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 28,
-                "store",
+                "shop",
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.main.shop.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.main.shop.lore"))
@@ -88,10 +88,10 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 15,
-                "warps",
+                "pwarps",
                 SkullBuilder.newBuilder()
-                        .setDisplayName(messageHandler.replacing(player, "guis.main.warps.title"))
-                        .setLore(messageHandler.replacingMany(player, "guis.main.warps.lore"))
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.player-warps.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.player-warps.lore"))
                         .setTexture("77400ea19dbd84f75c39ad6823ac4ef786f39f48fc6f84602366ac29b837422")
                         .toItemStack()
         ));
@@ -127,11 +127,31 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
+                31,
+                "warps",
+                SkullBuilder.newBuilder()
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.warps.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.warps.lore"))
+                        .setTexture("51c4a718a913f95edad106800a3414fb8277699308c32eb38b13daa416d1fe23")
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
                 33,
                 "resources",
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.main.resources.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.main.resources.lore"))
+                        .setTexture("51c4a718a913f95edad106800a3414fb8277699308c32eb38b13daa416d1fe23")
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                35,
+                "koths",
+                SkullBuilder.newBuilder()
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.koths.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.koths.lore"))
                         .setTexture("51c4a718a913f95edad106800a3414fb8277699308c32eb38b13daa416d1fe23")
                         .toItemStack()
         ));

@@ -114,6 +114,9 @@ public class WikiMenu extends Menu {
         @Override
         public void onClick(InventoryClickEvent event) {
             Player player = (Player) event.getWhoClicked();
+            if(this.command == null) {
+                return;
+            }
             player.performCommand(this.command);
         }
 

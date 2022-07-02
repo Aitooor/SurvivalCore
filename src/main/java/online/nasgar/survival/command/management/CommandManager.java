@@ -8,6 +8,9 @@ import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.coins.CoinsCommand;
 import online.nasgar.survival.command.message.MessageCommand;
 import online.nasgar.survival.command.message.ReplyCommand;
+import online.nasgar.survival.command.social.DiscordCommand;
+import online.nasgar.survival.command.social.ShopCommand;
+import online.nasgar.survival.command.social.WebCommand;
 import online.nasgar.survival.menu.impl.command.MenuCommand;
 import online.nasgar.survival.menu.impl.command.ProfileCommand;
 import online.nasgar.survival.menu.impl.command.ShopItemCommand;
@@ -26,20 +29,32 @@ public class CommandManager {
     public CommandManager(CachedRemoteModelService<PlayerData> modelService, MessageHandler messageHandler) {
         this.register(
 
+                // SOCIAL
+                new ShopCommand(messageHandler),
+                new DiscordCommand(messageHandler),
+                new WebCommand(messageHandler),
+
+                // BASIS
                 new FlyCommand(messageHandler),
                 new GodCommand(messageHandler),
                 new GamemodeCommand(messageHandler),
-                new MessageCommand(modelService, messageHandler),
                 new HealCommand(messageHandler),
+                new FeedCommand(messageHandler),
+                new BackPackCommand(modelService),
+                new AuctionCommand(modelService, messageHandler),
+
+                // MESSAGE
+                new MessageCommand(modelService, messageHandler),
                 new ReplyCommand(modelService, messageHandler),
+
+                // MENUS
                 new MenuCommand(messageHandler),
                 new ProfileCommand(modelService, messageHandler),
                 new WikiCommand(modelService, messageHandler),
                 new ShopItemCommand(messageHandler),
-                new FeedCommand(messageHandler),
                 new CoinsCommand(modelService, messageHandler),
-                new BackPackCommand(modelService),
-                new AuctionCommand(modelService, messageHandler),
+
+                // ADMIN
                 new ReloadCommand(messageHandler)
         );
     }
