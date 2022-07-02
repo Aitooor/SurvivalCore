@@ -13,6 +13,8 @@ public class FeedCommand extends Command {
         super("feed", messageHandler);
         this.messageHandler = messageHandler;
 
+        this.setPermission("survivalcore.feed");
+
         this.setOnlyPlayers(true);
     }
 
@@ -28,7 +30,7 @@ public class FeedCommand extends Command {
             return;
         }
 
-        if (!player.hasPermission("feed.others.command")){
+        if (!player.hasPermission("survivalcore.feed.others")){
             return;
         }
 

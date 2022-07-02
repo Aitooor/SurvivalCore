@@ -19,7 +19,7 @@ public class AddArgument extends Argument {
         this.modelService = modelService;
         this.messageHandler = messageHandler;
 
-        this.setPermission("coins.add.command");
+        this.setPermission("survivalcore.coins.add");
     }
 
     @Override

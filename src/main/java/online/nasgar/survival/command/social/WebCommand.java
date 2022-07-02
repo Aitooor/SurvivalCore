@@ -27,7 +27,7 @@ public class WebCommand extends Command {
                 return;
         }
 
-        if (player.hasPermission("web.other")){
+        if (player.hasPermission("survivalcore.web.other")){
             Player target = Bukkit.getPlayer(array[0]);
 
             if (this.isPlayerNull(target, array[0])){

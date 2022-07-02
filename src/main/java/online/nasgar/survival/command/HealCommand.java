@@ -13,6 +13,8 @@ public class HealCommand extends Command {
         super("heal", messageHandler);
         this.messageHandler = messageHandler;
 
+        this.setPermission("survivalcore.heal");
+
         this.setOnlyPlayers(true);
     }
 
@@ -29,7 +31,7 @@ public class HealCommand extends Command {
             return;
         }
 
-        if (!player.hasPermission("heal.others.command")){
+        if (!player.hasPermission("survivalcore.heal.others")){
             return;
         }
 

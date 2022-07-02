@@ -13,7 +13,7 @@ public class ReloadCommand extends Command {
         super("survivalreload", messageHandler);
         this.messageHandler = messageHandler;
 
-        this.setPermission("survivalreload.command");
+        this.setPermission("survivalcore.reload");
     }
 
     @Override

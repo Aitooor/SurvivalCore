@@ -18,7 +18,7 @@ public class GamemodeCommand extends Command {
         super("gamemode", messageHandler);
         this.messageHandler = messageHandler;
 
-        this.setPermission("gamemode.command");
+        this.setPermission("survivalcore.gamemode");
         this.setAliases(Arrays.asList("gm", "gmode"));
         this.setOnlyPlayers(true);
     }
@@ -77,7 +77,7 @@ public class GamemodeCommand extends Command {
     public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String label, String[] array) {
         List<String> list = new ArrayList<>();
 
-        if (sender.hasPermission("gamemode.command")){
+        if (sender.hasPermission("survivalcore.gamemode")){
             list.add(this.getGamemodeName(array[0]));
             return list;
         }

@@ -19,7 +19,7 @@ public class RemoveArgument extends Argument {
         this.modelService = modelService;
         this.messageHandler = messageHandler;
 
-        this.setPermission("coins.remove.command");
+        this.setPermission("survivalcore.coins.remove");
     }
 
     @Override

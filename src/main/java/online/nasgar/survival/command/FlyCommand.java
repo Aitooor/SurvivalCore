@@ -13,7 +13,7 @@ public class FlyCommand extends Command {
         super("fly", messageHandler);
         this.messageHandler = messageHandler;
 
-        this.setPermission("fly.command");
+        this.setPermission("survivalcore.fly");
         this.setOnlyPlayers(true);
     }
 
@@ -31,7 +31,7 @@ public class FlyCommand extends Command {
             return;
         }
 
-        if (!player.hasPermission("fly.others.command")) {
+        if (!player.hasPermission("survivalcore.fly.others")) {
             return;
         }
 

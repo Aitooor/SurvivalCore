@@ -25,7 +25,7 @@ public class DiscordCommand extends Command {
                 return;
         }
 
-        if(player.hasPermission("discord.other")){
+        if(player.hasPermission("survivalcore.discord.other")){
             Player target = Bukkit.getPlayer(array[0]);
 
             if(this.isPlayerNull(target, array[0])){

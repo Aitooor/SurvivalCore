@@ -19,7 +19,7 @@ public class GodCommand extends Command {
         super("god", messageHandler);
         this.messageHandler = messageHandler;
 
-        this.setPermission("god.command");
+        this.setPermission("survivalcore.god");
         this.setOnlyPlayers(true);
 
         uuids = new HashSet<>();
@@ -41,7 +41,7 @@ public class GodCommand extends Command {
             return;
         }
 
-        if (!player.hasPermission("god.others.command")) {
+        if (!player.hasPermission("survivalcore.god.others")) {
             return;
         }
 

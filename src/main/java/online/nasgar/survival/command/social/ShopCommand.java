@@ -27,7 +27,7 @@ public class ShopCommand extends Command {
                 return;
         }
 
-        if(player.hasPermission("shop.other")){
+        if(player.hasPermission("survivalcore.shop.other")){
             Player target = Bukkit.getPlayer(array[0]);
 
             if(this.isPlayerNull(target, array[0])){
