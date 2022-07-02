@@ -2,6 +2,8 @@ reload: "&aSurvival Configuration reloaded."
 
 player-not-found: "&cPlayer %target_name% not found."
 
+no-permission: "&b&lNASGAR &cThis command doens't exist"
+
 chat:
   format: "%rank%%player_name%&7: &f%message%"
 
@@ -60,6 +62,24 @@ fly:
     target:
       you: "&cFly for &e%target_name% &cdisabled!"
       other: "&cFly disabled by &e%staff_name%"
+shop:
+  usage: "&cUsage: /shop <player>"
+  player: "&b&lNASGAR &fhttps://nasgar.online/shop"
+  target:
+    you: "&b&lNASGAR &fSend correctly the link to &e%target%"
+    other: "&b&lNASGAR &fhttps://nasgar.online/shop &7Sended by &e%staff%"
+discord:
+  usage: "&cUsage: /discord <player>"
+  player: "&b&lNASGAR &fhttps://ds.nasgar.online"
+  target:
+    you: "&b&lNASGAR &fSend correctly the link to &e%target%"
+    other: "&b&lNASGAR &fhttps://ds.nasgar.online &7Sended by &e%staff%"
+web:
+  usage: "&cUsage: /web <player>"
+  player: "&b&lNASGAR &fhttps://nasgar.online"
+  target:
+    you: "&b&lNASGAR &fSend correctly the link to &e%target%"
+    other: "&b&lNASGAR &fhttps://nasgar.online &7Sended by &e%staff%"
 gamemode:
   usage: "&cUsage: /gamemode <mode>"
   not-found: "&cGamemode &e%gamemode% &cnot found!"
@@ -130,7 +150,7 @@ guis:
         - "&r"
         - "&fVisit our store"
         - "&fy buy a lot"
-        - "& fde new things."
+        - "&fde new things."
         - ""
         - "&7Click to view"
     wiki:
@@ -152,7 +172,7 @@ guis:
         - "&fWe'll explain it to you"
         - ""
         - "&7Click to view"
-    warps:
+    player-warps:
       title: "&8➢ &bPlayer Warps"
       lore:
         - ""
@@ -199,6 +219,16 @@ guis:
         - "&eThis is a community store for everyone"
         - ""
         - "&7Click to view"
+    warps:
+      title: "&8➢ &bWarps"
+      lore:
+        - ""
+        - "&aDo you want to go to another Warp??"
+        - ""
+        - "&fHere you can do it."
+        - "&eList of warps."
+        - ""
+        - "&7Click to view"
     resources:
       title: "&8➢ &bResources"
       lore:
@@ -208,6 +238,16 @@ guis:
         - "&fCome to this world to get resources,"
         - "&fmake your own farms, and much more."
         - "&eHere you can do everything that you can't at home, without losing anything."
+        - ""
+        - "&7Click to open"
+    koths:
+      title: "&8➢ &bKoths"
+      lore:
+        - ""
+        - "&aYou need understand it?"
+        - ""
+        - "&fInfo about it, rules, and more."
+        - "&eHere you can understand the system."
         - ""
         - "&7Click to open"
   profile:

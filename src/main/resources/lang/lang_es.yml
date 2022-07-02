@@ -2,6 +2,8 @@ reload: "&aConfiguracion del Survival recargada."
 
 player-not-found: "&cJugador %target_name% no encontrado."
 
+no-permission: "&b&lNASGAR &cEste comando no existe"
+
 chat:
   format: "%rank%%player_name%&7: &f%message%"
 
@@ -60,6 +62,24 @@ fly:
     target:
       you: "&cVuelo de &e%target_name% &cdesactivado!"
       other: "&cVuelo desactivado por &e%staff_name%"
+shop:
+  usage: "&cUso: /shop <jugador>"
+  player: "&b&lNASGAR &fhttps://nasgar.online/shop"
+  target:
+    you: "&b&lNASGAR &fEnviado correctamente el link a &e%target%"
+    other: "&b&lNASGAR &fhttps://nasgar.online/shop &7Enviado por &e%staff%"
+discord:
+  usage: "&cUso: /discord <jugador>"
+  player: "&b&lNASGAR &fhttps://ds.nasgar.online"
+  target:
+    you: "&b&lNASGAR &fEnviado correctamente el link a &e%target%"
+    other: "&b&lNASGAR &fhttps://ds.nasgar.online &7Enviado por &e%staff%"
+web:
+  usage: "&cUso: /web <jugador>"
+  player: "&b&lNASGAR &fhttps://nasgar.online"
+  target:
+    you: "&b&lNASGAR &fEnviado correctamente el link a &e%target%"
+    other: "&b&lNASGAR &fhttps://nasgar.online &7Enviado por &e%staff%"
 gamemode:
   usage: "&cUso: /gamemode <mode>"
   not-found: "&c¡Gamemode &e%gamemode% &cno encontrado!"
@@ -152,7 +172,7 @@ guis:
         - "&fNosotros te lo explicamos"
         - ""
         - "&7Click para ver"
-    warps:
+    player-warps:
       title: "&8➢ &bWarps de Jugadores"
       lore:
         - ""
@@ -199,6 +219,16 @@ guis:
         - "&eEsta es una tienda comunitaria para todos"
         - ""
         - "&7Click para ver"
+    warps:
+      title: "&8➢ &bWarps"
+      lore:
+        - ""
+        - "&a¿Quieres ir a otro Warp?"
+        - ""
+        - "&fAquí puedes hacerlo."
+        - "&eLista de deformaciones".
+        - ""
+        - "&7Haga clic para ver"
     resources:
       title: "&8➢ &bRecursos"
       lore:
@@ -210,6 +240,16 @@ guis:
         - "&eAqui podras hacer todo lo que en tu casa no, sin perder nada."
         - ""
         - "&7Click para abrir"
+    koths:
+      title: "&8➢ &bKoths"
+      lore:
+        - ""
+        - "&aNecesitas entenderlo?"
+        - ""
+        - "&fInfo al respecto, reglas y más".
+        - "&eAquí se puede entender el sistema."
+        - ""
+        - "&7Haga clic para abrir"
   profile:
     title: "&0Perfil"
     settings:
