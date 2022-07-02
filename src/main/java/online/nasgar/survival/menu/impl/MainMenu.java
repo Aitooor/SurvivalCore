@@ -132,7 +132,7 @@ public class MainMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.main.warps.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.main.warps.lore"))
-                        .setTexture("51c4a718a913f95edad106800a3414fb8277699308c32eb38b13daa416d1fe23")
+                        .setTexture("5cb7c21cc43dc17678ee6f16591ffaab1f637c37f4f6bbd8cea497451d76db6d")
                         .toItemStack()
         ));
 
@@ -142,7 +142,7 @@ public class MainMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.main.resources.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.main.resources.lore"))
-                        .setTexture("51c4a718a913f95edad106800a3414fb8277699308c32eb38b13daa416d1fe23")
+                        .setTexture("1289d5b178626ea23d0b0c3d2df5c085e8375056bf685b5ed5bb477fe8472d94")
                         .toItemStack()
         ));
 
@@ -152,7 +152,17 @@ public class MainMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.main.koths.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.main.koths.lore"))
-                        .setTexture("51c4a718a913f95edad106800a3414fb8277699308c32eb38b13daa416d1fe23")
+                        .setTexture("46fbf6b97c3bdab7062beb62793c672e65b8b11ee56a3d52387497b07449504b")
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                37,
+                "web",
+                SkullBuilder.newBuilder()
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.web.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.web.lore"))
+                        .setTexture("ada2380dc3fe0aff23016d5b2c11731dabca3a2598bdcab532c74de79383afe")
                         .toItemStack()
         ));
 

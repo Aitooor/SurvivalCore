@@ -140,7 +140,7 @@ guis:
       lore:
         - "&r"
         - "&fEnter our server"
-        - "&f from Discord."
+        - "&ffrom Discord."
         - "&fY knows our entire community."
         - ""
         - "&7Click to view"
@@ -154,7 +154,7 @@ guis:
         - ""
         - "&7Click to view"
     wiki:
-      title: "&8➢ &bWiki"
+      title: "&8➢ &bWiki &7(Help)"
       lore:
         - "&r"
         - "&aDo you have questions about the server?"
@@ -250,6 +250,13 @@ guis:
         - "&eHere you can understand the system."
         - ""
         - "&7Click to open"
+    web:
+      title: "&8➢ &bWebsite"
+      lore:
+        - "&r"
+        - "&fLookup our website"
+        - ""
+        - "&7Click to view"
   profile:
     title: "&0Profile"
     settings:

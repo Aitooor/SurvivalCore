@@ -154,7 +154,7 @@ guis:
         - ""
         - "&7Click para ver"
     wiki:
-      title: "&8➢ &bWiki"
+      title: "&8➢ &bWiki &7(Ayuda)"
       lore:
         - ""
         - "&a¿Tienes preguntas sobre el server?"
@@ -250,6 +250,13 @@ guis:
         - "&eAquí se puede entender el sistema."
         - ""
         - "&7Haga clic para abrir"
+    web:
+      title: "&8➢ &bPágina Web"
+      lore:
+        - "&r"
+        - "&fVisita nuestra web"
+        - ""
+        - "&7Click para ver"
   profile:
     title: "&0Perfil"
     settings:
