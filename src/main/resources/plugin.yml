@@ -4,8 +4,12 @@ main: online.nasgar.survival.Survival
 version: ${project.version}
 api-version: 1.13
 
-loadbefore: [ TimedRankup ]
+loadbefore:
+  - TimedRankup
+  - LuckPerms
+  - PlaceholderAPI
 
 depend:
   - TimedRankup
+  - Luckperms
   - PlaceholderAPI
