@@ -8,8 +8,9 @@ chat:
 tab:
   header:
     - "&b&lNASGAR &8| &fSurvival &71.18"
-    - "&7Jugando en Survival &e%online%"
+    - "&7Servidor &aSurvival &e%online%"
   footer:
+    - ""
     - "&7&oJugando en Nasgar &e%online%"
     - "&b&onasgar.online"
 
@@ -100,8 +101,10 @@ coins:
       remitente: "&aConfigurado con éxito en &e%target_name% &aa cantidad de &e%cantidad%$&a!"
       target: "&e%staff_name% &aha establecido &e%cantidad%$ &apara ti!"
 guis:
+  exit: "&cSalir"
+  back: "&cAtras"
   main:
-    title: "&0&oMenu Principal"
+    title: "&0Menu Principal"
     profile:
       title: "&8➢ &bPerfil"
       lore:
@@ -132,7 +135,7 @@ guis:
     wiki:
       title: "&8➢ &bWiki"
       lore:
-        - "&r"
+        - ""
         - "&a¿Tienes preguntas sobre el server?"
         - "&r"
         - "&fEntra a esta opcion e informate"
@@ -142,14 +145,92 @@ guis:
     protections:
       title: "&8➢ &bProtecciones"
       lore:
-        - "&r"
+        - ""
         - "&a¿Quieres saber como proteger?"
         - "&r"
         - "&fNosotros te lo explicamos"
         - ""
         - "&7Click para ver"
-  profile: "&0&oPerfil"
-  shop: "&0&oTienda de Items"
+    warps:
+      title: "&8➢ &bWarps de Jugadores"
+      lore:
+        - ""
+        - "&a¿Que es esto?"
+        - ""
+        - "&fCualquier jugador puede"
+        - "&fcrear su propio warp."
+        - "&ePara poder ser visitado por toda la comunidad"
+        - ""
+        - "&a¿Como puedo colocar uno?"
+        - "&fPuedes crear tu propio warp"
+        - "&fUsado el comando &b/pwarp set &7(nombre)"
+        - ""
+        - "&7Click para ver"
+    jobs:
+      title: "&8➢ &bTrabajos"
+      lore:
+        - ""
+        - "&fRecolecta dinero"
+        - "&fminando, talando, pescando, ..."
+        - "&ePor absolutamente todo"
+        - ""
+        - "&aSin necesidad de entrar a ningun trabajo"
+        - ""
+        - "&7Click para ver"
+    battlepass:
+      title: "&8➢ &bPase de Batalla"
+      lore:
+        - ""
+        - "&fCompleta los desafios y retos"
+        - "&fy consigue las recompensas"
+        - "&fpuedes comprar el &bpremium &fen la &atienda&f."
+        - "&eO te puede tocar en las cajas"
+        - ""
+        - "&7Click para abrir"
+    auction:
+      title: "&8➢ &bSubastas"
+      lore:
+        - ""
+        - "&a¿Quieres comprar algo?"
+        - ""
+        - "&fEsta es una opcion muy recomendable"
+        - "&fvende, compra y mucho mas de forma segura"
+        - "&eEsta es una tienda comunitaria para todos"
+        - ""
+        - "&7Click para ver"
+    resources:
+      title: "&8➢ &bRecursos"
+      lore:
+        - ""
+        - "&a¿Necesitas conseguir recursos?"
+        - ""
+        - "&fVen ha este mundo para conseguir recursos,"
+        - "&fhacer tus propias granjas, y mucho más."
+        - "&eAqui podras hacer todo lo que en tu casa no, sin perder nada."
+        - ""
+        - "&7Click para abrir"
+  profile:
+    title: "&0Perfil"
+    settings:
+      title: "&8➢ &bAjustes"
+      lore:
+        - ""
+        - "&fSee general settings"
+        - "&f and adjust them to your liking."
+        - ""
+        - "&fClick to open"
+  wiki:
+    title: "&0Wiki (Ayuda)"
+    settings:
+      title: "&8➢ &bAjustes"
+      lore:
+        - ""
+        - "&fMira los ajustes generales"
+        - "&fAjustalos&f, &eInfo &fy &aRankUP"
+        - ""
+        - "&fClick para abrir"
+
+  shop: "&0Tienda de Items"
 auction:
   help:
     - "&b&lComandos de subasta"
@@ -161,3 +242,8 @@ auction:
   pull:
     no-item: "&cNo tienes items en la mano."
   success: "&aSu artículo se ha agregado con éxito a la venta. En caso de que esté desconectado, el saldo se acreditará, pase lo que pase."
+  gui:
+    no-money: "&cNo tienes dinero"
+    product-name: "&6&lSubasta &7&l#"
+    lore-price: "&fPrecio &e"
+    lore-click: "&aClic para comprar"

@@ -8,7 +8,6 @@ import online.nasgar.survival.auctions.AuctionsManager;
 import online.nasgar.survival.auctions.menu.AuctionMenu;
 import online.nasgar.survival.command.management.Command;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.utils.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -32,7 +31,7 @@ public class AuctionCommand extends Command {
         Player player = (Player) sender;
 
         if (args.length == 1 && args[0].equalsIgnoreCase("menu")) {
-            new AuctionMenu(AuctionsManager.getInstance().getAuctions().stream().filter(auctionData -> !auctionData.isRemoved()).collect(Collectors.toList()), playerCacheModelService).openMenu(player);
+            new AuctionMenu(AuctionsManager.getInstance().getAuctions().stream().filter(auctionData -> !auctionData.isRemoved()).collect(Collectors.toList()), playerCacheModelService, messageHandler).openMenu(player);
             return;
         }
 

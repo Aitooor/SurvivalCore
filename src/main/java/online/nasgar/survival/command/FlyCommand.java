@@ -46,7 +46,7 @@ public class FlyCommand extends Command {
 
             messageHandler.sendReplacing(player, "fly.enabled.target.you", "%target_name%", array[0]);
 
-            messageHandler.sendReplacing(target, "fly.enable.target.other", "%staff_name%", player.getName());
+            messageHandler.sendReplacing(target, "fly.enabled.target.other", "%staff_name%", player.getName());
         } else {
             target.setAllowFlight(false);
 

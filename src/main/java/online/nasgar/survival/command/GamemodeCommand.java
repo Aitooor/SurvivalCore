@@ -61,6 +61,12 @@ public class GamemodeCommand extends Command {
                 return "ADVENTURE";
             }
 
+            case "spec":
+            case "spectator":
+            case "3": {
+                return "SPECTATOR";
+            }
+
             default: {
                 return null;
             }

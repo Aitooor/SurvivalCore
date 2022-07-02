@@ -18,14 +18,14 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ProfileMenu extends Menu {
+public class WikiMenu extends Menu {
 
     private final CachedRemoteModelService<PlayerData> modelService;
 
     MessageHandler messageHandler = Survival.getInstance().getMessageHandler();
 
-    public ProfileMenu(String title, CachedRemoteModelService<PlayerData> modelService) {
-        super(title, 5);
+    public WikiMenu(String title, CachedRemoteModelService<PlayerData> modelService) {
+        super(title, 6);
         this.modelService = modelService;
 
         this.setFillEnabled(true);
@@ -49,7 +49,7 @@ public class ProfileMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.profile.settings.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.profile.settings.lore"))
-                        .setTexture("2bcb59d149c0aa4b28796885464c722183b2db774263787970b4b7b138953df5")
+                        .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
         ));
 
@@ -63,7 +63,7 @@ public class ProfileMenu extends Menu {
                                 "&eMonedas",
                                 "&fTienes " + data.getCoins() + " &fmonedas",
                                 "")
-                        .setTexture("d01afe973c5482fdc71e6aa10698833c79c437f21308ea9a1a095746ec274a0f")
+                        .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
         ));
 
@@ -82,12 +82,12 @@ public class ProfileMenu extends Menu {
                                 "&fTodos los Rangos",
                                 "&fClick para abrir",
                                 "")
-                        .setTexture("45c0cd717ca9228849652a8ccdf5281a860cb2e79646b56a22bc59110f361da")
+                        .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
-                32,
+                50,
                 "menu",
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.back"))

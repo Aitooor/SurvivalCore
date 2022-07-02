@@ -1,4 +1,4 @@
-package online.nasgar.survival.command;
+package online.nasgar.survival.menu.impl.command;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
@@ -19,7 +19,6 @@ public class ProfileCommand extends Command {
         this.modelService = modelService;
         this.messageHandler = messageHandler;
 
-        this.setPermission("profile.command");
         this.setOnlyPlayers(true);
         this.setAliases(Arrays.asList("profilemenu", "profilegui"));
     }
@@ -27,7 +26,7 @@ public class ProfileCommand extends Command {
     @Override
     public void onCommand(Player player, String[] array) {
         new ProfileMenu(
-                messageHandler.get(player, "guis.profile"),
+                messageHandler.get(player, "guis.profile.title"),
                 modelService
         ).openMenu(player);
     }

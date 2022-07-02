@@ -1,4 +1,4 @@
-package online.nasgar.survival.command;
+package online.nasgar.survival.menu.impl.command;
 
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.command.management.Command;
@@ -15,7 +15,6 @@ public class MenuCommand extends Command {
         super("menu", messageHandler);
         this.messageHandler = messageHandler;
 
-        this.setPermission("menu.command");
         this.setOnlyPlayers(true);
         this.setAliases(Arrays.asList("gui", "mainmenu"));
     }

@@ -54,12 +54,6 @@
             <version>2.0.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>net.cosmogrp</groupId>
-            <artifactId>commons-bukkit</artifactId>
-            <version>0.3.3</version>
-            <scope>compile</scope>
-        </dependency>
 
         <dependency>
             <groupId>online.nasgar</groupId>

@@ -1,14 +1,13 @@
 package online.nasgar.survival.auctions.menu;
 
+import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
-import online.nasgar.survival.Survival;
 import online.nasgar.survival.auctions.AuctionData;
 import online.nasgar.survival.auctions.AuctionsManager;
 import online.nasgar.survival.menu.Menu;
 import online.nasgar.survival.menu.button.Button;
 import online.nasgar.survival.menu.type.MenuType;
 import online.nasgar.survival.playerdata.PlayerData;
-import online.nasgar.survival.utils.CC;
 import online.nasgar.survival.utils.ItemCreator;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -24,11 +23,15 @@ public class AuctionMenu extends Menu {
 
     private final ModelService<PlayerData> playerCacheModelService;
 
-    public AuctionMenu(List<AuctionData> auctionData, ModelService<PlayerData> playerCacheModelService) {
-        super("Auction", 54, MenuType.CHEST);
+    private final MessageHandler messageHandler;
+
+    public AuctionMenu(List<AuctionData> auctionData, ModelService<PlayerData> playerCacheModelService, MessageHandler messageHandler) {
+        super("Auctions", 54, MenuType.CHEST);
 
         this.notAddedAuctions = auctionData;
         this.playerCacheModelService = playerCacheModelService;
+
+        this.messageHandler = messageHandler;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class AuctionMenu extends Menu {
                     PlayerData playerData = playerCacheModelService.findSync(player.getUniqueId().toString());
 
                     if (playerData.getCoins() < data.getPrice()) {
-                        player.sendMessage(CC.translate("&cNot enough money."));
+                        messageHandler.send(player, "auction.gui.no-money");
                         return;
                     }
 
@@ -71,7 +74,7 @@ public class AuctionMenu extends Menu {
 
                 @Override
                 public ItemStack getButtonItem() {
-                    return new ItemCreator(data.getStack().getType()).setDisplayName("&b&lAuction #" + (finalId + 1)).setLore("  ", "&ePrice: &a$" + data.getPrice(), "  ", "&aClick here to buy this item.").toItemStack();
+                    return new ItemCreator(data.getStack().getType()).setDisplayName(messageHandler.replacing(player, "auction.gui.product-name") + (finalId + 1)).setLore("  ", messageHandler.replacing(player, "auction.gui.lore-price") + data.getPrice() + "&6$", "  ", messageHandler.replacing(player, "auction.gui.lore-click")).toItemStack();
                 }
             });
 

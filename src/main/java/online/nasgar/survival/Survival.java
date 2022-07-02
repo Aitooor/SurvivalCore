@@ -121,7 +121,7 @@ public class Survival extends JavaPlugin {
         MessageProvider messageProvider = MessageProvider
                 .create(
                         MessageSourceDecorator
-                                .decorate(BukkitMessageAdapt.newYamlSource(this, "lang_%lang%.yml"))
+                                .decorate(BukkitMessageAdapt.newYamlSource(this, "lang/lang_%lang%.yml"))
                                 .addFallbackLanguage("en")
                                 .get(),
                         config -> {

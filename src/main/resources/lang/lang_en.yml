@@ -8,8 +8,9 @@ chat:
 tab:
   header:
     - "&b&lNASGAR &8| &fSurvival &71.18"
-    - "&7Playing in Survival &e%online%"
+    - "&7Server &aSurvival &e%online%"
   footer:
+    - ""
     - "&7&oPlayin in Nasgar &e%online%"
     - "&b&onasgar.online"
 
@@ -100,8 +101,10 @@ coins:
       sender: "&aSuccessfully set to &e%target_name% &aa amount of &e%amount%$&a!"
       target: "&e%staff_name% &ahas set &e%amount%$ &afor you!"
 guis:
+  exit: "&cExit"
+  back: "&cBack"
   main:
-    title: "&0&oMain Menu"
+    title: "&0Main Menu"
     profile:
       title: "&8➢ &bProfile"
       lore:
@@ -148,8 +151,86 @@ guis:
         - "&fWe'll explain it to you"
         - ""
         - "&7Click to view"
-  profile: "&0&oProfile"
-  shop: "&0&oShop Items"
+    warps:
+      title: "&8➢ &bPlayer Warps"
+      lore:
+        - ""
+        - "&aWhat is this?"
+        - ""
+        - "&fAny player can"
+        - "&create your own warp."
+        - "&eTo be able to be visited by the whole community"
+        - ""
+        - "&aHow can I place one?"
+        - "&fYou can create your own warp"
+        - "&fUsed the command &b/pwarp set &7(name)"
+        - ""
+        - "&7Click to view"
+    jobs:
+      title: "&8➢ &bJobs"
+      lore:
+        - ""
+        - "&fCollect money"
+        - "&finishing, logging, fishing, ..."
+        - "&eFor absolutely everything"
+        - ""
+        - "&aNo need to enter any job"
+        - ""
+        - "&7Click to view"
+    battlepass:
+      title: "&8➢ &bBattle Pass"
+      lore:
+        - ""
+        - "&fComplete the challenges and challenges"
+        - "&fy get the rewards"
+        - "&fyou can buy the &bpremium &in the &attendance&f."
+        - "&aO can touch you in the boxes"
+        - ""
+        - "&7Click to open"
+    auction:
+      title: "&8➢ &bAuctions"
+      lore:
+        - ""
+        - "&aDo you want to buy something?"
+        - ""
+        - "&fThis is a highly recommended option"
+        - "&fsell, buy and much more safely"
+        - "&eThis is a community store for everyone"
+        - ""
+        - "&7Click to view"
+    resources:
+      title: "&8➢ &bResources"
+      lore:
+        - ""
+        - "&aNeed to get resources?"
+        - ""
+        - "&fCome to this world to get resources,"
+        - "&fmake your own farms, and much more."
+        - "&eHere you can do everything that you can't at home, without losing anything."
+        - ""
+        - "&7Click to open"
+  profile:
+    title: "&0Profile"
+    settings:
+      title: "&8➢ &bAjustes"
+      lore:
+        - ""
+        - "&fMira los ajustes generales"
+        - "&fAjustalos&f, &eInfo &fy &aRankUP"
+        - ""
+        - "&fClick para abrir"
+  wiki:
+    title: "&0Wiki (Help)"
+    settings:
+      title: "&8➢ &bAjustes"
+      lore:
+        - ""
+        - "&fMira los ajustes generales"
+        - "&fAjustalos&f, &eInfo &fy &aRankUP"
+        - ""
+        - "&fClick para abrir"
+
+  shop: "&0Shop Items"
 auction:
   help:
     - "&b&lAuction Commands"
@@ -161,3 +242,8 @@ auction:
   pull:
     no-item: "&cNo Item in hand."
   success: "&aYour item has been added successfully for sale. In case that you're offline the balance would be acredited, no matter what."
+  gui:
+    no-money: "&cNot enough money"
+    product-name: "&6&lAuction &7&l#"
+    lore-price: "&fPrice &e"
+    lore-click: "&aClick to buy"

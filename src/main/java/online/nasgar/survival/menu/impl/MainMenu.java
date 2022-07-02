@@ -21,25 +21,15 @@ public class MainMenu extends Menu {
     MessageHandler messageHandler = Survival.getInstance().getMessageHandler();
 
     public MainMenu(String title) {
-        super(title, 5);
+        super(title, 6);
 
         this.setFillEnabled(true);
 
-        this.setFillItemStack(new ItemCreator(Material.BLACK_STAINED_GLASS, 1, (short) 4)
+        this.setFillItemStack(new ItemCreator(Material.GRAY_STAINED_GLASS_PANE, 1, (short) 4)
                         .setDisplayName("&8Nasgar")
                 .toItemStack());
 
         this.setFillType(FillType.ALL);
-    }
-
-    @Override
-    public void onOpen(Player player) {
-        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1.0f, 1.0f);
-    }
-
-    @Override
-    public void onClose(Player player) {
-        player.playSound(player.getLocation(), Sound.BLOCK_CHEST_CLOSE, 1.0f, 1.0f);
     }
 
     @Override
@@ -100,51 +90,28 @@ public class MainMenu extends Menu {
                 15,
                 "warps",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &bWarps")
-                        .setLore(
-                                "&c¿Que es esto?",
-                                "&fCualquier jugador puede",
-                                "&fcrear su propio warp.",
-                                "&fPara poder ser visitado por toda la comunidad",
-                                "",
-                                "&c¿Como puedo colocar uno?",
-                                "&fPuedes crear tu propio warp",
-                                "&fUsado el comando &b/pwarp set &7(nombre)",
-                                "",
-                                "&aClick para mas informacion")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.warps.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.warps.lore"))
                         .setTexture("77400ea19dbd84f75c39ad6823ac4ef786f39f48fc6f84602366ac29b837422")
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 17,
-                "jobs",
+                "jobs browse",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &bTrabajos")
-                        .setLore(
-                                "&fRecolecta dinero",
-                                "&fminando, talando, pescando, ...",
-                                "&fPor absolutamente todo",
-                                "",
-                                "&aSin necesidad de entrar a ningun trabajo",
-                                "",
-                                "&aClick para mas informacion")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.jobs.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.jobs.lore"))
                         .setTexture("69a600ab0a83097065b95ae284f8059961774609adb3dbd3a4ca269d44409551")
                         .toItemStack()
         ));
 
         buttons.add(new ButtonItem(
                 23,
-                "battlepass",
+                "pass",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &bPase de Batalla")
-                        .setLore(
-                                "&fCompleta los desafios y retos",
-                                "&fy consigue las recompensas",
-                                "&fpuedes comprar el &epremium &fen la &atienda&f.",
-                                "&fO te puede tocar en las &ecajas&f.",
-                                "",
-                                "&aClick para abrir")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.battlepass.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.battlepass.lore"))
                         .setTexture("ea62b9de6a26b86869ca22ea40f1bde80a0430a54547becce8fda8707777258f")
                         .toItemStack()
         ));
@@ -153,14 +120,8 @@ public class MainMenu extends Menu {
                 25,
                 "auction menu",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &bCasa de Subastas")
-                        .setLore(
-                                "&c¿Quieres comprar algo?",
-                                "&fEsta es una opcion muy recomendable",
-                                "&fvende, compra y mucho mas de forma segura",
-                                "&fEsta es una tienda comunitaria para todos",
-                                "",
-                                "&aClick para mas informacion")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.auction.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.auction.lore"))
                         .setTexture("ef835b8941fe319931749b87fe8e84c5d1f4a271b5fbce5e700a60004d881f79")
                         .toItemStack()
         ));
@@ -169,8 +130,18 @@ public class MainMenu extends Menu {
                 33,
                 "resources",
                 SkullBuilder.newBuilder()
-                        .setDisplayName("&8➢ &bRecursos")
-                        .setTexture("27957f895d7bc53423a35aac59d584b41cc30e040269c955e451fe680a1cc049")
+                        .setDisplayName(messageHandler.replacing(player, "guis.main.resources.title"))
+                        .setLore(messageHandler.replacingMany(player, "guis.main.resources.lore"))
+                        .setTexture("51c4a718a913f95edad106800a3414fb8277699308c32eb38b13daa416d1fe23")
+                        .toItemStack()
+        ));
+
+        buttons.add(new ButtonItem(
+                50,
+                "",
+                SkullBuilder.newBuilder()
+                        .setDisplayName(messageHandler.replacing(player, "guis.exit"))
+                        .setTexture("86e145e71295bcc0488e9bb7e6d6895b7f969a3b5bb7eb34a52e932bc84df5b")
                         .toItemStack()
         ));
 
@@ -192,6 +163,7 @@ public class MainMenu extends Menu {
         @Override
         public void onClick(InventoryClickEvent event) {
             Player player = (Player) event.getWhoClicked();
+            player.closeInventory();
             player.performCommand(this.command);
         }
 
