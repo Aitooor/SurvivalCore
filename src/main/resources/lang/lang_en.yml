@@ -51,6 +51,13 @@ heal:
     target:
       you: "&e%target_name% &ahealth has been restored!"
       other: "&aYour health has been restored by &e%staff_name%"
+hat:
+  already-have: "&cYou already have a hat!"
+  no-item: "&cYou don't have any item in your hand!"
+  update: "&aYour hat has been updated!"
+  target:
+    you: "&f&e%target_name%&f's helmet has been updated"
+    other: "&fYour helmet has been updated by &e%staff_name%"
 fly:
   enabled:
     player: "&aFly enabled"

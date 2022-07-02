@@ -51,6 +51,13 @@ heal:
     target:
       you: "&aLa vida de &e%target_name% &aha sido restablecida!"
       other: "&aTu vida ha sido restablecida por &e%staff_name%"
+hat:
+  already-have: "&c¡Ya tienes un casco!"
+  no-item: "&c¡No tienes ningun item en la mano!"
+  update: "&a¡Tu casco ha sido actualizado!"
+  target:
+    you: "&fEl casco de &e%target_name% &fha sido actualizado"
+    other: "&fTu casco ha sido actualizado por &e%staff_name%"
 fly:
   enabled:
     player: "&aVuelo activado"
