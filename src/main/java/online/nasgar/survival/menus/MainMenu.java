@@ -156,16 +156,6 @@ public class MainMenu extends Menu {
         ));
 
         buttons.add(new ButtonItem(
-                37,
-                "web",
-                SkullBuilder.newBuilder()
-                        .setDisplayName(messageHandler.replacing(player, "guis.main.web.title"))
-                        .setLore(messageHandler.replacingMany(player, "guis.main.web.lore"))
-                        .setTexture("ada2380dc3fe0aff23016d5b2c11731dabca3a2598bdcab532c74de79383afe")
-                        .toItemStack()
-        ));
-
-        buttons.add(new ButtonItem(
                 50,
                 null,
                 SkullBuilder.newBuilder()
