@@ -45,7 +45,7 @@ public class SettingsMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 12,
-                "settings",
+                "",
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.profile.settings.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.profile.settings.lore"))
@@ -88,7 +88,7 @@ public class SettingsMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 32,
-                "menu",
+                "profile",
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.back"))
                         .setTexture("86e145e71295bcc0488e9bb7e6d6895b7f969a3b5bb7eb34a52e932bc84df5b")

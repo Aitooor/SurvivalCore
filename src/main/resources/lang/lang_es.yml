@@ -146,7 +146,7 @@ guis:
   exit: "&cSalir"
   back: "&cAtras"
   main:
-    title: "&0Menu Principal"
+    title: "Menu Principal"
     profile:
       title: "&8➢ &bPerfil"
       lore:
@@ -279,7 +279,7 @@ guis:
         - ""
         - "&7Click para ver"
   profile:
-    title: "&0Perfil"
+    title: "Perfil"
     settings:
       title: "&8➢ &bAjustes"
       lore:
@@ -289,7 +289,7 @@ guis:
         - ""
         - "&fClick to open"
   wiki:
-    title: "&0Wiki (Ayuda)"
+    title: "Wiki (Ayuda)"
     settings:
       title: "&8➢ &bAjustes"
       lore:
@@ -299,7 +299,7 @@ guis:
         - ""
         - "&fClick para abrir"
 
-  shop: "&0Tienda de Items"
+  shop: "Tienda de Items"
 auction:
   help:
     - "&b&lComandos de subasta"
