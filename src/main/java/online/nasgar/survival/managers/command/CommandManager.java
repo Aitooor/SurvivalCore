@@ -15,10 +15,7 @@ import online.nasgar.survival.command.message.ReplyCommand;
 import online.nasgar.survival.command.social.DiscordCommand;
 import online.nasgar.survival.command.social.ShopCommand;
 import online.nasgar.survival.command.social.WebCommand;
-import online.nasgar.survival.menus.command.MenuCommand;
-import online.nasgar.survival.menus.command.ProfileCommand;
-import online.nasgar.survival.menus.command.ShopItemCommand;
-import online.nasgar.survival.menus.command.WikiCommand;
+import online.nasgar.survival.menus.command.*;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
@@ -59,6 +56,7 @@ public class CommandManager {
                 // MENUS
                 new MenuCommand(messageHandler),
                 new ProfileCommand(modelService, messageHandler),
+                new SettingsCommand(modelService, messageHandler),
                 new WikiCommand(modelService, messageHandler),
                 new ShopItemCommand(messageHandler),
                 new CoinsCommand(modelService, messageHandler),
