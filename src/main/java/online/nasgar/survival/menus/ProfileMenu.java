@@ -55,7 +55,7 @@ public class ProfileMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 14,
-                "",
+                null,
                 SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &bInfo")
                         .setLore(
@@ -69,7 +69,7 @@ public class ProfileMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 16,
-                "",
+                null,
                 SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &bRankup")
                         .setLore(
