@@ -22,6 +22,8 @@ public class SkullCommand extends Command {
         this.setAliases(Arrays.asList("skull", "cabeza", "cabezas"));
 
         this.setPermission("survivalcore.skull");
+
+        this.setOnlyPlayers(true);
     }
 
     @Override public void onCommand(Player player, String[] array) {
@@ -31,7 +33,7 @@ public class SkullCommand extends Command {
         if (array.length < 1) {
             inventory.addItem(new ItemStack(SkullBuilder.newBuilder()
                     .setOwner(player.getName())
-                    .setDisplayName(ChatColor.GRAY + player.getName())
+                    .setDisplayName(ChatColor.YELLOW + player.getName())
                     .toItemStack()
             ));
             messageHandler.send(player, "skull.you");
@@ -51,7 +53,7 @@ public class SkullCommand extends Command {
 
         inventory.addItem(new ItemStack(SkullBuilder.newBuilder()
                 .setOwner(target.getName())
-                .setDisplayName(ChatColor.GRAY + target.getName())
+                .setDisplayName(ChatColor.YELLOW + target.getName())
                 .toItemStack()
         ));
         messageHandler.sendReplacing(player, "skull.target", "%target_name%", array[0]);

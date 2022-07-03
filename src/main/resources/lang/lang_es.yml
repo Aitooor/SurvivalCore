@@ -56,6 +56,7 @@ hat:
   no-item: "&c¡No tienes ningun item en la mano!"
   update: "&a¡Tu casco ha sido actualizado!"
   target:
+    already-have: "&e%target_name% &fya tiene un casco"
     you: "&fEl casco de &e%target_name% &fha sido actualizado"
     other: "&fTu casco ha sido actualizado por &e%staff_name%"
 enderchest:
@@ -246,7 +247,7 @@ guis:
         - "&a¿Quieres ir a otro Warp?"
         - ""
         - "&fAquí puedes hacerlo."
-        - "&eLista de deformaciones".
+        - "&eLista de deformaciones"
         - ""
         - "&7Haga clic para ver"
     resources:
@@ -266,7 +267,7 @@ guis:
         - ""
         - "&aNecesitas entenderlo?"
         - ""
-        - "&fInfo al respecto, reglas y más".
+        - "&fInfo al respecto, reglas y más"
         - "&eAquí se puede entender el sistema."
         - ""
         - "&7Haga clic para abrir"

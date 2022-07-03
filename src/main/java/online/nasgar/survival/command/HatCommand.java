@@ -57,7 +57,7 @@ public class HatCommand extends Command {
         }
 
         if (target.getInventory().getHelmet() != null) {
-            messageHandler.send(player, "hat.already-have");
+            messageHandler.send(player, "hat.target.already-have", "%target_name%", array[0]);
             return;
         }
 
@@ -65,9 +65,9 @@ public class HatCommand extends Command {
             messageHandler.send(player, "hat.no-item");
             return;
         }
-        player.getInventory().setItem(player.getInventory().getHeldItemSlot(), y);
-        player.getInventory().remove(x);
-        player.getInventory().setHelmet(x);
+        target.getInventory().setItem(player.getInventory().getHeldItemSlot(), y);
+        target.getInventory().remove(x);
+        target.getInventory().setHelmet(x);
 
         messageHandler.sendReplacing(player, "hat.target.you", "%target_name%", array[0]);
         messageHandler.sendReplacing(target, "hat.target.other", "%staff_name%", player.getName());
