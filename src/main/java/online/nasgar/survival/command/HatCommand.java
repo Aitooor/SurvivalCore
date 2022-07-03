@@ -57,7 +57,7 @@ public class HatCommand extends Command {
         }
 
         if (target.getInventory().getHelmet() != null) {
-            messageHandler.send(player, "hat.target.already-have", "%target_name%", target.getName());
+            messageHandler.sendReplacing(player, "hat.target.already-have", "%target_name%", target.getName());
             return;
         }
 
