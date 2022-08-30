@@ -1,6 +1,6 @@
-author: [ Nasgar Development, Aitooor ]
-name: VanillaCore
-main: online.nasgar.vanilla.Vanilla
+author: Nasgar Development Team
+name: SurvivalCore
+main: online.nasgar.survival.Survival
 version: ${project.version}
 api-version: 1.13
 

@@ -9,15 +9,15 @@ chat:
 
 tab:
   header:
-    - "&b&lNASGAR &8| &fVanilla &71.19"
-    - "&7Servidor &aVanilla &e%online%"
+    - "&b&lNASGAR &8| &fSurvival &71.19"
+    - "&7Servidor &aSurvival &e%online%"
   footer:
     - ""
     - "&7&oJugando en Nasgar &e%online%"
     - "&b&onasgar.online"
 
 scoreboard:
-  title: "&b&lVANILLA &8| &7&o1.19"
+  title: "&b&lSURVIVAL &8| &7&o1.19"
   lines:
     - ""
     - "&fNombre"
@@ -29,7 +29,7 @@ scoreboard:
     - "&fDinero"
     - "&e%money%"
     - ""
-    - "&fJugando &a%vanilla_online%"
+    - "&fJugando &a%survival_online%"
     - ""
     - "&bnasgar.online"
 
@@ -184,7 +184,7 @@ guis:
         - "&fde todo nuestros comandos y opciones"
         - ""
         - "&7Click para abrir"
-    protections:gi
+    protections:
       title: "&8➢ &bProtecciones"
       lore:
         - ""

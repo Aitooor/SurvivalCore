@@ -1,9 +1,9 @@
-id: Vanilla-1
+id: Survival-1
 
 mongodb:
   address: "localhost"
   port: 27017
-  database: "Vanilla"
+  database: "Survival"
   authentication:
     username: "usrcx_local54"
     password: "ZR9xye5J5R5J9BdLcykq9fGfLkS9dvFVptzmBZRMm2hzb6erTARH9RysXkCpVmvSZtEGh3rf3V3"
@@ -13,4 +13,18 @@ redis:
   port: 6379
   password: "e44fuT2mQM2hr437N5DTA99rK8xW8RhRAMmSm9LQ4FcnXx7bf5e8VpwXKquYzBvTpnKjUTthqq3"
   channel:
-    chat: "vanilla_core_chat"
+    chat: "SurvivalCoreChat"
+
+shop-items:
+  golden-apple:
+    item:
+      display-name: "&6&lGolden Apple &7($500)"
+      material: "GOLDEN_APPLE"
+      data: 0
+      amount: 64
+      glow: false
+      description:
+        - "&fSale a 500 perry"
+    price: 500
+    commands:
+      - "give <player> GOLDEN_APPLE 1"
