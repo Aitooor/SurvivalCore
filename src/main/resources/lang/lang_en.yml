@@ -9,15 +9,15 @@ chat:
 
 tab:
   header:
-    - "&b&lNASGAR &8| &fSurvival &71.19"
-    - "&7Server &aSurvival &e%online%"
+    - "&b&lNASGAR &8| &fVanilla &71.19"
+    - "&7Server &aVanilla &e%online%"
   footer:
     - ""
     - "&7&oPlayin in Nasgar &e%online%"
     - "&b&onasgar.online"
 
 scoreboard:
-  title: "&b&lSURVIVAL &8| &7&o1.19"
+  title: "&b&lVANILLA &8| &7&o1.19"
   lines:
     - ""
     - "&fName"
@@ -29,7 +29,7 @@ scoreboard:
     - "&fMoney"
     - "&e%money%"
     - ""
-    - "&fPlaying &a%survival_online%"
+    - "&fPlaying &a%vanilla_online%"
     - ""
     - "&bnasgar.online"
 
