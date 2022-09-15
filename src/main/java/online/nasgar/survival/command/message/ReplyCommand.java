@@ -1,7 +1,7 @@
 package online.nasgar.survival.command.message;
 
+import com.pixeldv.storage.ModelService;
 import me.yushust.message.MessageHandler;
-import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.managers.command.Command;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.managers.playerdata.PlayerData;

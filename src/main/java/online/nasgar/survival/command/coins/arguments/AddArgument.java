@@ -1,7 +1,7 @@
 package online.nasgar.survival.command.coins.arguments;
 
+import com.pixeldv.storage.dist.CachedRemoteModelService;
 import me.yushust.message.MessageHandler;
-import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.managers.command.Argument;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.utils.StringUtils;

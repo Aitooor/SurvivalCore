@@ -1,7 +1,7 @@
 package online.nasgar.survival.menus;
 
+import com.pixeldv.storage.dist.CachedRemoteModelService;
 import me.yushust.message.MessageHandler;
-import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.managers.menus.Menu;
 import online.nasgar.survival.managers.menus.button.Button;

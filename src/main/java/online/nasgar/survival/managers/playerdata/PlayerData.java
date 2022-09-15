@@ -1,10 +1,10 @@
 package online.nasgar.survival.managers.playerdata;
 
+import com.pixeldv.storage.model.Model;
+import com.pixeldv.storage.mongo.codec.DocumentCodec;
+import com.pixeldv.storage.mongo.codec.DocumentWriter;
 import lombok.Getter;
 import lombok.Setter;
-import net.cosmogrp.storage.model.Model;
-import net.cosmogrp.storage.mongo.codec.DocumentCodec;
-import net.cosmogrp.storage.mongo.codec.DocumentWriter;
 import online.nasgar.survival.utils.BukkitUtil;
 import online.nasgar.timedrankup.TimedRankup;
 import online.nasgar.timedrankup.rank.Rank;

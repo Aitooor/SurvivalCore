@@ -1,19 +1,17 @@
 package online.nasgar.survival;
 
+import com.pixeldv.storage.dist.CachedRemoteModelService;
+import com.pixeldv.storage.dist.LocalModelService;
+import com.pixeldv.storage.mongo.MongoModelService;
+import com.pixeldv.storage.redis.connection.GsonRedis;
+import com.pixeldv.storage.redis.connection.JedisBuilder;
+import com.pixeldv.storage.redis.connection.JedisInstance;
+import com.pixeldv.storage.redis.connection.Redis;
 import lombok.Getter;
 import me.yushust.message.MessageHandler;
 import me.yushust.message.MessageProvider;
 import me.yushust.message.bukkit.BukkitMessageAdapt;
 import me.yushust.message.source.MessageSourceDecorator;
-import net.cosmogrp.storage.dist.CachedRemoteModelService;
-import net.cosmogrp.storage.dist.LocalModelService;
-import net.cosmogrp.storage.mongo.MongoModelService;
-import net.cosmogrp.storage.redis.connection.GsonRedis;
-import net.cosmogrp.storage.redis.connection.JedisBuilder;
-import net.cosmogrp.storage.redis.connection.JedisInstance;
-import net.cosmogrp.storage.redis.connection.Redis;
-import online.nasgar.survival.auctions.AuctionsManager;
-import online.nasgar.survival.backpack.BackPackMenu;
 import online.nasgar.survival.services.chat.ChatService;
 import online.nasgar.survival.managers.command.CommandManager;
 import online.nasgar.survival.managers.config.ConfigFile;
@@ -84,7 +82,6 @@ public class Survival extends JavaPlugin {
         this.setupManagers();
 
         new MenuManager(this);
-        new AuctionsManager();
 
         Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
@@ -94,7 +91,6 @@ public class Survival extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
             Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
             Bukkit.getPluginManager().registerEvents(new BoardListener(playerModelService), this);
-            Bukkit.getPluginManager().registerEvents(new BackPackMenu(playerModelService), this);
         } else {
             Bukkit.getPluginManager().disablePlugin(this);
         }
@@ -102,8 +98,6 @@ public class Survival extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        AuctionsManager.getInstance().save();
-
         this.mongoManager.close();
         instance = null;
     }
@@ -161,7 +155,7 @@ public class Survival extends JavaPlugin {
         this.playerModelService = (CachedRemoteModelService<PlayerData>)
                 MongoModelService.builder(PlayerData.class)
                         .modelParser(new PlayerMongoModelParser())
-                        .cachedService(LocalModelService.create())
+                        .cachedService(LocalModelService.create()) //TODO Fix this
                         .database(mongoManager.getMongoDatabase())
                         .collection("users")
                         .executor(executor)
