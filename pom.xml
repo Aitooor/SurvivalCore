@@ -10,10 +10,6 @@
 
     <repositories>
         <repository>
-            <id>nasgar-public</id>
-            <url>https://repo.nasgar.online/repository/nasgar-public/</url>
-        </repository>
-        <repository>
             <id>codemc</id>
             <url>https://repo.codemc.io/repository/nms/</url>
         </repository>
@@ -58,7 +54,7 @@
         <dependency>
             <groupId>online.nasgar</groupId>
             <artifactId>TimedRankup</artifactId>
-            <version>1.19</version>
+            <version>1.0</version>
             <scope>provided</scope>
         </dependency>
 
