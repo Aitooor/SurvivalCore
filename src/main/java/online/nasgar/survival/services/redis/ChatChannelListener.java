@@ -1,7 +1,7 @@
 package online.nasgar.survival.services.redis;
 
-import com.pixeldv.storage.redis.channel.Channel;
-import com.pixeldv.storage.redis.channel.ChannelListener;
+import net.cosmogrp.storage.redis.channel.Channel;
+import net.cosmogrp.storage.redis.channel.ChannelListener;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.services.chat.ChatService;
 import online.nasgar.survival.managers.config.ConfigFile;

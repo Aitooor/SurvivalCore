@@ -1,8 +1,8 @@
 package online.nasgar.survival.utils.text;
 
-import com.pixeldv.storage.dist.CachedRemoteModelService;
 import lombok.Getter;
 import lombok.Setter;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.utils.LuckPermsUtil;

@@ -1,6 +1,6 @@
 package online.nasgar.survival.services.playerdata;
 
-import com.pixeldv.storage.dist.CachedRemoteModelService;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;

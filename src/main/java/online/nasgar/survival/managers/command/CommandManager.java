@@ -1,7 +1,9 @@
 package online.nasgar.survival.managers.command;
 
-import com.pixeldv.storage.dist.CachedRemoteModelService;
 import me.yushust.message.MessageHandler;
+import net.cosmogrp.storage.dist.CachedRemoteModelService;
+import online.nasgar.survival.auctions.commands.AuctionCommand;
+import online.nasgar.survival.backpack.commands.BackPackCommand;
 import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.admin.GamemodeCommand;
 import online.nasgar.survival.command.admin.GodCommand;
@@ -38,6 +40,8 @@ public class CommandManager {
                 new GamemodeCommand(messageHandler),
                 new HealCommand(messageHandler),
                 new FeedCommand(messageHandler),
+                new BackPackCommand(modelService),
+                new AuctionCommand(modelService, messageHandler),
 
                 // PREMIUM
                 new FlyCommand(messageHandler),
@@ -54,6 +58,7 @@ public class CommandManager {
                 new ProfileCommand(modelService, messageHandler),
                 new SettingsCommand(modelService, messageHandler),
                 new WikiCommand(modelService, messageHandler),
+                new ShopItemCommand(messageHandler),
                 new CoinsCommand(modelService, messageHandler),
 
                 // ADMIN

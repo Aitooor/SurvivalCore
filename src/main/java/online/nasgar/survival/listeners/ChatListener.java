@@ -1,6 +1,6 @@
 package online.nasgar.survival.listeners;
 
-import com.pixeldv.storage.redis.connection.Redis;
+import net.cosmogrp.storage.redis.connection.Redis;
 import online.nasgar.survival.services.chat.ChatService;
 import online.nasgar.survival.services.redis.ChatChannelListener;
 import online.nasgar.survival.services.redis.data.MessageData;

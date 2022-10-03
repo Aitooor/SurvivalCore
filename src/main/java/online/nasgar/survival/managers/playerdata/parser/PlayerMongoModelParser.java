@@ -1,7 +1,7 @@
 package online.nasgar.survival.managers.playerdata.parser;
 
-import com.pixeldv.storage.codec.ModelReader;
-import com.pixeldv.storage.mongo.codec.MongoModelParser;
+import net.cosmogrp.storage.codec.ModelReader;
+import net.cosmogrp.storage.mongo.codec.MongoModelParser;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.utils.BukkitUtil;
 import online.nasgar.timedrankup.TimedRankup;
