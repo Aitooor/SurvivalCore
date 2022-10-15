@@ -45,7 +45,7 @@ public class ProfileMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 12,
-                "settings",
+                null,
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.profile.settings.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.profile.settings.lore"))

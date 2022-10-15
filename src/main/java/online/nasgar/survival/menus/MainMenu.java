@@ -77,7 +77,7 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 13,
-                "lands",
+                "protections",
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.main.protections.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.main.protections.lore"))
@@ -137,7 +137,7 @@ public class MainMenu extends Menu {
 
         buttons.add(new ButtonItem(
                 33,
-                "resources",
+                "switch",
                 SkullBuilder.newBuilder()
                         .setDisplayName(messageHandler.replacing(player, "guis.main.resources.title"))
                         .setLore(messageHandler.replacingMany(player, "guis.main.resources.lore"))
