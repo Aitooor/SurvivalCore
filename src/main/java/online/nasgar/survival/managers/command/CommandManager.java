@@ -46,6 +46,7 @@ public class CommandManager {
                 new FlyCommand(messageHandler),
                 new HatCommand(messageHandler),
                 new EnderchestCommand(messageHandler),
+                new WordkbenchCommand(messageHandler),
                 new SkullCommand(messageHandler),
 
                 // MESSAGE
