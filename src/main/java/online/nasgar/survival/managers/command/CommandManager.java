@@ -35,7 +35,7 @@ public class CommandManager {
                 new WebCommand(messageHandler),
 
                 // BASIS
-                new ResourcesCommand(messageHandler),
+                new SwitchCommand(messageHandler),
                 new GodCommand(messageHandler),
                 new GamemodeCommand(messageHandler),
                 new HealCommand(messageHandler),

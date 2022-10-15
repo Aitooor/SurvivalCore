@@ -1,5 +1,6 @@
 package online.nasgar.survival.utils;
 
+import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import online.nasgar.survival.Survival;
@@ -21,19 +22,6 @@ public final class BungeeUtil {
 		}
 	}
 
-	public static void kickPlayer(Player source, String target, String reason) {
-		try {
-			ByteArrayDataOutput out = ByteStreams.newDataOutput();
-			out.writeUTF("KickPlayer");
-			out.writeUTF(target);
-			out.writeUTF(reason);
-
-			source.sendPluginMessage(Survival.getInstance(), "BungeeCord", out.toByteArray());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static void sendToServer(Player player, String server) {
 		try {
 			ByteArrayDataOutput out = ByteStreams.newDataOutput();
@@ -44,6 +32,15 @@ public final class BungeeUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static CharSequence getServer() {
+		ByteArrayDataOutput out = ByteStreams.newDataOutput();
+		ByteArrayDataInput in = ByteStreams.newDataInput(out.toByteArray());
+		out.writeUTF("GetServer");
+		String servername = in.readUTF();
+
+		return servername;
 	}
 
 	public static String getPlayerCount(Player player, String server) {
