@@ -14,17 +14,3 @@ redis:
   password: "e44fuT2mQM2hr437N5DTA99rK8xW8RhRAMmSm9LQ4FcnXx7bf5e8VpwXKquYzBvTpnKjUTthqq3"
   channel:
     chat: "SurvivalCoreChat"
-
-shop-items:
-  golden-apple:
-    item:
-      display-name: "&6&lGolden Apple &7($500)"
-      material: "GOLDEN_APPLE"
-      data: 0
-      amount: 64
-      glow: false
-      description:
-        - "&fSale a 500 perry"
-    price: 500
-    commands:
-      - "give <player> GOLDEN_APPLE 1"
