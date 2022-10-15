@@ -24,7 +24,7 @@ scoreboard:
     - " &fNombre"
     - "  &a%player%"
     - ""
-    - " &fR&7+ &8| &fRango"
+    - " &fR▲ &8| &fRango"
     - "  &a%rankup% &8| &a%rank%"
     - ""
     - " &fDinero"
@@ -32,7 +32,7 @@ scoreboard:
     - ""
     - " &fConectados &a%survival_online%"
     - ""
-    - "      &bnasgar.online  &r"
+    - "     &bnasgar.online  &r"
 
 feed:
   max:
