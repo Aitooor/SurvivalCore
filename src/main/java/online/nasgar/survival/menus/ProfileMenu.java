@@ -61,8 +61,7 @@ public class ProfileMenu extends Menu {
                         .setLore(
                                 "",
                                 "&eMonedas",
-                                "&fTienes " + data.getCoins() + " &fmonedas",
-                                "")
+                                "&fTienes &a" + data.getCoins() + " &fmonedas")
                         .setTexture("d01afe973c5482fdc71e6aa10698833c79c437f21308ea9a1a095746ec274a0f")
                         .toItemStack()
         ));
@@ -73,15 +72,14 @@ public class ProfileMenu extends Menu {
                 SkullBuilder.newBuilder()
                         .setDisplayName("&8➢ &bRankup")
                         .setLore(
-                                "&aRango Acual",
+                                "",
+                                "&fRango Acual",
                                 (data.getRank() != null ? data.getRank().getPrefix() : "default"),
                                 "",
-                                "&cSiguiente Rango",
+                                "&fSiguiente Rango",
                                 TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(player.getUniqueId())).getPrefix(),
                                 "",
-                                "&fTodos los Rangos",
-                                "&fClick para abrir",
-                                "")
+                                "&fTodos los Rangos &8(&7Click para ver&8)")
                         .setTexture("45c0cd717ca9228849652a8ccdf5281a860cb2e79646b56a22bc59110f361da")
                         .toItemStack()
         ));

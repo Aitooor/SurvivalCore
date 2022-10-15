@@ -19,6 +19,8 @@ public class ReloadCommand extends Command {
     @Override
     public void onCommand(CommandSender sender, String[] array) {
         Survival.getInstance().getConfigFile().reload();
+        Survival.getInstance().getMessageHandler().getSource().load("en");
+        Survival.getInstance().getMessageHandler().getSource().load("es");
 
         messageHandler.send(sender, "reload");
     }

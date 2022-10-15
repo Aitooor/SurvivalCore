@@ -152,7 +152,7 @@ public class Survival extends JavaPlugin {
                         .modelParser(new PlayerMongoModelParser())
                         .cachedService(LocalModelService.create())
                         .database(mongoManager.getMongoDatabase())
-                        .collection("users")
+                        .collection(configFile.getString("mongodb.collection"))
                         .executor(executor)
                         .build();
 

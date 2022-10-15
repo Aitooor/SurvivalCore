@@ -61,7 +61,7 @@ public class WikiMenu extends Menu {
                         .setLore(
                                 "",
                                 "&eMonedas",
-                                "&fTienes " + data.getCoins() + " &fmonedas",
+                                "&fTienes &a" + data.getCoins() + " &fmonedas",
                                 "")
                         .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
@@ -76,11 +76,10 @@ public class WikiMenu extends Menu {
                                 "&aRango Acual",
                                 (data.getRank() != null ? data.getRank().getPrefix() : "default"),
                                 "",
-                                "&cSiguiente Rango",
+                                "&aSiguiente Rango",
                                 TimedRankup.getPlugin(TimedRankup.class).getRankManager().getNextApplicable(TimedRankup.getPlugin(TimedRankup.class).getUserManager().get(player.getUniqueId())).getPrefix(),
                                 "",
-                                "&fTodos los Rangos",
-                                "&fClick para abrir",
+                                "&aTodos los Rangos &8(&7Click para ver&8)",
                                 "")
                         .setTexture("7873c12bffb5251a0b88d5ae75c7247cb39a75ff1a81cbe4c8a39b311ddeda")
                         .toItemStack()
