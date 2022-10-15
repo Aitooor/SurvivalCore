@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter @Setter
 public class Authentication {
 
-    private final String STRING_CONNECTION = "mongodb://%s:%s@%s:%s/?authSource=%s";
+    private final String STRING_CONNECTION = "mongodb://%s:%s@%s:%s/%s?authSource=admin";
 
     private String uri;
     private String address;
