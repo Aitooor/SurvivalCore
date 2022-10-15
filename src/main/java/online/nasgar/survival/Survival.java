@@ -12,7 +12,6 @@ import net.cosmogrp.storage.redis.connection.GsonRedis;
 import net.cosmogrp.storage.redis.connection.JedisBuilder;
 import net.cosmogrp.storage.redis.connection.JedisInstance;
 import net.cosmogrp.storage.redis.connection.Redis;
-import online.nasgar.survival.auctions.AuctionsManager;
 import online.nasgar.survival.backpack.BackPackMenu;
 import online.nasgar.survival.services.chat.ChatService;
 import online.nasgar.survival.managers.command.CommandManager;
@@ -30,7 +29,6 @@ import online.nasgar.survival.providers.BoardListener;
 import online.nasgar.survival.providers.TablistListener;
 import online.nasgar.survival.services.redis.ChatChannelListener;
 import online.nasgar.survival.services.redis.data.MessageData;
-import online.nasgar.survival.shop.ShopItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -48,22 +46,16 @@ public class Survival extends JavaPlugin {
     private static Survival instance;
 
     private String serverId;
-
     private ConfigFile configFile;
-
-    private MongoManager mongoManager;
-
-    private Executor executor;
-
-    private ChatService chatService;
-
     private MessageHandler messageHandler;
+    private Executor executor;
+    private ChatService chatService;
 
     private Redis redis;
 
+    private MongoManager mongoManager;
     private PlayerService playerService;
     private CachedRemoteModelService<PlayerData> playerModelService;
-    private ShopItemManager shopItemManager;
 
     @Override
     public void onEnable() {
@@ -84,9 +76,8 @@ public class Survival extends JavaPlugin {
         this.setupManagers();
 
         new MenuManager(this);
-        new AuctionsManager();
 
-        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerModelService), this);
@@ -102,8 +93,6 @@ public class Survival extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        AuctionsManager.getInstance().save();
-
         this.mongoManager.close();
         instance = null;
     }
@@ -170,11 +159,7 @@ public class Survival extends JavaPlugin {
         this.playerService = new PlayerService(playerModelService);
     }
 
-    private void setupManagers() {
-        new CommandManager(playerModelService, messageHandler);
-
-        this.shopItemManager = new ShopItemManager();
-    }
+    private void setupManagers() { new CommandManager(playerModelService, messageHandler); }
 
     private void setupDatabases() {
 
@@ -190,4 +175,5 @@ public class Survival extends JavaPlugin {
 
         );
     }
+
 }
