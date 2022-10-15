@@ -43,6 +43,7 @@ public class SetArgument extends Argument {
         int amount = Integer.parseInt(array[1]);
 
         modelService.findSync(target.getUniqueId().toString()).setCoins(amount);
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco set " + target.getName() + " " + amount);
         messageHandler.sendReplacing(sender, "coins.set.success.sender", "%target_name%", target.getName(), "%amount%", amount);
         messageHandler.sendReplacing(sender, "coins.set.success.target", "%amount%", amount, "%staff_name%", sender.getName());
     }

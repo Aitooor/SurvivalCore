@@ -1,4 +1,6 @@
 reload: "&aSurvival Configuration reloaded."
+prefix-game: "&b&lNASGAR &r"
+prefix: "[Survival] "
 
 player-not-found: "&cPlayer %target_name% not found."
 

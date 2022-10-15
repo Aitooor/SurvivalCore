@@ -6,8 +6,10 @@ api-version: 1.13
 
 loadbefore:
   - TimedRankup
+  - Vault
 depend:
   - TimedRankup
   - PlaceholderAPI
+  - Vault
 softdepend:
   - Luckperms
