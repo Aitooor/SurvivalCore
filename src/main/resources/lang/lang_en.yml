@@ -19,21 +19,21 @@ tab:
     - "&b&onasgar.online"
 
 scoreboard:
-  title: "&b&lSURVIVAL &8| &7&o1.19"
+  title: "  &b&lSURVIVAL 1.19 &8(&71.19&8)    &r"
   lines:
     - ""
-    - "&fName"
-    - "&a%player%"
+    - " &fName"
+    - "  &a%player%"
     - ""
-    - "&fRank &7| &fRankup"
-    - "&a%rank% &7| &a%rankup%"
+    - " &fR&7+ &8| &fRank"
+    - "  &a%rankup% &7| &a%rank%"
     - ""
-    - "&fMoney"
-    - "&e%money%"
+    - " &fMoney"
+    - "  &e%money%"
     - ""
-    - "&fPlaying &a%survival_online%"
+    - " &fPlaying &a%survival_online%"
     - ""
-    - "&bnasgar.online"
+    - "       &bnasgar.online  &r"
 
 feed:
   max:
@@ -61,6 +61,11 @@ hat:
     already-have: "&e%target_name% &ahas already a hat"
     you: "&f&e%target_name%&f's helmet has been updated"
     other: "&fYour helmet has been updated by &e%staff_name%"
+workbench:
+  you: "&aYour workbench has been opened!"
+  target:
+    you: "&e%target_name% &fworkbench has been opened!"
+    other: "&fYour workbench has been opened by &e%staff_name%"
 enderchest:
   you: "&aYour enderchest has been opened!"
   target:
@@ -202,7 +207,7 @@ guis:
         - "&aWhat is this?"
         - ""
         - "&fAny player can"
-        - "&create your own warp."
+        - "&fcreate your own warp."
         - "&eTo be able to be visited by the whole community"
         - ""
         - "&aHow can I place one?"
@@ -281,27 +286,25 @@ guis:
         - ""
         - "&7Click to view"
   profile:
-    title: "Profile"
+    title: "Perfil"
     settings:
       title: "&8➢ &bAjustes"
       lore:
         - ""
-        - "&fMira los ajustes generales"
-        - "&fAjustalos&f, &eInfo &fy &aRankUP"
+        - "&fSee general settings"
+        - "&f and adjust them to your liking."
         - ""
-        - "&fClick para abrir"
+        - "&7Click to open"
   wiki:
-    title: "Wiki (Help)"
+    title: "Wiki (Ayuda)"
     settings:
       title: "&8➢ &bAjustes"
       lore:
         - ""
         - "&fMira los ajustes generales"
-        - "&fAjustalos&f, &eInfo &fy &aRankUP"
+        - "&eInfo &7and &eRankUPs"
         - ""
-        - "&fClick para abrir"
-
-  shop: "Shop Items"
+        - "&7Click para abrir"
 auction:
   help:
     - "&b&lAuction Commands"

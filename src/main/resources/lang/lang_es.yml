@@ -17,21 +17,21 @@ tab:
     - "&b&onasgar.online"
 
 scoreboard:
-  title: "&b&lSURVIVAL &8| &7&o1.19"
+  title: "  &b&lSURVIVAL 1.19 &8(&71.19&8)    &r"
   lines:
     - ""
-    - "&fNombre"
-    - "&a%player%"
+    - " &fNombre"
+    - "  &a%player%"
     - ""
-    - "&fRango &7| &fRankup"
-    - "&a%rank% &7| &a%rankup%"
+    - " &fR&7+ &8| &fRango"
+    - "  &a%rankup% &7| &a%rank%"
     - ""
-    - "&fDinero"
-    - "&e%money%"
+    - " &fDinero"
+    - "  &e%money%"
     - ""
-    - "&fJugando &a%survival_online%"
+    - " &fJugando &a%survival_online%"
     - ""
-    - "&bnasgar.online"
+    - "       &bnasgar.online  &r"
 
 feed:
   max:
@@ -59,6 +59,11 @@ hat:
     already-have: "&e%target_name% &fya tiene un casco"
     you: "&fEl casco de &e%target_name% &fha sido actualizado"
     other: "&fTu casco ha sido actualizado por &e%staff_name%"
+workbench:
+  you: "&a¡Has abierto el workbench!"
+  target:
+    you: "&e%target_name% &fworkbench ha sido abierto!"
+    other: "&fTu workbench ha sido abierto por &e%staff_name%"
 enderchest:
   you: "&a¡Has abierto el enderchest!"
   target:
@@ -279,27 +284,25 @@ guis:
         - ""
         - "&7Click para ver"
   profile:
-    title: "Perfil"
-    settings:
-      title: "&8➢ &bAjustes"
-      lore:
-        - ""
-        - "&fSee general settings"
-        - "&f and adjust them to your liking."
-        - ""
-        - "&fClick to open"
-  wiki:
-    title: "Wiki (Ayuda)"
+    title: "Profile"
     settings:
       title: "&8➢ &bAjustes"
       lore:
         - ""
         - "&fMira los ajustes generales"
-        - "&fAjustalos&f, &eInfo &fy &aRankUP"
+        - "&eInfo &7y &eRankUPs"
         - ""
-        - "&fClick para abrir"
-
-  shop: "Tienda de Items"
+        - "&7Click para abrir"
+  wiki:
+    title: "Wiki (Help)"
+    settings:
+      title: "&8➢ &bAjustes"
+      lore:
+        - ""
+        - "&fMira los ajustes generales"
+        - "&eAjustalos&7, &eInfo &7y &eRankUP"
+        - ""
+        - "&7Click para abrir"
 auction:
   help:
     - "&b&lComandos de subasta"
