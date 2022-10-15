@@ -6,8 +6,6 @@ import online.nasgar.survival.command.admin.GodCommand;
 import online.nasgar.survival.command.message.event.MessageEvent;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.services.playerdata.PlayerService;
-import online.nasgar.survival.shop.ShopItem;
-import online.nasgar.survival.shop.event.TransactionEvent;
 import online.nasgar.survival.utils.TaskUtil;
 import online.nasgar.survival.utils.text.BuildText;
 import online.nasgar.survival.utils.text.ChatUtil;
@@ -21,8 +19,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginDisableEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -107,36 +103,6 @@ public class PlayerListener implements Listener {
 
         ChatUtil.toPlayer(player, new BuildText(modelService).of(target, messageHandler.get(player, "message.prefix.to") + message));
         ChatUtil.toPlayer(target, new BuildText(modelService).of(player, messageHandler.get(player, "message.prefix.from") + message));
-    }
-
-    @EventHandler
-    public void onTransaction(TransactionEvent event) {
-        Player player = event.getPlayer();
-        ShopItem shopItem = event.getShopItem();
-
-        PlayerData data = this.modelService.getOrFindSync(player.getUniqueId().toString());
-
-        ItemStack itemStack = shopItem.getItemStack();
-        ItemMeta itemMeta = itemStack.getItemMeta();
-
-        String displayName = null;
-
-        int priceCoins = shopItem.getPrice();
-
-
-        if (itemStack.hasItemMeta() && itemMeta.hasDisplayName()) {
-            displayName = itemMeta.getDisplayName();
-        }
-
-        if (data.getCoins() < priceCoins) {
-            messageHandler.send(player, "coins.insufficient");
-            return;
-        }
-
-        data.removeCoins(priceCoins);
-        shopItem.getCommands().forEach(command -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), (command).replace("<player>", player.getName())));
-        ChatUtil.toPlayer(player, "&aSuccessfully purchased " + displayName + " &afor &e" + priceCoins + "$");
-        messageHandler.sendReplacing(player, "purchased", "%display_name%", displayName, "%price_coins%", priceCoins);
     }
 
     @EventHandler
