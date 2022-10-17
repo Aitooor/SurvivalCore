@@ -1,4 +1,4 @@
-package online.nasgar.survival.utils;
+package online.nasgar.survival.utils.time;
 
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang.time.DurationFormatUtils;

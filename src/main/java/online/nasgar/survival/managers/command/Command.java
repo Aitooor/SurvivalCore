@@ -5,7 +5,7 @@ import lombok.Setter;
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.utils.text.ChatUtil;
 import online.nasgar.survival.utils.CooldownUtil;
-import online.nasgar.survival.utils.TimeFormatter;
+import online.nasgar.survival.utils.time.TimeFormatter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabCompleter;

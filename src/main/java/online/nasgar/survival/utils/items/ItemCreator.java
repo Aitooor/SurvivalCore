@@ -1,4 +1,4 @@
-package online.nasgar.survival.utils;
+package online.nasgar.survival.utils.items;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -61,10 +61,10 @@ public class ItemCreator {
         ItemStack itemStack = new ItemStack(material, amount, data);
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (display != null) {
-            itemMeta.setDisplayName(CC.translate(display));
+            itemMeta.setDisplayName(ChatUtil.translate(display));
         }
         if (lore != null) {
-            itemMeta.setLore(CC.translate(lore));
+            itemMeta.setLore(ChatUtil.translate(lore));
         }
         itemStack.setItemMeta(itemMeta);
         return itemStack;

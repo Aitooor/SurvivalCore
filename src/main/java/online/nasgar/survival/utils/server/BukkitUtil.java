@@ -1,4 +1,4 @@
-package online.nasgar.survival.utils;
+package online.nasgar.survival.utils.server;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;

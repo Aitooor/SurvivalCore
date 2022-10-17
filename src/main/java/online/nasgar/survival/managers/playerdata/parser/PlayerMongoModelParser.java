@@ -3,7 +3,7 @@ package online.nasgar.survival.managers.playerdata.parser;
 import net.cosmogrp.storage.codec.ModelReader;
 import net.cosmogrp.storage.mongo.codec.MongoModelParser;
 import online.nasgar.survival.managers.playerdata.PlayerData;
-import online.nasgar.survival.utils.BukkitUtil;
+import online.nasgar.survival.utils.server.BukkitUtil;
 import online.nasgar.timedrankup.TimedRankup;
 import org.bson.Document;
 import org.bukkit.potion.PotionEffect;
@@ -27,11 +27,7 @@ public class PlayerMongoModelParser implements MongoModelParser<PlayerData> {
         data.setFoodLevel(reader.readInt("food"));
         data.setHealth(reader.readDouble("health"));
         data.setLevel(reader.readInt("level"));
-
-        try {
-            data.setBackPackItems(BukkitUtil.itemStackArrayFromBase64(reader.readString("backPackItems")));
-        } catch (Exception ignored) {
-        }
+        
         try {
             data.setEnderChestItems(BukkitUtil.itemStackArrayFromBase64(reader.readString("enderChestItems")));
         } catch (Exception ignored) {

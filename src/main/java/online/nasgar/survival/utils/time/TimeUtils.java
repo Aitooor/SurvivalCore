@@ -1,4 +1,4 @@
-package online.nasgar.survival.utils;
+package online.nasgar.survival.utils.time;
 
 import java.time.Duration;
 

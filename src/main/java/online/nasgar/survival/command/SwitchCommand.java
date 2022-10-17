@@ -2,7 +2,7 @@ package online.nasgar.survival.command;
 
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.managers.command.Command;
-import online.nasgar.survival.utils.BungeeUtil;
+import online.nasgar.survival.utils.server.BungeeUtil;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

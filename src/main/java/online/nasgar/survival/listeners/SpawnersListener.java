@@ -1,6 +1,6 @@
 package online.nasgar.survival.listeners;
 
-import online.nasgar.survival.utils.ItemCreator;
+import online.nasgar.survival.utils.items.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;

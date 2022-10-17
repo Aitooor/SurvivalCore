@@ -1,4 +1,4 @@
-package online.nasgar.survival.utils;
+package online.nasgar.survival.utils.server;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;

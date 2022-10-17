@@ -1,4 +1,4 @@
-package online.nasgar.survival.utils;
+package online.nasgar.survival.utils.hooks;
 
 import lombok.experimental.UtilityClass;
 import net.luckperms.api.LuckPermsProvider;

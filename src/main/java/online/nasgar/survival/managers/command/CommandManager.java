@@ -2,7 +2,6 @@ package online.nasgar.survival.managers.command;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
-import online.nasgar.survival.backpack.commands.BackPackCommand;
 import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.admin.GamemodeCommand;
 import online.nasgar.survival.command.admin.GodCommand;
@@ -40,7 +39,6 @@ public class CommandManager {
                 new GamemodeCommand(messageHandler),
                 new HealCommand(messageHandler),
                 new FeedCommand(messageHandler),
-                new BackPackCommand(modelService),
 
                 // PREMIUM
                 new FlyCommand(messageHandler),

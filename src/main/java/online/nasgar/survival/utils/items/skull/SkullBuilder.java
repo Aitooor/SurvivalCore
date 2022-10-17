@@ -1,8 +1,8 @@
-package online.nasgar.survival.utils.skull;
+package online.nasgar.survival.utils.items.skull;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import online.nasgar.survival.utils.CC;
+import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -23,13 +23,13 @@ public class SkullBuilder {
     private List<String> lore;
 
     public SkullBuilder setDisplayName(String displayName) {
-        this.displayName = CC.translate(displayName);
+        this.displayName = ChatUtil.translate(displayName);
 
         return this;
     }
 
     public SkullBuilder setLore(List<String> lore) {
-        this.lore = CC.translate(lore);
+        this.lore = ChatUtil.translate(lore);
 
         return this;
     }
@@ -63,11 +63,11 @@ public class SkullBuilder {
 
 
         if (displayName != null) {
-            skullMeta.setDisplayName(CC.translate(displayName));
+            skullMeta.setDisplayName(ChatUtil.translate(displayName));
         }
 
         if (lore != null) {
-            skullMeta.setLore(CC.translate(lore));
+            skullMeta.setLore(ChatUtil.translate(lore));
         }
 
         if (owner != null) {

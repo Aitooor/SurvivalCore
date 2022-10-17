@@ -12,7 +12,6 @@ import net.cosmogrp.storage.redis.connection.GsonRedis;
 import net.cosmogrp.storage.redis.connection.JedisBuilder;
 import net.cosmogrp.storage.redis.connection.JedisInstance;
 import net.cosmogrp.storage.redis.connection.Redis;
-import online.nasgar.survival.backpack.BackPackMenu;
 import online.nasgar.survival.services.chat.ChatService;
 import online.nasgar.survival.managers.command.CommandManager;
 import online.nasgar.survival.managers.config.ConfigFile;
@@ -85,7 +84,6 @@ public class Survival extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
             Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
             Bukkit.getPluginManager().registerEvents(new BoardListener(playerModelService), this);
-            Bukkit.getPluginManager().registerEvents(new BackPackMenu(playerModelService), this);
         } else {
             Bukkit.getPluginManager().disablePlugin(this);
         }
@@ -100,7 +98,6 @@ public class Survival extends JavaPlugin {
 
     private void setupNMessage() {
         File langFolder = new File(this.getDataFolder(), "lang");
-
         try {
             langFolder.mkdir();
         } catch (Exception e) {
@@ -123,7 +120,6 @@ public class Survival extends JavaPlugin {
                             config.addInterceptor(s -> ChatColor.translateAlternateColorCodes('&', s));
                         }
                 );
-
         messageHandler = MessageHandler.of(messageProvider);
     }
 
@@ -164,16 +160,13 @@ public class Survival extends JavaPlugin {
     private void setupDatabases() {
 
         this.mongoManager = new MongoManager(new Authentication(
-
                 this.configFile.getString("mongodb.address"),
                 this.configFile.getInt("mongodb.port"),
                 this.configFile.getString("mongodb.database"),
                 this.configFile.getString("mongodb.authentication.username"),
                 this.configFile.getString("mongodb.authentication.password"),
                 this.configFile.getString("mongodb.authentication.uri")
-        )
-
-        );
+        ));
     }
 
 }

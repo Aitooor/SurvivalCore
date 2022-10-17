@@ -9,6 +9,7 @@ import online.nasgar.survival.services.playerdata.PlayerService;
 import online.nasgar.survival.utils.TaskUtil;
 import online.nasgar.survival.utils.text.BuildText;
 import online.nasgar.survival.utils.text.ChatUtil;
+import online.nasgar.survival.utils.text.TextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -21,6 +22,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class PlayerListener implements Listener {
@@ -47,20 +49,21 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        List<String> joinMsg = new ArrayList<>();
 
         playerService.load(player);
 
-        ChatUtil.toPlayer(player,
+        joinMsg.add(TextUtil.centerText(""));
+        joinMsg.add(TextUtil.centerText("&b&lSURVIVAL 1.19"));
+        joinMsg.add(TextUtil.centerText(""));
+        joinMsg.add(TextUtil.centerText("&b&lWebsite&7: &fwww.nasgar.online"));
+        joinMsg.add(TextUtil.centerText("&b&lTwitter&7: &f@NasgarNetwork"));
+        joinMsg.add(TextUtil.centerText("&b&lDiscord&7: &fds.nasgar.online"));
+        joinMsg.add(TextUtil.centerText(""));
+        joinMsg.add(TextUtil.centerText("Welcome &b&l<player>"));
+        joinMsg.add(TextUtil.centerText(""));
+        ChatUtil.toPlayer(player, joinMsg);
 
-                "&7&m-------------------------------------------------------",
-                "              &b&lNasgar Online&8┃&fSurvival",
-                "",
-                "              &b&lWebsite&7: &fwww.nasgar.online",
-                "              &b&lTwitter&7: &f@NasgarNetwork",
-                "              &b&lDiscord&7: &fds.nasgar.online",
-                "",
-                "              Welcome &b&l<player>&f",
-                "&7&m-------------------------------------------------------");
         event.setJoinMessage(null);
     }
 

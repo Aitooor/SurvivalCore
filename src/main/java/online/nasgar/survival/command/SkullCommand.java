@@ -3,7 +3,7 @@ package online.nasgar.survival.command;
 import me.yushust.message.MessageHandler;
 import net.md_5.bungee.api.ChatColor;
 import online.nasgar.survival.managers.command.Command;
-import online.nasgar.survival.utils.skull.SkullBuilder;
+import online.nasgar.survival.utils.items.skull.SkullBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -1,6 +1,6 @@
-author: Nasgar Development Team
-name: SurvivalCore
 main: online.nasgar.survival.Survival
+name: SurvivalCore
+author: Nasgar Development Team
 version: ${project.version}
 api-version: 1.13
 

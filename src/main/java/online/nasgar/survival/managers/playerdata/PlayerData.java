@@ -5,7 +5,7 @@ import lombok.Setter;
 import net.cosmogrp.storage.model.Model;
 import net.cosmogrp.storage.mongo.codec.DocumentCodec;
 import net.cosmogrp.storage.mongo.codec.DocumentWriter;
-import online.nasgar.survival.utils.BukkitUtil;
+import online.nasgar.survival.utils.server.BukkitUtil;
 import online.nasgar.timedrankup.TimedRankup;
 import online.nasgar.timedrankup.rank.Rank;
 import org.bson.Document;
@@ -42,8 +42,6 @@ public class PlayerData implements DocumentCodec, Model {
     private ItemStack[] items;
     private ItemStack[] armor;
     private ItemStack[] enderChestItems;
-
-    private ItemStack[] backPackItems;
 
     public PlayerData(String id) {
         this.id = id;
@@ -109,7 +107,6 @@ public class PlayerData implements DocumentCodec, Model {
                 .write("items", BukkitUtil.itemStackArrayToBase64(getItems()))
                 .write("armor", BukkitUtil.itemStackArrayToBase64(getArmor()))
                 .write("enderChestItems", BukkitUtil.itemStackArrayToBase64(getEnderChestItems()))
-                .write("backPackItems", BukkitUtil.itemStackArrayToBase64(getBackPackItems()))
                 .end();
     }
 

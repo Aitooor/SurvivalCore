@@ -1,6 +1,7 @@
 package online.nasgar.survival.utils.text;
 
 import lombok.experimental.UtilityClass;
+import online.nasgar.survival.Survival;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -60,5 +61,18 @@ public class ChatUtil {
         sender.sendMessage(translate(message));
     }
 
+    public static void logError(String... args) {
+        for (String str : args) {
+            Bukkit.getServer().getConsoleSender().sendMessage(translate(getPrefix() + "[ERROR] &c" + str));
+        }
+    }
+
+    public static String getPrefixGame(Player sender) {
+        return Survival.getInstance().getMessageHandler().replacing(sender, "prefix-game");
+    }
+
+    public static String getPrefix() {
+        return "[SurvivalCore] ";
+    }
 
 }
