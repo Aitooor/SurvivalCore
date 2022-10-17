@@ -56,11 +56,12 @@ public class PlayerListener implements Listener {
         joinMsg.add(TextUtil.centerText(""));
         joinMsg.add(TextUtil.centerText("&b&lSURVIVAL 1.19"));
         joinMsg.add(TextUtil.centerText(""));
-        joinMsg.add(TextUtil.centerText("&b&lWebsite&7: &fwww.nasgar.online"));
-        joinMsg.add(TextUtil.centerText("&b&lTwitter&7: &f@NasgarNetwork"));
-        joinMsg.add(TextUtil.centerText("&b&lDiscord&7: &fds.nasgar.online"));
+        joinMsg.add(TextUtil.centerText("&a&lWebsite &fhttps://nasgar.online"));
+        joinMsg.add(TextUtil.centerText("&a&lTwitter &f@NasgarNetwork"));
+        joinMsg.add(TextUtil.centerText("&aDiscord &fhttps://ds.nasgar.online"));
         joinMsg.add(TextUtil.centerText(""));
-        joinMsg.add(TextUtil.centerText("Welcome &b&l<player>"));
+        joinMsg.add(TextUtil.centerText("&7Welcome &e&l<player>"));
+        joinMsg.add(TextUtil.centerText("&aEnjoin the game"));
         joinMsg.add(TextUtil.centerText(""));
         ChatUtil.toPlayer(player, joinMsg);
 
