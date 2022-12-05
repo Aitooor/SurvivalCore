@@ -9,6 +9,7 @@ import online.nasgar.survival.managers.command.Command;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.utils.text.BuildText;
 import online.nasgar.survival.utils.text.ChatUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -43,10 +44,22 @@ public class CoinsCommand extends Command {
 
         Player player = (Player) sender;
 
-        String text = new BuildText(modelService).of(player, messageHandler.get(player, "coins.have.formated"));
+        if (array.length < 1) {
 
+            String text = new BuildText(modelService).of(player, messageHandler.get(player, "coins.have.formated"));
+
+
+            ChatUtil.toPlayer(player, text);
+            return;
+        }
+
+        Player target = Bukkit.getPlayer(array[0]);
+
+        if (this.isPlayerNull(target, array[0]))
+            return;
+
+        String text = new BuildText(modelService).of(target, messageHandler.get(target, "coins.have.formated"));
 
         ChatUtil.toPlayer(player, text);
-        return;
     }
 }

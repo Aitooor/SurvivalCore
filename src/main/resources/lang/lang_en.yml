@@ -150,6 +150,12 @@ coins:
     success:
       sender: "&aSuccessfully set to &e%target_name% &aa amount of &e%amount%$&a!"
       target: "&e%staff_name% &ahas set &e%amount%$ &afor you!"
+  balance-other:
+    usage: "&cUsage: /coins remove <player> <amount>"
+    invalid-amount: "&cThe player &e%target_name% &cno have that quantity!"
+    success:
+      sender: "&aSuccessfully removed to &e%target_name% &aa amount of &e%amount%$&a!"
+      target: "&e%staff_name% &ahas removed &e%amount%$ &afor you!"
 guis:
   exit: "&cExit"
   back: "&cBack"

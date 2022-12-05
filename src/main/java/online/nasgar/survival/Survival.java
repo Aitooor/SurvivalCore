@@ -87,7 +87,7 @@ public class Survival extends JavaPlugin {
             return;
         }
 
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null /*&& Bukkit.getPluginManager().getPlugin("VaultAPI") != null*/) {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerModelService), this);
             Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
             Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
@@ -179,12 +179,16 @@ public class Survival extends JavaPlugin {
     }
 
     private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null)
+        if (!getServer().getPluginManager().isPluginEnabled("Vault")) {
+            Bukkit.getLogger().severe(String.format("[%s] - Disabled due to Vault is disabled!", getDescription().getName()));
             return false;
+        }
 
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null)
+        if (rsp == null) {
+            Bukkit.getLogger().severe(String.format("[%s] - Disabled due to Rsp is null!", getDescription().getName()));
             return false;
+        }
 
         econ = rsp.getProvider();
         return econ != null;
