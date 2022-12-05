@@ -44,7 +44,6 @@ public class AddArgument extends Argument {
         int amount = Integer.parseInt(array[1]);
 
         data.addCoins(amount);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + target.getName() + " " + amount);
         messageHandler.sendReplacing(sender, "coins.add.success.sender", "%target_name%", target.getName(), "%amount%", amount);
         messageHandler.sendReplacing(sender, "coins.add.success.target", "%amount%", amount, "%staff_name%", sender.getName());
     }

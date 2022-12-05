@@ -49,7 +49,6 @@ public class RemoveArgument extends Argument {
         }
 
         data.removeCoins(amount);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco take " + target.getName() + " " + amount);
         messageHandler.sendReplacing(sender, "coins.remove.success.sender", "%target_name%", target.getName(), "%amount%", amount);
         messageHandler.sendReplacing(sender, "coins.remove.success.target", "%amount%", amount, "%staff_name%", sender.getName());
     }

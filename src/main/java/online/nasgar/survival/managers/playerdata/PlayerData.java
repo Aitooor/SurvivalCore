@@ -5,6 +5,7 @@ import lombok.Setter;
 import net.cosmogrp.storage.model.Model;
 import net.cosmogrp.storage.mongo.codec.DocumentCodec;
 import net.cosmogrp.storage.mongo.codec.DocumentWriter;
+import online.nasgar.survival.Survival;
 import online.nasgar.survival.utils.server.BukkitUtil;
 import online.nasgar.timedrankup.TimedRankup;
 import online.nasgar.timedrankup.rank.Rank;
@@ -63,14 +64,18 @@ public class PlayerData implements DocumentCodec, Model {
 
     public void addCoins(int amount) {
         this.setCoins(this.coins + amount);
+        Survival.getEconomy().depositPlayer(this.getAsPlayer(), amount);
     }
 
     public void removeCoins(int amount) {
         this.setCoins(this.coins - amount);
+        Survival.getEconomy().withdrawPlayer(this.getAsPlayer(), amount);
     }
 
     public void setCoins(int amount) {
         this.coins = amount;
+        Survival.getEconomy().withdrawPlayer(this.getAsPlayer(), Survival.getEconomy().getBalance(this.getAsPlayer()));
+        Survival.getEconomy().depositPlayer(this.getAsPlayer(), amount);
     }
 
     public Player getAsPlayer() {

@@ -12,6 +12,7 @@ import net.cosmogrp.storage.redis.connection.GsonRedis;
 import net.cosmogrp.storage.redis.connection.JedisBuilder;
 import net.cosmogrp.storage.redis.connection.JedisInstance;
 import net.cosmogrp.storage.redis.connection.Redis;
+import net.milkbowl.vault.economy.Economy;
 import online.nasgar.survival.services.chat.ChatService;
 import online.nasgar.survival.managers.command.CommandManager;
 import online.nasgar.survival.managers.config.ConfigFile;
@@ -32,6 +33,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -55,6 +57,7 @@ public class Survival extends JavaPlugin {
     private MongoManager mongoManager;
     private PlayerService playerService;
     private CachedRemoteModelService<PlayerData> playerModelService;
+    private static Economy econ = null;
 
     @Override
     public void onEnable() {
@@ -78,12 +81,19 @@ public class Survival extends JavaPlugin {
 
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+        if (!setupEconomy()) {
+            Bukkit.getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null /*&& Bukkit.getPluginManager().getPlugin("VaultAPI") != null*/) {
             Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerModelService), this);
             Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
             Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
             Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
             Bukkit.getPluginManager().registerEvents(new BoardListener(playerModelService), this);
+            // Register economy
         } else {
             Bukkit.getPluginManager().disablePlugin(this);
         }
@@ -158,7 +168,6 @@ public class Survival extends JavaPlugin {
     private void setupManagers() { new CommandManager(playerModelService, messageHandler); }
 
     private void setupDatabases() {
-
         this.mongoManager = new MongoManager(new Authentication(
                 this.configFile.getString("mongodb.address"),
                 this.configFile.getInt("mongodb.port"),
@@ -169,4 +178,19 @@ public class Survival extends JavaPlugin {
         ));
     }
 
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null)
+            return false;
+
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null)
+            return false;
+
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
+    public static Economy getEconomy() {
+        return econ;
+    }
 }
