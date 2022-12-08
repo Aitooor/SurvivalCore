@@ -26,7 +26,7 @@ public class TablistListener implements Listener {
                 messageHandler.replacing(player, "tab.header","%online%", survivalInt),
                 messageHandler.replacing(player, "tab.footer", "%online%", bungeeTotal));
 
-        String playerListNames = "%vault_prefix% %player_name%";
+        String playerListNames = PlaceholderAPI.setPlaceholders(player, "%vault_prefix%&r %player_name%");
         playerListNames = PlaceholderAPI.setPlaceholders(event.getPlayer(), playerListNames);
         player.setPlayerListName(playerListNames);
     }

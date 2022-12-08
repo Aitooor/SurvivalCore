@@ -44,6 +44,10 @@ public class PlayerService {
                 });
     }
 
+    public void saveAll() {
+
+    }
+
     public void saveAndRemove(String id) {
         saveAndRemove(id, data -> {
         });

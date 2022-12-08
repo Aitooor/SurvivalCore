@@ -15,7 +15,7 @@ public class ChatService {
     public void sendMessage(String playerName, String message) {
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
 
-            String rank = "%vault_prefix% ";
+            String rank = PlaceholderAPI.setPlaceholders(onlinePlayer.getPlayer(), "%vault_prefix%&r");
             rank = PlaceholderAPI.setPlaceholders(onlinePlayer.getPlayer(), rank);
 
             messageHandler.sendReplacing(onlinePlayer, "chat.format",

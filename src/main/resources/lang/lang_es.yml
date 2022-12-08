@@ -5,7 +5,7 @@ player-not-found: "&cJugador %target_name% no encontrado."
 no-permission: "&b&lNASGAR &cEste comando no existe"
 
 chat:
-  format: "%rank%%player_name%&7: &f%message%"
+  format: "%rank% %player_name%&7: &f%message%"
 
 tab:
   header:

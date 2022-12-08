@@ -45,9 +45,7 @@ public class CoinsCommand extends Command {
         Player player = (Player) sender;
 
         if (array.length < 1) {
-
             String text = new BuildText(modelService).of(player, messageHandler.get(player, "coins.have.formated"));
-
 
             ChatUtil.toPlayer(player, text);
             return;
@@ -55,8 +53,7 @@ public class CoinsCommand extends Command {
 
         Player target = Bukkit.getPlayer(array[0]);
 
-        if (this.isPlayerNull(target, array[0]))
-            return;
+        if (this.isPlayerNull(target, array[0])) return;
 
         String text = new BuildText(modelService).of(target, messageHandler.get(target, "coins.have.formated"));
 
