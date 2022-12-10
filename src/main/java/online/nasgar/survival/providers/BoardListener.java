@@ -58,7 +58,7 @@ public class BoardListener implements Listener {
 
         String rank = PlaceholderAPI.setPlaceholders(player, "%vault_prefix%");
         rank = PlaceholderAPI.setPlaceholders(player, rank);
-        String localTime = "%localtime_time_dd/MM/yyyy%";
+        String localTime = "%localtime_time_yyyy/MM/dd%";
         localTime = PlaceholderAPI.setPlaceholders(player, localTime);
         String survival = "%pb_pc_Survivals%";
         survival = PlaceholderAPI.setPlaceholders(player, survival);

@@ -15,19 +15,20 @@ public class TablistListener implements Listener {
         Player player = event.getPlayer();
         MessageHandler messageHandler = Survival.getInstance().getMessageHandler();
 
-        String bungeeTotal = "%bungee_total%";
-        bungeeTotal = PlaceholderAPI.setPlaceholders(player, bungeeTotal);
+        String bungeeTotal = PlaceholderAPI.setPlaceholders(player, "%bungee_total%");
 
-        String survival = "%pb_pc_Survivals%";
-        survival = PlaceholderAPI.setPlaceholders(player, survival);
+        String survival = PlaceholderAPI.setPlaceholders(player, "%pb_pc_Survivals%");
         int survivalInt = Integer.parseInt(survival);
 
         player.setPlayerListHeaderFooter(
                 messageHandler.replacing(player, "tab.header","%online%", survivalInt),
-                messageHandler.replacing(player, "tab.footer", "%online%", bungeeTotal));
+                messageHandler.replacing(player, "tab.footer", "%online%", bungeeTotal)
+        );
 
-        String playerListNames = PlaceholderAPI.setPlaceholders(player, "%vault_prefix%&r %player_name%");
-        playerListNames = PlaceholderAPI.setPlaceholders(event.getPlayer(), playerListNames);
+        String playerListNames = PlaceholderAPI.setPlaceholders(
+                event.getPlayer(),
+                PlaceholderAPI.setPlaceholders(player, "%vault_prefix%&r %player_name%")
+        );
         player.setPlayerListName(playerListNames);
     }
 }
