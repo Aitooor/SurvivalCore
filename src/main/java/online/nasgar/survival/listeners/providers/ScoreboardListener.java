@@ -1,4 +1,4 @@
-package online.nasgar.survival.providers;
+package online.nasgar.survival.listeners.providers;
 
 import online.nasgar.survival.managers.scoreboard.FastBoard;
 import me.clip.placeholderapi.PlaceholderAPI;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class BoardListener implements Listener {
+public class ScoreboardListener implements Listener {
 
     private final Map<UUID, FastBoard> boards = new HashMap<>();
 
@@ -26,7 +26,7 @@ public class BoardListener implements Listener {
 
     MessageHandler messageHandler = Survival.getInstance().getMessageHandler();
 
-    public BoardListener(CachedRemoteModelService<PlayerData> modelService) {
+    public ScoreboardListener(CachedRemoteModelService<PlayerData> modelService) {
         this.modelService = modelService;
         Bukkit.getScheduler().runTaskTimerAsynchronously(Survival.getInstance(), () -> this.boards.values().forEach(this::updateBoard), 20L, 20L);
     }

@@ -4,6 +4,6 @@ author: Nasgar Development Team
 version: ${project.version}
 api-version: 1.13
 
-depend: [Vault, TimedRankup, PlaceholderAPI]
+depend: [ Vault, TimedRankup, PlaceholderAPI ]
 softdepend:
   - Luckperms

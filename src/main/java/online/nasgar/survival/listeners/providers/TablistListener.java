@@ -1,4 +1,4 @@
-package online.nasgar.survival.providers;
+package online.nasgar.survival.listeners.providers;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.yushust.message.MessageHandler;

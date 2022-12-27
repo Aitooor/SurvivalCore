@@ -25,8 +25,8 @@ import online.nasgar.survival.managers.menus.MenuManager;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.managers.playerdata.parser.PlayerMongoModelParser;
 import online.nasgar.survival.services.playerdata.PlayerService;
-import online.nasgar.survival.providers.BoardListener;
-import online.nasgar.survival.providers.TablistListener;
+import online.nasgar.survival.listeners.providers.ScoreboardListener;
+import online.nasgar.survival.listeners.providers.TablistListener;
 import online.nasgar.survival.services.redis.ChatChannelListener;
 import online.nasgar.survival.services.redis.data.MessageData;
 import org.bukkit.Bukkit;
@@ -88,11 +88,11 @@ public class Survival extends JavaPlugin {
         }
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService, messageHandler, playerModelService), this);
-            Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService), this);
+            Bukkit.getPluginManager().registerEvents(new PlayerListener(playerService), this);
+            Bukkit.getPluginManager().registerEvents(new ChatListener(redis, chatService, messageHandler, playerModelService), this);
             Bukkit.getPluginManager().registerEvents(new SpawnersListener(), this);
             Bukkit.getPluginManager().registerEvents(new TablistListener(), this);
-            Bukkit.getPluginManager().registerEvents(new BoardListener(playerModelService), this);
+            Bukkit.getPluginManager().registerEvents(new ScoreboardListener(playerModelService), this);
             // Register economy
         } else {
             Bukkit.getPluginManager().disablePlugin(this);

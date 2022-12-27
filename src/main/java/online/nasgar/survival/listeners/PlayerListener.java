@@ -28,17 +28,9 @@ import java.util.UUID;
 public class PlayerListener implements Listener {
 
     private final PlayerService playerService;
-    private final CachedRemoteModelService<PlayerData> modelService;
-    private final MessageHandler messageHandler;
 
-    public PlayerListener(
-            PlayerService playerService,
-            MessageHandler messageHandler,
-            CachedRemoteModelService<PlayerData> modelService
-    ) {
+    public PlayerListener(PlayerService playerService) {
         this.playerService = playerService;
-        this.modelService = modelService;
-        this.messageHandler = messageHandler;
     }
 
     @EventHandler
@@ -97,16 +89,6 @@ public class PlayerListener implements Listener {
         UUID uuid = event.getPlayer().getUniqueId();
 
         playerService.saveAndRemove(uuid.toString());
-    }
-
-    @EventHandler
-    public void onMessage(MessageEvent event) {
-        Player player = event.getPlayer();
-        Player target = event.getTarget();
-        String message = event.getMessage();
-
-        ChatUtil.toPlayer(player, new BuildText(modelService).of(target, messageHandler.get(player, "message.prefix.to") + message));
-        ChatUtil.toPlayer(target, new BuildText(modelService).of(player, messageHandler.get(player, "message.prefix.from") + message));
     }
 
     @EventHandler
