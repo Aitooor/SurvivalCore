@@ -1,7 +1,5 @@
 package online.nasgar.survival.managers.command;
 
-import lombok.Getter;
-import lombok.Setter;
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.command.CommandSender;
@@ -11,7 +9,6 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @Setter
 public class Argument  {
 
     private final MessageHandler messageHandler;
@@ -77,4 +74,63 @@ public class Argument  {
         return false;
     }
 
+    public MessageHandler getMessageHandler() {
+        return messageHandler;
+    }
+
+    public Command getCommand() {
+        return command;
+    }
+
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
+    public List<String> getAliases() {
+        return aliases;
+    }
+
+    public void setAliases(List<String> aliases) {
+        this.aliases = aliases;
+    }
+
+    public CommandSender getSender() {
+        return sender;
+    }
+
+    public void setSender(CommandSender sender) {
+        this.sender = sender;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public boolean isOnlyPlayers() {
+        return onlyPlayers;
+    }
+
+    public void setOnlyPlayers(boolean onlyPlayers) {
+        this.onlyPlayers = onlyPlayers;
+    }
 }

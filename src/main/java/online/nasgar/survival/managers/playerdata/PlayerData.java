@@ -1,7 +1,5 @@
 package online.nasgar.survival.managers.playerdata;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.cosmogrp.storage.model.Model;
 import net.cosmogrp.storage.mongo.codec.DocumentCodec;
 import net.cosmogrp.storage.mongo.codec.DocumentWriter;
@@ -21,8 +19,6 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
 public class PlayerData implements DocumentCodec, Model {
 
     private String id;
@@ -118,5 +114,117 @@ public class PlayerData implements DocumentCodec, Model {
     @Override
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLastConverser() {
+        return lastConverser;
+    }
+
+    public void setLastConverser(String lastConverser) {
+        this.lastConverser = lastConverser;
+    }
+
+    public List<String> getIgnoredPlayers() {
+        return ignoredPlayers;
+    }
+
+    public void setIgnoredPlayers(List<String> ignoredPlayers) {
+        this.ignoredPlayers = ignoredPlayers;
+    }
+
+    public double getXp() {
+        return xp;
+    }
+
+    public void setXp(double xp) {
+        this.xp = xp;
+    }
+
+    public double getHealth() {
+        return health;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public int getFoodLevel() {
+        return foodLevel;
+    }
+
+    public void setFoodLevel(int foodLevel) {
+        this.foodLevel = foodLevel;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public List<PotionEffect> getEffects() {
+        return effects;
+    }
+
+    public void setEffects(List<PotionEffect> effects) {
+        this.effects = effects;
+    }
+
+    public AtomicInteger getTime() {
+        return time;
+    }
+
+    public void setTime(AtomicInteger time) {
+        this.time = time;
+    }
+
+    public boolean isTpm() {
+        return tpm;
+    }
+
+    public void setTpm(boolean tpm) {
+        this.tpm = tpm;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+    }
+
+    public ItemStack[] getItems() {
+        return items;
+    }
+
+    public void setItems(ItemStack[] items) {
+        this.items = items;
+    }
+
+    public ItemStack[] getArmor() {
+        return armor;
+    }
+
+    public void setArmor(ItemStack[] armor) {
+        this.armor = armor;
+    }
+
+    public ItemStack[] getEnderChestItems() {
+        return enderChestItems;
+    }
+
+    public void setEnderChestItems(ItemStack[] enderChestItems) {
+        this.enderChestItems = enderChestItems;
     }
 }

@@ -1,12 +1,8 @@
 package online.nasgar.survival.managers.menus.button;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-@Getter
-@Setter
 public abstract class Button {
 
     private int slot;
@@ -29,4 +25,11 @@ public abstract class Button {
 
     public abstract ItemStack getButtonItem();
 
+    public int getSlot() {
+        return slot;
+    }
+
+    public void setSlot(int slot) {
+        this.slot = slot;
+    }
 }

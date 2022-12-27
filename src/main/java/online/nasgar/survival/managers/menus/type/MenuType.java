@@ -1,12 +1,10 @@
 package online.nasgar.survival.managers.menus.type;
 
-import lombok.AllArgsConstructor;
 import online.nasgar.survival.managers.menus.Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
-@AllArgsConstructor
 public enum MenuType {
 
     DEFAULT(null) {
@@ -22,6 +20,10 @@ public enum MenuType {
     FURNACE(InventoryType.FURNACE),
     CRAFTING(InventoryType.CRAFTING),
     WORKBENCH(InventoryType.WORKBENCH);
+
+    MenuType(InventoryType inventoryType) {
+        this.inventoryType = inventoryType;
+    }
 
     private final InventoryType inventoryType;
 

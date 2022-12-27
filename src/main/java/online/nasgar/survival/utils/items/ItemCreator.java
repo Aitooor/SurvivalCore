@@ -1,7 +1,5 @@
 package online.nasgar.survival.utils.items;
 
-import lombok.Getter;
-import lombok.Setter;
 import online.nasgar.survival.utils.text.ChatUtil;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -12,8 +10,6 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.*;
 
-@Getter
-@Setter
 public class ItemCreator {
 
     private ItemStack itemStack;
@@ -174,5 +170,29 @@ public class ItemCreator {
         itemStack.setItemMeta(itemMeta);
 
         return itemStack;
+    }
+
+    public ItemStack getItemStack() {
+        return itemStack;
+    }
+
+    public void setItemStack(ItemStack itemStack) {
+        this.itemStack = itemStack;
+    }
+
+    public ItemMeta getItemMeta() {
+        return itemMeta;
+    }
+
+    public void setItemMeta(ItemMeta itemMeta) {
+        this.itemMeta = itemMeta;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public List<String> getLore() {
+        return lore;
     }
 }

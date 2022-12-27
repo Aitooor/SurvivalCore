@@ -1,7 +1,6 @@
 package online.nasgar.survival.utils;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import lombok.experimental.UtilityClass;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.utils.call.Callback;
 import org.bukkit.Bukkit;
@@ -10,11 +9,10 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.concurrent.ThreadFactory;
 
-@UtilityClass
 public class TaskUtil {
 
-    private final Survival plugin = Survival.getInstance();
-    private final BukkitScheduler scheduler = Bukkit.getScheduler();
+    private static final Survival plugin = Survival.getInstance();
+    private static final BukkitScheduler scheduler = Bukkit.getScheduler();
 
     public static ThreadFactory newThreadFactory(String name) {
         return new ThreadFactoryBuilder().setNameFormat(name).build();
@@ -40,7 +38,7 @@ public class TaskUtil {
         return scheduler.runTaskTimerAsynchronously(plugin, callback::call, delay, tick);
     }
 
-    public BukkitTask runTaskAsync(Callback callback) {
+    public static BukkitTask runTaskAsync(Callback callback) {
         return scheduler.runTaskAsynchronously(plugin, callback::call);
     }
 

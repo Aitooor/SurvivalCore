@@ -1,7 +1,5 @@
 package online.nasgar.survival.managers.menus;
 
-import lombok.Getter;
-import lombok.Setter;
 import online.nasgar.survival.managers.menus.button.Button;
 import online.nasgar.survival.managers.menus.type.FillType;
 import online.nasgar.survival.managers.menus.type.MenuType;
@@ -12,8 +10,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Set;
 
-@Getter
-@Setter
 public abstract class Menu {
 
     private MenuManager menuManager = MenuManager.getInstance();
@@ -118,4 +114,67 @@ public abstract class Menu {
 
     public abstract Set<Button> getButtons(Player player);
 
+    public MenuManager getMenuManager() {
+        return menuManager;
+    }
+
+    public void setMenuManager(MenuManager menuManager) {
+        this.menuManager = menuManager;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public MenuType getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(MenuType menuType) {
+        this.menuType = menuType;
+    }
+
+    public boolean isFillEnabled() {
+        return fillEnabled;
+    }
+
+    public void setFillEnabled(boolean fillEnabled) {
+        this.fillEnabled = fillEnabled;
+    }
+
+    public ItemStack getFillItemStack() {
+        return fillItemStack;
+    }
+
+    public void setFillItemStack(ItemStack fillItemStack) {
+        this.fillItemStack = fillItemStack;
+    }
+
+    public FillType getFillType() {
+        return fillType;
+    }
+
+    public void setFillType(FillType fillType) {
+        this.fillType = fillType;
+    }
 }

@@ -1,7 +1,5 @@
 package online.nasgar.survival.managers.command;
 
-import lombok.Getter;
-import lombok.Setter;
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.utils.text.ChatUtil;
 import online.nasgar.survival.utils.CooldownUtil;
@@ -11,10 +9,10 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-@Getter @Setter
 public class Command extends BukkitCommand implements TabCompleter {
 
     private final MessageHandler messageHandler;
@@ -161,4 +159,62 @@ public class Command extends BukkitCommand implements TabCompleter {
         return list;
     }
 
+    public MessageHandler getMessageHandler() {
+        return messageHandler;
+    }
+
+    @Nullable
+    @Override
+    public String getPermission() {
+        return permission;
+    }
+
+    @Override
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
+    public long getCooldown() {
+        return cooldown;
+    }
+
+    public boolean isOnlyPlayers() {
+        return onlyPlayers;
+    }
+
+    public void setOnlyPlayers(boolean onlyPlayers) {
+        this.onlyPlayers = onlyPlayers;
+    }
+
+    public boolean isArgumentBase() {
+        return argumentBase;
+    }
+
+    public void setArgumentBase(boolean argumentBase) {
+        this.argumentBase = argumentBase;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Set<Argument> getArguments() {
+        return arguments;
+    }
+
+    public void setArguments(Set<Argument> arguments) {
+        this.arguments = arguments;
+    }
+
+    public List<String> getArgumentBaseUsageMessage() {
+        return argumentBaseUsageMessage;
+    }
+
+    public void setArgumentBaseUsageMessage(List<String> argumentBaseUsageMessage) {
+        this.argumentBaseUsageMessage = argumentBaseUsageMessage;
+    }
 }

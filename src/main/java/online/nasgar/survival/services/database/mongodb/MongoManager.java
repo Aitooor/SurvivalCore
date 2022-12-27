@@ -5,13 +5,11 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import lombok.Getter;
 import online.nasgar.survival.services.database.Authentication;
 import org.bson.Document;
 
 import java.io.Closeable;
 
-@Getter
 public class MongoManager implements Closeable {
 
     private final MongoClient mongoClient;
@@ -35,4 +33,11 @@ public class MongoManager implements Closeable {
         return this.mongoDatabase.getCollection(name);
     }
 
+    public MongoClient getMongoClient() {
+        return mongoClient;
+    }
+
+    public MongoDatabase getMongoDatabase() {
+        return mongoDatabase;
+    }
 }

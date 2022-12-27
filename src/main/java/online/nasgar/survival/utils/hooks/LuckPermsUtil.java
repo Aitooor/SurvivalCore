@@ -1,6 +1,5 @@
 package online.nasgar.survival.utils.hooks;
 
-import lombok.experimental.UtilityClass;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import net.luckperms.api.model.user.User;
@@ -9,10 +8,9 @@ import org.bukkit.entity.Player;
 
 import java.util.Optional;
 
-@UtilityClass
 public class LuckPermsUtil {
 
-    private CachedMetaData getMetaData(Player player) {
+    private static CachedMetaData getMetaData(Player player) {
         User user = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId());
         if (user == null) {
             throw new IllegalArgumentException("LuckPerms user for " + player.getName() + " could not be found");
@@ -24,7 +22,7 @@ public class LuckPermsUtil {
         return user.getCachedData().getMetaData(queryOptions.get());
     }
 
-    public String getRankName(Player player) {
+    public static String getRankName(Player player) {
         User user = LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId());
         if (user == null) {
             throw new IllegalArgumentException("LuckPerms user for " + player.getName() + " could not be found");
@@ -32,11 +30,11 @@ public class LuckPermsUtil {
         return user.getPrimaryGroup();
     }
 
-    public String getPrefix(Player player) {
+    public static String getPrefix(Player player) {
         return getMetaData(player).getPrefix() == null ? "" : getMetaData(player).getPrefix();
     }
 
-    public String getSuffix(Player player) {
+    public static String getSuffix(Player player) {
         return getMetaData(player).getSuffix() == null ? "" : getMetaData(player).getSuffix();
     }
 

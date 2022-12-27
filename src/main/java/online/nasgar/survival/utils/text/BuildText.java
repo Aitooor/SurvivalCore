@@ -1,7 +1,5 @@
 package online.nasgar.survival.utils.text;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import online.nasgar.survival.Survival;
 import online.nasgar.survival.managers.playerdata.PlayerData;
@@ -20,8 +18,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
 public class BuildText {
 
     private Survival plugin = Survival.getInstance();
@@ -100,4 +96,39 @@ public class BuildText {
         map.put("<" + key.trim() + ">", value);
     }
 
+    public Survival getPlugin() {
+        return plugin;
+    }
+
+    public void setPlugin(Survival plugin) {
+        this.plugin = plugin;
+    }
+
+    public CachedRemoteModelService<PlayerData> getModelService() {
+        return modelService;
+    }
+
+    public Map<String, String> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, String> map) {
+        this.map = map;
+    }
+
+    public String getStaticText() {
+        return staticText;
+    }
+
+    public void setStaticText(String staticText) {
+        this.staticText = staticText;
+    }
+
+    public Matcher getMatcher() {
+        return matcher;
+    }
+
+    public void setMatcher(Matcher matcher) {
+        this.matcher = matcher;
+    }
 }

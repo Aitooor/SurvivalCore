@@ -1,13 +1,11 @@
 package online.nasgar.survival.command.message.event;
 
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-@Getter
 public class MessageEvent extends PlayerEvent implements Cancellable {
 
     private static HandlerList handlerList = new HandlerList();
@@ -41,4 +39,8 @@ public class MessageEvent extends PlayerEvent implements Cancellable {
     public static HandlerList getHandlerList() {
         return handlerList;
     }
+
+    public Player getTarget() { return target; }
+
+    public String getMessage() { return message; }
 }

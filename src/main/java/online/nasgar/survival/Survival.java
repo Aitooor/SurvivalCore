@@ -1,6 +1,5 @@
 package online.nasgar.survival;
 
-import lombok.Getter;
 import me.yushust.message.MessageHandler;
 import me.yushust.message.MessageProvider;
 import me.yushust.message.bukkit.BukkitMessageAdapt;
@@ -40,10 +39,8 @@ import java.io.File;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@Getter
 public class Survival extends JavaPlugin {
 
-    @Getter
     private static Survival instance;
 
     private String serverId;
@@ -195,6 +192,50 @@ public class Survival extends JavaPlugin {
     }
 
     public static Economy getEconomy() {
+        return econ;
+    }
+
+    public static Survival getInstance() {
+        return instance;
+    }
+
+    public String getServerId() {
+        return serverId;
+    }
+
+    public ConfigFile getConfigFile() {
+        return configFile;
+    }
+
+    public MessageHandler getMessageHandler() {
+        return messageHandler;
+    }
+
+    public Executor getExecutor() {
+        return executor;
+    }
+
+    public ChatService getChatService() {
+        return chatService;
+    }
+
+    public Redis getRedis() {
+        return redis;
+    }
+
+    public MongoManager getMongoManager() {
+        return mongoManager;
+    }
+
+    public PlayerService getPlayerService() {
+        return playerService;
+    }
+
+    public CachedRemoteModelService<PlayerData> getPlayerModelService() {
+        return playerModelService;
+    }
+
+    public static Economy getEcon() {
         return econ;
     }
 }

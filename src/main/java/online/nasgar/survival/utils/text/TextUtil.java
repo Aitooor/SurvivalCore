@@ -1,12 +1,10 @@
 package online.nasgar.survival.utils.text;
 
-import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 
-@UtilityClass
 public class TextUtil {
 
-    public String centerText(String text) {
+    public static String centerText(String text) {
         char[] chars = text.toCharArray(); // Get a list of all characters in text
 
         boolean bold = false;

@@ -1,6 +1,5 @@
 package online.nasgar.survival.managers.menus.listener;
 
-import lombok.AllArgsConstructor;
 import online.nasgar.survival.managers.menus.Menu;
 import online.nasgar.survival.managers.menus.MenuManager;
 import online.nasgar.survival.managers.menus.button.Button;
@@ -12,8 +11,11 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 
 import java.util.function.Consumer;
 
-@AllArgsConstructor
 public class MenuListener implements Listener {
+
+    public MenuListener(MenuManager menuManager) {
+        this.menuManager = menuManager;
+    }
 
     private final MenuManager menuManager;
 

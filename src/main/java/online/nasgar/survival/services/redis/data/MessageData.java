@@ -1,10 +1,14 @@
 package online.nasgar.survival.services.redis.data;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@AllArgsConstructor @Getter
 public class MessageData {
 
-    private String content;
+    public MessageData(String content) {
+        this.content = content;
+    }
+
+    private final String content;
+
+    public String getContent() {
+        return content;
+    }
 }

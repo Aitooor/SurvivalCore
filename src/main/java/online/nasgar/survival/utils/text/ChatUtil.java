@@ -1,6 +1,5 @@
 package online.nasgar.survival.utils.text;
 
-import lombok.experimental.UtilityClass;
 import online.nasgar.survival.Survival;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,14 +10,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@UtilityClass
 public class ChatUtil {
 
-    public String translate(String message) {
+    public static String translate(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 
-    public String translate(String... longMessage) {
+    public static String translate(String... longMessage) {
         for (String message : longMessage) {
             return message;
         }
@@ -37,7 +35,7 @@ public class ChatUtil {
         Arrays.asList(message).forEach(log -> Bukkit.getConsoleSender().sendMessage(translate(log)));
     }
 
-    public void toPlayer(Player player, List<String> stringList) {
+    public static void toPlayer(Player player, List<String> stringList) {
         stringList.forEach(message -> toPlayer(player, message));
     }
 
@@ -45,7 +43,7 @@ public class ChatUtil {
         Arrays.asList(longMessage).forEach(message -> toPlayer(player, message));
     }
 
-    public void toPlayer(Player player, String message) {
+    public static void toPlayer(Player player, String message) {
         player.sendMessage(translate(message).replace("<player>", player.getName()));
     }
 
@@ -57,7 +55,7 @@ public class ChatUtil {
         Arrays.asList(longMessage).forEach(message -> toSender(sender, message));
     }
 
-    public void toSender(CommandSender sender, String message) {
+    public static void toSender(CommandSender sender, String message) {
         sender.sendMessage(translate(message));
     }
 

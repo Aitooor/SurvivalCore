@@ -1,6 +1,5 @@
 package online.nasgar.survival.managers.menus;
 
-import lombok.Getter;
 import online.nasgar.survival.managers.menus.listener.MenuListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -11,10 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-@Getter
 public class MenuManager {
 
-    @Getter
     private static MenuManager instance;
     private final Map<UUID, Menu> menuMap;
 
@@ -78,4 +75,11 @@ public class MenuManager {
         return this.menuMap.containsKey(player.getUniqueId());
     }
 
+    public static MenuManager getInstance() {
+        return instance;
+    }
+
+    public Map<UUID, Menu> getMenuMap() {
+        return menuMap;
+    }
 }
