@@ -1,4 +1,4 @@
-package online.nasgar.survival.command.coins.arguments;
+package online.nasgar.survival.command.normal.coins.args;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
@@ -9,23 +9,23 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class RemoveArgument extends Argument {
+public class SetArgument extends Argument {
 
     private final CachedRemoteModelService<PlayerData> modelService;
     private final MessageHandler messageHandler;
 
-    public RemoveArgument(CachedRemoteModelService<PlayerData> modelService, MessageHandler messageHandler) {
-        super(messageHandler, "remove");
+    public SetArgument(CachedRemoteModelService<PlayerData> modelService, MessageHandler messageHandler) {
+        super(messageHandler, "set");
         this.modelService = modelService;
         this.messageHandler = messageHandler;
 
-        this.setPermission("survivalcore.coins.remove");
+        this.setPermission("survivalcore.coins.set");
     }
 
     @Override
     public void onArgument(CommandSender sender, String[] array) {
         if (array.length < 1) {
-            messageHandler.send(sender, "coins.remove.usage");
+            messageHandler.send(sender, "coins.set.usage");
             return;
         }
 
@@ -40,16 +40,10 @@ public class RemoveArgument extends Argument {
             return;
         }
 
-        PlayerData data = modelService.getOrFindSync(target.getUniqueId().toString());
         int amount = Integer.parseInt(array[1]);
 
-        if (amount > data.getCoins()) {
-            messageHandler.sendReplacing(sender, "coins.invalid-amount", "%target_name%", target.getName());
-            return;
-        }
-
-        data.removeCoins(amount);
-        messageHandler.sendReplacing(sender, "coins.remove.success.sender", "%target_name%", target.getName(), "%amount%", amount);
-        messageHandler.sendReplacing(sender, "coins.remove.success.target", "%amount%", amount, "%staff_name%", sender.getName());
+        modelService.findSync(target.getUniqueId().toString()).setCoins(amount);
+        messageHandler.sendReplacing(sender, "coins.set.success.sender", "%target_name%", target.getName(), "%amount%", amount);
+        messageHandler.sendReplacing(sender, "coins.set.success.target", "%amount%", amount, "%staff_name%", sender.getName());
     }
 }

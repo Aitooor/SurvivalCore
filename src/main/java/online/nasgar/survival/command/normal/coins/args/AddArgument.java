@@ -1,4 +1,4 @@
-package online.nasgar.survival.command.coins.arguments;
+package online.nasgar.survival.command.normal.coins.args;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;

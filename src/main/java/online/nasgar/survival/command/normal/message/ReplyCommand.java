@@ -1,9 +1,9 @@
-package online.nasgar.survival.command.message;
+package online.nasgar.survival.command.normal.message;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.ModelService;
 import online.nasgar.survival.managers.command.Command;
-import online.nasgar.survival.command.message.event.MessageEvent;
+import online.nasgar.survival.command.normal.message.event.MessageEvent;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.utils.StringUtils;
 import org.bukkit.Bukkit;

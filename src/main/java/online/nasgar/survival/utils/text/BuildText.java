@@ -96,39 +96,7 @@ public class BuildText {
         map.put("<" + key.trim() + ">", value);
     }
 
-    public Survival getPlugin() {
-        return plugin;
-    }
-
-    public void setPlugin(Survival plugin) {
-        this.plugin = plugin;
-    }
-
     public CachedRemoteModelService<PlayerData> getModelService() {
         return modelService;
-    }
-
-    public Map<String, String> getMap() {
-        return map;
-    }
-
-    public void setMap(Map<String, String> map) {
-        this.map = map;
-    }
-
-    public String getStaticText() {
-        return staticText;
-    }
-
-    public void setStaticText(String staticText) {
-        this.staticText = staticText;
-    }
-
-    public Matcher getMatcher() {
-        return matcher;
-    }
-
-    public void setMatcher(Matcher matcher) {
-        this.matcher = matcher;
     }
 }

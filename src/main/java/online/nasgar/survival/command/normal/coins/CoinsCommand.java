@@ -1,10 +1,10 @@
-package online.nasgar.survival.command.coins;
+package online.nasgar.survival.command.normal.coins;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
-import online.nasgar.survival.command.coins.arguments.AddArgument;
-import online.nasgar.survival.command.coins.arguments.RemoveArgument;
-import online.nasgar.survival.command.coins.arguments.SetArgument;
+import online.nasgar.survival.command.normal.coins.args.AddArgument;
+import online.nasgar.survival.command.normal.coins.args.RemoveArgument;
+import online.nasgar.survival.command.normal.coins.args.SetArgument;
 import online.nasgar.survival.managers.command.Command;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.utils.text.BuildText;

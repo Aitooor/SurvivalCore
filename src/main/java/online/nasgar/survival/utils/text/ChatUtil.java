@@ -7,20 +7,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ChatUtil {
 
     public static String translate(String message) {
         return ChatColor.translateAlternateColorCodes('&', message);
-    }
-
-    public static String translate(String... longMessage) {
-        for (String message : longMessage) {
-            return message;
-        }
-        return null;
     }
 
     public static List<String> translate(List<String> stringList) {
@@ -31,16 +23,8 @@ public class ChatUtil {
         return arrayList;
     }
 
-    public void print(String... message) {
-        Arrays.asList(message).forEach(log -> Bukkit.getConsoleSender().sendMessage(translate(log)));
-    }
-
     public static void toPlayer(Player player, List<String> stringList) {
         stringList.forEach(message -> toPlayer(player, message));
-    }
-
-    public void toPlayer(Player player, String... longMessage) {
-        Arrays.asList(longMessage).forEach(message -> toPlayer(player, message));
     }
 
     public static void toPlayer(Player player, String message) {
@@ -49,10 +33,6 @@ public class ChatUtil {
 
     public void toSender(CommandSender sender, List<String> stringList) {
         stringList.forEach(message -> toSender(sender, message));
-    }
-
-    public void toSender(CommandSender sender, String... longMessage) {
-        Arrays.asList(longMessage).forEach(message -> toSender(sender, message));
     }
 
     public static void toSender(CommandSender sender, String message) {

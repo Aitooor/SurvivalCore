@@ -1,4 +1,4 @@
-package online.nasgar.survival.command.message.event;
+package online.nasgar.survival.command.normal.message.event;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

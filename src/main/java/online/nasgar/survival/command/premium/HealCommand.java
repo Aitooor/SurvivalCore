@@ -1,4 +1,4 @@
-package online.nasgar.survival.command;
+package online.nasgar.survival.command.premium;
 
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.managers.command.Command;

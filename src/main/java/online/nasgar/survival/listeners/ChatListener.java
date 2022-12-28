@@ -3,7 +3,7 @@ package online.nasgar.survival.listeners;
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
 import net.cosmogrp.storage.redis.connection.Redis;
-import online.nasgar.survival.command.message.event.MessageEvent;
+import online.nasgar.survival.command.normal.message.event.MessageEvent;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import online.nasgar.survival.services.chat.ChatService;
 import online.nasgar.survival.services.redis.ChatChannelListener;

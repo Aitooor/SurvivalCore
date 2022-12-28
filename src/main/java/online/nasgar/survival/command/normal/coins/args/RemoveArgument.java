@@ -1,4 +1,4 @@
-package online.nasgar.survival.command.coins.arguments;
+package online.nasgar.survival.command.normal.coins.args;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
@@ -9,23 +9,23 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SetArgument extends Argument {
+public class RemoveArgument extends Argument {
 
     private final CachedRemoteModelService<PlayerData> modelService;
     private final MessageHandler messageHandler;
 
-    public SetArgument(CachedRemoteModelService<PlayerData> modelService, MessageHandler messageHandler) {
-        super(messageHandler, "set");
+    public RemoveArgument(CachedRemoteModelService<PlayerData> modelService, MessageHandler messageHandler) {
+        super(messageHandler, "remove");
         this.modelService = modelService;
         this.messageHandler = messageHandler;
 
-        this.setPermission("survivalcore.coins.set");
+        this.setPermission("survivalcore.coins.remove");
     }
 
     @Override
     public void onArgument(CommandSender sender, String[] array) {
         if (array.length < 1) {
-            messageHandler.send(sender, "coins.set.usage");
+            messageHandler.send(sender, "coins.remove.usage");
             return;
         }
 
@@ -40,10 +40,16 @@ public class SetArgument extends Argument {
             return;
         }
 
+        PlayerData data = modelService.getOrFindSync(target.getUniqueId().toString());
         int amount = Integer.parseInt(array[1]);
 
-        modelService.findSync(target.getUniqueId().toString()).setCoins(amount);
-        messageHandler.sendReplacing(sender, "coins.set.success.sender", "%target_name%", target.getName(), "%amount%", amount);
-        messageHandler.sendReplacing(sender, "coins.set.success.target", "%amount%", amount, "%staff_name%", sender.getName());
+        if (amount > data.getCoins()) {
+            messageHandler.sendReplacing(sender, "coins.invalid-amount", "%target_name%", target.getName());
+            return;
+        }
+
+        data.removeCoins(amount);
+        messageHandler.sendReplacing(sender, "coins.remove.success.sender", "%target_name%", target.getName(), "%amount%", amount);
+        messageHandler.sendReplacing(sender, "coins.remove.success.target", "%amount%", amount, "%staff_name%", sender.getName());
     }
 }

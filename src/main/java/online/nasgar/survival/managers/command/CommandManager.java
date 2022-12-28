@@ -2,17 +2,18 @@ package online.nasgar.survival.managers.command;
 
 import me.yushust.message.MessageHandler;
 import net.cosmogrp.storage.dist.CachedRemoteModelService;
-import online.nasgar.survival.command.*;
 import online.nasgar.survival.command.admin.GamemodeCommand;
 import online.nasgar.survival.command.admin.GodCommand;
 import online.nasgar.survival.command.admin.ReloadCommand;
 import online.nasgar.survival.command.admin.TopCommand;
-import online.nasgar.survival.command.coins.CoinsCommand;
-import online.nasgar.survival.command.message.MessageCommand;
-import online.nasgar.survival.command.message.ReplyCommand;
-import online.nasgar.survival.command.social.DiscordCommand;
-import online.nasgar.survival.command.social.ShopCommand;
-import online.nasgar.survival.command.social.WebCommand;
+import online.nasgar.survival.command.normal.coins.CoinsCommand;
+import online.nasgar.survival.command.normal.message.MessageCommand;
+import online.nasgar.survival.command.normal.message.ReplyCommand;
+import online.nasgar.survival.command.normal.DiscordCommand;
+import online.nasgar.survival.command.normal.ShopCommand;
+import online.nasgar.survival.command.normal.SwitchCommand;
+import online.nasgar.survival.command.normal.WebCommand;
+import online.nasgar.survival.command.premium.*;
 import online.nasgar.survival.menus.command.*;
 import online.nasgar.survival.managers.playerdata.PlayerData;
 import org.bukkit.Bukkit;
@@ -44,7 +45,7 @@ public class CommandManager {
                 new FlyCommand(messageHandler),
                 new HatCommand(messageHandler),
                 new EnderchestCommand(messageHandler),
-                new WordkbenchCommand(messageHandler),
+                new WorkbenchCommand(messageHandler),
                 new SkullCommand(messageHandler),
 
                 // MESSAGE

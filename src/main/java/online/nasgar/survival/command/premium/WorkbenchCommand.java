@@ -1,4 +1,4 @@
-package online.nasgar.survival.command;
+package online.nasgar.survival.command.premium;
 
 import me.yushust.message.MessageHandler;
 import online.nasgar.survival.managers.command.Command;
@@ -7,11 +7,11 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 
-public class WordkbenchCommand extends Command {
+public class WorkbenchCommand extends Command {
 
     private final MessageHandler messageHandler;
 
-    public WordkbenchCommand(MessageHandler messageHandler) {
+    public WorkbenchCommand(MessageHandler messageHandler) {
         super("workdbench", messageHandler);
         this.messageHandler = messageHandler;
 

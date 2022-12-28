@@ -9,19 +9,6 @@ import org.bukkit.entity.Player;
 
 public final class BungeeUtil {
 
-	public static void sendMessage(Player source, String target, String message) {
-		try {
-			ByteArrayDataOutput out = ByteStreams.newDataOutput();
-			out.writeUTF("Message");
-			out.writeUTF(target);
-			out.writeUTF(message);
-
-			source.sendPluginMessage(Survival.getInstance(), "BungeeCord", out.toByteArray());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static void sendToServer(Player player, String server) {
 		try {
 			ByteArrayDataOutput out = ByteStreams.newDataOutput();
@@ -41,19 +28,6 @@ public final class BungeeUtil {
 		String servername = in.readUTF();
 
 		return servername;
-	}
-
-	public static String getPlayerCount(Player player, String server) {
-		try {
-			ByteArrayDataOutput out = ByteStreams.newDataOutput();
-			out.writeUTF("PlayerCount");
-			out.writeUTF(server);
-
-			player.sendPluginMessage(Survival.getInstance(), "BungeeCord", out.toByteArray());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return server;
 	}
 
 }
