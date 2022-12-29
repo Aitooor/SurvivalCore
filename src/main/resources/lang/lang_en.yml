@@ -12,10 +12,10 @@ chat:
 tab:
   header:
     - "&b&lNASGAR &8| &fSurvival &71.19"
-    - "&7Server &aSurvival &e%online%"
+    - "&7Server &aSurvival &e%bungeesync_online_SURVIVALS%"
   footer:
     - ""
-    - "&7&oPlayin in Nasgar &e%online%"
+    - "&7&oPlayin in Nasgar &e%bungee_total%"
     - "&b&onasgar.online"
 
 scoreboard:
@@ -312,19 +312,3 @@ guis:
         - "&eInfo &7and &eRankUPs"
         - ""
         - "&7Click para abrir"
-auction:
-  help:
-    - "&b&lAuction Commands"
-    - "&7/auction menu"
-    - "&7/auction pull <price> <time>"
-  invalid:
-    price: "&cInvalid price."
-    duration: "&cInvalid duration."
-  pull:
-    no-item: "&cNo Item in hand."
-  success: "&aYour item has been added successfully for sale. In case that you're offline the balance would be acredited, no matter what."
-  gui:
-    no-money: "&cNot enough money"
-    product-name: "&6&lAuction &7&l#"
-    lore-price: "&fPrice &e"
-    lore-click: "&aClick to buy"
