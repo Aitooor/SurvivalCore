@@ -21,18 +21,18 @@ tab:
 scoreboard:
   title: "  &b&lSURVIVAL &8(&71.19&8)    &r"
   lines:
-    - " &8⌚ &7%localtime%"
+    - " &8⌚ &7%localtime_time_yyyy/MM/dd%"
     - ""
     - " &fName"
     - "  &a%player%"
     - ""
     - " &fR▲ &8| &fRank"
-    - "  &a%rankup% &8| &a%rank%"
+    - "  &a%rankup% &8| &a%prefix%"
     - ""
     - " &fMoney"
     - "  &e%money%"
     - ""
-    - " &fOnline &a%survival_online%"
+    - " &fOnline &a%bungeesync_online_SURVIVALS%"
     - ""
     - "     &bnasgar.online  &r"
 

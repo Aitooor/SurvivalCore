@@ -58,22 +58,15 @@ public class ScoreboardListener implements Listener {
 
         String rank = PlaceholderAPI.setPlaceholders(player, "%vault_prefix%");
         rank = PlaceholderAPI.setPlaceholders(player, rank);
-        String localTime = "%localtime_time_yyyy/MM/dd%";
-        localTime = PlaceholderAPI.setPlaceholders(player, localTime);
-        String survival = "%pb_pc_Survivals%";
-        survival = PlaceholderAPI.setPlaceholders(player, survival);
-        int survivalInt = Integer.parseInt(survival);
 
         String money = new BuildText(modelService).of(player, messageHandler.get(player, "coins.have.numbered"));
         PlayerData data = modelService.getOrFindSync(player.getUniqueId().toString());
         String rankup = (data.getRank() != null ? data.getRank().getPrefix() : "default");
 
-        board.updateLines(messageHandler.replacingMany(player, "scoreboard.lines",
-                "%localtime%", localTime,
-                "%survival_online%", survivalInt,
+        board.updateLines(PlaceholderAPI.setPlaceholders(player, messageHandler.replacingMany(player, "scoreboard.lines",
                 "%player%", player.getName(),
-                "%rank%", rank,
+                "%prefix%", rank,
                 "%rankup%", rankup,
-                "%money%", money));
+                "%money%", money)));
     }
 }
